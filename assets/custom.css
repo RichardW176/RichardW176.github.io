@@ -72,13 +72,10 @@ a:hover {
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
-  object-fit: contain;        /* change to cover if preferred */
+  object-fit: cover;   /* <-- change back */
   object-position: center center;
   border-radius: 20px;
-  border: 2px solid white;
-  background: #111;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Subtle lift + glow */
