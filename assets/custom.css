@@ -1,83 +1,116 @@
-/* ===== custom.css =====
-   Place this in assets/custom.css (or the file you already have)
-   Commit & hard-refresh (Ctrl+Shift+R) after saving in GitHub.
-*/
+/* ================================
+   TRUE PORTFOLIO DARK MODE
+================================ */
 
-/* PAGE CONTENT: control the overall content width and center it */
+/* Global background + text */
+body {
+  background-color: #0b0b0f !important;
+  color: #e6e6e6;
+}
+
+/* Remove light header/footer backgrounds */
+.site-header,
+.site-footer {
+  background-color: #0b0b0f !important;
+  border: none;
+}
+
+/* Header title */
+.site-title {
+  color: #ffffff !important;
+}
+
+/* Navigation links */
+.site-nav a {
+  color: #cccccc !important;
+}
+
+.site-nav a:hover {
+  color: #ffffff !important;
+}
+
+/* Page content wrapper */
 .page-content {
-  max-width: 1800px !important;
+  max-width: 1600px !important;
+  margin: 0 auto;
 }
-.project-grid {
-  direction: ltr;   /* force left-to-right layout */
+
+/* Section headings */
+h1, h2, h3 {
+  color: #ffffff;
 }
+
+/* Links */
+a {
+  color: #8ab4ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+/* ================================
+   PROJECT GRID
+================================ */
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
   margin: 60px auto;
 }
+
+/* Card container */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Image styling */
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
-  object-fit: contain;   /* shows full image, no cropping */
+  object-fit: contain;        /* change to cover if preferred */
   object-position: center center;
   border-radius: 20px;
+  border: 2px solid white;
+  background: #111;
   display: block;
-  background: #111;      /* fills empty space if needed */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* IMAGE: keep full width, taller aspect ratio so images look taller,
-   use object-fit to avoid stretching, and object-position to focus on center */
-.project-card img {
-  width: 100%;
-  aspect-ratio: 5 / 7;      /* taller cards (change to 3/4, 4/5, etc to taste) */
-  object-fit: cover;        /* crop but keep aspect; switch to 'contain' if you never want crop */
-  object-position: center center; /* focus center of the image */
-  border-radius: 20px;
-  display: block;
-  transition: transform 0.35s ease;
-  background: #111;         /* fallback background if image area shows */
-}
-
-/* Hover zoom — subtle */
+/* Subtle lift + glow */
 .project-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.03);
+  box-shadow: 0 10px 40px rgba(255,255,255,0.08);
 }
 
-/* Title link under each card — small styling so text sits nicely */
+/* Title under card */
 .project-card h3,
 .project-card a > h3 {
-  margin-top: 12px;
-  margin-bottom: 0;
-  font-size: 1.25rem;
-  color: #2b6cb0; /* adjust to match your theme */
-  text-decoration: none;
+  margin-top: 16px;
+  font-size: 1.2rem;
+  color: #dcdcdc;
 }
 
-/* Make sure very small screens stack nicely (responsive) */
+.project-card a > h3:hover {
+  color: #ffffff;
+}
+
+/* ================================
+   Responsive
+================================ */
+
 @media (max-width: 1100px) {
   .project-grid {
-    grid-template-columns: repeat(2, minmax(260px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .project-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
   }
 }
-
-/* Optional: slight page heading spacing adjustments */
-.page-content > h1,
-.page-content > h2 {
-  margin-top: 0.4rem;
-  margin-bottom: 0.6rem;
-}
-
-/* Optional: ensure links under cards align center with card */
-.project-card .card-link {
-  text-align: left; /* or center */
-}
-
-/* EOF */
