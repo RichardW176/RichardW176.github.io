@@ -5,21 +5,16 @@
 
 /* PAGE CONTENT: control the overall content width and center it */
 .page-content {
-  max-width: 1400px !important; /* tweak this to make content wider/narrower */
-  margin: 0 auto;               /* center page content */
-  padding-left: 20px;           /* small side padding for small screens */
-  padding-right: 20px;
+  max-width: 1600px !important;
+  margin: 0 auto;
 }
 
-/* PROJECT GRID: 3 columns, centered, with gaps */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(420px, 1fr));
-  gap: 60px;               /* space between cards */
-  margin: 60px auto;       /* vertical spacing and horizontal centering */
-  max-width: 1400px;       /* keeps the grid from growing too wide */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  margin: 60px auto;
 }
-
 /* PROJECT CARD container (if you have a .project-card wrapper) */
 .project-card {
   position: relative;
