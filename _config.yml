@@ -5,3 +5,7 @@ theme: minima
 collections:
   projects:
     output: true
+  prose:
+    output: true
+  screenwriting:
+    output: true
