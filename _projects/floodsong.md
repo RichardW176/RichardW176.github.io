@@ -1,6 +1,7 @@
 ---
 title: Floodsong
 image: /assets/images/floodsong.png
+order: 4
 ---
 
 Floodsong is a [short description of your project].
