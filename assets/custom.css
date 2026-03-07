@@ -1,18 +1,41 @@
 /* ================================
    TRUE PORTFOLIO DARK MODE
 ================================ */
+
+body {
+  background-color: #0b0b0f !important;
+  color: #e6e6e6;
+}
+
+.site-header,
+.site-footer {
+  background-color: #0b0b0f !important;
+  border: none;
+}
+
+.site-title {
+  color: #ffffff !important;
+}
+
+.site-nav a {
+  color: #cccccc !important;
+}
+
+.site-nav a:hover {
+  color: #ffffff !important;
+}
+
 /* ================================
    HERO SECTION
 ================================ */
 
 .hero {
-  padding: 120px 0 100px 0;
+  padding: 140px 5vw 100px 5vw;
 }
 
 .hero-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
 }
 
 .hero-role {
@@ -23,7 +46,7 @@
 }
 
 .hero-title {
-  font-size: 120px;
+  font-size: clamp(70px, 9vw, 140px);
   line-height: 0.95;
   font-weight: 800;
   color: #fff;
@@ -35,63 +58,16 @@
   color: #aaa;
   max-width: 800px;
 }
-/* Global background + text */
-body {
-  background-color: #0b0b0f !important;
-  color: #e6e6e6;
-}
-
-/* Remove light header/footer backgrounds */
-.site-header,
-.site-footer {
-  background-color: #0b0b0f !important;
-  border: none;
-}
-
-/* Header title */
-.site-title {
-  color: #ffffff !important;
-}
-
-/* Navigation links */
-.site-nav a {
-  color: #cccccc !important;
-}
-
-.site-nav a:hover {
-  color: #ffffff !important;
-}
-
-/* Page content wrapper */
-.page-content {
-  max-width: 1600px !important;
-  margin: 0 auto;
-}
-
-/* Section headings */
-h1, h2, h3 {
-  color: #ffffff;
-}
-
-/* Links */
-a {
-  color: #8ab4ff;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ffffff;
-}
 
 /* ================================
-   PROJECT GRID
+   PROJECT GRID (FULL WIDTH)
 ================================ */
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 60px;
-  margin: 60px auto;
+  margin: 80px 5vw;   /* removes dead side space */
 }
 
 /* Card container */
@@ -105,19 +81,21 @@ a:hover {
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
-  object-fit: cover;   /* <-- change back */
+  object-fit: cover;
   object-position: center center;
   border-radius: 20px;
   display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid white;
 }
 
-/* Subtle lift + glow */
+/* Hover lift */
 .project-card:hover img {
   transform: scale(1.03);
-  box-shadow: 0 10px 40px rgba(255,255,255,0.08);
+  box-shadow: 0 15px 40px rgba(255,255,255,0.08);
 }
 
-/* Title under card */
+/* Title styling */
 .project-card h3,
 .project-card a > h3 {
   margin-top: 16px;
@@ -130,7 +108,7 @@ a:hover {
 }
 
 /* ================================
-   Responsive
+   RESPONSIVE
 ================================ */
 
 @media (max-width: 1100px) {
@@ -143,40 +121,4 @@ a:hover {
   .project-grid {
     grid-template-columns: 1fr;
   }
-}
-/* ================================
-   PROSE BANNER STYLE
-================================ */
-
-.prose-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  margin: 40px auto 80px auto;
-  max-width: 1200px;
-}
-
-.prose-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 160px;
-  background: #111;
-  border: 2px solid white;
-  border-radius: 16px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.prose-card h3 {
-  color: white;
-  font-size: 1.4rem;
-  text-align: center;
-  margin: 0;
-}
-
-.prose-card:hover {
-  background: #1a1a1f;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(255,255,255,0.08);
 }
