@@ -5,8 +5,7 @@
 
 /* PAGE CONTENT: control the overall content width and center it */
 .page-content {
-  max-width: 1600px !important;
-  margin: 0 auto;
+  max-width: 1800px !important;
 }
 
 .project-grid {
