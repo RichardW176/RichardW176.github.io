@@ -3,7 +3,7 @@ layout: page
 title: Home
 ---
 <link rel="stylesheet" href="/assets/custom.css">
-# Ruiqian Wang
+# Ruiqian (Richard) Wang
 
 Welcome to my personal site.
 
