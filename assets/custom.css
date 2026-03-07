@@ -7,7 +7,9 @@
 .page-content {
   max-width: 1800px !important;
 }
-
+.project-grid {
+  direction: ltr;   /* force left-to-right layout */
+}
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
