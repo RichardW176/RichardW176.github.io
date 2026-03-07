@@ -1,6 +1,5 @@
-/* Make page content wider */
 .wrapper {
-  max-width: 1400px;   /* increase from default ~800-1000px */
+  max-width: 1600px;
 }
 
 .project-grid {
