@@ -26,7 +26,7 @@ body {
 }
 
 /* ================================
-   HERO SECTION
+   HERO SECTION (CENTERED)
 ================================ */
 
 .hero {
@@ -60,16 +60,31 @@ body {
 }
 
 /* ================================
-   PROJECT GRID (FULL WIDTH)
+   BREAK OUT OF MINIMA WRAPPER
+================================ */
+
+/* Remove max-width restriction */
+.page-content .wrapper {
+  max-width: 100% !important;
+}
+
+/* ================================
+   FULL-WIDTH PROJECT GRID
 ================================ */
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
-  padding: 0 5vw;
-  margin: 80px 0;
+
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0 6vw;
+
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
+
 /* Card container */
 .project-card {
   position: relative;
@@ -86,7 +101,6 @@ body {
   border-radius: 20px;
   display: block;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid white;
 }
 
 /* Hover lift */
