@@ -1,3 +1,7 @@
 title: Richard Wang
 description: My personal website
 theme: minima
+
+collections:
+  projects:
+    output: true
