@@ -11,9 +11,8 @@
 
 .project-card img {
   width: 100%;
-  aspect-ratio: 2 / 3;   /* significantly taller */
-  object-fit: contain;
-  background: #111;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
   object-position: center center;
   border-radius: 20px;
   display: block;
