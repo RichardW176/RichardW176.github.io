@@ -1,28 +1,21 @@
-.wrapper {
-  max-width: 1600px;
+.page-content {
+  max-width: 95% !important;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  margin-top: 40px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 60px;
+  margin-top: 60px;
 }
 
 .project-card img {
   width: 100%;
-  aspect-ratio: 16 / 9;   /* Makes it wide */
-  object-fit: cover;
+  aspect-ratio: 16 / 9;   /* keeps equal height */
+  object-fit: cover;      /* keeps fill behavior */
+  object-position: center top;  /* 👈 shows more top of image */
+  border-radius: 20px;
   display: block;
-  transition: transform 0.4s ease;
-}
-
-.project-card img {
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
 }
 
 .project-card:hover img {
