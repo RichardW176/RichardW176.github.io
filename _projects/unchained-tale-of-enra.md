@@ -1,6 +1,7 @@
 ---
 title: "Unchained: Tale of Enra"
 image: /assets/images/unchained-tale-of-enra.png
+order: 3
 ---
 
 Unchained: Tale of Enra is a [brief description of your project].
