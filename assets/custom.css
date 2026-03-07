@@ -16,14 +16,12 @@
   margin: 60px auto;
 }
 /* PROJECT CARD container (if you have a .project-card wrapper) */
-.project-card {
-  position: relative;
-  overflow: hidden;
+.project-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center center;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background: transparent;
 }
 
 /* IMAGE: keep full width, taller aspect ratio so images look taller,
