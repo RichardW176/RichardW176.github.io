@@ -14,7 +14,7 @@
 /* PROJECT GRID: 3 columns, centered, with gaps */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(350px, 1fr)); /* 3 columns, minimum 350px each */
+  grid-template-columns: repeat(3, minmax(420px, 1fr));
   gap: 60px;               /* space between cards */
   margin: 60px auto;       /* vertical spacing and horizontal centering */
   max-width: 1400px;       /* keeps the grid from growing too wide */
