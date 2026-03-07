@@ -1,6 +1,7 @@
 ---
 title: Thang!
 image: /assets/images/thang.png
+order: 5
 ---
 
 Thang is a [short description of the project].
