@@ -5,10 +5,10 @@ title: Home
 
 <section class="hero">
   <div class="hero-inner">
-    <p class="hero-role">GAME DEVELOPER • XR DESIGNER • HCI RESEARCHER</p>
-    <h1 class="hero-title">Richard<br>Wang.</h1>
+    <p class="hero-role">GAME DEVELOPER • NARRATIVE DESIGNER • SCRIPTWRITER</p>
+    <h1 class="hero-title">Ruiqian<br>Wang.</h1>
     <p class="hero-tagline">
-      I create immersive worlds and interactive experiences across PC, mobile, and XR.
+      Hi! I'm Ruiqian (Richard), a creative passionate about narrative, boss design, and screenwriting.
     </p>
   </div>
 </section>
