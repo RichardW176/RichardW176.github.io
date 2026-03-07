@@ -1,6 +1,7 @@
 ---
 title: Masterworks of Horror
 image: /assets/images/GDC Banner Wide.png
+order: 2
 ---
 
 Masterworks of Horror is a [short description of the project].
