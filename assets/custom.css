@@ -111,3 +111,39 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+/* ================================
+   PROSE BANNER STYLE
+================================ */
+
+.prose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin: 40px auto 80px auto;
+  max-width: 1200px;
+}
+
+.prose-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  background: #111;
+  border: 2px solid white;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.prose-card h3 {
+  color: white;
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 0;
+}
+
+.prose-card:hover {
+  background: #1a1a1f;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.08);
+}
