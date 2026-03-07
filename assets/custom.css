@@ -18,7 +18,7 @@
 /* PROJECT CARD container (if you have a .project-card wrapper) */
 .project-card img {
   width: 100%;
-  aspect-ratio: 5 / 8;
+  aspect-ratio: 5 / 7;
   object-fit: contain;   /* prevents zooming */
   object-position: center center;
   border-radius: 20px;
@@ -29,7 +29,7 @@
    use object-fit to avoid stretching, and object-position to focus on center */
 .project-card img {
   width: 100%;
-  aspect-ratio: 5 / 8;      /* taller cards (change to 3/4, 4/5, etc to taste) */
+  aspect-ratio: 5 / 7;      /* taller cards (change to 3/4, 4/5, etc to taste) */
   object-fit: cover;        /* crop but keep aspect; switch to 'contain' if you never want crop */
   object-position: center center; /* focus center of the image */
   border-radius: 20px;
