@@ -20,3 +20,17 @@ Welcome to my personal site.
   </div>
 {% endfor %}
 </div>
+
+## Prose
+
+<div class="project-grid">
+{% assign sorted_prose = site.prose | sort: "order" %}
+{% for piece in sorted_prose %}
+  <div class="project-card">
+    <a href="{{ piece.url }}">
+      <img src="{{ piece.image }}" alt="{{ piece.title }}">
+      <h3>{{ piece.title }}</h3>
+    </a>
+  </div>
+{% endfor %}
+</div>
