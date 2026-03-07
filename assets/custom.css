@@ -1,3 +1,8 @@
+/* Make page content wider */
+.wrapper {
+  max-width: 1400px;   /* increase from default ~800-1000px */
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
