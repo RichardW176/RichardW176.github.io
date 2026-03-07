@@ -11,9 +11,9 @@
 
 .project-card img {
   width: 100%;
-  aspect-ratio: 16 / 9;   /* keeps equal height */
-  object-fit: cover;      /* keeps fill behavior */
-  object-position: center top;  /* 👈 shows more top of image */
+  aspect-ratio: 4 / 5;      /* 👈 better for poster art */
+  object-fit: cover;
+  object-position: center top;
   border-radius: 20px;
   display: block;
 }
