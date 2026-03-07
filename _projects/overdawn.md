@@ -1,6 +1,6 @@
 ---
 title: Overdawn
-image: /assets/images/overdawn.jpg
+image: /assets/images/overdawn.png
 ---
 
 Overdawn is a [short description of your project].
