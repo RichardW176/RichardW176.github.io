@@ -6,7 +6,8 @@
 ================================ */
 
 .hero {
-  background: #000;
+
+  background: transparent;
   padding: 120px 0 100px 0;
 }
 
