@@ -7,7 +7,7 @@ title: Home
 
 Welcome to my personal site.
 
-## Projects
+## Video Games
 
 <div class="project-grid">
 {% assign sorted_projects = site.projects | sort: "order" %}
