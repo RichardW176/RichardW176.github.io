@@ -3,7 +3,7 @@
 
 @import "minima";
 
-/* debug test — remove this after verification */
+/* DEBUG TEST */
 body { background: #0b0b0c !important; color: #eee !important; }
 
 /* PROJECT GRID */
@@ -14,23 +14,20 @@ body { background: #0b0b0c !important; color: #eee !important; }
   margin-top: 30px;
 }
 
-/* PROJECT CARD */
 .project-card {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
 }
 
-/* FORCE IMAGE SIZE */
 .project-card img {
   width: 100%;
-  height: 500px;         /* 👈 Controls card height */
-  object-fit: cover;     /* 👈 Crops image to fit */
+  height: 500px;
+  object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
 }
 
-/* Hover zoom effect */
 .project-card:hover img {
   transform: scale(1.05);
 }
