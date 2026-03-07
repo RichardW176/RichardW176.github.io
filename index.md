@@ -2,7 +2,7 @@
 layout: page
 title: Home
 ---
-
+<link rel="stylesheet" href="/assets/custom.css">
 # Hello, I'm Richard 👋
 
 Welcome to my personal site.
