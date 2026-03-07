@@ -24,7 +24,11 @@ title: Home
   <div class="project-card">
     <a href="{{ project.url }}">
       <img src="{{ project.image }}" alt="{{ project.title }}">
-      <h3>{{ project.title }}</h3>
+      <div class="project-overlay">
+        <h3>{{ project.title }}</h3>
+        <p class="project-role">{{ project.role }}</p>
+        <p class="project-desc">{{ project.description }}</p>
+      </div>
     </a>
   </div>
 {% endfor %}
