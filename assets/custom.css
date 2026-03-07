@@ -15,14 +15,14 @@
   gap: 60px;
   margin: 60px auto;
 }
-/* PROJECT CARD container (if you have a .project-card wrapper) */
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
-  object-fit: contain;   /* prevents zooming */
+  object-fit: contain;   /* shows full image, no cropping */
   object-position: center center;
   border-radius: 20px;
-  background: #111;      /* optional */
+  display: block;
+  background: #111;      /* fills empty space if needed */
 }
 
 /* IMAGE: keep full width, taller aspect ratio so images look taller,
