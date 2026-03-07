@@ -77,14 +77,10 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
 
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 0 6vw;
-
-  margin-top: 80px;
-  margin-bottom: 80px;
+  max-width: 1600px;     /* controls overall width */
+  margin: 80px auto;     /* centers the grid */
+  padding: 0 4vw;        /* slight breathing room */
 }
-
 /* Card container */
 .project-card {
   position: relative;
