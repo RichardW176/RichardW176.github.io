@@ -3,6 +3,9 @@
 
 @import "minima";
 
+/* debug test — remove this after verification */
+body { background: #0b0b0c !important; color: #eee !important; }
+
 /* PROJECT GRID */
 .project-grid {
   display: grid;
