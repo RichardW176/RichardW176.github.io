@@ -1,6 +1,7 @@
 ---
 title: "Project: Disciple"
 image: /assets/images/project-disciple.png
+order: 6
 ---
 
 Project: Disciple is a [brief description of the project].
