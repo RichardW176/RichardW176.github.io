@@ -6,7 +6,7 @@ title: Home
 <section class="hero">
   <div class="hero-inner">
     <p class="hero-role">GAME DEVELOPER • NARRATIVE DESIGNER • SCRIPTWRITER</p>
-    <h1 class="hero-title">Ruiqian<br>Wang.</h1>
+    <h1 class="hero-title">Ruiqian<br>Wang</h1>
     <p class="hero-tagline">
       Hi! I'm Ruiqian (Richard), a creative passionate about narrative, boss design, and screenwriting.
     </p>
