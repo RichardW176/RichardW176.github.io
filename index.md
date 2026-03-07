@@ -23,14 +23,11 @@ Welcome to my personal site.
 
 ## Prose
 
-<div class="project-grid">
+<div class="prose-grid">
 {% assign sorted_prose = site.prose | sort: "order" %}
 {% for piece in sorted_prose %}
-  <div class="project-card">
-    <a href="{{ piece.url }}">
-      <img src="{{ piece.image }}" alt="{{ piece.title }}">
-      <h3>{{ piece.title }}</h3>
-    </a>
-  </div>
+  <a href="{{ piece.url }}" class="prose-card">
+    <h3>{{ piece.title }}</h3>
+  </a>
 {% endfor %}
 </div>
