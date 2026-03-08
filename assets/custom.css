@@ -208,9 +208,9 @@ h2 {
   display: grid;
   gap: 24px;
   overflow: visible;
-  opacity: 0;
-  transform: translateY(30px);
-  filter: blur(10px);
+  opacity: 0.16;
+  transform: translateY(10px);
+  filter: blur(2px);
   pointer-events: none;
   transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
 }

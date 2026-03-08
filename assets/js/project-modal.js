@@ -46,8 +46,8 @@
         entry.target.classList.toggle('is-active', entry.isIntersecting);
       });
     }, {
-      threshold: 0.4,
-      rootMargin: '-10% 0px -18% 0px',
+      threshold: 0.18,
+      rootMargin: '-6% 0px -24% 0px',
     });
 
     projectShowcases.forEach((showcase, index) => {
