@@ -49,19 +49,6 @@ title: Home
           {{ project.content | markdownify }}
         </div>
 
-        {% if project.awards %}
-        <section class="project-awards">
-          <h3>Awards</h3>
-          <div class="project-awards-grid">
-            {% for award in project.awards %}
-            <figure class="project-award-card">
-              <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: project.title }}" class="project-award-image">
-            </figure>
-            {% endfor %}
-          </div>
-        </section>
-        {% endif %}
-
         {% if project.media %}
         <section class="project-media">
           <h3>Media</h3>
@@ -137,6 +124,19 @@ title: Home
                 </div>
                 <pre class="project-script-card__content">{% if script.content %}{{ script.content | escape }}{% else %}Loading script...{% endif %}</pre>
               </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if project.awards %}
+        <section class="project-awards">
+          <h3>Awards</h3>
+          <div class="project-awards-grid">
+            {% for award in project.awards %}
+            <figure class="project-award-card">
+              <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: project.title }}" class="project-award-image">
+            </figure>
             {% endfor %}
           </div>
         </section>
