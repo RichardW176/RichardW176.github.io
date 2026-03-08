@@ -1,6 +1,8 @@
 ---
 title: "KArrion"
 image: /assets/images/karrion.png
+role: Lead Designer
+description: Apocalyptic tycoon survival shooter developed in Roblox.
 order: 8   # adjust position in grid
 ---
 
