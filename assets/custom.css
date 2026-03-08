@@ -60,7 +60,7 @@ body {
 }
 
 /* ================================
-   PROJECT GRID (BALANCED WIDTH)
+   PROJECT GRID (SMALL MARGINS)
 ================================ */
 
 .project-grid {
@@ -69,26 +69,15 @@ body {
   gap: 60px;
   max-width: 1600px;
   margin: 80px auto;
-  padding: 0 4vw;
+  padding: 0 4vw;  /* small balanced margins */
 }
 
 /* Card container */
 .project-card {
-  position: relative;
-  overflow: hidden;
   border-radius: 20px;
 }
 
-.project-card a {
-  display: block;
-  position: relative;
-  text-decoration: none;
-}
-
-/* ================================
-   PROJECT IMAGE
-================================ */
-
+/* Image styling */
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
@@ -96,61 +85,45 @@ body {
   object-position: center center;
   border-radius: 20px;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform 0.3s ease;
 }
 
 /* Slight lift on hover */
 .project-card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 /* ================================
-   HOVER OVERLAY (HIDDEN UNTIL HOVER)
+   PROJECT INFO BELOW IMAGE
 ================================ */
 
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  color: white;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-  padding: 30px;
-
+.project-info {
+  margin-top: 18px;
   opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-  transition: all 0.35s ease;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
 }
 
-.project-card:hover .project-overlay {
+.project-card:hover .project-info {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
 }
 
-/* Overlay text styling */
-.project-overlay h3 {
-  font-size: 1.6rem;
-  margin-bottom: 12px;
+.project-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+  color: #ffffff;
 }
 
 .project-role {
   font-size: 0.9rem;
-  letter-spacing: 1px;
   color: #aaa;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .project-desc {
   font-size: 0.95rem;
   color: #ccc;
-  max-width: 85%;
 }
 
 /* ================================
