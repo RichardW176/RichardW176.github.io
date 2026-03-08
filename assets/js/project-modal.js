@@ -69,7 +69,34 @@
       closeModal();
     }
   });
+  function wireDocButtons(modalInner) {
+  const docsList = modalInner.querySelector('.project-docs-list');
+  if (!docsList) return;
 
+  // Create preview container
+  let previewWrap = document.createElement('div');
+  previewWrap.className = 'doc-preview';
+  docsList.parentNode.insertBefore(previewWrap, docsList.nextSibling);
+
+  const iframe = document.createElement('iframe');
+  iframe.className = 'doc-preview-iframe';
+  iframe.style.width = '100%';
+  iframe.style.height = '60vh';
+  iframe.style.border = 'none';
+  iframe.style.borderRadius = '10px';
+  previewWrap.appendChild(iframe);
+
+  const btns = docsList.querySelectorAll('.project-doc-btn');
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      iframe.src = btn.dataset.docFile;
+    });
+  });
+
+  // Auto-load first doc
+  if (btns[0]) btns[0].click();
+}
   // attach handlers: intercept project links
   function initProjectLinks() {
     const links = document.querySelectorAll('.project-card a');
