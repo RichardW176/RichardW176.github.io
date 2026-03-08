@@ -22,25 +22,25 @@ title: Home
 {% for project in sorted_projects %}
 
   <section class="project-showcase" id="{{ project.title | slugify }}">
-    <div class="project-showcase__poster-column">
-      <div class="project-showcase__poster-frame">
-        <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
-        <div class="project-showcase__poster-caption">
-          <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
-          <h2 class="project-showcase__title">{{ project.title }}</h2>
-          <p class="project-showcase__role">{{ project.role }}</p>
-          <p class="project-showcase__desc">{{ project.description }}</p>
+    <div class="project-showcase__stage">
+      <div class="project-showcase__poster-column">
+        <div class="project-showcase__poster-frame">
+          <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
+          <div class="project-showcase__poster-caption">
+            <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+            <h2 class="project-showcase__title">{{ project.title }}</h2>
+          </div>
         </div>
       </div>
+
+      <aside class="project-showcase__summary">
+        <p class="project-showcase__eyebrow">Overview</p>
+        <p class="project-showcase__role">{{ project.role }}</p>
+        <p class="project-showcase__desc">{{ project.description }}</p>
+      </aside>
     </div>
 
     <article class="project-showcase__body project-page-inner">
-      <header class="project-showcase__intro">
-        <p class="project-showcase__eyebrow">Overview</p>
-        <h3 class="project-showcase__overview-title">{{ project.title }}</h3>
-        <p class="project-showcase__hover-note">Hover over the poster to reveal project details.</p>
-      </header>
-
       <div class="project-showcase__details">
         <div class="project-content">
           {{ project.content | markdownify }}
