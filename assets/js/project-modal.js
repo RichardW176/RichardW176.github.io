@@ -1,16 +1,13 @@
 (() => {
   const modal = document.getElementById('project-modal');
   const modalInner = document.getElementById('project-modal-inner');
-  const closeBtn = document.querySelector('.project-modal-close');
-  const backdrop = document.querySelector('.project-modal-backdrop');
 
   if (!modal || !modalInner) return;
 
-  function openModal(content) {
-    modalInner.innerHTML = content;
+  function openModal(contentHtml) {
+    modalInner.innerHTML = contentHtml;
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-
     wireDocButtons();
   }
 
@@ -21,38 +18,55 @@
   }
 
   function wireDocButtons() {
-    const btns = modalInner.querySelectorAll('.project-doc-btn');
-    if (!btns.length) return;
+    const docsList = modalInner.querySelector('.project-docs-list');
+    if (!docsList) return;
 
-    const iframe = document.createElement('iframe');
-    iframe.style.width = '100%';
-    iframe.style.height = '60vh';
-    iframe.style.border = 'none';
-    iframe.style.marginTop = '20px';
+    const preview = document.createElement('iframe');
+    preview.style.width = '100%';
+    preview.style.height = '60vh';
+    preview.style.border = 'none';
+    preview.style.marginTop = '20px';
 
-    modalInner.appendChild(iframe);
+    docsList.parentNode.appendChild(preview);
 
-    btns.forEach(btn => {
+    const buttons = docsList.querySelectorAll('.project-doc-btn');
+
+    buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        iframe.src = btn.dataset.docFile;
+        preview.src = btn.dataset.docFile;
       });
     });
 
-    btns[0].click();
+    if (buttons[0]) buttons[0].click();
   }
 
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const hidden = card.querySelector('.project-hidden-content');
-      if (!hidden) return;
-      openModal(hidden.innerHTML);
+  // intercept project clicks
+  document.querySelectorAll('.project-card a').forEach(link => {
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const res = await fetch(link.href);
+      const html = await res.text();
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const content = doc.querySelector('.project-page-inner');
+
+      if (content) {
+        openModal(content.innerHTML);
+      }
     });
   });
 
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', closeModal);
+  // close handlers
+  modal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-modal-close]')) {
+      closeModal();
+    }
+  });
 
-  window.addEventListener('keydown', e => {
+  window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
 })();
