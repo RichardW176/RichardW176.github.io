@@ -1,106 +1,104 @@
 (() => {
-  const modal = document.getElementById('project-modal');
-  const modalInner = document.getElementById('project-modal-inner');
+  const projectModal = document.getElementById('project-modal');
+  const projectModalInner = document.getElementById('project-modal-inner');
+  const docModal = document.getElementById('doc-modal');
+  const docModalFrame = document.getElementById('doc-modal-frame');
+  const docModalLink = document.getElementById('doc-modal-link');
 
-  if (!modal || !modalInner) return;
-
-  let previewFrame = null;
-
-  function renderLoadingState() {
-    modalInner.innerHTML = '<div class="project-modal__spinner">Loading project...</div>';
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {
+    return;
   }
 
-  function openModal(contentHtml) {
-    modalInner.innerHTML = contentHtml;
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    previewFrame = null;
-    wireDocButtons();
+  function syncBodyScrollLock() {
+    const projectOpen = projectModal.getAttribute('aria-hidden') === 'false';
+    const docOpen = docModal.getAttribute('aria-hidden') === 'false';
+    document.body.style.overflow = projectOpen || docOpen ? 'hidden' : '';
   }
 
-  function closeModal() {
-    modal.setAttribute('aria-hidden', 'true');
-    modalInner.innerHTML = '';
-    document.body.style.overflow = '';
-    previewFrame = null;
+  function openProjectModal(contentHtml) {
+    projectModalInner.innerHTML = contentHtml;
+    projectModal.setAttribute('aria-hidden', 'false');
+    syncBodyScrollLock();
   }
 
-  function wireDocButtons() {
-    const docsList = modalInner.querySelector('.project-docs-list');
-    if (!docsList) return;
+  function closeDocModal() {
+    docModal.setAttribute('aria-hidden', 'true');
+    docModalFrame.removeAttribute('src');
+    docModalLink.setAttribute('href', '#');
+    syncBodyScrollLock();
+  }
 
-    previewFrame = document.createElement('iframe');
-    previewFrame.title = 'Project document preview';
-    previewFrame.style.width = '100%';
-    previewFrame.style.height = '60vh';
-    previewFrame.style.border = 'none';
-    previewFrame.style.marginTop = '20px';
+  function closeProjectModal() {
+    closeDocModal();
+    projectModal.setAttribute('aria-hidden', 'true');
+    projectModalInner.innerHTML = '';
+    syncBodyScrollLock();
+  }
 
-    docsList.parentNode.appendChild(previewFrame);
+  function openDocModal(fileUrl, fileTitle) {
+    docModalFrame.src = fileUrl;
+    docModalLink.href = fileUrl;
+    docModalLink.textContent = fileTitle ? `Open ${fileTitle} in new tab` : 'Open PDF in new tab';
+    docModal.setAttribute('aria-hidden', 'false');
+    syncBodyScrollLock();
+  }
 
-    const buttons = docsList.querySelectorAll('.project-doc-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(button => button.classList.remove('is-active'));
-        btn.classList.add('is-active');
-
-        if (previewFrame) {
-          previewFrame.src = btn.dataset.docFile;
-        }
-      });
-    });
-
-    if (buttons[0]) {
-      buttons[0].click();
+  function getTemplateHtml(link) {
+    const templateId = link.dataset.projectTemplate;
+    if (!templateId) {
+      return '';
     }
-  }
 
-  function getProjectContent(doc) {
-    return doc.querySelector('.project-page-inner')
-      || doc.querySelector('.project-page')
-      || doc.querySelector('main')
-      || doc.body;
+    const template = document.getElementById(templateId);
+    return template ? template.innerHTML.trim() : '';
   }
 
   document.querySelectorAll('.project-card a').forEach(link => {
-    link.addEventListener('click', async (e) => {
-      e.preventDefault();
-      renderLoadingState();
-
-      try {
-        const res = await fetch(link.href);
-        if (!res.ok) {
-          throw new Error(`Request failed with status ${res.status}`);
-        }
-
-        const html = await res.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const content = getProjectContent(doc);
-
-        if (!content) {
-          throw new Error('Project content container not found');
-        }
-
-        openModal(content.innerHTML);
-      } catch (error) {
-        console.error('Failed to open project modal:', error);
-        window.location.href = link.href;
+    link.addEventListener('click', (e) => {
+      const templateHtml = getTemplateHtml(link);
+      if (!templateHtml) {
+        return;
       }
+
+      e.preventDefault();
+      openProjectModal(templateHtml);
     });
   });
 
-  modal.addEventListener('click', (e) => {
+  projectModalInner.addEventListener('click', (e) => {
+    const docButton = e.target.closest('.project-doc-btn');
+    if (!docButton) {
+      return;
+    }
+
+    e.preventDefault();
+    openDocModal(docButton.dataset.docFile, docButton.dataset.docTitle);
+  });
+
+  projectModal.addEventListener('click', (e) => {
     if (e.target.closest('[data-modal-close]')) {
-      closeModal();
+      closeProjectModal();
+    }
+  });
+
+  docModal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-doc-close]')) {
+      closeDocModal();
     }
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
+    if (e.key !== 'Escape') {
+      return;
+    }
+
+    if (docModal.getAttribute('aria-hidden') === 'false') {
+      closeDocModal();
+      return;
+    }
+
+    if (projectModal.getAttribute('aria-hidden') === 'false') {
+      closeProjectModal();
     }
   });
 })();

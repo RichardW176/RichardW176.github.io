@@ -22,7 +22,7 @@ title: Home
 {% for project in sorted_projects %}
 
   <div class="project-card">
-    <a href="{{ project.url }}">
+    <a href="{{ project.url }}" data-project-template="project-template-{{ forloop.index }}">
       <img src="{{ project.image }}" alt="{{ project.title }}">
     </a>
 
@@ -32,6 +32,37 @@ title: Home
       <p class="project-desc">{{ project.description }}</p>
     </div>
   </div>
+
+  <template id="project-template-{{ forloop.index }}">
+    <div class="project-page-inner">
+      <h1>{{ project.title }}</h1>
+
+      {% if project.image %}
+        <img src="{{ project.image }}" alt="{{ project.title }}" class="project-hero-image">
+      {% endif %}
+
+      <div class="project-content">
+        {{ project.content | markdownify }}
+      </div>
+
+      {% if project.docs %}
+      <section class="project-docs">
+        <h2>Documents</h2>
+        <div class="project-docs-list">
+          {% for doc in project.docs %}
+            <button
+              type="button"
+              class="project-doc-btn"
+              data-doc-file="{{ doc.file }}"
+              data-doc-title="{{ doc.title }}">
+              {{ doc.title }}
+            </button>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </div>
+  </template>
 
 {% endfor %}
 </div>
@@ -43,6 +74,18 @@ title: Home
   <div class="project-modal__panel">
     <button class="project-modal__close" data-modal-close>✕</button>
     <div id="project-modal-inner" class="project-modal__inner"></div>
+  </div>
+</div>
+
+<div id="doc-modal" class="doc-modal" aria-hidden="true">
+  <div class="doc-modal__backdrop" data-doc-close></div>
+
+  <div class="doc-modal__panel">
+    <button class="doc-modal__close" data-doc-close>✕</button>
+    <div class="doc-modal__toolbar">
+      <a id="doc-modal-link" class="doc-modal__link" href="#" target="_blank" rel="noopener noreferrer">Open PDF in new tab</a>
+    </div>
+    <iframe id="doc-modal-frame" class="doc-modal__frame" title="Project PDF preview"></iframe>
   </div>
 </div>
 

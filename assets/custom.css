@@ -211,8 +211,50 @@ h2 {
 /* inner content area where fetched HTML is injected */
 .project-modal__inner {
   color: #ddd;
-  /* keep images responsive inside modal */
+  padding-top: 18px;
 }
+
+.project-page-inner {
+  display: grid;
+  gap: 24px;
+}
+
+.project-page-inner h1,
+.project-page-inner h2,
+.project-page-inner h3,
+.project-page-inner p,
+.project-page-inner ul,
+.project-page-inner ol {
+  max-width: none;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.project-page-inner h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.project-page-inner h2 {
+  margin: 24px 0 12px;
+  font-size: 1.5rem;
+}
+
+.project-page-inner p,
+.project-page-inner li {
+  color: #cfcfd6;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.project-page-inner ul,
+.project-page-inner ol {
+  padding-left: 20px;
+}
+
+.project-hero-image,
 .project-modal__inner img {
   max-width: 100%;
   height: auto;
@@ -240,6 +282,81 @@ h2 {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.doc-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1300;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.doc-modal[aria-hidden="false"] {
+  display: flex;
+  pointer-events: auto;
+}
+
+.doc-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.doc-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, calc(100% - 48px));
+  height: min(88vh, 900px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #101015;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.65);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.doc-modal__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 64px 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.doc-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  color: #ddd;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.doc-modal__close:hover,
+.doc-modal__link:hover {
+  color: white;
+}
+
+.doc-modal__link {
+  color: #d7d7dc;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.doc-modal__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #18181f;
+}
+
 /* spinner fallback */
 .project-modal__spinner {
   color: #aaa;
@@ -252,4 +369,7 @@ h2 {
 @media (max-width: 900px) {
   .project-modal__panel { width: calc(100% - 24px); padding: 20px; border-radius: 10px; }
   .project-modal__close { top: 8px; right: 8px; }
+  .doc-modal__panel { width: calc(100% - 24px); height: calc(100vh - 24px); }
+  .doc-modal__toolbar { padding: 18px 54px 14px 18px; }
+  .project-page-inner h1 { font-size: clamp(2rem, 10vw, 3rem); }
 }
