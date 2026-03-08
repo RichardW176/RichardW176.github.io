@@ -94,14 +94,16 @@ h2 {
   aspect-ratio: 5 / 7;
   object-fit: cover;
   border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.8);  /* full outline */
-  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);  /* slim + very dark */
+  
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 /* Slight lift */
 .project-card:hover img {
-  transform: scale(1.03);
-  border-color: white;   /* 👈 slight hover emphasis */
+  transform: scale(1.02);
+  border-color: rgba(255, 255, 255, 0.3);  /* slightly brighter on hover */
 }
 
 /* INFO HIDDEN COMPLETELY */
