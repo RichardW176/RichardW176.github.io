@@ -46,30 +46,33 @@
     const updateActiveShowcase = () => {
       activeFrame = null;
 
+      const viewportHeight = window.innerHeight;
       const viewportCenter = window.innerHeight * 0.52;
-      let activeShowcase = null;
-      let closestShowcase = projectShowcases[0];
-      let closestDistance = Number.POSITIVE_INFINITY;
+      let bestShowcase = projectShowcases[0];
+      let bestScore = Number.NEGATIVE_INFINITY;
 
       projectShowcases.forEach((showcase) => {
         const focusTarget = showcase.querySelector('.project-showcase__body') || showcase;
         const rect = focusTarget.getBoundingClientRect();
+        const visibleTop = Math.max(rect.top, 0);
+        const visibleBottom = Math.min(rect.bottom, viewportHeight);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const containsCenter = rect.top <= viewportCenter && rect.bottom >= viewportCenter;
+        const centerDistance = Math.abs((rect.top + (rect.height / 2)) - viewportCenter);
 
-        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
-          activeShowcase = showcase;
-        }
+        const visibilityScore = visibleHeight;
+        const centerBonus = containsCenter ? viewportHeight * 0.35 : 0;
+        const proximityPenalty = centerDistance * 0.08;
+        const score = visibilityScore + centerBonus - proximityPenalty;
 
-        const showcaseCenter = rect.top + (rect.height / 2);
-        const distance = Math.abs(showcaseCenter - viewportCenter);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestShowcase = showcase;
+        if (score > bestScore) {
+          bestScore = score;
+          bestShowcase = showcase;
         }
       });
 
       projectShowcases.forEach((showcase) => {
-        showcase.classList.toggle('is-active', showcase === (activeShowcase || closestShowcase));
+        showcase.classList.toggle('is-active', showcase === bestShowcase);
       });
     };
 
