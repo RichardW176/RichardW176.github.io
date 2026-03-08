@@ -7,6 +7,7 @@ description: 2.5D bullet hell set in a voxelized cyberpunk world.
 docs:
   - title: "Overdawn Documentation"
     file: /assets/overdawn-doc.pdf
+    preview: true
 scripts:
   - title: "Wasteland Dialogue"
     file: /assets/scripts/overdawn/wasteland-dialogue.yarn

@@ -58,10 +58,31 @@ title: Home
       {% endif %}
 
       {% if project.docs %}
+      {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
+      {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
       <section class="project-docs">
         <h2>Documents</h2>
+        {% if preview_docs.size > 0 %}
+        <div class="project-docs-grid">
+          {% for doc in preview_docs %}
+          <article class="project-doc-card">
+            <div class="project-doc-card__header">
+              <h3>{{ doc.title }}</h3>
+              <a class="project-doc-card__link" href="{{ doc.file }}" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            </div>
+            <iframe
+              class="project-doc-card__frame"
+              src="{{ doc.file }}#toolbar=1&navpanes=0&scrollbar=1&zoom=page-width"
+              title="{{ doc.title }}">
+            </iframe>
+          </article>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if standard_docs.size > 0 %}
         <div class="project-docs-list">
-          {% for doc in project.docs %}
+          {% for doc in standard_docs %}
             <button
               type="button"
               class="project-doc-btn"
@@ -71,6 +92,7 @@ title: Home
             </button>
           {% endfor %}
         </div>
+        {% endif %}
       </section>
       {% endif %}
 
