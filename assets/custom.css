@@ -1,6 +1,8 @@
-/* ================================
-   TRUE PORTFOLIO DARK MODE
-================================ */
+/* =====================================
+   CLEAN DARK PORTFOLIO RESET
+===================================== */
+
+/* ===== GLOBAL ===== */
 
 body {
   background-color: #0b0b0f !important;
@@ -25,16 +27,14 @@ body {
   color: #ffffff !important;
 }
 
-/* ================================
-   HERO SECTION
-================================ */
+/* ===== HERO SECTION ===== */
 
 .hero {
   padding: 140px 5vw 100px 5vw;
 }
 
 .hero-inner {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -46,87 +46,90 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(70px, 9vw, 140px);
+  font-size: clamp(70px, 9vw, 130px);
   line-height: 0.95;
   font-weight: 800;
-  color: #fff;
+  color: #ffffff;
   margin: 0 0 40px 0;
 }
 
 .hero-tagline {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: #aaa;
-  max-width: 800px;
+  max-width: 700px;
 }
 
+/* ===== SECTION TITLES ===== */
 
-/* ================================
-   PROJECT GRID (EXPANDING CARDS)
-================================ */
+h2 {
+  max-width: 1400px;
+  margin: 60px auto 30px auto;
+  padding: 0 20px;
+  font-size: 2rem;
+}
+
+/* ===== PROJECT GRID ===== */
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  max-width: 1600px;
-  margin: 80px auto;
-  padding: 0 4vw;
-  grid-auto-rows: auto;
-  transition: all 0.3s ease;
+  gap: 50px;
+
+  max-width: 1400px;
+  margin: 0 auto 80px auto;
+  padding: 0 20px;
 }
 
-/* Card container */
+/* ===== PROJECT CARD ===== */
+
 .project-card {
-  position: relative;
   border-radius: 20px;
-  transition: all 0.35s ease;
 }
 
-/* Image */
+.project-card a {
+  display: block;
+  text-decoration: none;
+}
+
+/* ===== IMAGE ===== */
+
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
   object-fit: cover;
+  object-position: center center;
   border-radius: 20px;
   display: block;
-  transition: transform 0.35s ease;
-}
-
-/* Hidden description */
-.project-info {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.35s ease;
-  margin-top: 0;
-}
-
-/* Hover effect */
-.project-card:hover {
-  transform: translateY(-6px);
+  transition: transform 0.3s ease;
 }
 
 .project-card:hover img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* Expand card on hover */
+/* ===== INFO (HIDDEN BY DEFAULT) ===== */
+
+.project-info {
+  margin-top: 15px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+}
+
 .project-card:hover .project-info {
-  max-height: 200px;  /* controls how much text can show */
   opacity: 1;
-  margin-top: 16px;
+  transform: translateY(0);
 }
 
-/* Text styling */
 .project-info h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  color: #ffffff;
   margin-bottom: 6px;
-  color: white;
 }
 
 .project-role {
   font-size: 0.9rem;
-  color: #aaa;
+  color: #999;
   margin-bottom: 6px;
 }
 
@@ -135,9 +138,7 @@ body {
   color: #ccc;
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 1100px) {
   .project-grid {
@@ -145,7 +146,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .project-grid {
     grid-template-columns: 1fr;
   }
