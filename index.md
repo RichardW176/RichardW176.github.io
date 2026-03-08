@@ -38,12 +38,32 @@ title: Home
 
 ## Prose
 
-<div class="prose-grid">
-{% assign sorted_prose = site.prose | sort: "order" %}
-{% for piece in sorted_prose %}
-  <a href="{{ piece.url }}" class="prose-card">
-    <h3>{{ piece.title }}</h3>
-  </a>
+<div class="project-grid">
+{% assign sorted_projects = site.projects | sort: "order" %}
+{% for project in sorted_projects %}
+  <div class="project-card" data-project="{{ project.slug }}">
+    <img src="{{ project.image }}" alt="{{ project.title }}">
+
+    <!-- Hidden project content -->
+    <div class="project-hidden-content" id="project-{{ project.slug }}">
+      <h1>{{ project.title }}</h1>
+      <p>{{ project.description }}</p>
+      {{ project.content }}
+
+      {% if project.docs %}
+      <div class="project-docs-list">
+        {% for doc in project.docs %}
+          <button
+            type="button"
+            class="project-doc-btn"
+            data-doc-file="{{ doc.file }}">
+            {{ doc.title }}
+          </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
 {% endfor %}
 </div>
 
