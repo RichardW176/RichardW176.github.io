@@ -28,4 +28,4 @@ Describe what you built and what you were responsible for.
 ## Links
 docs:
   - title: "Global Narrative Documentation - Sample"
-    file: /assets/docs/floodsong-doc.pdf
+    file: /assets/floodsong-doc.pdf
