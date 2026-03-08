@@ -7,6 +7,10 @@ description: 2.5D bullet hell set in a voxelized cyberpunk world.
 docs:
   - title: "Overdawn Documentation"
     file: /assets/overdawn-doc.pdf
+scripts:
+  - title: "Wasteland Dialogue"
+    file: /assets/scripts/overdawn/wasteland-dialogue.yarn
+    format: "Yarn Script"
 media:
   - file: /assets/images/overdawn-andrean-slums.jpg
     alt: Overdawn screenshot of the Andrean slums

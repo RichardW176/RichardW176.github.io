@@ -73,6 +73,24 @@ title: Home
         </div>
       </section>
       {% endif %}
+
+      {% if project.scripts %}
+      <section class="project-scripts">
+        <h2>Scripts</h2>
+        <div class="project-scripts-list">
+          {% for script in project.scripts %}
+            <button
+              type="button"
+              class="project-script-btn"
+              data-script-file="{{ script.file }}"
+              data-script-title="{{ script.title }}"
+              data-script-format="{{ script.format | default: 'Yarn Script' }}">
+              {{ script.title }}
+            </button>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
     </div>
   </template>
 
@@ -98,6 +116,22 @@ title: Home
       <a id="doc-modal-link" class="doc-modal__link" href="#" target="_blank" rel="noopener noreferrer">Open PDF in new tab</a>
     </div>
     <iframe id="doc-modal-frame" class="doc-modal__frame" title="Project PDF preview"></iframe>
+  </div>
+</div>
+
+<div id="script-modal" class="script-modal" aria-hidden="true">
+  <div class="script-modal__backdrop" data-script-close></div>
+
+  <div class="script-modal__panel">
+    <button class="script-modal__close" data-script-close>✕</button>
+    <div class="script-modal__toolbar">
+      <div class="script-modal__meta">
+        <p id="script-modal-format" class="script-modal__format">Yarn Script</p>
+        <h2 id="script-modal-title" class="script-modal__title">Script</h2>
+      </div>
+      <a id="script-modal-link" class="script-modal__link" href="#" target="_blank" rel="noopener noreferrer">Open raw file</a>
+    </div>
+    <pre id="script-modal-content" class="script-modal__content"></pre>
   </div>
 </div>
 

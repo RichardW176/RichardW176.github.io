@@ -299,7 +299,8 @@ h2 {
   gap: 12px;
 }
 
-.project-doc-btn {
+.project-doc-btn,
+.project-script-btn {
   padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
@@ -309,9 +310,21 @@ h2 {
 }
 
 .project-doc-btn:hover,
-.project-doc-btn.is-active {
+.project-doc-btn.is-active,
+.project-script-btn:hover {
   border-color: rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.1);
+}
+
+.project-scripts {
+  display: grid;
+  gap: 16px;
+}
+
+.project-scripts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .doc-modal {
@@ -389,6 +402,108 @@ h2 {
   background: #18181f;
 }
 
+.script-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1400;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.script-modal[aria-hidden="false"] {
+  display: flex;
+  pointer-events: auto;
+}
+
+.script-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.script-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100% - 48px));
+  height: min(84vh, 920px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0f1015;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.script-modal__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 22px 64px 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.script-modal__meta {
+  display: grid;
+  gap: 6px;
+}
+
+.script-modal__format {
+  margin: 0;
+  color: #8f95a3;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.script-modal__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.script-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  color: #ddd;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.script-modal__close:hover,
+.script-modal__link:hover {
+  color: white;
+}
+
+.script-modal__link {
+  color: #d7d7dc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.script-modal__content {
+  margin: 0;
+  padding: 24px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #e6e6e6;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 120px),
+    #11131a;
+}
+
 /* spinner fallback */
 .project-modal__spinner {
   color: #aaa;
@@ -403,6 +518,9 @@ h2 {
   .project-modal__close { top: 8px; right: 8px; }
   .doc-modal__panel { width: calc(100% - 24px); height: calc(100vh - 24px); }
   .doc-modal__toolbar { padding: 18px 54px 14px 18px; }
+  .script-modal__panel { width: calc(100% - 24px); height: calc(100vh - 24px); }
+  .script-modal__toolbar { padding: 18px 54px 14px 18px; }
   .project-page-inner h1 { font-size: clamp(2rem, 10vw, 3rem); }
   .project-media-grid { grid-template-columns: 1fr; }
+  .script-modal__toolbar { grid-template-columns: 1fr; display: grid; }
 }

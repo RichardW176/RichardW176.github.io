@@ -43,5 +43,23 @@ layout: default
     </section>
     {% endif %}
 
+    {% if page.scripts %}
+    <section class="project-scripts">
+      <h2>Scripts</h2>
+      <div class="project-scripts-list">
+        {% for script in page.scripts %}
+          <button
+            type="button"
+            class="project-script-btn"
+            data-script-file="{{ script.file }}"
+            data-script-title="{{ script.title }}"
+            data-script-format="{{ script.format | default: 'Yarn Script' }}">
+            {{ script.title }}
+          </button>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
   </div>
 </div>
