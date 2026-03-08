@@ -109,6 +109,7 @@ h2 {
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
 }
 
 .project-showcase__poster {
@@ -118,6 +119,17 @@ h2 {
   object-fit: cover;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.project-showcase__poster-caption {
+  position: absolute;
+  inset: auto 20px 20px;
+  display: grid;
+  gap: 10px;
+  padding: 20px 22px 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(4, 5, 10, 0), rgba(4, 5, 10, 0.9) 28%, rgba(4, 5, 10, 0.96));
 }
 
 .project-showcase__body {
@@ -137,9 +149,17 @@ h2 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.project-showcase__index {
+.project-showcase__eyebrow {
   margin: 0;
   color: #8d93a2;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.project-showcase__index {
+  margin: 0;
+  color: #f3f6ff;
   font-size: 0.8rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -148,25 +168,62 @@ h2 {
 .project-showcase__title {
   margin: 0;
   padding: 0;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 0.92;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 0.95;
+  color: #ffffff;
+}
+
+.project-showcase__overview-title {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.project-showcase__hover-note {
+  margin: 0;
+  color: #8e95a4;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .project-showcase__role,
 .project-showcase__desc {
   margin: 0;
-  max-width: 760px;
+  max-width: none;
 }
 
 .project-showcase__role {
-  color: #c7ccd6;
-  font-size: 1.05rem;
+  color: rgba(227, 233, 244, 0.9);
+  font-size: 0.98rem;
 }
 
 .project-showcase__desc {
-  color: #9198a8;
-  font-size: 1rem;
+  color: rgba(194, 201, 214, 0.72);
+  font-size: 0.98rem;
   line-height: 1.7;
+}
+
+.project-showcase__details {
+  display: grid;
+  gap: 24px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 220ms ease, transform 220ms ease, max-height 320ms ease;
+}
+
+.project-showcase__poster-column:hover + .project-showcase__body .project-showcase__details,
+.project-showcase__poster-column:focus-within + .project-showcase__body .project-showcase__details {
+  max-height: 6000px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-showcase__poster-column:hover + .project-showcase__body .project-showcase__hover-note,
+.project-showcase__poster-column:focus-within + .project-showcase__body .project-showcase__hover-note {
+  opacity: 0;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -180,8 +237,11 @@ h2 {
   .project-sequence { gap: 64px; margin: 40px auto 80px; }
   .project-showcase { grid-template-columns: 1fr; gap: 24px; }
   .project-showcase__poster-frame { position: static; padding: 14px; }
+  .project-showcase__poster-caption { inset: auto 14px 14px; padding: 16px 18px 14px; }
   .project-showcase__body { padding: 22px; }
   .project-showcase__title { font-size: clamp(2.2rem, 14vw, 3.6rem); }
+  .project-showcase__details { max-height: none; opacity: 1; overflow: visible; transform: none; }
+  .project-showcase__hover-note { display: none; }
 }
 /* =========================
    Project modal (overlay)

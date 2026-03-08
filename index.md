@@ -25,100 +25,107 @@ title: Home
     <div class="project-showcase__poster-column">
       <div class="project-showcase__poster-frame">
         <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
+        <div class="project-showcase__poster-caption">
+          <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+          <h2 class="project-showcase__title">{{ project.title }}</h2>
+          <p class="project-showcase__role">{{ project.role }}</p>
+          <p class="project-showcase__desc">{{ project.description }}</p>
+        </div>
       </div>
     </div>
 
     <article class="project-showcase__body project-page-inner">
       <header class="project-showcase__intro">
-        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
-        <h2 class="project-showcase__title">{{ project.title }}</h2>
-        <p class="project-showcase__role">{{ project.role }}</p>
-        <p class="project-showcase__desc">{{ project.description }}</p>
+        <p class="project-showcase__eyebrow">Overview</p>
+        <h3 class="project-showcase__overview-title">{{ project.title }}</h3>
+        <p class="project-showcase__hover-note">Hover over the poster to reveal project details.</p>
       </header>
 
-      <div class="project-content">
-        {{ project.content | markdownify }}
-      </div>
-
-      {% if project.media %}
-      <section class="project-media">
-        <h3>Media</h3>
-        <div class="project-media-grid">
-          {% for item in project.media %}
-          <figure class="project-media-card">
-            <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="project-media-image">
-            {% if item.description %}
-            <figcaption>{{ item.description }}</figcaption>
-            {% endif %}
-          </figure>
-          {% endfor %}
+      <div class="project-showcase__details">
+        <div class="project-content">
+          {{ project.content | markdownify }}
         </div>
-      </section>
-      {% endif %}
 
-      {% if project.docs %}
-      {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
-      {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
-      <section class="project-docs">
-        <h3>Documents</h3>
-        {% if preview_docs.size > 0 %}
-        <div class="project-docs-grid">
-          {% for doc in preview_docs %}
-          <article class="project-doc-card">
-            <div class="project-doc-card__header">
-              <h4>{{ doc.title }}</h4>
-              <a class="project-doc-card__link" href="{{ doc.file }}" target="_blank" rel="noopener noreferrer">Open PDF</a>
-            </div>
-            <iframe
-              class="project-doc-card__frame"
-              src="{{ doc.file }}#toolbar=1&navpanes=0&scrollbar=1&zoom=page-width"
-              title="{{ doc.title }}">
-            </iframe>
-          </article>
-          {% endfor %}
-        </div>
+        {% if project.media %}
+        <section class="project-media">
+          <h3>Media</h3>
+          <div class="project-media-grid">
+            {% for item in project.media %}
+            <figure class="project-media-card">
+              <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="project-media-image">
+              {% if item.description %}
+              <figcaption>{{ item.description }}</figcaption>
+              {% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+        </section>
         {% endif %}
 
-        {% if standard_docs.size > 0 %}
-        <div class="project-docs-list">
-          {% for doc in standard_docs %}
-            <button
-              type="button"
-              class="project-doc-btn"
-              data-doc-file="{{ doc.file }}"
-              data-doc-title="{{ doc.title }}">
-              {{ doc.title }}
-            </button>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </section>
-      {% endif %}
-
-      {% if project.scripts %}
-      <section class="project-scripts">
-        <h3>Scripts</h3>
-        <div class="project-scripts-grid">
-          {% for script in project.scripts %}
-            <article
-              class="project-script-card"
-              data-script-file="{{ script.file }}"
-              data-script-title="{{ script.title }}"
-              data-script-format="{{ script.format | default: 'Yarn Script' }}"
-              {% if script.content %}data-script-inline="true"{% endif %}>
-              <div class="project-script-card__header">
-                <div class="project-script-card__meta">
-                  <p class="project-script-card__format">{{ script.format | default: 'Yarn Script' }}</p>
-                  <h4>{{ script.title }}</h4>
-                </div>
-                <a class="project-script-card__link" href="{{ script.file }}" target="_blank" rel="noopener noreferrer">Open raw file</a>
+        {% if project.docs %}
+        {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
+        {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
+        <section class="project-docs">
+          <h3>Documents</h3>
+          {% if preview_docs.size > 0 %}
+          <div class="project-docs-grid">
+            {% for doc in preview_docs %}
+            <article class="project-doc-card">
+              <div class="project-doc-card__header">
+                <h4>{{ doc.title }}</h4>
+                <a class="project-doc-card__link" href="{{ doc.file }}" target="_blank" rel="noopener noreferrer">Open PDF</a>
               </div>
-              <pre class="project-script-card__content">{% if script.content %}{{ script.content | escape }}{% else %}Loading script...{% endif %}</pre>
+              <iframe
+                class="project-doc-card__frame"
+                src="{{ doc.file }}#toolbar=1&navpanes=0&scrollbar=1&zoom=page-width"
+                title="{{ doc.title }}">
+              </iframe>
             </article>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if standard_docs.size > 0 %}
+          <div class="project-docs-list">
+            {% for doc in standard_docs %}
+              <button
+                type="button"
+                class="project-doc-btn"
+                data-doc-file="{{ doc.file }}"
+                data-doc-title="{{ doc.title }}">
+                {{ doc.title }}
+              </button>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </section>
+        {% endif %}
+
+        {% if project.scripts %}
+        <section class="project-scripts">
+          <h3>Scripts</h3>
+          <div class="project-scripts-grid">
+            {% for script in project.scripts %}
+              <article
+                class="project-script-card"
+                data-script-file="{{ script.file }}"
+                data-script-title="{{ script.title }}"
+                data-script-format="{{ script.format | default: 'Yarn Script' }}"
+                {% if script.content %}data-script-inline="true"{% endif %}>
+                <div class="project-script-card__header">
+                  <div class="project-script-card__meta">
+                    <p class="project-script-card__format">{{ script.format | default: 'Yarn Script' }}</p>
+                    <h4>{{ script.title }}</h4>
+                  </div>
+                  <a class="project-script-card__link" href="{{ script.file }}" target="_blank" rel="noopener noreferrer">Open raw file</a>
+                </div>
+                <pre class="project-script-card__content">{% if script.content %}{{ script.content | escape }}{% else %}Loading script...{% endif %}</pre>
+              </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+      </div>
     </article>
   </section>
 
