@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="project-page">
+  <div class="project-page-inner">
+
+    <h1>{{ page.title }}</h1>
+
+    {% if page.image %}
+      <img src="{{ page.image }}" class="project-hero-image">
+    {% endif %}
+
+    <div class="project-content">
+      {{ content }}
+    </div>
+
+    {% if page.docs %}
+    <section class="project-docs">
+      <h2>Documents</h2>
+      <div class="project-docs-list">
+        {% for doc in page.docs %}
+          <button
+            type="button"
+            class="project-doc-btn"
+            data-doc-file="{{ doc.file }}"
+            data-doc-title="{{ doc.title }}">
+            {{ doc.title }}
+          </button>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+  </div>
+</div>
