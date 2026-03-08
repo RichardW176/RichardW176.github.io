@@ -10,6 +10,7 @@
   function openModal(htmlContent, sourceUrl) {
     // inject content (replace spinner)
     modalInner.innerHTML = htmlContent;
+    wireDocButtons(modalInner);
     modal.setAttribute('aria-hidden', 'false');
 
     // remember focus
