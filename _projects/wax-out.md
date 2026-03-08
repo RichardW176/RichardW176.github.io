@@ -1,6 +1,8 @@
 ---
 title: "Wax Out!"
 image: /assets/images/wax-out.png
+role: Narrative Designer, Designer
+description: Experimental RPG where gameplay 
 order: 7   # adjust number based on where you want it
 ---
 
