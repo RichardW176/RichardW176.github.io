@@ -46,3 +46,19 @@ title: Home
   </a>
 {% endfor %}
 </div>
+
+<!-- Modal container (keeps hidden until opened) -->
+<div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="project-modal__backdrop" data-modal-close></div>
+
+  <div class="project-modal__panel" role="document">
+    <button class="project-modal__close" aria-label="Close project" data-modal-close>✕</button>
+    <div class="project-modal__inner" id="project-modal-inner">
+      <!-- fetched project content will be injected here -->
+      <div class="project-modal__spinner" aria-hidden="true">Loading…</div>
+    </div>
+  </div>
+</div>
+
+<!-- include the modal script -->
+<script src="/assets/js/project-modal.js" defer></script>
