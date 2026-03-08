@@ -82,3 +82,11 @@ title: Home
 
 <!-- include the modal script -->
 <script src="/assets/js/project-modal.js" defer></script>
+
+<div id="project-modal" class="project-modal" aria-hidden="true">
+  <div class="project-modal-backdrop"></div>
+  <div class="project-modal-panel">
+    <button class="project-modal-close">✕</button>
+    <div id="project-modal-inner"></div>
+  </div>
+</div>
