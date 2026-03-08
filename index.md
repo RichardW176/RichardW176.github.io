@@ -49,6 +49,25 @@ title: Home
           {{ project.content | markdownify }}
         </div>
 
+        {% if project.awards %}
+        <section class="project-awards">
+          <h3>Awards</h3>
+          <div class="project-awards-grid">
+            {% for award in project.awards %}
+            <figure class="project-award-card">
+              <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: project.title }}" class="project-award-image">
+              {% if award.title or award.description %}
+              <figcaption>
+                {% if award.title %}<strong>{{ award.title }}</strong>{% endif %}
+                {% if award.description %}<p>{{ award.description }}</p>{% endif %}
+              </figcaption>
+              {% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
         {% if project.media %}
         <section class="project-media">
           <h3>Media</h3>

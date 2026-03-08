@@ -4,6 +4,13 @@ image: /assets/images/overdawn.png
 order: 1
 role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
+awards:
+  - title: "GWB"
+    file: /assets/images/GWB.avif
+    alt: Overdawn award image for GWB
+  - title: "Tencet"
+    file: /assets/images/tencet.avif
+    alt: Overdawn award image for Tencet
 docs:
   - title: "Rev Boss Design Document"
     file: /assets/overdawn-rev-design-document.pdf

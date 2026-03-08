@@ -13,6 +13,25 @@ layout: default
       {{ content }}
     </div>
 
+    {% if page.awards %}
+    <section class="project-awards">
+      <h2>Awards</h2>
+      <div class="project-awards-grid">
+        {% for award in page.awards %}
+        <figure class="project-award-card">
+          <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: page.title }}" class="project-award-image">
+          {% if award.title or award.description %}
+          <figcaption>
+            {% if award.title %}<strong>{{ award.title }}</strong>{% endif %}
+            {% if award.description %}<p>{{ award.description }}</p>{% endif %}
+          </figcaption>
+          {% endif %}
+        </figure>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
     {% if page.media %}
     <section class="project-media">
       <h2>Media</h2>

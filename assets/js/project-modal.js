@@ -40,22 +40,43 @@
 
   hydrateScriptCards(document);
 
-  if (projectShowcases.length && 'IntersectionObserver' in window) {
-    const showcaseObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle('is-active', entry.isIntersecting);
-      });
-    }, {
-      threshold: 0.18,
-      rootMargin: '-6% 0px -24% 0px',
-    });
+  if (projectShowcases.length) {
+    let activeFrame = null;
 
-    projectShowcases.forEach((showcase, index) => {
-      if (index === 0) {
-        showcase.classList.add('is-active');
+    const updateActiveShowcase = () => {
+      activeFrame = null;
+
+      const viewportCenter = window.innerHeight * 0.52;
+      let closestShowcase = projectShowcases[0];
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      projectShowcases.forEach((showcase) => {
+        const rect = showcase.getBoundingClientRect();
+        const showcaseCenter = rect.top + (rect.height / 2);
+        const distance = Math.abs(showcaseCenter - viewportCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestShowcase = showcase;
+        }
+      });
+
+      projectShowcases.forEach((showcase) => {
+        showcase.classList.toggle('is-active', showcase === closestShowcase);
+      });
+    };
+
+    const requestActiveUpdate = () => {
+      if (activeFrame !== null) {
+        return;
       }
-      showcaseObserver.observe(showcase);
-    });
+
+      activeFrame = window.requestAnimationFrame(updateActiveShowcase);
+    };
+
+    updateActiveShowcase();
+    window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+    window.addEventListener('resize', requestActiveUpdate);
   } else {
     projectShowcases.forEach((showcase) => {
       showcase.classList.add('is-active');

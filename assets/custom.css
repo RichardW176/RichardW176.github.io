@@ -221,11 +221,11 @@ h2 {
   display: grid;
   gap: 24px;
   overflow: visible;
-  opacity: 0.16;
+  opacity: 0.24;
   transform: translateY(10px);
-  filter: blur(2px);
+  filter: blur(1.4px);
   pointer-events: none;
-  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
+  transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
 }
 
 .project-showcase.is-active .project-showcase__details {
@@ -386,6 +386,52 @@ h2 {
 .project-media {
   display: grid;
   gap: 16px;
+}
+
+.project-awards {
+  display: grid;
+  gap: 16px;
+}
+
+.project-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-award-card {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.project-award-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: rgba(9, 10, 14, 0.96);
+}
+
+.project-award-card figcaption {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  color: #cfcfd6;
+  line-height: 1.6;
+}
+
+.project-award-card figcaption strong {
+  color: #f1f4fb;
+}
+
+.project-award-card figcaption p {
+  margin: 0;
 }
 
 .project-media-grid {
@@ -654,6 +700,7 @@ h2 {
   .project-page > .project-page-inner { padding: 22px; }
   .project-page-inner h1 { font-size: clamp(2rem, 10vw, 3rem); }
   .project-docs-grid { grid-template-columns: 1fr; }
+  .project-awards-grid { grid-template-columns: 1fr; }
   .project-media-grid { grid-template-columns: 1fr; }
   .project-scripts-grid { grid-template-columns: 1fr; }
   .project-doc-card__header { display: grid; }
