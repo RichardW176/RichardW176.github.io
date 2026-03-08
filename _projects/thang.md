@@ -2,7 +2,7 @@
 title: Thang!
 image: /assets/images/thang.png
 role: Lead Narrative, Designer
-description: 2.5D bullet hell set in a voxelized cyberpunk world.
+description: 3v3 party shooter inspired by the Korean playground game "“Eoreumttang” (Freeze Tag).
 order: 5
 ---
 
