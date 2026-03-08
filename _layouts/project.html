@@ -46,16 +46,22 @@ layout: default
     {% if page.scripts %}
     <section class="project-scripts">
       <h2>Scripts</h2>
-      <div class="project-scripts-list">
+      <div class="project-scripts-grid">
         {% for script in page.scripts %}
-          <button
-            type="button"
-            class="project-script-btn"
+          <article
+            class="project-script-card"
             data-script-file="{{ script.file }}"
             data-script-title="{{ script.title }}"
             data-script-format="{{ script.format | default: 'Yarn Script' }}">
-            {{ script.title }}
-          </button>
+            <div class="project-script-card__header">
+              <div class="project-script-card__meta">
+                <p class="project-script-card__format">{{ script.format | default: 'Yarn Script' }}</p>
+                <h3>{{ script.title }}</h3>
+              </div>
+              <a class="project-script-card__link" href="{{ script.file }}" target="_blank" rel="noopener noreferrer">Open raw file</a>
+            </div>
+            <pre class="project-script-card__content">Loading script...</pre>
+          </article>
         {% endfor %}
       </div>
     </section>
@@ -63,3 +69,5 @@ layout: default
 
   </div>
 </div>
+
+<script src="/assets/js/project-modal.js" defer></script>

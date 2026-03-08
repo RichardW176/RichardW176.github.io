@@ -4,31 +4,56 @@
   const docModal = document.getElementById('doc-modal');
   const docModalFrame = document.getElementById('doc-modal-frame');
   const docModalLink = document.getElementById('doc-modal-link');
-  const scriptModal = document.getElementById('script-modal');
-  const scriptModalTitle = document.getElementById('script-modal-title');
-  const scriptModalFormat = document.getElementById('script-modal-format');
-  const scriptModalContent = document.getElementById('script-modal-content');
-  const scriptModalLink = document.getElementById('script-modal-link');
 
-  if (
-    !projectModal || !projectModalInner ||
-    !docModal || !docModalFrame || !docModalLink ||
-    !scriptModal || !scriptModalTitle || !scriptModalFormat || !scriptModalContent || !scriptModalLink
-  ) {
+  async function hydrateScriptCards(root) {
+    const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded])');
+    if (!cards.length) {
+      return;
+    }
+
+    await Promise.all(Array.from(cards, async (card) => {
+      const content = card.querySelector('.project-script-card__content');
+      const fileUrl = card.dataset.scriptFile;
+
+      card.dataset.scriptLoaded = 'true';
+
+      if (!content || !fileUrl) {
+        return;
+      }
+
+      content.textContent = 'Loading script...';
+
+      try {
+        const res = await fetch(fileUrl);
+        if (!res.ok) {
+          throw new Error(`Request failed with status ${res.status}`);
+        }
+
+        content.textContent = await res.text();
+      } catch (error) {
+        console.error('Failed to load script file:', error);
+        content.textContent = 'Unable to load this script right now.';
+      }
+    }));
+  }
+
+  hydrateScriptCards(document);
+
+  if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {
     return;
   }
 
   function syncBodyScrollLock() {
     const projectOpen = projectModal.getAttribute('aria-hidden') === 'false';
     const docOpen = docModal.getAttribute('aria-hidden') === 'false';
-    const scriptOpen = scriptModal.getAttribute('aria-hidden') === 'false';
-    document.body.style.overflow = projectOpen || docOpen || scriptOpen ? 'hidden' : '';
+    document.body.style.overflow = projectOpen || docOpen ? 'hidden' : '';
   }
 
   function openProjectModal(contentHtml) {
     projectModalInner.innerHTML = contentHtml;
     projectModal.setAttribute('aria-hidden', 'false');
     syncBodyScrollLock();
+    hydrateScriptCards(projectModalInner);
   }
 
   function closeDocModal() {
@@ -38,18 +63,8 @@
     syncBodyScrollLock();
   }
 
-  function closeScriptModal() {
-    scriptModal.setAttribute('aria-hidden', 'true');
-    scriptModalTitle.textContent = 'Script';
-    scriptModalFormat.textContent = 'Yarn Script';
-    scriptModalContent.textContent = '';
-    scriptModalLink.setAttribute('href', '#');
-    syncBodyScrollLock();
-  }
-
   function closeProjectModal() {
     closeDocModal();
-    closeScriptModal();
     projectModal.setAttribute('aria-hidden', 'true');
     projectModalInner.innerHTML = '';
     syncBodyScrollLock();
@@ -61,27 +76,6 @@
     docModalLink.textContent = fileTitle ? `Open ${fileTitle} in new tab` : 'Open PDF in new tab';
     docModal.setAttribute('aria-hidden', 'false');
     syncBodyScrollLock();
-  }
-
-  async function openScriptModal(fileUrl, fileTitle, fileFormat) {
-    scriptModalTitle.textContent = fileTitle || 'Script';
-    scriptModalFormat.textContent = fileFormat || 'Yarn Script';
-    scriptModalContent.textContent = 'Loading script...';
-    scriptModalLink.href = fileUrl;
-    scriptModal.setAttribute('aria-hidden', 'false');
-    syncBodyScrollLock();
-
-    try {
-      const res = await fetch(fileUrl);
-      if (!res.ok) {
-        throw new Error(`Request failed with status ${res.status}`);
-      }
-
-      scriptModalContent.textContent = await res.text();
-    } catch (error) {
-      console.error('Failed to load script file:', error);
-      scriptModalContent.textContent = 'Unable to load this script right now.';
-    }
   }
 
   function getTemplateHtml(link) {
@@ -108,23 +102,12 @@
 
   projectModalInner.addEventListener('click', (e) => {
     const docButton = e.target.closest('.project-doc-btn');
-    if (docButton) {
-      e.preventDefault();
-      openDocModal(docButton.dataset.docFile, docButton.dataset.docTitle);
-      return;
-    }
-
-    const scriptButton = e.target.closest('.project-script-btn');
-    if (!scriptButton) {
+    if (!docButton) {
       return;
     }
 
     e.preventDefault();
-    openScriptModal(
-      scriptButton.dataset.scriptFile,
-      scriptButton.dataset.scriptTitle,
-      scriptButton.dataset.scriptFormat
-    );
+    openDocModal(docButton.dataset.docFile, docButton.dataset.docTitle);
   });
 
   projectModal.addEventListener('click', (e) => {
@@ -139,19 +122,8 @@
     }
   });
 
-  scriptModal.addEventListener('click', (e) => {
-    if (e.target.closest('[data-script-close]')) {
-      closeScriptModal();
-    }
-  });
-
   window.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') {
-      return;
-    }
-
-    if (scriptModal.getAttribute('aria-hidden') === 'false') {
-      closeScriptModal();
       return;
     }
 
