@@ -2,7 +2,7 @@
 title: Overdawn
 image: /assets/images/overdawn.png
 order: 1
-role: Lead Narrative, Lead Designer, Artist, Usability Consultant
+role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
 docs:
   - title: "Overdawn Documentation"
@@ -63,9 +63,9 @@ media:
     description: Combat screenshot from the gangster hideout emphasizing top-down action, enemy pressure, and readable effects.
 ---
 
-Lead Narrative, Lead Design, and Usability Consultant for *Overdawn*, a start-up game project developed by an independent LA based studio.
+**Lead Narrative Designer**, **Lead Design**, and **Usability Consultant** for *Overdawn*, a start-up game project developed by an independent LA based studio.
 
-- Narrative: Implementing dialogues using Yarnspinner and behavior trees, worldbuilding, character briefs, scriptwriting, delegating tasks, and scheduling meetings.
-- Design: Boss design, combat design, level design, cutscene and animation implementation, UI/UX design using Figma.
-- Art: Creating 25+ voxelized assets using MagicaVoxel, post-processing, asset implementation in-engine, storyboarding for animated trailer.
-- Usability: Playtesting and weekly bug tracking reports.
+- **Narrative:** Implementing dialogues using Yarnspinner and behavior trees, worldbuilding, character briefs, scriptwriting, delegating tasks, and scheduling meetings.
+- **Design:** Boss design, combat design, level design, cutscene and animation implementation, UI/UX design using Figma.
+- **Art:** Creating 25+ voxelized assets using MagicaVoxel, post-processing, asset implementation in-engine, storyboarding for animated trailer.
+- **Usability:** Playtesting and weekly bug tracking reports.

@@ -2,7 +2,7 @@
 layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
-role: Lead Narrative
+role: Lead Narrative Designer
 description: A high-velocity third person action adventure where you surf through tsunamis, parkour over ruins, and battle leviathans.
 order: 4
 docs:

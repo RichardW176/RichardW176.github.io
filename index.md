@@ -33,7 +33,12 @@ title: Home
         <p class="project-showcase__eyebrow">Overview</p>
         <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
         <h2 class="project-showcase__title">{{ project.title }}</h2>
-        <p class="project-showcase__role">{{ project.role }}</p>
+        <p class="project-showcase__role">
+          {% assign project_roles = project.role | split: ", " %}
+          {% for role in project_roles %}
+            <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </p>
         <p class="project-showcase__desc">{{ project.description }}</p>
       </aside>
     </div>

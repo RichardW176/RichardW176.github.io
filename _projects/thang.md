@@ -1,7 +1,7 @@
 ---
 title: Thang!
 image: /assets/images/thang.png
-role: Lead Narrative, Designer
+role: Lead Narrative Designer, Designer
 description: 3v3 party shooter inspired by the Korean playground game "“Eoreumttang” (Freeze Tag).
 order: 5
 ---
