@@ -207,17 +207,15 @@ h2 {
 .project-showcase__details {
   display: grid;
   gap: 24px;
-  max-height: 0;
-  overflow: hidden;
+  overflow: visible;
   opacity: 0;
   transform: translateY(30px);
   filter: blur(10px);
   pointer-events: none;
-  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease, max-height 420ms ease;
+  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
 }
 
 .project-showcase.is-active .project-showcase__details {
-  max-height: 6000px;
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
@@ -241,7 +239,6 @@ h2 {
   .project-showcase__title { font-size: clamp(2.2rem, 14vw, 3.6rem); }
   .project-showcase__summary { aspect-ratio: auto; }
   .project-showcase__details {
-    max-height: none;
     opacity: 1;
     overflow: visible;
     transform: none;
