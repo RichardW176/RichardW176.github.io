@@ -70,66 +70,64 @@ h2 {
 
 /* ===== PROJECT GRID ===== */
 
+/* ================================
+   TIGHT GRID WITH EXPAND ON HOVER
+================================ */
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
-
   max-width: 1400px;
-  margin: 0 auto 80px auto;
+  margin: 60px auto;
   padding: 0 20px;
 }
 
-/* ===== PROJECT CARD ===== */
-
+/* Card */
 .project-card {
   border-radius: 20px;
 }
 
-.project-card a {
-  display: block;
-  text-decoration: none;
-}
-
-/* ===== IMAGE ===== */
-
+/* Image */
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
   object-fit: cover;
-  object-position: center center;
   border-radius: 20px;
   display: block;
   transition: transform 0.3s ease;
 }
 
+/* Slight lift */
 .project-card:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
-/* ===== INFO (HIDDEN BY DEFAULT) ===== */
-
+/* INFO HIDDEN COMPLETELY */
 .project-info {
-  margin-top: 15px;
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
 }
 
+/* EXPAND ON HOVER */
 .project-card:hover .project-info {
+  max-height: 300px;   /* enough room for text */
   opacity: 1;
-  transform: translateY(0);
+  margin-top: 15px;
 }
 
+/* Text styling */
 .project-info h3 {
   font-size: 1.2rem;
-  color: #ffffff;
+  color: white;
   margin-bottom: 6px;
 }
 
 .project-role {
   font-size: 0.9rem;
-  color: #999;
+  color: #aaa;
   margin-bottom: 6px;
 }
 
