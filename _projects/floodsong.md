@@ -1,4 +1,5 @@
 ---
+layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
 role: Lead Narrative
