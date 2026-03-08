@@ -109,13 +109,13 @@ h2 {
   position: sticky;
   top: 28px;
   padding: 20px;
+  display: grid;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
 }
 
 .project-showcase__poster {
@@ -125,17 +125,6 @@ h2 {
   object-fit: cover;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.project-showcase__poster-caption {
-  position: absolute;
-  inset: auto 20px 20px;
-  display: grid;
-  gap: 10px;
-  padding: 20px 22px 18px;
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(4, 5, 10, 0), rgba(4, 5, 10, 0.9) 28%, rgba(4, 5, 10, 0.96));
 }
 
 .project-showcase__body {
@@ -152,7 +141,7 @@ h2 {
   display: grid;
   align-content: end;
   gap: 18px;
-  padding: 28px 30px;
+  padding: 20px;
   min-height: 100%;
   aspect-ratio: 5 / 7;
   border-radius: 24px;
@@ -161,6 +150,11 @@ h2 {
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 140px),
     linear-gradient(180deg, rgba(10, 10, 12, 0.96), #0b0b0f);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
+}
+
+.project-showcase__summary > * {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .project-showcase__eyebrow {
@@ -233,8 +227,7 @@ h2 {
   .project-sequence { gap: 64px; margin: 40px auto 80px; }
   .project-showcase__stage { grid-template-columns: 1fr; gap: 24px; }
   .project-showcase__poster-frame { position: static; padding: 14px; }
-  .project-showcase__poster-caption { inset: auto 14px 14px; padding: 16px 18px 14px; }
-  .project-showcase__summary { padding: 22px; }
+  .project-showcase__summary { padding: 14px; }
   .project-showcase__body { padding: 22px; }
   .project-showcase__title { font-size: clamp(2.2rem, 14vw, 3.6rem); }
   .project-showcase__summary { aspect-ratio: auto; }

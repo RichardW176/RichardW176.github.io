@@ -26,15 +26,13 @@ title: Home
       <div class="project-showcase__poster-column">
         <div class="project-showcase__poster-frame">
           <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
-          <div class="project-showcase__poster-caption">
-            <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
-            <h2 class="project-showcase__title">{{ project.title }}</h2>
-          </div>
         </div>
       </div>
 
       <aside class="project-showcase__summary">
         <p class="project-showcase__eyebrow">Overview</p>
+        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+        <h2 class="project-showcase__title">{{ project.title }}</h2>
         <p class="project-showcase__role">{{ project.role }}</p>
         <p class="project-showcase__desc">{{ project.description }}</p>
       </aside>
