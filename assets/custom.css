@@ -95,9 +95,10 @@ h2 {
 
 .project-showcase__stage {
   display: grid;
-  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(280px, 380px));
   gap: 48px;
-  align-items: start;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .project-showcase__poster-column {
@@ -149,9 +150,11 @@ h2 {
 
 .project-showcase__summary {
   display: grid;
+  align-content: end;
   gap: 18px;
   padding: 28px 30px;
   min-height: 100%;
+  aspect-ratio: 5 / 7;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
@@ -207,22 +210,25 @@ h2 {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 220ms ease, transform 220ms ease, max-height 320ms ease;
+  transform: translateY(30px);
+  filter: blur(10px);
+  pointer-events: none;
+  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease, max-height 420ms ease;
 }
 
-.project-showcase__stage:hover + .project-showcase__body .project-showcase__details,
-.project-showcase__stage:focus-within + .project-showcase__body .project-showcase__details {
+.project-showcase.is-active .project-showcase__details {
   max-height: 6000px;
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
+  pointer-events: auto;
 }
 
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1100px) {
   .project-sequence { gap: 88px; }
-  .project-showcase__stage { grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 32px; }
+  .project-showcase__stage { grid-template-columns: repeat(2, minmax(240px, 320px)); gap: 32px; }
 }
 
 @media (max-width: 700px) {
@@ -233,7 +239,15 @@ h2 {
   .project-showcase__summary { padding: 22px; }
   .project-showcase__body { padding: 22px; }
   .project-showcase__title { font-size: clamp(2.2rem, 14vw, 3.6rem); }
-  .project-showcase__details { max-height: none; opacity: 1; overflow: visible; transform: none; }
+  .project-showcase__summary { aspect-ratio: auto; }
+  .project-showcase__details {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    transform: none;
+    filter: none;
+    pointer-events: auto;
+  }
 }
 /* =========================
    Project modal (overlay)

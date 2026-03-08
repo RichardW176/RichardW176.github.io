@@ -4,6 +4,7 @@
   const docModal = document.getElementById('doc-modal');
   const docModalFrame = document.getElementById('doc-modal-frame');
   const docModalLink = document.getElementById('doc-modal-link');
+  const projectShowcases = document.querySelectorAll('.project-showcase');
 
   async function hydrateScriptCards(root) {
     const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded]):not([data-script-inline="true"])');
@@ -38,6 +39,28 @@
   }
 
   hydrateScriptCards(document);
+
+  if (projectShowcases.length && 'IntersectionObserver' in window) {
+    const showcaseObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('is-active', entry.isIntersecting);
+      });
+    }, {
+      threshold: 0.4,
+      rootMargin: '-10% 0px -18% 0px',
+    });
+
+    projectShowcases.forEach((showcase, index) => {
+      if (index === 0) {
+        showcase.classList.add('is-active');
+      }
+      showcaseObserver.observe(showcase);
+    });
+  } else {
+    projectShowcases.forEach((showcase) => {
+      showcase.classList.add('is-active');
+    });
+  }
 
   if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {
     return;
