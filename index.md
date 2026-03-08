@@ -17,25 +17,24 @@ title: Home
 
 ## Video Games
 
-<div class="project-grid">
+<div class="project-sequence">
 {% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
 
-  <div class="project-card">
-    <a href="{{ project.url }}" data-project-template="project-template-{{ forloop.index }}">
-      <img src="{{ project.image }}" alt="{{ project.title }}">
-    </a>
-
-    <div class="project-info">
-      <h3>{{ project.title }}</h3>
-      <p class="project-role">{{ project.role }}</p>
-      <p class="project-desc">{{ project.description }}</p>
+  <section class="project-showcase" id="{{ project.title | slugify }}">
+    <div class="project-showcase__poster-column">
+      <div class="project-showcase__poster-frame">
+        <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
+      </div>
     </div>
-  </div>
 
-  <template id="project-template-{{ forloop.index }}">
-    <div class="project-page-inner">
-      <h1>{{ project.title }}</h1>
+    <article class="project-showcase__body project-page-inner">
+      <header class="project-showcase__intro">
+        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+        <h2 class="project-showcase__title">{{ project.title }}</h2>
+        <p class="project-showcase__role">{{ project.role }}</p>
+        <p class="project-showcase__desc">{{ project.description }}</p>
+      </header>
 
       <div class="project-content">
         {{ project.content | markdownify }}
@@ -43,7 +42,7 @@ title: Home
 
       {% if project.media %}
       <section class="project-media">
-        <h2>Media</h2>
+        <h3>Media</h3>
         <div class="project-media-grid">
           {% for item in project.media %}
           <figure class="project-media-card">
@@ -61,13 +60,13 @@ title: Home
       {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
       {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
       <section class="project-docs">
-        <h2>Documents</h2>
+        <h3>Documents</h3>
         {% if preview_docs.size > 0 %}
         <div class="project-docs-grid">
           {% for doc in preview_docs %}
           <article class="project-doc-card">
             <div class="project-doc-card__header">
-              <h3>{{ doc.title }}</h3>
+              <h4>{{ doc.title }}</h4>
               <a class="project-doc-card__link" href="{{ doc.file }}" target="_blank" rel="noopener noreferrer">Open PDF</a>
             </div>
             <iframe
@@ -98,7 +97,7 @@ title: Home
 
       {% if project.scripts %}
       <section class="project-scripts">
-        <h2>Scripts</h2>
+        <h3>Scripts</h3>
         <div class="project-scripts-grid">
           {% for script in project.scripts %}
             <article
@@ -110,7 +109,7 @@ title: Home
               <div class="project-script-card__header">
                 <div class="project-script-card__meta">
                   <p class="project-script-card__format">{{ script.format | default: 'Yarn Script' }}</p>
-                  <h3>{{ script.title }}</h3>
+                  <h4>{{ script.title }}</h4>
                 </div>
                 <a class="project-script-card__link" href="{{ script.file }}" target="_blank" rel="noopener noreferrer">Open raw file</a>
               </div>
@@ -120,32 +119,10 @@ title: Home
         </div>
       </section>
       {% endif %}
-    </div>
-  </template>
+    </article>
+  </section>
 
 {% endfor %}
-</div>
-
-<!-- SINGLE modal container -->
-<div id="project-modal" class="project-modal" aria-hidden="true">
-  <div class="project-modal__backdrop" data-modal-close></div>
-
-  <div class="project-modal__panel">
-    <button class="project-modal__close" data-modal-close>✕</button>
-    <div id="project-modal-inner" class="project-modal__inner"></div>
-  </div>
-</div>
-
-<div id="doc-modal" class="doc-modal" aria-hidden="true">
-  <div class="doc-modal__backdrop" data-doc-close></div>
-
-  <div class="doc-modal__panel">
-    <button class="doc-modal__close" data-doc-close>✕</button>
-    <div class="doc-modal__toolbar">
-      <a id="doc-modal-link" class="doc-modal__link" href="#" target="_blank" rel="noopener noreferrer">Open PDF in new tab</a>
-    </div>
-    <iframe id="doc-modal-frame" class="doc-modal__frame" title="Project PDF preview"></iframe>
-  </div>
 </div>
 
 <script src="/assets/js/project-modal.js" defer></script>
