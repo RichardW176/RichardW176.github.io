@@ -8,6 +8,7 @@ order: 4
 docs:
   - title: "Global Narrative Documentation - Sample"
     file: /assets/floodsong-doc.pdf
+    preview: true
 ---
 
 Floodsong is a [short description of your project].
