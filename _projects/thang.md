@@ -1,6 +1,8 @@
 ---
 title: Thang!
 image: /assets/images/thang.png
+role: Lead Narrative, Designer
+description: 2.5D bullet hell set in a voxelized cyberpunk world.
 order: 5
 ---
 
