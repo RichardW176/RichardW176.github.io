@@ -47,11 +47,18 @@
       activeFrame = null;
 
       const viewportCenter = window.innerHeight * 0.52;
+      let activeShowcase = null;
       let closestShowcase = projectShowcases[0];
       let closestDistance = Number.POSITIVE_INFINITY;
 
       projectShowcases.forEach((showcase) => {
-        const rect = showcase.getBoundingClientRect();
+        const focusTarget = showcase.querySelector('.project-showcase__body') || showcase;
+        const rect = focusTarget.getBoundingClientRect();
+
+        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+          activeShowcase = showcase;
+        }
+
         const showcaseCenter = rect.top + (rect.height / 2);
         const distance = Math.abs(showcaseCenter - viewportCenter);
 
@@ -62,7 +69,7 @@
       });
 
       projectShowcases.forEach((showcase) => {
-        showcase.classList.toggle('is-active', showcase === closestShowcase);
+        showcase.classList.toggle('is-active', showcase === (activeShowcase || closestShowcase));
       });
     };
 
