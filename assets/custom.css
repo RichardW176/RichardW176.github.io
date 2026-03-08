@@ -26,7 +26,7 @@ body {
 }
 
 /* ================================
-   HERO SECTION (CENTERED)
+   HERO SECTION
 ================================ */
 
 .hero {
@@ -60,27 +60,18 @@ body {
 }
 
 /* ================================
-   BREAK OUT OF MINIMA WRAPPER
-================================ */
-
-/* Remove max-width restriction */
-.page-content .wrapper {
-  max-width: 100% !important;
-}
-
-/* ================================
-   FULL-WIDTH PROJECT GRID
+   PROJECT GRID (BALANCED WIDTH)
 ================================ */
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
-
-  max-width: 1600px;     /* controls overall width */
-  margin: 80px auto;     /* centers the grid */
-  padding: 0 4vw;        /* slight breathing room */
+  max-width: 1600px;
+  margin: 80px auto;
+  padding: 0 4vw;
 }
+
 /* Card container */
 .project-card {
   position: relative;
@@ -88,7 +79,16 @@ body {
   border-radius: 20px;
 }
 
-/* Image styling */
+.project-card a {
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+/* ================================
+   PROJECT IMAGE
+================================ */
+
 .project-card img {
   width: 100%;
   aspect-ratio: 5 / 7;
@@ -96,25 +96,61 @@ body {
   object-position: center center;
   border-radius: 20px;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
-/* Hover lift */
+/* Slight lift on hover */
 .project-card:hover img {
-  transform: scale(1.03);
-  box-shadow: 0 15px 40px rgba(255,255,255,0.08);
+  transform: scale(1.04);
 }
 
-/* Title styling */
-.project-card h3,
-.project-card a > h3 {
-  margin-top: 16px;
-  font-size: 1.2rem;
-  color: #dcdcdc;
+/* ================================
+   HOVER OVERLAY (HIDDEN UNTIL HOVER)
+================================ */
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 30px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.35s ease;
 }
 
-.project-card a > h3:hover {
-  color: #ffffff;
+.project-card:hover .project-overlay {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Overlay text styling */
+.project-overlay h3 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.project-role {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: #ccc;
+  max-width: 85%;
 }
 
 /* ================================
