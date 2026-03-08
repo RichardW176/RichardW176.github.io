@@ -7,13 +7,25 @@ layout: default
 
     <h1>{{ page.title }}</h1>
 
-    {% if page.image %}
-      <img src="{{ page.image }}" class="project-hero-image">
-    {% endif %}
-
     <div class="project-content">
       {{ content }}
     </div>
+
+    {% if page.media %}
+    <section class="project-media">
+      <h2>Media</h2>
+      <div class="project-media-grid">
+        {% for item in page.media %}
+        <figure class="project-media-card">
+          <img src="{{ item.file }}" alt="{{ item.alt | default: page.title }}" class="project-media-image">
+          {% if item.description %}
+          <figcaption>{{ item.description }}</figcaption>
+          {% endif %}
+        </figure>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
 
     {% if page.docs %}
     <section class="project-docs">

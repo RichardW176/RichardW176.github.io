@@ -37,13 +37,25 @@ title: Home
     <div class="project-page-inner">
       <h1>{{ project.title }}</h1>
 
-      {% if project.image %}
-        <img src="{{ project.image }}" alt="{{ project.title }}" class="project-hero-image">
-      {% endif %}
-
       <div class="project-content">
         {{ project.content | markdownify }}
       </div>
+
+      {% if project.media %}
+      <section class="project-media">
+        <h2>Media</h2>
+        <div class="project-media-grid">
+          {% for item in project.media %}
+          <figure class="project-media-card">
+            <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="project-media-image">
+            {% if item.description %}
+            <figcaption>{{ item.description }}</figcaption>
+            {% endif %}
+          </figure>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
 
       {% if project.docs %}
       <section class="project-docs">
