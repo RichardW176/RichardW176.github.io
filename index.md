@@ -17,7 +17,6 @@ title: Home
 
 
 ## Video Games
-
 <div class="project-grid">
 {% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
