@@ -18,14 +18,19 @@ title: Home
 
 ## Video Games
 <div class="project-grid">
+{% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
   <div class="project-card">
     <a href="{{ project.url }}">
       <img src="{{ project.image }}" alt="{{ project.title }}">
     </a>
+
     <div class="project-info">
-      ...
+      <h3>{{ project.title }}</h3>
+      <p class="project-role">{{ project.role }}</p>
+      <p class="project-desc">{{ project.description }}</p>
     </div>
+
   </div>
 {% endfor %}
 </div>
