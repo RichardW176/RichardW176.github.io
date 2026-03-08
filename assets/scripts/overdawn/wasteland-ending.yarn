@@ -1,0 +1,76 @@
+title: A1C3_Aetherspace_PinkillIntro
+tags:
+---
+Pinkill: Eyes open, Koi. #line:01c1ae4
+Pinkill: Remember why we're here. #line:0f7f12a
+<<CallEvent KoiWakeUp>>
+===
+
+title: A1C3_Aetherspace_REV1
+tags:
+---
+Rev: Mom couldn't look at me. Dad didn't know my name. #line:069eead
+Rev: But I had my brothers. #line:0015feb
+Rev: And they had me. #line:01689c3
+<<CallEvent RevDissolves>>
+===
+
+title: A1C3_Aetherspace_REV2
+tags:
+---
+Rev: Oh... Hi. You're the girl from down the street? #line:06859a4
+Rev: Where's... Theo? Max? #line:0ef76f8
+Rev: Have you seen them? #line:09bfeeb
+<<CallEvent RevDissolves>>
+===
+
+title: A1C3_Aetherspace_REV3
+tags:
+---
+Rev: [shake]You're not supposed to be here.[/shake] #line:0adb1f6
+Rev: [shake]Nobody's supposed to be here.[/shake] #line:0dcea0f
+Rev: [deadly][shake]Get. [pause/] out.[/shake][/deadly] #line:05bd2a2
+<<CallEvent RevDissolves>>
+===
+
+title: A1C3_Aetherspace_REV4
+tags:
+---
+[deadly][shake]GET.[pause/]HER.[pause/]OUT.[pause]OF.[pause/]MY.[pause/]HEAD.[/shake][/deadly] #line:00bc93d
+[deadly][shake][yell]GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GETOUT.GET–[/yell][/shake][/deadly] #line:0b5e5b9
+<<CallEvent RevDissolves>>
+===
+
+title: A1C3_Aetherspace_PinkillHello
+tags:
+---
+Pinkill: ... #line:0b81120
+Pinkill: Welcome home, Koi.[pause/] #line:0208081
+<<CallEvent PinkillAdvent>>
+Pinkill: Though I fear it won't be around for much longer. #line:0667993
+Koi: Home?  #line:0d7d777
+Pinkill: Even my [Pinkill]Aetherspace[/Pinkill] may soon succumb to the coming [deadly]apocalypse[/deadly]. #line:034168e
+Pinkill: This haven I built... [pause/]funny how it'll all just be dust in the storm soon... #line:05245be
+Pinkill: That's why you can't leave everything behind, Koi- no matter how much you want to.  #line:0043ccc
+Pinkill: Trust me. #line:0d7e600
+Koi: Give me one reason I should. #line:07d4d92
+Pinkill: Because I'm the only one willing to do what needs to be done. #line:07254ab
+<<wait 1>>
+Pinkill: [Augusto]Augusto[/Augusto] and his [Tatini]House[/Tatini] are a <shake>disease</shake> that will rot [Andrean]Andrean[/Andrean] from the inside. #line:08d0a01
+Pinkill: Fortquin is a war he can't win, and the bastard knows it. #line:0b6b8d3
+<<CallEvent Titans>>
+Pinkill: No matter how many Aetherbounds he drains into Titans...  #line:00eb013
+Pinkill: He won't stop until we're all dead in his war. #line:00f9c00
+Koi: But you're willing to see me die in yours instead. #line:0eebb6d
+<<CallEvent PinkillResolution>>
+Pinkill: [deadly]I AM WHAT WILL SAVE THIS WRETCHED CITY CHILD.[/deadly] #line:0324a05
+Koi: From who- #line:02df838
+Pinkill: [deadly]FROM ITSELF.[/deadly] #line:0c24dc7
+<<CallEvent Nuke>>
+Pinkill: ... #line:0c49d47
+Pinkill: I've seen it happen time and time again: #line:0f006e2
+Pinkill: Our [transplant]future[/transplant] slipping further away from me [deadly]every.[pause/] waking.[pause/] moment.[/deadly] #line:023b467
+Koi: Then you'll watch me do what you couldn't.  #line:0b9e3d8
+<<CallEvent Myway>>
+Koi: My way. #line:0a345bb
+===

@@ -1,0 +1,32 @@
+title: OAC_ElevatorIntroVelena
+tags:
+---
+[speed=22.5/] #line:035b91b
+Velena: Welcome back to the land of the living, junko. #line:075aa11
+<<declare $MoralityIndex = 0>>
+<<CallEvent "FadeOut">>
+    Koi: I don't stim anymore. [speed=15/]And you know <shake>why. #line:0e6e5ab
+Velena: [speed=22.5/]Yeah. I do. Was fun while it lasted. #line:0dc756b
+Velena: I wish things were different.  #line:0142b44
+Koi: Yeah. [speed=30/]<shake>[deadly]FUCK...[/deadly][pause/] My head... [pause/]Everything's ringing.[speed=22.5/] #line:0e6fc6c
+<<CallEvent "KoiCamera">>
+Velena: It's your [transplant]transplant[/transplant].  #line:05ea541
+Velena: I know your [transplant]neuro[/transplant] more than anyone, but I can’t help you if you keep me in the dark. #line:06886e8
+<<CallEvent "KoiDialog">>
+Velena: [showOptionsDelay=0.5/][timer=15/] You were talking crazy back there, like a [deadly]defecto[/deadly]. You could [transplant]break aeth[/transplant]. Or worse. #line:0d9a974
+    -> Don't patronize me. #line:0456869
+        Koi: Don't patronize me. We're not kids anymore. #line:09bd7a1
+        Velena: Maybe things were better when we were. Simpler. #line:039071d
+    -> Was it a [transplant]withdrawl[/transplant]? #line:0722c3c
+        Koi: This what [transplant]aeth withdrawl[/transplant] feels like? #line:08a9823
+        Velena: [transplant]With trips[/transplant] aren't like that. This was something else. #line:0cd2360
+    -> Maybe you can tune it. #line:0d67b0a
+        Koi: Could you do a quick fix? #line:06f08f3
+        Velena: I.. we don't even know what [transplant]it[/transplant] does. I wouldn't push it. #line:01e848e
+    -> [fallback/]. . . #line:00db534
+        Velena: ...?[pause/] Don't go quiet on me now. #line:0778577
+    Koi: Let's just get this over with. #line:0ab23cc
+Velena: Right. Our target is in the penthouse. [deadly]Kill[/deadly] the contract.  #line:0d94d7c
+Velena: [speed=22.5/]Guns only. [transplant]Short Aeth[/transplant] and who knows what shit you'll be dreaming tomorrow... #line:0be5890
+<<CallEvent "WakeUp">>
+===

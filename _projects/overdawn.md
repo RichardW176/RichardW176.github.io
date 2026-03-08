@@ -5,7 +5,7 @@ order: 1
 role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
 docs:
-  - title: "Overdawn Documentation"
+  - title: "Rev Boss Design Document"
     file: /assets/overdawn-rev-design-document.pdf
     preview: true
 scripts:
@@ -48,6 +48,21 @@ scripts:
       <<CallEvent "TitanDialogEnd">>
       Titan: Go... and return our future to us, [Koi/]Koi. #line:02885ca
       ===
+  - title: "Theo Fight Dialogue"
+    file: /assets/scripts/overdawn/theo-fight-dialogue.yarn
+    format: "Yarn Script"
+  - title: "Elevator Intro"
+    file: /assets/scripts/overdawn/elevator-intro.yarn
+    format: "Yarn Script"
+  - title: "City Radio"
+    file: /assets/scripts/overdawn/city-radio.yarn
+    format: "Yarn Script"
+  - title: "Wasteland Ending"
+    file: /assets/scripts/overdawn/wasteland-ending.yarn
+    format: "Yarn Script"
+  - title: "Archangel Ending"
+    file: /assets/scripts/overdawn/archangel-ending.yarn
+    format: "Yarn Script"
 media:
   - file: /assets/images/overdawn-andrean-slums.jpg
     alt: Overdawn screenshot of the Andrean slums

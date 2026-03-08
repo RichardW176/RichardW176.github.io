@@ -1,0 +1,49 @@
+title: KP_BossFightKeithHit
+tags:
+---
+Theo: [deadly]BAD MOVE.[/deadly]  #line:0481266
+Keith Tatini: I’d like you to meet Theo Khai, one of my most trusted friends.  #line:037bc76
+Koi: Th... Theo Khai? #line:03d9e7c
+Keith Tatini: It was his off day tonight. What a shame. #line:07606e0
+===
+
+title: KP_BossFightPlayerArms
+tags: Theo
+---
+Theo: [deadly]BAD MOVE.[/deadly] #line:0c54b84
+Keith Tatini: Theo please. Calm down. Kid, put the weapon down— #line:00b7a1f
+Theo: [deadly]She’s had her chance. I’LL TEAR HER APART.[/deadly]  #line:0ca37b5
+===
+
+title: KP_BossFightElite
+tags: Theo
+---
+???: You're not going to get away with hurting Mr. Tatini. #line:0d58281
+???: [deadly]You'll die trying...[deadly/] #line:0c45ec5
+===
+
+title: KP_Boss_Hurt
+tags: Theo
+---
+Theo: You won't make it out of here... No boundy ever does. #line:0895abf
+Theo: They’ll find you.  #line:00f409c
+Theo: Like they found me.  #line:0ab1fb7
+===
+
+title: KP_Boss_Lowhealth
+tags: Theo
+---
+Theo: If they never took you… #line:0171eb9
+Theo: Then my brothers… Are they still— #line:01ea990
+???: IT’S TOO LATE FOR THEM. GIVE IT UP. #line:0ca8ce0
+===
+
+title: KP_BossFightDefeated
+tags: Theo
+---
+Theo: Everything is… Quiet. #line:08af9ef
+Theo: I don’t hear her anymore… #line:094d805
+Theo: Oh Trev… Max… #line:0486762
+<<set $TheoDead = true>>
+Theo: Your big brother’s coming home… I’m free. haha...  #line:084af93
+===

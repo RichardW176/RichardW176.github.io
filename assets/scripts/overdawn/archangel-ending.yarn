@@ -1,0 +1,115 @@
+title: Archangel_Pinkill_SBG
+tags:
+---
+Koi: ...   #line:0a88974
+Koi: You again.   #line:0e936b5
+Pinkill: [pause/].[pause/].[pause/].   #line:0b40a01
+Koi: That’s all you have to say?   #line:004d3fe
+Pinkill: .[pause/].[pause/].   #line:09145e4
+Pinkill: <shake>Where.[pause/].[pause/].[pause/] Where are we, Koi?   #line:0894024
+Koi: What?   #line:0e9c036
+Pinkill: <shake>I don't know where we are Koi. [pause=0.5/]This isn’t where you’re supposed to be-   #line:07814d5
+===
+
+title: Archangel_Pinkill_Lab
+tags:
+---
+Pinkill: <shake> Koi...    #line:06b95b3
+Koi: Spit it out.   #line:011ab4f
+Pinkill: <shake> You're in over your head. Delusional. [deadly]Wake up.[/deadly]   #line:05ebfb8
+Koi: Maybe you're the delusional one.   #line:040b7e4
+Pinkill: <shake>Something's [deadly]wrong[/deadly] child. [pause/]Surely even you can sense that.    #line:0377d67
+===
+
+title: Archangel_Theo_Lab
+tags:
+---
+You’re the girl from down the street.  #line:0a9711d
+Koi: .[pause/].[pause/].[pause/][Theo]Theo[/Theo]? #line:0c7da5c
+Theo: So you must've already met my brothers. #line:0add547
+Theo: Most of the conscripts here are from South Mills anyways[pause/]— except her.    #line:05de7c5
+Koi: Except who?   #line:06e6b0f
+Theo: [showOptionsDelay=0.5/][timer=15/] The [Tatini]Tatini[/Tatini] girl. The pretty one with the long black hair.  #line:00da9bf
+    -> C.mon. We're leaving. #line:0808e96
+        Koi: C’mon. We’re getting out of here. #line:05e2b02
+        Theo: Don’t worry.  #line:038ce7b
+    -> Tatini...? #line:0653c60
+        Koi: [shake/][Tatini]Tatini[/Tatini]...? #line:0a5504f
+        Theo: They took her in for surgery an hour ago.  #line:0016a45
+        Theo: Don't worry. #line:0d375de
+    -> [fallback/]. . .  #line:0ec31e6
+        Theo: Theo: They took her in for surgery an hour ago.  #line:0dfeb9f
+        Theo: Don’t worry.  #line:0a9f55a
+Theo: She’s going to save everyone here Koi. You[pause/], me[pause/]— everyone. #line:0e63002
+Theo: I trust [archangel]her.[/archangel] #line:0c7ae68
+===
+
+title: Archangel_Opening
+tags:
+---
+|DIRECTIVE|    #line:0b0c221
+|RUN_PROGRAM] [archangel]_ARCHANGEL_[/archangel] - |EXECUTABLE]   #line:005ca45
+|LOAD_EXECUTABLES] [archangel]_ARCHANGEL_[/archangel] - |VINDICATION]|ABSOLUTION]|SCRIPTURESOFM]   #line:0d1bc80    #line:07b9e5c
+|LOAD_VOICEMODULAR] [archangel]_ARCHANGEL_[/archangel] -|[shake]HELPME[/shake]]   #line:0125a88
+<<CallEvent AngelFinal>>
+|PROJECT| [archangel]_ARCHANGEL_[/archangel] .[pause/].[pause/].[pause/][deadly] |ENGAGE|[/deadly]   #line:0ab086e
+<<CallEvent AngelEngageFinalBattle>>
+===
+
+title: Archangel_Defeated
+tags:
+---
+Koi: Hey.    #line:00dba45
+Angela Tatini: Hey.[pause/]   #line:01e30e8
+Angela Tatini: You’re- [pause/] you’re not from around here, are you?   #line:010e8bc
+Koi: Neither are you.    #line:070c9d9
+Angela Tatini: Hehe. Fair. I like your hair.   #line:073468a
+Koi: Thanks... [pause/] Yours too?   #line:08602b8
+Angela Tatini: You’re funny. Not much hair left now though, huh.   #line:0eca54d
+Angela Tatini: I thought- I thought I could control it... use the Titan against them.   #line:01036e4
+Angela Tatini: Show [Augusto]my father[/Augusto] how stupid his obsession with this war was.   #line:00e378a
+Koi: I’m sorry it had to end this way.   #line:045981d
+Angela Tatini: I wouldn’t have had it any other way.[pause/].[pause/].   #line:0e41c2d
+Angela Tatini: But... [pause/] I’m glad someone like you came along to finish it.     #line:01ad212
+Angela Tatini: Thanks-...   #line:00b3f4b
+Koi: Koi.    #line:00732ed
+Angela Tatini: I guess you shouldn't keep Theo waiting then, Koi. #line:0de1c2c
+<<CallEvent AngelTeleport>>
+Koi: Theo? #line:06e004e
+===
+
+title: Archangel_Theo_Ending
+tags:
+---
+Theo: Where are we going?    #line:009c92e
+Koi: Anywhere but here.    #line:06c21cd
+Theo: [showOptionsDelay=0.5/][timer=7/]Is Angela gone?   #line:0310a58
+    -> We’ll hear from her.   #line:004b7c0
+        Koi: We'll hear from her. One way or another. #line:0e92095
+        Theo: Or maybe she was never there.   #line:0662136
+        Theo: Maybe she died in that surgery.    #line:06fc8d3
+    -> She gets to rest.   #line:0e0e729
+        Koi: She won't have to suffer anymore. #line:0a55eab
+        Theo: I’d like to believe that.   #line:045a88a
+    -> [fallback/] ...   #line:050c2d5
+<<CallEvent Upcam>>
+Theo: [showOptionsDelay=0.5/][timer=7/]She was a Tatini, but she was one of us.    #line:03260f2
+    -> There is no ‘us.’   #line:0326879
+        Koi: There is no ‘us.’   #line:0ecd12e
+        Theo: That’s where you’re wrong.    #line:016a88b
+        Theo: Because we’re in this together. All of us.   #line:0ec9604
+    -> What was she like?   #line:060e92e
+        Koi: What was she like? #line:0ca3679
+        Theo: Pretty, long hair... but kind. #line:01b3b87
+        Theo: She was the only person there who cared about us.   #line:058f572
+<<CallEvent Finalcam>>
+Theo: Angela, Trevor, Max, Velena, you, me, we’re kids born with powers they didn’t ask for.   #line:06efb63
+Theo: We’ll never make it out of this war alive fighting each other.    #line:0bbdf0b
+Theo: Promise you’ll help me find them.    #line:0827729
+Koi: No guarantees.   #line:07233e3
+Theo: ...   #line:01e0e87
+Koi: But I’ll try.    #line:02931ee
+<<CallEvent  Zoomaway>>
+Theo: Next station's gonna be a long ride away, Koi.   #line:03a8313
+Koi: ... [pause/] I’ve got time.    #line:057befa
+===
