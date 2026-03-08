@@ -6,7 +6,7 @@ role: Lead Narrative, Lead Designer, Artist, Usability Consultant
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
 docs:
   - title: "Overdawn Documentation"
-    file: /assets/overdawn-doc.pdf
+    file: /assets/overdawn-rev-design-document.pdf
     preview: true
 scripts:
   - title: "Wasteland Dialogue"
