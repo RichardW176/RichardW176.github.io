@@ -6,7 +6,7 @@
   const docModalLink = document.getElementById('doc-modal-link');
 
   async function hydrateScriptCards(root) {
-    const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded])');
+    const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded]):not([data-script-inline="true"])');
     if (!cards.length) {
       return;
     }

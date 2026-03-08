@@ -83,7 +83,8 @@ title: Home
               class="project-script-card"
               data-script-file="{{ script.file }}"
               data-script-title="{{ script.title }}"
-              data-script-format="{{ script.format | default: 'Yarn Script' }}">
+              data-script-format="{{ script.format | default: 'Yarn Script' }}"
+              {% if script.content %}data-script-inline="true"{% endif %}>
               <div class="project-script-card__header">
                 <div class="project-script-card__meta">
                   <p class="project-script-card__format">{{ script.format | default: 'Yarn Script' }}</p>
@@ -91,7 +92,7 @@ title: Home
                 </div>
                 <a class="project-script-card__link" href="{{ script.file }}" target="_blank" rel="noopener noreferrer">Open raw file</a>
               </div>
-              <pre class="project-script-card__content">Loading script...</pre>
+              <pre class="project-script-card__content">{% if script.content %}{{ script.content | escape }}{% else %}Loading script...{% endif %}</pre>
             </article>
           {% endfor %}
         </div>
