@@ -20,11 +20,6 @@ layout: default
         {% for award in page.awards %}
         <figure class="project-award-card">
           <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: page.title }}" class="project-award-image">
-          {% if award.title %}
-          <figcaption>
-            <strong>{{ award.title }}</strong>
-          </figcaption>
-          {% endif %}
         </figure>
         {% endfor %}
       </div>

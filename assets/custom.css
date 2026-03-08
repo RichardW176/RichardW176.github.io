@@ -418,16 +418,6 @@ h2 {
   background: rgba(9, 10, 14, 0.96);
 }
 
-.project-award-card figcaption {
-  padding: 14px 16px 16px;
-  color: #cfcfd6;
-  line-height: 1.6;
-}
-
-.project-award-card figcaption strong {
-  color: #f1f4fb;
-}
-
 .project-media-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -56,11 +56,6 @@ title: Home
             {% for award in project.awards %}
             <figure class="project-award-card">
               <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: project.title }}" class="project-award-image">
-              {% if award.title %}
-              <figcaption>
-                <strong>{{ award.title }}</strong>
-              </figcaption>
-              {% endif %}
             </figure>
             {% endfor %}
           </div>
