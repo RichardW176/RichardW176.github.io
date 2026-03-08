@@ -2,6 +2,13 @@ title: Richard Wang
 description: My personal website
 theme: minima
 
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
 collections:
   projects:
     output: true

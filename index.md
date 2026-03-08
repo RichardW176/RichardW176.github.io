@@ -42,7 +42,7 @@ title: Home
 
   <div class="project-modal__panel">
     <button class="project-modal__close" data-modal-close>✕</button>
-    <div id="project-modal-inner"></div>
+    <div id="project-modal-inner" class="project-modal__inner"></div>
   </div>
 </div>
 
