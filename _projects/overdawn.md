@@ -63,22 +63,9 @@ media:
     description: Combat screenshot from the gangster hideout emphasizing top-down action, enemy pressure, and readable effects.
 ---
 
-Overdawn is a [short description of your project].
+Lead Narrative, Lead Design, and Usability Consultant for *Overdawn*, a start-up game project developed by an independent LA based studio.
 
-## Overview
-
-Overdawn is designed to:
-- Solve X problem
-- Provide Y functionality
-- Deliver Z results
-
-## Technologies Used
-
-- Python
-- React
-- Jekyll
-- etc.
-
-## What I Learned
-
-Brief reflection about what you learned building this.
+- Narrative: Implementing dialogues using Yarnspinner and behavior trees, worldbuilding, character briefs, scriptwriting, delegating tasks, and scheduling meetings.
+- Design: Boss design, combat design, level design, cutscene and animation implementation, UI/UX design using Figma.
+- Art: Creating 25+ voxelized assets using MagicaVoxel, post-processing, asset implementation in-engine, storyboarding for animated trailer.
+- Usability: Playtesting and weekly bug tracking reports.
