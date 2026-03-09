@@ -14,16 +14,16 @@ docs:
     file: /assets/Trapped Author - Richard (12_26).pdf
     preview: true
 media:
-  - file: /assets/Screenshot 2026-03-08 121333.png
-    alt: Masterworks of Horror deck art screenshot
-    description: Exclusive "doodle" collab deck art and temporary art for GDC.
-  - file: /assets/Screenshot 2026-03-08 121348.png
-    alt: Masterworks of Horror GDC art screenshot
-    description: Exclusive "doodle" collab deck art and temporary art for GDC.
   - file: /assets/images/stitched and dozer.png
     alt: Masterworks of Horror stitched and dozer screenshot
     description: "Implemented 2 collab cards in-engine \"Stitched Together\" and \"Dozer\""
   - file: /assets/images/Frame 3 (2).png
     alt: Masterworks of Horror frame screenshot
     description: "Assisted with UI mock up and implementation in-engine."
+  - file: /assets/Screenshot 2026-03-08 121333.png
+    alt: Masterworks of Horror deck art screenshot
+    description: Exclusive "doodle" collab deck art and temporary art for GDC.
+  - file: /assets/Screenshot 2026-03-08 121348.png
+    alt: Masterworks of Horror GDC art screenshot
+    description: Exclusive "doodle" collab deck art and temporary art for GDC.
 ---

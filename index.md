@@ -77,22 +77,6 @@ title: Home
         </section>
         {% endif %}
 
-        {% if project.collaborations %}
-        <section class="project-collaborations">
-          <h3>Collaborations</h3>
-          <div class="collaboration-grid collaboration-grid--project">
-            {% for item in project.collaborations %}
-            <figure class="collaboration-card">
-              <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="collaboration-card__image">
-              {% if item.description %}
-              <figcaption>{{ item.description }}</figcaption>
-              {% endif %}
-            </figure>
-            {% endfor %}
-          </div>
-        </section>
-        {% endif %}
-
         {% if project.docs %}
         {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
         {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
@@ -164,6 +148,22 @@ title: Home
             {% for award in project.awards %}
             <figure class="project-award-card">
               <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: project.title }}" class="project-award-image">
+            </figure>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if project.collaborations %}
+        <section class="project-collaborations">
+          <h3>Collaborations</h3>
+          <div class="collaboration-grid collaboration-grid--project">
+            {% for item in project.collaborations %}
+            <figure class="collaboration-card">
+              <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="collaboration-card__image">
+              {% if item.description %}
+              <figcaption>{{ item.description }}</figcaption>
+              {% endif %}
             </figure>
             {% endfor %}
           </div>
