@@ -1,6 +1,6 @@
 ---
 title: Overdawn
-image: /assets/images/overdawn.jpg
+image: /assets/images/overdawn.png
 order: 1
 role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
