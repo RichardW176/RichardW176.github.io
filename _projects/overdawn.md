@@ -73,16 +73,16 @@ scripts:
 media:
   - file: /assets/images/overdawn-andrean-slums.jpg
     alt: Overdawn screenshot of the Andrean slums
-    description: Andrean Slums: Level, environment, and sequence design for "Andrean Slums" area (7 levels).
+    description: 'Andrean Slums: Level, environment, and sequence design for "Andrean Slums" area (7 levels).'
   - file: /assets/images/overdawn-archangel.jpg
     alt: Overdawn screenshot of the Archangel encounter
-    description: Archangel: Directed narrative, design, and art for secret final boss "Archangel".
+    description: 'Archangel: Directed narrative, design, and art for secret final boss "Archangel".'
   - file: /assets/images/overdawn-doyama-lobby.jpg
     alt: Overdawn screenshot of the Doyama lobby
-    description: Doyama: Level and environment design for "Doyama" restaurant area (7 levels).
+    description: 'Doyama: Level and environment design for "Doyama" restaurant area (7 levels).'
   - file: /assets/images/overdawn-gangster-hideout.jpg
     alt: Overdawn screenshot of the gangster hideout
-    description: Rev: Led boss, narrative design, and usability for boss "Rev".
+    description: 'Rev: Led boss, narrative design, and usability for boss "Rev".'
 ---
 
 <!-- intentionally blank -->
