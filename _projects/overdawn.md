@@ -73,16 +73,16 @@ scripts:
 media:
   - file: /assets/images/overdawn-andrean-slums.jpg
     alt: Overdawn screenshot of the Andrean slums
-    description: Andrean slums environment shot highlighting Overdawn's dense urban lighting and cyberpunk atmosphere.
+    description: Andrean Slums: Level, environment, and sequence design for "Andrean Slums" area (7 levels).
   - file: /assets/images/overdawn-archangel.jpg
     alt: Overdawn screenshot of the Archangel encounter
-    description: Archangel set piece showcasing the game's large-scale encounter framing and high-contrast palette.
+    description: Archangel: Directed narrative, design, and art for secret final boss "Archangel".
   - file: /assets/images/overdawn-doyama-lobby.jpg
     alt: Overdawn screenshot of the Doyama lobby
-    description: Doyama lobby interior featuring Overdawn's stylized architectural spaces and warm neon glow.
+    description: Doyama: Level and environment design for "Doyama" restaurant area (7 levels).
   - file: /assets/images/overdawn-gangster-hideout.jpg
     alt: Overdawn screenshot of the gangster hideout
-    description: Combat screenshot from the gangster hideout emphasizing top-down action, enemy pressure, and readable effects.
+    description: Rev: Led boss, narrative design, and usability for boss "Rev".
 ---
 
 **Lead Narrative Designer**, **Lead Design**, and **Usability Consultant** for *Overdawn*, a start-up game project developed by an independent LA based studio.
