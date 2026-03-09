@@ -12,24 +12,3 @@ docs:
     file: /assets/MARLOW - Scripts + Design.pdf
     preview: true
 ---
-
-Unchained: Tale of Enra is a [brief description of your project].
-
-## Overview
-
-Short overview of the project’s concept, genre, and goals.
-
-## My Role
-
-Describe what you contributed:
-- Systems
-- Design
-- Programming
-- Art
-- Leadership
-
-## Technologies Used
-
-- Engine (Unity / Unreal / etc.)
-- Languages
-- Tools
