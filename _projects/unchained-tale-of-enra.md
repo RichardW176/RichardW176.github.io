@@ -2,7 +2,7 @@
 title: "Unchained: Tale of Enra"
 image: /assets/images/unchained-tale-of-enra.png
 role: Narrative Designer, Designer
-description: Turn / negotiation based action RPG set in a fantasy world.
+description: ""
 order: 3
 docs:
   - title: "Marlow Character Brief"

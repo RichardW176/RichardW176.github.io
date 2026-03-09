@@ -84,10 +84,3 @@ media:
     alt: Overdawn screenshot of the gangster hideout
     description: Rev: Led boss, narrative design, and usability for boss "Rev".
 ---
-
-**Lead Narrative Designer**, **Lead Design**, and **Usability Consultant** for *Overdawn*, a start-up game project developed by an independent LA based studio.
-
-- **Narrative:** Implementing dialogues using Yarnspinner and behavior trees, worldbuilding, character briefs, scriptwriting, delegating tasks, and scheduling meetings.
-- **Design:** Boss design, combat design, level design, cutscene and animation implementation, UI/UX design using Figma.
-- **Art:** Creating 25+ voxelized assets using MagicaVoxel, post-processing, asset implementation in-engine, storyboarding for animated trailer.
-- **Usability:** Playtesting and weekly bug tracking reports.

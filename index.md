@@ -39,7 +39,9 @@ title: Home
             <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
           {% endfor %}
         </p>
+        {% if project.description and project.description != "" %}
         <p class="project-showcase__desc">{{ project.description }}</p>
+        {% endif %}
       </aside>
     </div>
 

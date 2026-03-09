@@ -2,7 +2,7 @@
 title: Masterworks of Horror
 image: /assets/images/GDC Banner Wide.png
 role: Designer, Artist, 
-description: PvP card battler inspired by classic horror literature.
+description: ""
 order: 2
 docs:
   - title: "Masterworks GDD V1.9 - Richard Revisions"

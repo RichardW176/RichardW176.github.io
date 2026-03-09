@@ -2,7 +2,7 @@
 title: "Project: Disciple"
 image: /assets/images/project-disciple.png
 role: Lead Narrative Designer, Designer
-description: Idle mobile citybuilder where players build their own cult.
+description: ""
 order: 6
 ---
 
