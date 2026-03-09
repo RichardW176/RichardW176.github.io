@@ -26,4 +26,7 @@ media:
   - file: /assets/Screenshot 2026-03-08 121348.png
     alt: Masterworks of Horror GDC art screenshot
     description: Exclusive "doodle" collab deck art and temporary art for GDC.
+  - file: /assets/images/Screenshot 2026-03-09 005119.png
+    alt: Masterworks of Horror temp art screenshot
+    description: Implementated temp art assets for GDC and doodle arts.
 ---
