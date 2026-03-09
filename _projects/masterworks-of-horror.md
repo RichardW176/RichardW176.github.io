@@ -18,10 +18,10 @@ media:
   - file: /assets/Screenshot 2026-03-08 121348.png
     alt: Masterworks of Horror GDC art screenshot
     description: Exclusive "doodle" collab deck art and temporary art for GDC.
-  - file: /assets/images/Screenshot 2026-03-08 224328.png
-    alt: Masterworks of Horror screenshot 1
-    description: Masterworks 1
-  - file: /assets/images/Frame 3 (2).png
-    alt: Masterworks of Horror frame screenshot
-    description: Masterworks 2
+  - file: /assets/images/stitched and dozer.png
+    alt: Masterworks of Horror stitched and dozer screenshot
+    description: "Masterwork 1: Implemented 2 collab cards in-engine \"Stitched Together\" and \"Dozer\""
+  - file: /assets/images/Screenshot 2026-03-08 224240.png
+    alt: Masterworks of Horror screenshot 2
+    description: "Masterwork 2: Assisted with UI mock up and implementation in-engine."
 ---
