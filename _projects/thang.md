@@ -17,4 +17,8 @@ media:
   - file: /assets/images/Screenshot 2026-03-08 234608.png
     alt: Thang screenshot 2
     description: Sketched and implemented map blockout for expo submission.
+collaborations:
+  - file: /assets/images/icc.png
+    alt: International Consulting Club (ICC) at USC
+    description: International Consulting Club (ICC) at USC
 ---

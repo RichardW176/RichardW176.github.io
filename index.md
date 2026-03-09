@@ -77,6 +77,22 @@ title: Home
         </section>
         {% endif %}
 
+        {% if project.collaborations %}
+        <section class="project-collaborations">
+          <h3>Collaborations</h3>
+          <div class="collaboration-grid collaboration-grid--project">
+            {% for item in project.collaborations %}
+            <figure class="collaboration-card">
+              <img src="{{ item.file }}" alt="{{ item.alt | default: project.title }}" class="collaboration-card__image">
+              {% if item.description %}
+              <figcaption>{{ item.description }}</figcaption>
+              {% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
         {% if project.docs %}
         {% assign preview_docs = project.docs | where_exp: "doc", "doc.preview == true" %}
         {% assign standard_docs = project.docs | where_exp: "doc", "doc.preview != true" %}
@@ -159,16 +175,5 @@ title: Home
 
 {% endfor %}
 </div>
-
-## Collaborations
-
-<section class="collaboration-section">
-  <div class="collaboration-grid">
-    <figure class="collaboration-card">
-      <img src="/assets/images/icc.png" alt="International Consulting Club (ICC) at USC" class="collaboration-card__image">
-      <figcaption>International Consulting Club (ICC) at USC</figcaption>
-    </figure>
-  </div>
-</section>
 
 <script src="/assets/js/project-modal.js" defer></script>

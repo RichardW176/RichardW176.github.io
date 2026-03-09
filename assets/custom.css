@@ -421,6 +421,11 @@ h2 {
   gap: 16px;
 }
 
+.project-collaborations {
+  display: grid;
+  gap: 16px;
+}
+
 .project-awards {
   display: grid;
   gap: 16px;
@@ -479,16 +484,14 @@ h2 {
   line-height: 1.6;
 }
 
-.collaboration-section {
-  max-width: 1400px;
-  margin: 0 auto 120px;
-  padding: 0 20px;
-}
-
 .collaboration-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
   gap: 20px;
+}
+
+.collaboration-grid--project {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .collaboration-card {
@@ -754,6 +757,7 @@ h2 {
   .project-docs-grid { grid-template-columns: 1fr; }
   .project-awards-grid { grid-template-columns: 1fr; }
   .project-media-grid { grid-template-columns: 1fr; }
+  .collaboration-grid--project { grid-template-columns: 1fr; }
   .project-scripts-grid { grid-template-columns: 1fr; }
   .project-doc-card__header { display: grid; }
   .project-doc-card__frame { height: 260px; }

@@ -37,6 +37,22 @@ layout: default
     </section>
     {% endif %}
 
+    {% if page.collaborations %}
+    <section class="project-collaborations">
+      <h2>Collaborations</h2>
+      <div class="collaboration-grid collaboration-grid--project">
+        {% for item in page.collaborations %}
+        <figure class="collaboration-card">
+          <img src="{{ item.file }}" alt="{{ item.alt | default: page.title }}" class="collaboration-card__image">
+          {% if item.description %}
+          <figcaption>{{ item.description }}</figcaption>
+          {% endif %}
+        </figure>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
     {% if page.docs %}
     {% assign preview_docs = page.docs | where_exp: "doc", "doc.preview == true" %}
     {% assign standard_docs = page.docs | where_exp: "doc", "doc.preview != true" %}
