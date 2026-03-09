@@ -2,6 +2,8 @@
 title: Masterworks of Horror
 image: /assets/images/GDC Banner Wide.png
 role: Designer, Artist,
+stage: Production
+timeline: Nov 2025 - Present
 description: ""
 order: 2
 docs:

@@ -42,6 +42,13 @@ title: Home
             <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
           {% endfor %}
         </p>
+        {% if project.stage or project.timeline %}
+        <p class="project-showcase__meta">
+          {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}
+          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">•</span>{% endif %}
+          {% if project.timeline %}<span>{{ project.timeline }}</span>{% endif %}
+        </p>
+        {% endif %}
         {% if project.description and project.description != "" %}
         <p class="project-showcase__desc">{{ project.description }}</p>
         {% endif %}

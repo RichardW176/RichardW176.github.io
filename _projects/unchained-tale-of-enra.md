@@ -2,6 +2,8 @@
 title: "Unchained: Tale of Enra"
 image: /assets/images/unchained-tale-of-enra.png
 role: Narrative Designer, Designer
+stage: Post-production
+timeline: June 2025 - Present
 description: ""
 order: 3
 docs:

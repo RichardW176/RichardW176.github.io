@@ -4,6 +4,8 @@ image: /assets/images/overdawn.png
 poster_fit: contain
 order: 1
 role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
+stage: Published
+timeline: May 2025 - Feb 2026
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
 awards:
   - title: "GWB"

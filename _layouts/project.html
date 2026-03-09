@@ -9,6 +9,14 @@ layout: default
 
     <h1>{{ page.title }}</h1>
 
+    {% if page.stage or page.timeline %}
+    <p class="project-page__meta">
+      {% if page.stage %}<span>{{ page.stage }}</span>{% endif %}
+      {% if page.stage and page.timeline %}<span class="project-page__meta-sep">•</span>{% endif %}
+      {% if page.timeline %}<span>{{ page.timeline }}</span>{% endif %}
+    </p>
+    {% endif %}
+
     <div class="project-content">
       {{ content }}
     </div>

@@ -2,6 +2,8 @@
 title: Thang!
 image: /assets/images/thang.png
 role: Lead Narrative Designer, Designer
+stage: Production
+timeline: Dec 2025 - Present
 description: ""
 order: 5
 docs:
