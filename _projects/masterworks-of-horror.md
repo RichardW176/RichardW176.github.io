@@ -4,7 +4,7 @@ image: /assets/images/GDC Banner Wide.png
 role: Designer, Artist,
 stage: Production
 timeline: Nov 2025 - Present
-description: ""
+description: PvP card battler inspired by classic horror literature.
 order: 2
 docs:
   - title: "Masterworks GDD V1.9 - Richard Revisions"

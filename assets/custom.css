@@ -479,6 +479,41 @@ h2 {
   line-height: 1.6;
 }
 
+.collaboration-section {
+  max-width: 1400px;
+  margin: 0 auto 120px;
+  padding: 0 20px;
+}
+
+.collaboration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+  gap: 20px;
+}
+
+.collaboration-card {
+  margin: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.collaboration-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: rgba(9, 10, 14, 0.96);
+}
+
+.collaboration-card figcaption {
+  padding: 14px 16px 16px;
+  color: #cfcfd6;
+  line-height: 1.6;
+}
+
 .project-docs-list {
   display: flex;
   flex-wrap: wrap;

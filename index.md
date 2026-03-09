@@ -160,4 +160,15 @@ title: Home
 {% endfor %}
 </div>
 
+## Collaborations
+
+<section class="collaboration-section">
+  <div class="collaboration-grid">
+    <figure class="collaboration-card">
+      <img src="/assets/images/icc.png" alt="International Consulting Club (ICC) at USC" class="collaboration-card__image">
+      <figcaption>International Consulting Club (ICC) at USC</figcaption>
+    </figure>
+  </div>
+</section>
+
 <script src="/assets/js/project-modal.js" defer></script>

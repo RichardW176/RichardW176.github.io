@@ -4,7 +4,7 @@ image: /assets/images/thang.png
 role: Lead Narrative Designer, Designer
 stage: Production
 timeline: Dec 2025 - Present
-description: ""
+description: 3v3 party shooter inspired by the Korean playground game Freeze Tag.
 order: 5
 docs:
   - title: "Global Design Documentation - EXPO"

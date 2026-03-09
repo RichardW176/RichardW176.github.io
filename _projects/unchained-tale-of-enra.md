@@ -4,7 +4,7 @@ image: /assets/images/unchained-tale-of-enra.png
 role: Narrative Designer, Designer
 stage: Post-production
 timeline: June 2025 - Present
-description: ""
+description: Turn / negotiation based action RPG set in a fantasy world.
 order: 3
 docs:
   - title: "Marlow Character Brief"
