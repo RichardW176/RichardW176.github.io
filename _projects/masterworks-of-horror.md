@@ -21,7 +21,7 @@ media:
   - file: /assets/images/Screenshot 2026-03-08 224328.png
     alt: Masterworks of Horror screenshot 1
     description: Masterworks 1
-  - file: /assets/images/Screenshot 2026-03-08 224423.png
-    alt: Masterworks of Horror screenshot 2
+  - file: /assets/images/Frame 3 (2).png
+    alt: Masterworks of Horror frame screenshot
     description: Masterworks 2
 ---

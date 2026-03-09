@@ -25,7 +25,10 @@ title: Home
     <div class="project-showcase__stage">
       <div class="project-showcase__poster-column">
         <div class="project-showcase__poster-frame">
-          <img class="project-showcase__poster" src="{{ project.image }}" alt="{{ project.title }}">
+          <img
+            class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
+            src="{{ project.image }}"
+            alt="{{ project.title }}">
         </div>
       </div>
 
