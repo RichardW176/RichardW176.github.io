@@ -7,8 +7,10 @@ order: 2
 docs:
   - title: "Masterworks GDD V1.9 - Richard Revisions"
     file: /assets/MASTERWORKS GDD V1.9 - Richard Revisions.pdf
+    preview: true
   - title: "Trapped Author - Richard"
     file: /assets/Trapped Author - Richard (12_26).pdf
+    preview: true
 media:
   - file: /assets/Screenshot 2026-03-08 121333.png
     alt: Masterworks of Horror deck art screenshot

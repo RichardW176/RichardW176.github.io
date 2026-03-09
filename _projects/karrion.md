@@ -7,6 +7,7 @@ order: 8   # adjust position in grid
 docs:
   - title: "Roblox Game Brainstorming"
     file: /assets/Roblox Game Brainstorming.pdf
+    preview: true
 ---
 
 KArrion is a [short description of the project].

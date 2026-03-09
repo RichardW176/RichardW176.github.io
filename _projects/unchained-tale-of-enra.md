@@ -7,8 +7,10 @@ order: 3
 docs:
   - title: "Marlow Character Brief"
     file: /assets/MARLOW - Character Brief.pdf
+    preview: true
   - title: "Marlow Scripts + Design"
     file: /assets/MARLOW - Scripts + Design.pdf
+    preview: true
 ---
 
 Unchained: Tale of Enra is a [brief description of your project].
