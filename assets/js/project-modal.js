@@ -45,20 +45,49 @@
       return;
     }
 
+    const isVideoInViewport = (video) => {
+      const rect = video.getBoundingClientRect();
+      return rect.bottom >= 0 &&
+        rect.right >= 0 &&
+        rect.top <= window.innerHeight &&
+        rect.left <= window.innerWidth;
+    };
+
+    const syncVideoPlayback = (video) => {
+      if (!isVideoInViewport(video)) {
+        video.pause();
+        return;
+      }
+
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    };
+
     videos.forEach((video) => {
       video.dataset.visibleAutoplayBound = 'true';
+      video.autoplay = true;
+      video.defaultMuted = true;
       video.muted = true;
       video.loop = true;
       video.playsInline = true;
+      video.setAttribute('autoplay', '');
+      video.setAttribute('muted', '');
+      video.load();
       video.pause();
+
+      const retryPlayback = () => {
+        syncVideoPlayback(video);
+      };
+
+      video.addEventListener('loadeddata', retryPlayback);
+      video.addEventListener('canplay', retryPlayback);
     });
 
     if (!('IntersectionObserver' in window)) {
       videos.forEach((video) => {
-        const playPromise = video.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(() => {});
-        }
+        syncVideoPlayback(video);
       });
       return;
     }
@@ -69,10 +98,7 @@
           const video = entry.target;
 
           if (entry.isIntersecting) {
-            const playPromise = video.play();
-            if (playPromise && typeof playPromise.catch === 'function') {
-              playPromise.catch(() => {});
-            }
+            syncVideoPlayback(video);
             return;
           }
 

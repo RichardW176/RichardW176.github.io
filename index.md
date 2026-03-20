@@ -38,6 +38,7 @@ title: Home
         <div class="project-showcase__summary-video">
           <video
             class="project-showcase__summary-video-media"
+            autoplay
             data-autoplay-when-visible="true"
             loop
             muted
@@ -83,6 +84,7 @@ title: Home
     <div class="project-showcase__secondary-video">
       <video
         class="project-showcase__secondary-video-media"
+        autoplay
         data-autoplay-when-visible="true"
         loop
         muted
