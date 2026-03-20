@@ -95,8 +95,8 @@ h2 {
 
 .project-showcase__stage {
   display: grid;
-  grid-template-columns: minmax(280px, 380px) minmax(360px, 560px);
-  gap: 20px;
+  grid-template-columns: minmax(280px, 380px) minmax(460px, 720px);
+  gap: 24px;
   align-items: stretch;
   justify-content: center;
 }
@@ -164,13 +164,12 @@ h2 {
 
 .project-showcase__summary--with-video {
   overflow: hidden;
+  isolation: isolate;
   padding: 26px 28px 28px;
   max-width: none;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
-    linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
+  background: linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
 }
 
@@ -179,24 +178,15 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(5, 7, 14, 0.18) 0%, rgba(5, 7, 14, 0.4) 34%, rgba(5, 7, 14, 0.74) 72%, rgba(5, 7, 14, 0.88) 100%),
-    linear-gradient(90deg, rgba(4, 5, 10, 0.34) 0%, rgba(4, 5, 10, 0.1) 55%, rgba(4, 5, 10, 0.28) 100%);
-}
-
-.project-showcase__summary--with-video::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 180px);
+  background: linear-gradient(180deg, rgba(5, 7, 14, 0.12) 0%, rgba(5, 7, 14, 0.18) 32%, rgba(5, 7, 14, 0.58) 72%, rgba(5, 7, 14, 0.82) 100%);
 }
 
 .project-showcase__summary-video {
   position: absolute;
   inset: 0;
   z-index: 0;
+  transform: translateZ(0);
 }
 
 .project-showcase__summary-video-media {
@@ -205,6 +195,8 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   background: rgba(8, 8, 12, 0.92);
 }
 
@@ -289,8 +281,7 @@ h2 {
   background: linear-gradient(90deg, rgba(11, 11, 15, 0), rgba(11, 11, 15, 0.86) 62%, rgba(11, 11, 15, 0.98));
 }
 
-.project-showcase__summary--with-video::before,
-.project-showcase__summary--with-video::after {
+.project-showcase__summary--with-video::before {
   left: 0;
   width: auto;
 }
@@ -359,7 +350,7 @@ h2 {
 
 @media (max-width: 1100px) {
   .project-sequence { gap: 88px; }
-  .project-showcase__stage { grid-template-columns: minmax(240px, 320px) minmax(300px, 460px); gap: 16px; }
+  .project-showcase__stage { grid-template-columns: minmax(240px, 320px) minmax(360px, 560px); gap: 18px; }
 }
 
 @media (max-width: 700px) {
