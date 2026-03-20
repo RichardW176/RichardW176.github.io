@@ -40,62 +40,62 @@ select {
 /* ===== HERO SECTION ===== */
 
 .hero {
-  padding: 140px 5vw 100px 5vw;
+  padding: 120px 6vw 84px 6vw;
 }
 
 .hero-inner {
-  max-width: 1200px;
+  max-width: 1020px;
   margin: 0 auto;
 }
 
 .hero-role {
   color: #999;
   letter-spacing: 3px;
-  font-size: 0.9rem;
-  margin-bottom: 30px;
+  font-size: 0.78rem;
+  margin-bottom: 24px;
 }
 
 .hero-title {
-  font-size: clamp(70px, 9vw, 130px);
+  font-size: clamp(58px, 7.6vw, 110px);
   line-height: 0.95;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 40px 0;
+  margin: 0 0 32px 0;
 }
 
 .hero-tagline {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #aaa;
-  max-width: 700px;
+  max-width: 620px;
 }
 
 /* ===== SECTION TITLES ===== */
 
 h2 {
-  max-width: 1400px;
-  margin: 60px auto 30px auto;
-  padding: 0 20px;
-  font-size: 2rem;
+  max-width: 1190px;
+  margin: 48px auto 24px auto;
+  padding: 0 28px;
+  font-size: 1.72rem;
 }
 
 /* ===== PROJECT SEQUENCE ===== */
 
 .project-sequence {
   display: grid;
-  gap: 120px;
-  max-width: 1400px;
-  margin: 60px auto 120px;
-  padding: 0 20px;
+  gap: 96px;
+  max-width: 1190px;
+  margin: 52px auto 104px;
+  padding: 0 28px;
 }
 
 .project-showcase {
   display: grid;
-  gap: 28px;
+  gap: 24px;
 }
 
 .project-showcase__stage {
   display: grid;
-  grid-template-columns: minmax(280px, 380px) minmax(460px, 720px);
+  grid-template-columns: minmax(240px, 323px) minmax(390px, 612px);
   gap: 0;
   align-items: stretch;
   justify-content: center;
@@ -110,10 +110,10 @@ h2 {
   position: sticky;
   top: 28px;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 17px;
   display: grid;
   aspect-ratio: 5 / 7;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
@@ -132,7 +132,7 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 20px;
+  border-radius: 17px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(8, 8, 12, 0.92);
 }
@@ -147,8 +147,8 @@ h2 {
 }
 
 .project-showcase__body {
-  padding: 30px 32px;
-  border-radius: 24px;
+  padding: 26px 28px;
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 140px),
@@ -161,9 +161,9 @@ h2 {
   box-sizing: border-box;
   align-content: end;
   align-self: stretch;
-  gap: 18px;
-  padding: 22px 0 26px 8px;
-  max-width: 320px;
+  gap: 15px;
+  padding: 18px 0 22px 6px;
+  max-width: 272px;
   min-height: 0;
   position: relative;
 }
@@ -176,10 +176,10 @@ h2 {
 .project-showcase__summary--with-video {
   overflow: hidden;
   isolation: isolate;
-  margin-left: -36px;
-  padding: 26px 28px 28px;
+  margin-left: -30px;
+  padding: 22px 24px 24px;
   max-width: none;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
@@ -217,18 +217,18 @@ h2 {
   z-index: 3;
   display: grid;
   align-content: start;
-  gap: 18px;
+  gap: 15px;
   min-height: 100%;
 }
 
 .project-showcase__summary--with-video .project-showcase__summary-content {
-  padding-left: 52px;
+  padding-left: 44px;
 }
 
 .project-showcase__eyebrow {
   margin: 0;
   color: #8d93a2;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -236,7 +236,7 @@ h2 {
 .project-showcase__index {
   margin: 0;
   color: #f3f6ff;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -244,7 +244,7 @@ h2 {
 .project-showcase__title {
   margin: 0;
   padding: 0;
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(2rem, 4.2vw, 3.55rem);
   line-height: 0.95;
   color: #ffffff;
 }
@@ -257,8 +257,8 @@ h2 {
 
 .project-showcase__role {
   color: rgba(227, 233, 244, 0.9);
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 1.62;
 }
 
 .project-showcase__role strong {
@@ -269,10 +269,10 @@ h2 {
 .project-showcase__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
   margin: 0;
   color: rgba(168, 176, 193, 0.82);
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -284,8 +284,8 @@ h2 {
 
 .project-showcase__desc {
   color: rgba(194, 201, 214, 0.72);
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 1.62;
 }
 
 .project-showcase__summary::before {
@@ -346,7 +346,7 @@ h2 {
 
 .project-showcase__details {
   display: grid;
-  gap: 24px;
+  gap: 20px;
   overflow: visible;
   opacity: 0.24;
   transform: translateY(10px);
@@ -365,13 +365,13 @@ h2 {
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1100px) {
-  .project-sequence { gap: 88px; }
-  .project-showcase__stage { grid-template-columns: minmax(240px, 320px) minmax(360px, 560px); gap: 0; }
-  .project-showcase__summary--with-video { margin-left: -28px; }
+  .project-sequence { gap: 76px; }
+  .project-showcase__stage { grid-template-columns: minmax(220px, 300px) minmax(320px, 520px); gap: 0; }
+  .project-showcase__summary--with-video { margin-left: -24px; }
 }
 
 @media (max-width: 700px) {
-  .project-sequence { gap: 64px; margin: 40px auto 80px; }
+  .project-sequence { gap: 56px; margin: 36px auto 72px; }
   .project-showcase__stage { grid-template-columns: 1fr; gap: 24px; }
   .project-showcase__poster-frame { position: static; padding: 14px; }
   .project-showcase__summary {
@@ -380,15 +380,15 @@ h2 {
   }
   .project-showcase__summary--with-video {
     margin-left: 0;
-    min-height: 420px;
-    padding: 22px;
+    min-height: 400px;
+    padding: 20px;
   }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
   }
   .project-showcase__summary::before { display: none; }
-  .project-showcase__body { padding: 22px; }
-  .project-showcase__title { font-size: clamp(2.2rem, 14vw, 3.6rem); }
+  .project-showcase__body { padding: 20px; }
+  .project-showcase__title { font-size: clamp(1.95rem, 12vw, 3.05rem); }
   .project-showcase__details {
     opacity: 1;
     overflow: visible;
