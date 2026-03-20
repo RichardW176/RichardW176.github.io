@@ -2,7 +2,9 @@
 title: Overdawn
 image: /assets/images/overdawn.png
 video: /assets/Overdawn%20Menu.mp4
-poster_fit: contain
+poster_fit: cover
+poster_position: top center
+poster_frame_flush: true
 order: 1
 role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
 stage: Published

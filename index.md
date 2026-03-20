@@ -24,10 +24,11 @@ title: Home
   <section class="project-showcase" id="{{ project.title | slugify }}">
     <div class="project-showcase__stage">
       <div class="project-showcase__poster-column">
-        <div class="project-showcase__poster-frame">
+        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}">
           <img
             class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
             src="{{ project.image }}"
+            {% if project.poster_position %}style="object-position: {{ project.poster_position }};"{% endif %}
             alt="{{ project.title }}">
         </div>
       </div>
