@@ -21,14 +21,34 @@ title: Home
 {% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
 
-  <section class="project-showcase" id="{{ project.title | slugify }}">
+  <section class="project-showcase{% if project.video or project.video_sources %} project-showcase--has-video{% endif %}" id="{{ project.title | slugify }}">
     <div class="project-showcase__stage">
       <div class="project-showcase__poster-column">
         <div class="project-showcase__poster-frame">
+          {% if project.video or project.video_sources %}
+          <video
+            class="project-showcase__poster project-showcase__video"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+            poster="{{ project.image }}"
+            aria-label="{{ project.title }} preview video">
+            {% if project.video_sources %}
+              {% for video_source in project.video_sources %}
+            <source src="{{ video_source }}" type="video/mp4">
+              {% endfor %}
+            {% elsif project.video %}
+            <source src="{{ project.video }}" type="video/mp4">
+            {% endif %}
+          </video>
+          {% else %}
           <img
             class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
             src="{{ project.image }}"
             alt="{{ project.title }}">
+          {% endif %}
         </div>
       </div>
 

@@ -135,6 +135,24 @@ h2 {
   object-fit: contain;
 }
 
+.project-showcase__video {
+  object-fit: cover;
+  object-position: center;
+}
+
+.project-showcase--has-video .project-showcase__stage {
+  align-items: stretch;
+}
+
+.project-showcase--has-video .project-showcase__poster-frame,
+.project-showcase--has-video .project-showcase__summary {
+  min-height: clamp(340px, 42vw, 520px);
+}
+
+.project-showcase--has-video .project-showcase__poster-frame {
+  aspect-ratio: auto;
+}
+
 .project-showcase__body {
   padding: 30px 32px;
   border-radius: 24px;
@@ -268,6 +286,12 @@ h2 {
   .project-sequence { gap: 64px; margin: 40px auto 80px; }
   .project-showcase__stage { grid-template-columns: 1fr; gap: 24px; }
   .project-showcase__poster-frame { position: static; padding: 14px; }
+  .project-showcase--has-video .project-showcase__poster-frame {
+    min-height: 280px;
+  }
+  .project-showcase--has-video .project-showcase__summary {
+    min-height: 0;
+  }
   .project-showcase__summary {
     padding: 0;
     max-width: none;
