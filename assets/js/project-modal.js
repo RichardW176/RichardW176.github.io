@@ -74,15 +74,16 @@
       video.playsInline = true;
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
-      video.load();
-      video.pause();
-
-      const retryPlayback = () => {
+      const tryPlayback = () => {
         syncVideoPlayback(video);
       };
 
-      video.addEventListener('loadeddata', retryPlayback);
-      video.addEventListener('canplay', retryPlayback);
+      video.addEventListener('loadedmetadata', tryPlayback);
+      video.addEventListener('loadeddata', tryPlayback);
+      video.addEventListener('canplay', tryPlayback);
+      window.requestAnimationFrame(() => {
+        syncVideoPlayback(video);
+      });
     });
 
     if (!('IntersectionObserver' in window)) {
