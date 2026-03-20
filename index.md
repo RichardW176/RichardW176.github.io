@@ -43,8 +43,7 @@ title: Home
             loop
             muted
             playsinline
-            preload="auto"
-            poster="{{ project.image }}"
+            preload="metadata"
             aria-label="{{ project.title }} preview video">
             {% if project.video_sources %}
               {% for video_source in project.video_sources %}
@@ -89,8 +88,7 @@ title: Home
         loop
         muted
         playsinline
-        preload="auto"
-        poster="{{ project.image }}"
+        preload="metadata"
         aria-label="{{ project.title }} secondary preview video">
         <source src="{{ project.secondary_video }}" type="video/mp4">
       </video>
