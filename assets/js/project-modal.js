@@ -5,6 +5,7 @@
   const docModalFrame = document.getElementById('doc-modal-frame');
   const docModalLink = document.getElementById('doc-modal-link');
   const projectShowcases = document.querySelectorAll('.project-showcase');
+  let visibleVideoObserver = null;
 
   async function hydrateScriptCards(root) {
     const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded]):not([data-script-inline="true"])');
@@ -38,7 +39,59 @@
     }));
   }
 
+  function hydrateVisibleVideos(root) {
+    const videos = root.querySelectorAll('video[data-autoplay-when-visible="true"]:not([data-visible-autoplay-bound])');
+    if (!videos.length) {
+      return;
+    }
+
+    videos.forEach((video) => {
+      video.dataset.visibleAutoplayBound = 'true';
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.pause();
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach((video) => {
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
+        }
+      });
+      return;
+    }
+
+    if (!visibleVideoObserver) {
+      visibleVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+
+          if (entry.isIntersecting) {
+            const playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(() => {});
+            }
+            return;
+          }
+
+          video.pause();
+        });
+      }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+      });
+    }
+
+    videos.forEach((video) => {
+      visibleVideoObserver.observe(video);
+    });
+  }
+
   hydrateScriptCards(document);
+  hydrateVisibleVideos(document);
 
   if (projectShowcases.length) {
     let activeFrame = null;
@@ -108,6 +161,7 @@
     projectModal.setAttribute('aria-hidden', 'false');
     syncBodyScrollLock();
     hydrateScriptCards(projectModalInner);
+    hydrateVisibleVideos(projectModalInner);
   }
 
   function closeDocModal() {
