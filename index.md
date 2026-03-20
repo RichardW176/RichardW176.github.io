@@ -79,6 +79,22 @@ title: Home
       </aside>
     </div>
 
+    {% if project.secondary_video %}
+    <div class="project-showcase__secondary-video">
+      <video
+        class="project-showcase__secondary-video-media"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        poster="{{ project.image }}"
+        aria-label="{{ project.title }} secondary preview video">
+        <source src="{{ project.secondary_video }}" type="video/mp4">
+      </video>
+    </div>
+    {% endif %}
+
     <article class="project-showcase__body project-page-inner">
       <div class="project-showcase__details">
         <div class="project-content">

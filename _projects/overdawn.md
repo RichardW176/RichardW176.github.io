@@ -2,6 +2,7 @@
 title: Overdawn
 image: /assets/images/overdawn.png
 video: /assets/Overdawn%20Menu.mp4
+secondary_video: /assets/Archangel%20Preview.mp4
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
