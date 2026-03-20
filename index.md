@@ -32,26 +32,7 @@ title: Home
         </div>
       </div>
 
-      <aside class="project-showcase__summary">
-        <p class="project-showcase__eyebrow">Overview</p>
-        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
-        <h2 class="project-showcase__title">{{ project.title }}</h2>
-        <p class="project-showcase__role">
-          {% assign project_roles = project.role | split: ", " %}
-          {% for role in project_roles %}
-            <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
-          {% endfor %}
-        </p>
-        {% if project.stage or project.timeline %}
-        <p class="project-showcase__meta">
-          {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}
-          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">•</span>{% endif %}
-          {% if project.timeline %}<span>{{ project.timeline }}</span>{% endif %}
-        </p>
-        {% endif %}
-        {% if project.description and project.description != "" %}
-        <p class="project-showcase__desc">{{ project.description }}</p>
-        {% endif %}
+      <aside class="project-showcase__summary{% if project.video or project.video_sources %} project-showcase__summary--with-video{% endif %}">
         {% if project.video or project.video_sources %}
         <div class="project-showcase__summary-video">
           <video
@@ -73,6 +54,27 @@ title: Home
           </video>
         </div>
         {% endif %}
+        <div class="project-showcase__summary-content">
+        <p class="project-showcase__eyebrow">Overview</p>
+        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+        <h2 class="project-showcase__title">{{ project.title }}</h2>
+        <p class="project-showcase__role">
+          {% assign project_roles = project.role | split: ", " %}
+          {% for role in project_roles %}
+            <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </p>
+        {% if project.stage or project.timeline %}
+        <p class="project-showcase__meta">
+          {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}
+          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">•</span>{% endif %}
+          {% if project.timeline %}<span>{{ project.timeline }}</span>{% endif %}
+        </p>
+        {% endif %}
+        {% if project.description and project.description != "" %}
+        <p class="project-showcase__desc">{{ project.description }}</p>
+        {% endif %}
+        </div>
       </aside>
     </div>
 
