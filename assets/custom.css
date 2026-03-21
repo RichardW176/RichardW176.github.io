@@ -25,6 +25,25 @@ select {
   border: none;
 }
 
+.site-header,
+.post-header {
+  display: none;
+}
+
+.page-content {
+  padding-top: 0;
+}
+
+.page-content .wrapper {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.post {
+  margin: 0;
+}
+
 .site-title {
   color: #ffffff !important;
 }
@@ -247,14 +266,13 @@ h2 {
 
 .project-showcase__summary-awards {
   position: absolute;
-  top: -18px;
-  right: -34px;
+  top: 0;
+  right: 0;
   z-index: 3;
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  transform: scale(0.82);
-  transform-origin: top right;
+  transform: translate(72px, -34px);
 }
 
 .project-showcase__summary-award {
@@ -603,10 +621,10 @@ h2 {
     padding: 22px;
   }
   .project-showcase__summary-awards {
-    top: -10px;
-    right: -18px;
+    top: 0;
+    right: 0;
     gap: 6px;
-    transform: scale(0.74);
+    transform: translate(32px, -18px);
   }
   .project-showcase__summary-award {
     width: clamp(56px, 18vw, 78px);
