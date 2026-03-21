@@ -266,8 +266,8 @@ h2 {
 
 .project-showcase__summary-awards {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: -18px;
+  right: -38px;
   z-index: 3;
   display: flex;
   align-items: flex-start;
@@ -276,27 +276,16 @@ h2 {
 
 .project-showcase__summary-award {
   margin: 0;
-  width: 78px;
-  height: 78px;
-  overflow: hidden;
+  width: 82px;
 }
 
 .project-showcase__summary-award-image {
   display: block;
-  width: 180px;
-  max-width: none;
+  width: 100%;
   height: auto;
+  max-width: none;
+  object-fit: contain;
   background: transparent;
-}
-
-.project-showcase__summary-award:nth-child(1) .project-showcase__summary-award-image {
-  margin-top: -30px;
-  margin-left: -52px;
-}
-
-.project-showcase__summary-award:nth-child(2) .project-showcase__summary-award-image {
-  margin-top: -28px;
-  margin-left: -50px;
 }
 
 .project-showcase__summary-video-media {
@@ -632,24 +621,12 @@ h2 {
     padding: 22px;
   }
   .project-showcase__summary-awards {
-    top: 6px;
-    right: 6px;
+    top: -10px;
+    right: -18px;
     gap: 4px;
   }
   .project-showcase__summary-award {
-    width: 58px;
-    height: 58px;
-  }
-  .project-showcase__summary-award-image {
-    width: 132px;
-  }
-  .project-showcase__summary-award:nth-child(1) .project-showcase__summary-award-image {
-    margin-top: -22px;
-    margin-left: -38px;
-  }
-  .project-showcase__summary-award:nth-child(2) .project-showcase__summary-award-image {
-    margin-top: -20px;
-    margin-left: -36px;
+    width: 62px;
   }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
