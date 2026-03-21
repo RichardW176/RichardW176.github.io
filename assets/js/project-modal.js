@@ -6,6 +6,7 @@
   const docModalLink = document.getElementById('doc-modal-link');
   const projectShowcases = document.querySelectorAll('.project-showcase');
   let visibleVideoObserver = null;
+  const visibleVideoThreshold = 0.35;
 
   async function hydrateScriptCards(root) {
     const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded]):not([data-script-inline="true"])');
@@ -45,16 +46,17 @@
       return;
     }
 
-    const isVideoInViewport = (video) => {
+    const getVideoVisibleRatio = (video) => {
       const rect = video.getBoundingClientRect();
-      return rect.bottom >= 0 &&
-        rect.right >= 0 &&
-        rect.top <= window.innerHeight &&
-        rect.left <= window.innerWidth;
+      const visibleWidth = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+      const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      const visibleArea = visibleWidth * visibleHeight;
+      const totalArea = Math.max(rect.width * rect.height, 1);
+      return visibleArea / totalArea;
     };
 
-    const syncVideoPlayback = (video) => {
-      if (!isVideoInViewport(video)) {
+    const syncVideoPlayback = (video, visibleRatio = getVideoVisibleRatio(video)) => {
+      if (visibleRatio < visibleVideoThreshold) {
         video.pause();
         return;
       }
@@ -67,12 +69,11 @@
 
     videos.forEach((video) => {
       video.dataset.visibleAutoplayBound = 'true';
-      video.autoplay = true;
+      video.autoplay = false;
       video.defaultMuted = true;
       video.muted = true;
       video.loop = true;
       video.playsInline = true;
-      video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       const tryPlayback = () => {
         syncVideoPlayback(video);
@@ -99,7 +100,7 @@
           const video = entry.target;
 
           if (entry.isIntersecting) {
-            syncVideoPlayback(video);
+            syncVideoPlayback(video, entry.intersectionRatio);
             return;
           }
 
@@ -108,7 +109,7 @@
       }, {
         root: null,
         rootMargin: '0px',
-        threshold: 0,
+        threshold: [0, 0.15, 0.35, 0.5, 0.75, 1],
       });
     }
 

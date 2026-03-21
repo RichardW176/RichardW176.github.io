@@ -11,6 +11,7 @@ tertiary_video_subtitle: Archetype Deck
 accent_rgb: 48 148 255
 poster_frame_borderless: true
 hide_summary_intro: true
+hide_body: true
 role: Designer, Artist,
 role_display: Design &middot; Art
 engine: Unity
