@@ -360,7 +360,7 @@ h2 {
   margin: -8px auto 0;
   overflow: hidden;
   border: 0;
-  border-radius: 0;
+  border-radius: 22px;
   background: transparent;
   box-shadow: none;
 }
@@ -370,9 +370,9 @@ h2 {
   width: 100%;
   aspect-ratio: 16 / 5;
   object-fit: cover;
-  object-position: center;
+  object-position: center 42%;
   border: 0;
-  border-radius: 0;
+  border-radius: 22px;
   background: #05070e;
 }
 
