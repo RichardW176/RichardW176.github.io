@@ -48,6 +48,16 @@ select {
   padding: 128px 5.5vw 90px 5.5vw;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(255, 58, 138, 0.34);
+  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
+}
+
 .hero-media {
   position: absolute;
   inset: 0;
@@ -77,7 +87,7 @@ select {
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   align-content: end;
   width: min(1120px, 100%);
@@ -224,9 +234,9 @@ h2 {
   padding: 24px 26px 26px;
   max-width: none;
   border-radius: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 58, 138, 0.34);
   background: linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08), 0 28px 90px rgba(0, 0, 0, 0.45);
 }
 
 .project-showcase__summary--with-video::before {
@@ -417,10 +427,10 @@ h2 {
 .project-showcase__secondary-video {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 58, 138, 0.45);
+  border: 1px solid rgba(255, 58, 138, 0.34);
   border-radius: 22px 22px 0 0;
   background: #000000;
-  box-shadow: 0 0 0 1px rgba(255, 58, 138, 0.12), 0 0 18px rgba(255, 58, 138, 0.16);
+  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
 }
 
 .project-showcase__secondary-video-media {
@@ -474,11 +484,11 @@ h2 {
   display: grid;
   gap: 22px;
   padding: 28px 32px 34px;
-  border: 1px solid rgba(255, 58, 138, 0.45);
+  border: 1px solid rgba(255, 58, 138, 0.34);
   border-top: 0;
   border-radius: 0 0 22px 22px;
   background: #000000;
-  box-shadow: 0 10px 24px rgba(255, 58, 138, 0.1);
+  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
 }
 
 .project-showcase__secondary-panel-heading {
@@ -514,9 +524,9 @@ h2 {
   margin: 0;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 58, 138, 0.38);
+  border: 1px solid rgba(255, 58, 138, 0.3);
   background: #000000;
-  box-shadow: 0 0 14px rgba(255, 58, 138, 0.12);
+  box-shadow: 0 0 6px rgba(255, 58, 138, 0.06);
 }
 
 .project-showcase__secondary-panel-image {
