@@ -167,6 +167,7 @@ title: Home
           muted
           playsinline
           preload="metadata"
+          {% if project.tertiary_video_position %}style="object-position: {{ project.tertiary_video_position }};"{% endif %}
           aria-label="{{ project.title }} tertiary preview video">
           <source src="{{ project.tertiary_video }}" type="video/mp4">
         </video>

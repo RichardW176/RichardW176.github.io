@@ -408,6 +408,7 @@ h2 {
 .project-showcase__secondary-feature {
   width: min(100%, 996px);
   margin: -8px auto 0;
+  filter: drop-shadow(0 22px 34px rgba(255, 58, 138, 0.12));
 }
 
 .project-showcase__secondary-feature + .project-showcase__secondary-feature {
@@ -439,8 +440,8 @@ h2 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.76) 16%, rgba(0, 0, 0, 0.34) 34%, rgba(0, 0, 0, 0) 52%);
-  clip-path: polygon(0 0, 60% 0, 0 74%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.88) 18%, rgba(0, 0, 0, 0.56) 36%, rgba(0, 0, 0, 0.14) 54%, rgba(0, 0, 0, 0) 66%);
+  clip-path: polygon(0 0, 66% 0, 0 78%);
 }
 
 .project-showcase__secondary-video-copy {

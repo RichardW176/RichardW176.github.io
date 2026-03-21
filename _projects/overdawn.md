@@ -18,6 +18,7 @@ secondary_feature_items:
 tertiary_video: /assets/Rev%20Preview.mp4
 tertiary_video_title: Rev
 tertiary_video_subtitle: Final Boss
+tertiary_video_position: center 66%
 tertiary_feature_heading: Applicable Skills
 tertiary_feature_items:
   - label: Boss Design
