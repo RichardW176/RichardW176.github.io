@@ -7,7 +7,7 @@
 /* ===== GLOBAL ===== */
 
 body {
-  background-color: #141418 !important;
+  background-color: #0b0b0f !important;
   color: #e6e6e6;
   font-family: "Roboto Flex", sans-serif;
 }
@@ -21,7 +21,7 @@ select {
 
 .site-header,
 .site-footer {
-  background-color: #141418 !important;
+  background-color: #0b0b0f !important;
   border: none;
 }
 
@@ -368,9 +368,9 @@ h2 {
 .project-showcase__secondary-video-media {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 6.8;
   object-fit: cover;
-  object-position: center 44%;
+  object-position: center 58%;
   border: 0;
   border-radius: 22px;
   background: #05070e;
