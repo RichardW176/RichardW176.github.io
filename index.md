@@ -17,7 +17,7 @@ title: Home
     </video>
   </div>
   <div class="hero-inner">
-    <p class="hero-role">GAME DEVELOPER • NARRATIVE DESIGNER • SCRIPTWRITER</p>
+    <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
     <div class="hero-name-stack">
       <h1 class="hero-title">Ruiqian<br>Wang</h1>
     </div>
