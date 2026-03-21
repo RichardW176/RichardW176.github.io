@@ -112,6 +112,16 @@ title: Home
         aria-label="{{ project.title }} secondary preview video">
         <source src="{{ project.secondary_video }}" type="video/mp4">
       </video>
+      {% if project.secondary_video_title or project.secondary_video_subtitle %}
+      <div class="project-showcase__secondary-video-overlay">
+        {% if project.secondary_video_subtitle %}
+        <p class="project-showcase__secondary-video-subtitle">{{ project.secondary_video_subtitle }}</p>
+        {% endif %}
+        {% if project.secondary_video_title %}
+        <h3 class="project-showcase__secondary-video-title">{{ project.secondary_video_title }}</h3>
+        {% endif %}
+      </div>
+      {% endif %}
     </div>
     {% endif %}
 
