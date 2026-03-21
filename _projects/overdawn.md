@@ -52,6 +52,7 @@ inline_awards: true
 order: 1
 role: Narrative, Design, Art, Usability
 role_display: Narrative &middot; Design &middot; Art &middot; Usability
+engine: Unity
 stage: Published
 timeline: May 2025 - Feb 2026
 description: 2.5D bullet hell set in a voxelized cyberpunk world.

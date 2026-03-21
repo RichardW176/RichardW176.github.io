@@ -100,11 +100,13 @@ title: Home
           {% endfor %}
         </p>
         {% endif %}
-        {% if project.stage or project.timeline %}
+        {% if project.stage or project.timeline or project.engine %}
         <p class="project-showcase__meta">
           {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}
-          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">•</span>{% endif %}
+          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
           {% if project.timeline %}<span>{{ project.timeline }}</span>{% endif %}
+          {% if project.engine and (project.stage or project.timeline) %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
+          {% if project.engine %}<span>{{ project.engine }}</span>{% endif %}
         </p>
         {% endif %}
         {% if project.description and project.description != "" %}

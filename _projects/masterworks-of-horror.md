@@ -10,6 +10,7 @@ poster_frame_borderless: true
 hide_summary_intro: true
 role: Designer, Artist,
 role_display: Design &middot; Art
+engine: Unity
 stage: Production
 timeline: Nov 2025 - Present
 description: PvP card battler inspired by classic horror literature.
