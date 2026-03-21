@@ -266,7 +266,7 @@ h2 {
 
 .project-showcase__summary-awards {
   position: absolute;
-  top: -18px;
+  top: -30px;
   right: -38px;
   z-index: 3;
   display: flex;
@@ -276,7 +276,7 @@ h2 {
 
 .project-showcase__summary-award {
   margin: 0;
-  width: 82px;
+  width: 92px;
 }
 
 .project-showcase__summary-award-image {
@@ -621,12 +621,12 @@ h2 {
     padding: 22px;
   }
   .project-showcase__summary-awards {
-    top: -10px;
+    top: -16px;
     right: -18px;
     gap: 4px;
   }
   .project-showcase__summary-award {
-    width: 62px;
+    width: 68px;
   }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
