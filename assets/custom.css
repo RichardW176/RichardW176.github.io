@@ -48,6 +48,13 @@ select {
   margin: 0 auto;
 }
 
+.hero-name-stack {
+  position: relative;
+  z-index: 0;
+  max-width: 920px;
+  margin-bottom: 18px;
+}
+
 .hero-role {
   color: #999;
   letter-spacing: 3px;
@@ -56,14 +63,39 @@ select {
 }
 
 .hero-title {
+  position: relative;
+  z-index: 2;
   font-size: clamp(64px, 8.3vw, 120px);
   line-height: 0.95;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 36px 0;
+  margin: 0;
+}
+
+.hero-title-video-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(84%, 760px);
+  height: clamp(110px, 15vw, 180px);
+  margin: -10px 0 0 18px;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.hero-title-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.7;
+  filter: saturate(1.05) brightness(0.82);
+  transform: translateZ(0);
 }
 
 .hero-tagline {
+  position: relative;
+  z-index: 2;
   font-size: 1.18rem;
   color: #aaa;
   max-width: 680px;
@@ -399,6 +431,15 @@ h2 {
 }
 
 @media (max-width: 700px) {
+  .hero-name-stack {
+    max-width: none;
+  }
+  .hero-title-video-wrap {
+    width: min(92%, 520px);
+    height: clamp(88px, 24vw, 140px);
+    margin: -6px 0 0 8px;
+    border-radius: 18px;
+  }
   .project-sequence { gap: 60px; margin: 38px auto 78px; }
   .project-showcase__stage { grid-template-columns: 1fr; gap: 24px; }
   .project-showcase__poster-frame { position: static; padding: 14px; }

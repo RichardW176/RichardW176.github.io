@@ -6,7 +6,22 @@ title: Home
 <section class="hero">
   <div class="hero-inner">
     <p class="hero-role">GAME DEVELOPER • NARRATIVE DESIGNER • SCRIPTWRITER</p>
-    <h1 class="hero-title">Ruiqian<br>Wang</h1>
+    <div class="hero-name-stack">
+      <h1 class="hero-title">Ruiqian<br>Wang</h1>
+      <div class="hero-title-video-wrap">
+        <video
+          class="hero-title-video"
+          autoplay
+          data-autoplay-when-visible="true"
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-label="Hero preview video">
+          <source src="/assets/Overdawn%20Menu.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
     <p class="hero-tagline">
       Hi! I'm Ruiqian (Richard), a creative passionate about narrative, boss design, and screenwriting.
     </p>
