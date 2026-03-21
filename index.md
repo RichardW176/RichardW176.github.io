@@ -214,6 +214,122 @@ title: Home
     </div>
     {% endif %}
 
+    {% if project.quaternary_video %}
+    <div class="project-showcase__secondary-feature">
+      <div class="project-showcase__secondary-video">
+        <video
+          class="project-showcase__secondary-video-media"
+          autoplay
+          data-autoplay-when-visible="true"
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          {% if project.quaternary_video_position %}style="object-position: {{ project.quaternary_video_position }};"{% endif %}
+          aria-label="{{ project.title }} quaternary preview video">
+          <source src="{{ project.quaternary_video }}" type="video/mp4">
+        </video>
+        {% if project.quaternary_video_title or project.quaternary_video_subtitle %}
+        <div class="project-showcase__secondary-video-copy">
+          {% if project.quaternary_video_title %}
+          <h3 class="project-showcase__secondary-video-title">{{ project.quaternary_video_title }}</h3>
+          {% endif %}
+          {% if project.quaternary_video_subtitle %}
+          <p class="project-showcase__secondary-video-subtitle">{{ project.quaternary_video_subtitle }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% if project.quaternary_feature_heading or project.quaternary_feature_items or project.quaternary_feature_media %}
+      <div class="project-showcase__secondary-panel">
+        {% if project.quaternary_feature_heading %}
+        <h3 class="project-showcase__secondary-panel-heading">{{ project.quaternary_feature_heading }}</h3>
+        {% endif %}
+        {% if project.quaternary_feature_items %}
+        <div class="project-showcase__secondary-panel-copy">
+          {% for item in project.quaternary_feature_items %}
+          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if project.quaternary_feature_media %}
+        <div class="project-showcase__secondary-panel-media">
+          {% for item in project.quaternary_feature_media %}
+          <figure class="project-showcase__secondary-panel-card">
+            <img
+              src="{{ item.file }}"
+              alt="{{ item.alt | default: project.title }}"
+              class="project-showcase__secondary-panel-image">
+            {% if item.description %}
+            <figcaption>{{ item.description }}</figcaption>
+            {% endif %}
+          </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% if project.quinary_video %}
+    <div class="project-showcase__secondary-feature">
+      <div class="project-showcase__secondary-video">
+        <video
+          class="project-showcase__secondary-video-media"
+          autoplay
+          data-autoplay-when-visible="true"
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          {% if project.quinary_video_position %}style="object-position: {{ project.quinary_video_position }};"{% endif %}
+          aria-label="{{ project.title }} quinary preview video">
+          <source src="{{ project.quinary_video }}" type="video/mp4">
+        </video>
+        {% if project.quinary_video_title or project.quinary_video_subtitle %}
+        <div class="project-showcase__secondary-video-copy">
+          {% if project.quinary_video_title %}
+          <h3 class="project-showcase__secondary-video-title">{{ project.quinary_video_title }}</h3>
+          {% endif %}
+          {% if project.quinary_video_subtitle %}
+          <p class="project-showcase__secondary-video-subtitle">{{ project.quinary_video_subtitle }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% if project.quinary_feature_heading or project.quinary_feature_items or project.quinary_feature_media %}
+      <div class="project-showcase__secondary-panel">
+        {% if project.quinary_feature_heading %}
+        <h3 class="project-showcase__secondary-panel-heading">{{ project.quinary_feature_heading }}</h3>
+        {% endif %}
+        {% if project.quinary_feature_items %}
+        <div class="project-showcase__secondary-panel-copy">
+          {% for item in project.quinary_feature_items %}
+          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if project.quinary_feature_media %}
+        <div class="project-showcase__secondary-panel-media">
+          {% for item in project.quinary_feature_media %}
+          <figure class="project-showcase__secondary-panel-card">
+            <img
+              src="{{ item.file }}"
+              alt="{{ item.alt | default: project.title }}"
+              class="project-showcase__secondary-panel-image">
+            {% if item.description %}
+            <figcaption>{{ item.description }}</figcaption>
+            {% endif %}
+          </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
     <article class="project-showcase__body project-page-inner">
       <div class="project-showcase__details">
         <div class="project-content">

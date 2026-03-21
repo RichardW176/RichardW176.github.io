@@ -29,6 +29,32 @@ tertiary_feature_items:
     text: Improved encounter clarity through telegraph timing, phase readability, and player feedback.
   - label: Art Direction
     text: Supported the visual direction of the battle space and presentation for the finale.
+quaternary_video: /assets/Slums%20Preview.mp4
+quaternary_video_title: Andrean Slums
+quaternary_video_subtitle: Explorable Region
+quaternary_feature_heading: Applicable Skills
+quaternary_feature_items:
+  - label: Level Design
+    text: Built out the layout, traversal rhythm, and combat flow across the explorable slums region.
+  - label: Environment Design
+    text: Shaped the spatial identity of the area through set dressing, landmarks, and encounter framing.
+  - label: Narrative Design
+    text: Supported worldbuilding and player progression through the region's sequencing and tone.
+  - label: Usability
+    text: Tuned navigation readability and player guidance across the broader overworld space.
+quinary_video: /assets/Gangster%20Hideout%20Preview.mp4
+quinary_video_title: Gangster Hideout
+quinary_video_subtitle: Combat Area
+quinary_feature_heading: Applicable Skills
+quinary_feature_items:
+  - label: Combat Design
+    text: Designed and tuned this combat space for pressure, readability, and encounter pacing.
+  - label: Encounter Design
+    text: Structured enemy placement, arena flow, and threat escalation inside the hideout.
+  - label: Environment Design
+    text: Developed the mood, layout, and visual storytelling of the hideout interior.
+  - label: Usability
+    text: Refined player feedback and spatial clarity to support fast, readable combat.
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
