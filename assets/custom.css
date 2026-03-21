@@ -266,7 +266,7 @@ h2 {
 
 .project-showcase__summary-awards {
   position: absolute;
-  top: -30px;
+  top: -6px;
   right: -38px;
   z-index: 3;
   display: flex;
@@ -286,6 +286,7 @@ h2 {
   max-width: none;
   object-fit: contain;
   background: transparent;
+  transform: translateY(-34px);
 }
 
 .project-showcase__summary-video-media {
@@ -621,12 +622,15 @@ h2 {
     padding: 22px;
   }
   .project-showcase__summary-awards {
-    top: -16px;
+    top: -4px;
     right: -18px;
     gap: 4px;
   }
   .project-showcase__summary-award {
     width: 68px;
+  }
+  .project-showcase__summary-award-image {
+    transform: translateY(-22px);
   }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
