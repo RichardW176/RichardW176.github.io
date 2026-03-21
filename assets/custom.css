@@ -48,16 +48,6 @@ select {
   padding: 128px 5.5vw 90px 5.5vw;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  z-index: 1;
-  pointer-events: none;
-  border: 1px solid rgba(255, 58, 138, 0.34);
-  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
-}
-
 .hero-media {
   position: absolute;
   inset: 0;
