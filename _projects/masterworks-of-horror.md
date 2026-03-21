@@ -5,7 +5,10 @@ video: /assets/Necronomicon%20Landscape.mp4
 secondary_video: /assets/Trapped%20Author.mp4
 secondary_video_title: Trapped Author
 secondary_video_subtitle: Erase Archetype Deck
-accent_rgb: 36 73 129
+tertiary_video: /assets/Collabs%20%20Corrupted%20Collabs.mp4
+tertiary_video_title: Collab / Corrupted Collabs
+tertiary_video_subtitle: Archetype Deck
+accent_rgb: 48 148 255
 poster_frame_borderless: true
 hide_summary_intro: true
 role: Designer, Artist,
