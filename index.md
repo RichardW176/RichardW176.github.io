@@ -61,12 +61,16 @@ title: Home
         <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
         {% endunless %}
         <h2 class="project-showcase__title">{{ project.title }}</h2>
+        {% if project.role_display %}
+        <p class="project-showcase__role">{{ project.role_display }}</p>
+        {% else %}
         <p class="project-showcase__role">
           {% assign project_roles = project.role | split: ", " %}
           {% for role in project_roles %}
             <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
           {% endfor %}
         </p>
+        {% endif %}
         {% if project.stage or project.timeline %}
         <p class="project-showcase__meta">
           {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}

@@ -222,7 +222,7 @@ h2 {
 }
 
 .project-showcase__summary--with-video .project-showcase__summary-content {
-  padding-left: 48px;
+  padding-left: 28px;
 }
 
 .project-showcase__eyebrow {
@@ -342,7 +342,7 @@ h2 {
 }
 
 .project-showcase__summary--with-video .project-showcase__title {
-  font-size: clamp(2.8rem, 6.2vw, 5rem);
+  font-size: clamp(2.24rem, 4.96vw, 4rem);
   line-height: 0.9;
 }
 

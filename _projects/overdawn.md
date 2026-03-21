@@ -8,7 +8,8 @@ poster_position: top center
 poster_frame_flush: true
 hide_summary_intro: true
 order: 1
-role: Narrative . Design . Art . Usability
+role: Narrative, Design, Art, Usability
+role_display: Narrative &middot; Design &middot; Art &middot; Usability
 stage: Published
 timeline: May 2025 - Feb 2026
 description: 2.5D bullet hell set in a voxelized cyberpunk world.
