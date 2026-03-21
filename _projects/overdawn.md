@@ -47,6 +47,8 @@ poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
 hide_summary_intro: true
+hide_body: true
+inline_awards: true
 order: 1
 role: Narrative, Design, Art, Usability
 role_display: Narrative &middot; Design &middot; Art &middot; Usability

@@ -99,6 +99,21 @@ title: Home
       </aside>
     </div>
 
+    {% if project.inline_awards and project.awards %}
+    <section class="project-showcase__awards-strip" aria-label="{{ project.title }} awards">
+      <div class="project-showcase__awards-strip-grid">
+        {% for award in project.awards %}
+        <figure class="project-showcase__awards-strip-card">
+          <img
+            src="{{ award.file }}"
+            alt="{{ award.alt | default: award.title | default: project.title }}"
+            class="project-showcase__awards-strip-image">
+        </figure>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
     {% if project.secondary_video %}
     <div class="project-showcase__secondary-feature">
       <div class="project-showcase__secondary-video">
@@ -330,6 +345,7 @@ title: Home
     </div>
     {% endif %}
 
+    {% unless project.hide_body %}
     <article class="project-showcase__body project-page-inner">
       <div class="project-showcase__details">
         <div class="project-content">
@@ -446,6 +462,7 @@ title: Home
         {% endif %}
       </div>
     </article>
+    {% endunless %}
   </section>
 
 {% endfor %}

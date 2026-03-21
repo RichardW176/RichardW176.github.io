@@ -200,6 +200,39 @@ h2 {
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
 }
 
+.project-showcase__awards-strip {
+  width: min(100%, 1030px);
+  margin: -4px auto 4px;
+  padding: 20px 22px 22px;
+  border: 1px solid rgba(255, 58, 138, 0.34);
+  border-radius: 22px;
+  background: #000000;
+  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
+}
+
+.project-showcase__awards-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-showcase__awards-strip-card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 58, 138, 0.3);
+  background: #000000;
+  box-shadow: 0 0 6px rgba(255, 58, 138, 0.06);
+}
+
+.project-showcase__awards-strip-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #000000;
+}
+
 .project-showcase__summary {
   display: grid;
   box-sizing: border-box;
@@ -582,6 +615,13 @@ h2 {
   }
   .project-showcase__summary::before { display: none; }
   .project-showcase__body { padding: 22px; }
+  .project-showcase__awards-strip {
+    width: 100%;
+    padding: 18px;
+  }
+  .project-showcase__awards-strip-grid {
+    grid-template-columns: 1fr;
+  }
   .project-showcase__title { font-size: clamp(2.1rem, 12.8vw, 3.3rem); }
   .project-showcase__secondary-feature {
     width: 100%;
