@@ -100,25 +100,52 @@ title: Home
     </div>
 
     {% if project.secondary_video %}
-    <div class="project-showcase__secondary-video">
-      <video
-        class="project-showcase__secondary-video-media"
-        autoplay
-        data-autoplay-when-visible="true"
-        loop
-        muted
-        playsinline
-        preload="metadata"
-        aria-label="{{ project.title }} secondary preview video">
-        <source src="{{ project.secondary_video }}" type="video/mp4">
-      </video>
-      {% if project.secondary_video_title or project.secondary_video_subtitle %}
-      <div class="project-showcase__secondary-video-overlay">
+    <div class="project-showcase__secondary-feature">
+      <div class="project-showcase__secondary-video">
+        <video
+          class="project-showcase__secondary-video-media"
+          autoplay
+          data-autoplay-when-visible="true"
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-label="{{ project.title }} secondary preview video">
+          <source src="{{ project.secondary_video }}" type="video/mp4">
+        </video>
+        {% if project.secondary_video_title %}
+        <h3 class="project-showcase__secondary-video-title">{{ project.secondary_video_title }}</h3>
+        {% endif %}
         {% if project.secondary_video_subtitle %}
         <p class="project-showcase__secondary-video-subtitle">{{ project.secondary_video_subtitle }}</p>
         {% endif %}
-        {% if project.secondary_video_title %}
-        <h3 class="project-showcase__secondary-video-title">{{ project.secondary_video_title }}</h3>
+      </div>
+      {% if project.secondary_feature_heading or project.secondary_feature_items or project.secondary_feature_media %}
+      <div class="project-showcase__secondary-panel">
+        {% if project.secondary_feature_heading %}
+        <h3 class="project-showcase__secondary-panel-heading">{{ project.secondary_feature_heading }}</h3>
+        {% endif %}
+        {% if project.secondary_feature_items %}
+        <div class="project-showcase__secondary-panel-copy">
+          {% for item in project.secondary_feature_items %}
+          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if project.secondary_feature_media %}
+        <div class="project-showcase__secondary-panel-media">
+          {% for item in project.secondary_feature_media %}
+          <figure class="project-showcase__secondary-panel-card">
+            <img
+              src="{{ item.file }}"
+              alt="{{ item.alt | default: project.title }}"
+              class="project-showcase__secondary-panel-image">
+            {% if item.description %}
+            <figcaption>{{ item.description }}</figcaption>
+            {% endif %}
+          </figure>
+          {% endfor %}
+        </div>
         {% endif %}
       </div>
       {% endif %}

@@ -5,6 +5,20 @@ video: /assets/Overdawn%20Menu.mp4
 secondary_video: /assets/Archangel%20Preview.mp4
 secondary_video_title: Archangel
 secondary_video_subtitle: Secret Ending Boss
+secondary_feature_heading: Applicable Skills
+secondary_feature_items:
+  - label: Combat Design
+    text: Brainstormed abilities, balanced attack patterns, and tuned the secret-ending boss flow.
+  - label: Level Design
+    text: Built out the arena blockout, encounter readability, and environmental set dressing.
+  - label: Art
+    text: Created voxel art for the boss and environment, plus particles and cutscene engineering.
+  - label: Narrative Design
+    text: Wrote dialogue sequencing and character framing for the Archangel ending.
+secondary_feature_media:
+  - file: /assets/images/overdawn-archangel.jpg
+    alt: Overdawn screenshot of the Archangel encounter
+    description: Archangel encounter still
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true

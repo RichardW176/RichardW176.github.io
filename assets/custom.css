@@ -405,14 +405,17 @@ h2 {
   transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
 }
 
-.project-showcase__secondary-video {
-  position: relative;
+.project-showcase__secondary-feature {
   width: min(100%, 996px);
   margin: -8px auto 0;
+}
+
+.project-showcase__secondary-video {
+  position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 22px;
-  background: transparent;
+  border-radius: 22px 22px 0 0;
+  background: #05070e;
   box-shadow: none;
 }
 
@@ -423,44 +426,100 @@ h2 {
   object-fit: cover;
   object-position: center 58%;
   border: 0;
-  border-radius: 22px;
+  border-radius: 22px 22px 0 0;
   background: #05070e;
 }
 
-.project-showcase__secondary-video::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.12) 32%, rgba(0, 0, 0, 0.38) 68%, rgba(0, 0, 0, 0.76) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.14) 38%, rgba(0, 0, 0, 0.26) 100%);
-}
-
-.project-showcase__secondary-video-overlay {
-  position: absolute;
-  inset: auto auto 0 0;
-  z-index: 1;
-  display: grid;
-  gap: 10px;
-  width: min(100%, 540px);
-  padding: 0 38px 34px;
-}
-
+.project-showcase__secondary-video-title,
 .project-showcase__secondary-video-subtitle {
+  position: absolute;
+  z-index: 1;
   margin: 0;
-  color: #999;
-  letter-spacing: 3px;
-  font-size: 0.84rem;
-  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
 .project-showcase__secondary-video-title {
-  margin: 0;
-  font-size: clamp(3rem, 6.2vw, 5.3rem);
+  inset: 26px 32px auto auto;
+  max-width: min(42%, 320px);
+  font-size: clamp(2.6rem, 4.2vw, 4.1rem);
   line-height: 0.92;
   font-weight: 800;
+  text-align: right;
+}
+
+.project-showcase__secondary-video-subtitle {
+  inset: auto auto 28px 32px;
+  max-width: min(48%, 360px);
+  font-size: 0.96rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.project-showcase__secondary-panel {
+  display: grid;
+  gap: 22px;
+  padding: 28px 32px 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 0;
+  border-radius: 0 0 22px 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 120px),
+    linear-gradient(180deg, rgba(10, 10, 12, 0.96), #0b0b0f);
+}
+
+.project-showcase__secondary-panel-heading {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.05;
   color: #ffffff;
+}
+
+.project-showcase__secondary-panel-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.project-showcase__secondary-panel-line {
+  margin: 0;
+  color: rgba(224, 229, 242, 0.88);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.project-showcase__secondary-panel-line strong {
+  color: #ffffff;
+}
+
+.project-showcase__secondary-panel-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.project-showcase__secondary-panel-card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.project-showcase__secondary-panel-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: rgba(9, 10, 14, 0.96);
+}
+
+.project-showcase__secondary-panel-card figcaption {
+  padding: 12px 14px 14px;
+  color: rgba(214, 220, 232, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .project-showcase.is-active .project-showcase__details {
@@ -512,19 +571,32 @@ h2 {
   .project-showcase__summary::before { display: none; }
   .project-showcase__body { padding: 22px; }
   .project-showcase__title { font-size: clamp(2.1rem, 12.8vw, 3.3rem); }
-  .project-showcase__secondary-video {
+  .project-showcase__secondary-feature {
     width: 100%;
     margin-top: 0;
   }
   .project-showcase__secondary-video-media {
     aspect-ratio: 16 / 9;
   }
-  .project-showcase__secondary-video-overlay {
-    width: 100%;
-    padding: 0 22px 22px;
-  }
   .project-showcase__secondary-video-title {
-    font-size: clamp(2.35rem, 12vw, 3.6rem);
+    inset: 18px 20px auto auto;
+    max-width: 52%;
+    font-size: clamp(2rem, 9.2vw, 3.1rem);
+  }
+  .project-showcase__secondary-video-subtitle {
+    inset: auto auto 18px 20px;
+    max-width: 70%;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+  }
+  .project-showcase__secondary-panel {
+    padding: 22px;
+  }
+  .project-showcase__secondary-panel-heading {
+    font-size: 1.3rem;
+  }
+  .project-showcase__secondary-panel-media {
+    grid-template-columns: 1fr;
   }
   .project-showcase__details {
     opacity: 1;
