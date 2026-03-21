@@ -408,7 +408,6 @@ h2 {
 .project-showcase__secondary-feature {
   width: min(100%, 996px);
   margin: -8px auto 0;
-  filter: drop-shadow(0 22px 34px rgba(255, 58, 138, 0.12));
 }
 
 .project-showcase__secondary-feature + .project-showcase__secondary-feature {
@@ -418,10 +417,10 @@ h2 {
 .project-showcase__secondary-video {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 58, 138, 0.45);
   border-radius: 22px 22px 0 0;
   background: #000000;
-  box-shadow: none;
+  box-shadow: 0 0 0 1px rgba(255, 58, 138, 0.12), 0 0 18px rgba(255, 58, 138, 0.16);
 }
 
 .project-showcase__secondary-video-media {
@@ -475,10 +474,11 @@ h2 {
   display: grid;
   gap: 22px;
   padding: 28px 32px 34px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 58, 138, 0.45);
   border-top: 0;
   border-radius: 0 0 22px 22px;
   background: #000000;
+  box-shadow: 0 10px 24px rgba(255, 58, 138, 0.1);
 }
 
 .project-showcase__secondary-panel-heading {
@@ -514,8 +514,9 @@ h2 {
   margin: 0;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 58, 138, 0.38);
   background: #000000;
+  box-shadow: 0 0 14px rgba(255, 58, 138, 0.12);
 }
 
 .project-showcase__secondary-panel-image {
