@@ -5,7 +5,11 @@ video: /assets/Necronomicon%20Landscape.mp4
 secondary_video: /assets/Trapped%20Author.mp4
 secondary_video_title: Trapped Author
 secondary_video_subtitle: Erase Archetype Deck
+accent_rgb: 36 73 129
+poster_frame_borderless: true
+hide_summary_intro: true
 role: Designer, Artist,
+role_display: Design &middot; Art
 stage: Production
 timeline: Nov 2025 - Present
 description: PvP card battler inspired by classic horror literature.

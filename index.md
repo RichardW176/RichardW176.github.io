@@ -35,10 +35,13 @@ title: Home
 {% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
 
-  <section class="project-showcase" id="{{ project.title | slugify }}">
+  <section
+    class="project-showcase"
+    id="{{ project.title | slugify }}"
+    {% if project.accent_rgb %}style="--project-accent-rgb: {{ project.accent_rgb }};"{% endif %}>
     <div class="project-showcase__stage">
       <div class="project-showcase__poster-column">
-        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}">
+        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if project.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
           <img
             class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
             src="{{ project.image }}"

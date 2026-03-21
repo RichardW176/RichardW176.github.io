@@ -152,6 +152,7 @@ h2 {
 }
 
 .project-showcase {
+  --project-accent-rgb: 255 58 138;
   display: grid;
   gap: 26px;
 }
@@ -189,6 +190,13 @@ h2 {
   overflow: hidden;
 }
 
+.project-showcase__poster-frame--borderless {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .project-showcase__poster {
   display: block;
   width: 100%;
@@ -203,6 +211,11 @@ h2 {
 .project-showcase__poster-frame--flush .project-showcase__poster {
   border: 0;
   border-radius: inherit;
+}
+
+.project-showcase__poster-frame--borderless .project-showcase__poster {
+  border: 0;
+  border-radius: 26px;
 }
 
 .project-showcase__poster--contain {
@@ -243,9 +256,9 @@ h2 {
   padding: 24px 26px 26px;
   max-width: none;
   border-radius: 26px;
-  border: 1px solid rgba(255, 58, 138, 0.34);
+  border: 1px solid rgb(var(--project-accent-rgb) / 0.34);
   background: linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
-  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08), 0 28px 90px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 10px rgb(var(--project-accent-rgb) / 0.08), 0 28px 90px rgba(0, 0, 0, 0.45);
 }
 
 .project-showcase__summary--with-video::before {
@@ -461,10 +474,10 @@ h2 {
 .project-showcase__secondary-video {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 58, 138, 0.34);
+  border: 1px solid rgb(var(--project-accent-rgb) / 0.34);
   border-radius: 22px 22px 0 0;
   background: #000000;
-  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
+  box-shadow: 0 0 10px rgb(var(--project-accent-rgb) / 0.08);
 }
 
 .project-showcase__secondary-video-media {
@@ -518,11 +531,11 @@ h2 {
   display: grid;
   gap: 22px;
   padding: 28px 32px 34px;
-  border: 1px solid rgba(255, 58, 138, 0.34);
+  border: 1px solid rgb(var(--project-accent-rgb) / 0.34);
   border-top: 0;
   border-radius: 0 0 22px 22px;
   background: #000000;
-  box-shadow: 0 0 10px rgba(255, 58, 138, 0.08);
+  box-shadow: 0 0 10px rgb(var(--project-accent-rgb) / 0.08);
 }
 
 .project-showcase__secondary-panel-heading {
@@ -558,9 +571,9 @@ h2 {
   margin: 0;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 58, 138, 0.3);
+  border: 1px solid rgb(var(--project-accent-rgb) / 0.3);
   background: #000000;
-  box-shadow: 0 0 6px rgba(255, 58, 138, 0.06);
+  box-shadow: 0 0 6px rgb(var(--project-accent-rgb) / 0.06);
 }
 
 .project-showcase__secondary-panel-image {
