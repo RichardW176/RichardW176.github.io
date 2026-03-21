@@ -359,7 +359,7 @@ h2 {
   width: min(100%, 996px);
   margin: -8px auto 0;
   overflow: hidden;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
   background: transparent;
   box-shadow: none;
