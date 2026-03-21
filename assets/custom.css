@@ -246,6 +246,7 @@ h2 {
   padding: 0;
   font-size: clamp(2.18rem, 4.6vw, 3.9rem);
   line-height: 0.95;
+  font-weight: 800;
   color: #ffffff;
 }
 
@@ -338,6 +339,11 @@ h2 {
 .project-showcase__summary--with-video .project-showcase__role,
 .project-showcase__summary--with-video .project-showcase__role strong {
   color: #ffffff;
+}
+
+.project-showcase__summary--with-video .project-showcase__title {
+  font-size: clamp(2.8rem, 6.2vw, 5rem);
+  line-height: 0.9;
 }
 
 .project-showcase__summary--with-video .project-showcase__desc {

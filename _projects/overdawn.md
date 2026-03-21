@@ -6,8 +6,9 @@ secondary_video: /assets/Archangel%20Preview.mp4
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
+hide_summary_intro: true
 order: 1
-role: Lead Narrative Designer, Lead Designer, Artist, Usability Consultant
+role: Narrative . Design . Art . Usability
 stage: Published
 timeline: May 2025 - Feb 2026
 description: 2.5D bullet hell set in a voxelized cyberpunk world.

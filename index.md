@@ -56,8 +56,10 @@ title: Home
         </div>
         {% endif %}
         <div class="project-showcase__summary-content">
+        {% unless project.hide_summary_intro %}
         <p class="project-showcase__eyebrow">Overview</p>
         <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
+        {% endunless %}
         <h2 class="project-showcase__title">{{ project.title }}</h2>
         <p class="project-showcase__role">
           {% assign project_roles = project.role | split: ", " %}
