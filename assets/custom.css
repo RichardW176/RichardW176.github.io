@@ -410,6 +410,10 @@ h2 {
   margin: -8px auto 0;
 }
 
+.project-showcase__secondary-feature + .project-showcase__secondary-feature {
+  margin-top: 26px;
+}
+
 .project-showcase__secondary-video {
   position: relative;
   overflow: hidden;
@@ -430,31 +434,30 @@ h2 {
   background: #05070e;
 }
 
-.project-showcase__secondary-video-title,
-.project-showcase__secondary-video-subtitle {
+.project-showcase__secondary-video-copy {
   position: absolute;
+  inset: 26px auto auto 32px;
   z-index: 1;
-  margin: 0;
-  color: #ffffff;
+  display: grid;
+  gap: 10px;
+  max-width: min(52%, 420px);
   text-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
 .project-showcase__secondary-video-title {
-  inset: 26px 32px auto auto;
-  max-width: min(42%, 320px);
-  font-size: clamp(2.6rem, 4.2vw, 4.1rem);
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(3rem, 4.8vw, 4.8rem);
   line-height: 0.92;
   font-weight: 800;
-  text-align: right;
 }
 
 .project-showcase__secondary-video-subtitle {
-  inset: auto auto 28px 32px;
-  max-width: min(48%, 360px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.96rem;
   font-weight: 500;
   letter-spacing: 0.16em;
-  pointer-events: none;
   text-transform: uppercase;
 }
 
@@ -578,14 +581,15 @@ h2 {
   .project-showcase__secondary-video-media {
     aspect-ratio: 16 / 9;
   }
+  .project-showcase__secondary-video-copy {
+    inset: 18px auto auto 20px;
+    max-width: 68%;
+    gap: 8px;
+  }
   .project-showcase__secondary-video-title {
-    inset: 18px 20px auto auto;
-    max-width: 52%;
-    font-size: clamp(2rem, 9.2vw, 3.1rem);
+    font-size: clamp(2.35rem, 10vw, 3.6rem);
   }
   .project-showcase__secondary-video-subtitle {
-    inset: auto auto 18px 20px;
-    max-width: 70%;
     font-size: 0.8rem;
     letter-spacing: 0.12em;
   }

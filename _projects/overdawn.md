@@ -19,6 +19,23 @@ secondary_feature_media:
   - file: /assets/images/overdawn-archangel.jpg
     alt: Overdawn screenshot of the Archangel encounter
     description: Archangel encounter still
+tertiary_video: /assets/Rev%20Preview.mp4
+tertiary_video_title: Rev
+tertiary_video_subtitle: Final Boss
+tertiary_feature_heading: Applicable Skills
+tertiary_feature_items:
+  - label: Boss Design
+    text: Led boss tuning, attack readability, and pacing for the final Rev encounter.
+  - label: Narrative Design
+    text: Framed Rev as the capstone fight and tied the encounter beats back into the broader story arc.
+  - label: Usability
+    text: Improved encounter clarity through telegraph timing, phase readability, and player feedback.
+  - label: Art Direction
+    text: Supported the visual direction of the battle space and presentation for the finale.
+tertiary_feature_media:
+  - file: /assets/images/overdawn-gangster-hideout.jpg
+    alt: Overdawn screenshot related to the Rev encounter
+    description: Rev encounter still
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
