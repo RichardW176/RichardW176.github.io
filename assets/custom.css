@@ -419,7 +419,7 @@ h2 {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px 22px 0 0;
-  background: #05070e;
+  background: #000000;
   box-shadow: none;
 }
 
@@ -431,7 +431,16 @@ h2 {
   object-position: center 58%;
   border: 0;
   border-radius: 22px 22px 0 0;
-  background: #05070e;
+  background: #000000;
+}
+
+.project-showcase__secondary-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.76) 16%, rgba(0, 0, 0, 0.34) 34%, rgba(0, 0, 0, 0) 52%);
+  clip-path: polygon(0 0, 60% 0, 0 74%);
 }
 
 .project-showcase__secondary-video-copy {
@@ -468,9 +477,7 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 0;
   border-radius: 0 0 22px 22px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 120px),
-    linear-gradient(180deg, rgba(10, 10, 12, 0.96), #0b0b0f);
+  background: #000000;
 }
 
 .project-showcase__secondary-panel-heading {
@@ -507,7 +514,7 @@ h2 {
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  background: #000000;
 }
 
 .project-showcase__secondary-panel-image {
@@ -515,7 +522,7 @@ h2 {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  background: rgba(9, 10, 14, 0.96);
+  background: #000000;
 }
 
 .project-showcase__secondary-panel-card figcaption {

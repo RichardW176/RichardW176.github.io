@@ -15,10 +15,6 @@ secondary_feature_items:
     text: Created voxel art for the boss and environment, plus particles and cutscene engineering.
   - label: Narrative Design
     text: Wrote dialogue sequencing and character framing for the Archangel ending.
-secondary_feature_media:
-  - file: /assets/images/overdawn-archangel.jpg
-    alt: Overdawn screenshot of the Archangel encounter
-    description: Archangel encounter still
 tertiary_video: /assets/Rev%20Preview.mp4
 tertiary_video_title: Rev
 tertiary_video_subtitle: Final Boss
@@ -32,10 +28,6 @@ tertiary_feature_items:
     text: Improved encounter clarity through telegraph timing, phase readability, and player feedback.
   - label: Art Direction
     text: Supported the visual direction of the battle space and presentation for the finale.
-tertiary_feature_media:
-  - file: /assets/images/overdawn-gangster-hideout.jpg
-    alt: Overdawn screenshot related to the Rev encounter
-    description: Rev encounter still
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
