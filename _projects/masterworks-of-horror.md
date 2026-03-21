@@ -1,6 +1,10 @@
 ---
 title: Masterworks of Horror
 image: /assets/images/GDC Banner Wide.png
+video: /assets/Necronomicon%20Landscape.mp4
+secondary_video: /assets/Trapped%20Author.mp4
+secondary_video_title: Trapped Author
+secondary_video_subtitle: Erase Archetype Deck
 role: Designer, Artist,
 stage: Production
 timeline: Nov 2025 - Present
