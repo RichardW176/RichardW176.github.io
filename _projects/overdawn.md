@@ -8,13 +8,13 @@ secondary_video_subtitle: Secret Ending Boss
 secondary_feature_heading: Applicable Skills
 secondary_feature_items:
   - label: Combat Design
-    text: Brainstormed abilities, balanced attack patterns, and tuned the secret-ending boss flow.
+    text: Ability documentation / implementation, behavior tree, balancing
   - label: Level Design
-    text: Built out the arena blockout, encounter readability, and environmental set dressing.
-  - label: Art
-    text: Created voxel art for the boss and environment, plus particles and cutscene engineering.
+    text: Level blockout, set dressing, sequence engineering
   - label: Narrative Design
-    text: Wrote dialogue sequencing and character framing for the Archangel ending.
+    text: Character documentation, yarnspinner dialogue
+  - label: Art
+    text: Boss model, voxelized props, cinematics engineering, post processing
 tertiary_video: /assets/Rev%20Preview.mp4
 tertiary_video_title: Rev
 tertiary_video_subtitle: Final Boss
@@ -22,39 +22,27 @@ tertiary_video_position: center 66%
 tertiary_feature_heading: Applicable Skills
 tertiary_feature_items:
   - label: Boss Design
-    text: Led boss tuning, attack readability, and pacing for the final Rev encounter.
+    text: Ability documentation / implementation, behavior tree, balancing, enemy design
   - label: Narrative Design
-    text: Framed Rev as the capstone fight and tied the encounter beats back into the broader story arc.
-  - label: Usability
-    text: Improved encounter clarity through telegraph timing, phase readability, and player feedback.
-  - label: Art Direction
-    text: Supported the visual direction of the battle space and presentation for the finale.
+    text: Character documentation, yarnspinner dialogue
+  - label: Level Design
+    text: Level documentation / blockout, set dressing, post processing
 quaternary_video: /assets/Slums%20Preview.mp4
 quaternary_video_title: Andrean Slums
 quaternary_video_subtitle: Explorable Region
 quaternary_feature_heading: Applicable Skills
 quaternary_feature_items:
   - label: Level Design
-    text: Built out the layout, traversal rhythm, and combat flow across the explorable slums region.
-  - label: Environment Design
-    text: Shaped the spatial identity of the area through set dressing, landmarks, and encounter framing.
-  - label: Narrative Design
-    text: Supported worldbuilding and player progression through the region's sequencing and tone.
-  - label: Usability
-    text: Tuned navigation readability and player guidance across the broader overworld space.
+    text: Level blockout, set dressing, post processing
 quinary_video: /assets/Gangster%20Hideout%20Preview.mp4
 quinary_video_title: Gangster Hideout
 quinary_video_subtitle: Combat Area
 quinary_feature_heading: Applicable Skills
 quinary_feature_items:
   - label: Combat Design
-    text: Designed and tuned this combat space for pressure, readability, and encounter pacing.
-  - label: Encounter Design
-    text: Structured enemy placement, arena flow, and threat escalation inside the hideout.
-  - label: Environment Design
-    text: Developed the mood, layout, and visual storytelling of the hideout interior.
-  - label: Usability
-    text: Refined player feedback and spatial clarity to support fast, readable combat.
+    text: Enemy design
+  - label: Level Design
+    text: Level blockout, set dressing, post processing
 poster_fit: cover
 poster_position: top center
 poster_frame_flush: true
