@@ -215,7 +215,7 @@
   }
 
   function getTemplateHtml(link) {
-    const templateId = link.dataset.projectTemplate;
+    const templateId = link.dataset.projectTemplate || link.dataset.modalTemplate;
     if (!templateId) {
       return '';
     }
@@ -227,6 +227,18 @@
   document.querySelectorAll('.project-card a').forEach(link => {
     link.addEventListener('click', (e) => {
       const templateHtml = getTemplateHtml(link);
+      if (!templateHtml) {
+        return;
+      }
+
+      e.preventDefault();
+      openProjectModal(templateHtml);
+    });
+  });
+
+  document.querySelectorAll('[data-modal-template]').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      const templateHtml = getTemplateHtml(trigger);
       if (!templateHtml) {
         return;
       }

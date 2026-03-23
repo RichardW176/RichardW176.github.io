@@ -31,7 +31,13 @@ title: Home
 <section class="portfolio-panel" id="video-games">
   <nav class="portfolio-nav" aria-label="Portfolio sections">
     <a class="portfolio-nav__link portfolio-nav__link--active" href="#video-games" aria-current="page">Video Games</a>
-    <a class="portfolio-nav__link" href="#writing-samples">Writing Samples</a>
+    <button
+      class="portfolio-nav__link"
+      type="button"
+      data-modal-template="writing-samples-template"
+      aria-haspopup="dialog">
+      Writing Samples
+    </button>
   </nav>
 
 <div class="project-sequence">
@@ -469,15 +475,14 @@ title: Home
 </div>
 </section>
 
-<section class="portfolio-panel portfolio-panel--writing" id="writing-samples">
-  <nav class="portfolio-nav" aria-label="Portfolio sections">
-    <a class="portfolio-nav__link" href="#video-games">Video Games</a>
-    <a class="portfolio-nav__link portfolio-nav__link--active" href="#writing-samples" aria-current="page">Writing Samples</a>
-  </nav>
-
+<template id="writing-samples-template">
+  <div class="project-page-inner writing-modal-page">
+    <p class="writing-modal-page__eyebrow">Writing Samples</p>
+    <h1 id="project-modal-title">Writing Samples</h1>
+    <p class="writing-modal-page__intro">A prose collection that opens over the games page, so readers can explore writing without leaving the portfolio.</p>
   {% assign sorted_prose = site.prose | sort: "order" %}
   {% if sorted_prose.size > 0 %}
-  <div class="writing-grid">
+  <div class="writing-grid writing-grid--modal">
     {% for piece in sorted_prose %}
     <article class="writing-card">
       <p class="writing-card__eyebrow">Writing Sample</p>
@@ -499,6 +504,26 @@ title: Home
   {% else %}
   <p class="writing-empty-state">Add files to <code>_prose</code> to populate this section.</p>
   {% endif %}
-</section>
+  </div>
+</template>
+
+<div class="project-modal" id="project-modal" aria-hidden="true">
+  <div class="project-modal__backdrop" data-modal-close></div>
+  <div class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <button class="project-modal__close" type="button" aria-label="Close overlay" data-modal-close>&times;</button>
+    <div class="project-modal__inner" id="project-modal-inner"></div>
+  </div>
+</div>
+
+<div class="doc-modal" id="doc-modal" aria-hidden="true">
+  <div class="doc-modal__backdrop" data-doc-close></div>
+  <div class="doc-modal__panel" role="dialog" aria-modal="true" aria-labelledby="doc-modal-link">
+    <button class="doc-modal__close" type="button" aria-label="Close document viewer" data-doc-close>&times;</button>
+    <div class="doc-modal__toolbar">
+      <a class="doc-modal__link" id="doc-modal-link" href="#" target="_blank" rel="noopener noreferrer">Open PDF in new tab</a>
+    </div>
+    <iframe class="doc-modal__frame" id="doc-modal-frame" title="Document viewer"></iframe>
+  </div>
+</div>
 
 <script src="/assets/js/project-modal.js" defer></script>

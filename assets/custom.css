@@ -150,10 +150,6 @@ h2 {
   margin: 0 auto;
 }
 
-.portfolio-panel--writing {
-  margin-bottom: 112px;
-}
-
 .portfolio-nav {
   display: flex;
   flex-wrap: wrap;
@@ -171,6 +167,7 @@ h2 {
   border-bottom: 1px solid transparent;
   background: transparent;
   color: #999fab;
+  cursor: pointer;
   text-decoration: none;
   font-size: clamp(1.35rem, 2.6vw, 1.9rem);
   font-weight: 500;
@@ -674,6 +671,12 @@ h2 {
   padding: 0 24px;
 }
 
+.writing-grid--modal {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
 .writing-card {
   display: grid;
   gap: 18px;
@@ -731,6 +734,24 @@ h2 {
   margin: 56px auto 0;
   padding: 0 24px;
   color: rgba(214, 220, 232, 0.76);
+}
+
+.writing-modal-page {
+  gap: 28px;
+}
+
+.writing-modal-page__eyebrow {
+  margin: 0;
+  color: #8d93a2;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.writing-modal-page__intro {
+  margin: -12px 0 0;
+  color: rgba(214, 220, 232, 0.76);
+  max-width: 760px;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -824,14 +845,14 @@ h2 {
     filter: none;
     pointer-events: auto;
   }
-  .portfolio-panel--writing {
-    margin-bottom: 78px;
-  }
   .writing-grid {
     margin-top: 38px;
   }
   .writing-card {
     padding: 22px;
+  }
+  .writing-modal-page {
+    gap: 22px;
   }
 }
 /* =========================
