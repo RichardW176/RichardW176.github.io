@@ -176,22 +176,10 @@ h2 {
   gap: 0;
   width: min(calc(1120px - var(--portfolio-peek)), 100%);
   margin: 52px auto 0;
-  margin-bottom: -1px;
   padding: 0;
   position: relative;
   isolation: isolate;
-  z-index: 4;
-}
-
-.portfolio-nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: #000000;
-  z-index: 1;
+  z-index: 6;
 }
 
 .portfolio-nav__link {
@@ -250,6 +238,19 @@ h2 {
   margin: 0 auto;
   min-height: 720px;
   overflow: visible;
+  isolation: isolate;
+}
+
+.portfolio-stack::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1px;
+  right: 1px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+  z-index: 4;
 }
 
 .portfolio-page {
@@ -337,6 +338,7 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #000000;
   box-shadow: 0 32px 110px rgba(0, 0, 0, 0.42);
+  position: relative;
 }
 
 .portfolio-page__surface--writing {
