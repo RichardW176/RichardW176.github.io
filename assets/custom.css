@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 /* =====================================
    CLEAN DARK PORTFOLIO RESET
@@ -9,7 +9,7 @@
 body {
   background-color: #000000 !important;
   color: #e6e6e6;
-  font-family: "Roboto Flex", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 html {
@@ -33,7 +33,7 @@ label,
 li,
 figcaption,
 blockquote {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 button,
