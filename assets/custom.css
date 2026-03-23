@@ -225,6 +225,7 @@ h2 {
   min-height: 60px;
   padding: 12px 18px 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom-color: transparent;
   border-radius: 18px 18px 0 0;
   background: #000000;
   color: rgba(241, 244, 255, 0.78);
@@ -256,7 +257,7 @@ h2 {
 .portfolio-nav__link--active {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.3);
-  border-bottom-color: #000000;
+  border-bottom-color: transparent;
   margin-bottom: -1px;
   opacity: 1;
   background: #000000;
