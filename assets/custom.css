@@ -16,6 +16,26 @@ html {
   scroll-behavior: smooth;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea,
+select,
+label,
+li,
+figcaption,
+blockquote {
+  font-family: "Roboto Flex", sans-serif;
+}
+
 button,
 input,
 textarea,
@@ -271,16 +291,16 @@ h2 {
   border-radius: 0 32px 32px 32px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 180px),
-    linear-gradient(180deg, rgba(46, 47, 52, 0.98), rgba(28, 28, 31, 0.99));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 180px),
+    linear-gradient(180deg, rgba(12, 12, 14, 0.98), rgba(0, 0, 0, 0.99));
   box-shadow: 0 32px 110px rgba(0, 0, 0, 0.42);
 }
 
 .portfolio-page__surface--writing {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 180px),
-    linear-gradient(180deg, rgba(140, 80, 78, 0.98), rgba(111, 57, 57, 0.99));
-  border-color: rgba(255, 224, 224, 0.14);
+    linear-gradient(180deg, rgba(12, 12, 14, 0.98), rgba(0, 0, 0, 0.99));
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .portfolio-page__header {
@@ -1375,7 +1395,7 @@ h2 {
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: Consolas, "Courier New", monospace;
+  font-family: inherit;
   font-size: 0.92rem;
   line-height: 1.7;
   color: #e6e6e6;
