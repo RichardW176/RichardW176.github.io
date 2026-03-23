@@ -178,6 +178,7 @@
     const stack = switcher.querySelector('.portfolio-stack');
     const tabs = Array.from(switcher.querySelectorAll('[data-portfolio-tab]'));
     const pages = Array.from(switcher.querySelectorAll('[data-portfolio-page]'));
+    let transitionTimer = null;
 
     if (!stack || !tabs.length || !pages.length) {
       return;
@@ -202,7 +203,28 @@
         return;
       }
 
+      const previousActive = pages.find((page) => page.classList.contains('is-active'));
+      const isSwitching = Boolean(previousActive && previousActive.dataset.portfolioPage !== pageId);
+
       activePageId = pageId;
+
+      if (transitionTimer) {
+        window.clearTimeout(transitionTimer);
+        transitionTimer = null;
+      }
+
+      stack.classList.remove('is-transitioning');
+      pages.forEach((page) => page.classList.remove('was-active'));
+
+      if (isSwitching && previousActive) {
+        stack.classList.add('is-transitioning');
+        previousActive.classList.add('was-active');
+        transitionTimer = window.setTimeout(() => {
+          stack.classList.remove('is-transitioning');
+          previousActive.classList.remove('was-active');
+          transitionTimer = null;
+        }, 560);
+      }
 
       tabs.forEach((tab) => {
         const isActive = tab.dataset.portfolioTab === pageId;
@@ -213,8 +235,7 @@
       pages.forEach((page) => {
         const isActive = page.dataset.portfolioPage === pageId;
         page.classList.toggle('is-active', isActive);
-        page.classList.toggle('is-peek-left', !isActive && pageId === 'writing-samples');
-        page.classList.toggle('is-peek-right', !isActive && pageId === 'video-games');
+        page.classList.toggle('is-underlay', !isActive);
         page.setAttribute('aria-hidden', isActive ? 'false' : 'true');
       });
 
