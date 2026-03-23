@@ -55,11 +55,6 @@ title: Home
       data-portfolio-page="video-games"
       aria-hidden="false">
       <div class="portfolio-page__surface">
-        <header class="portfolio-page__header">
-          <p class="portfolio-page__eyebrow">Selected Work</p>
-          <h2 class="portfolio-page__title">Video Games</h2>
-        </header>
-
 <div class="project-sequence">
 {% assign sorted_projects = site.projects | sort: "order" %}
 {% for project in sorted_projects %}
@@ -88,7 +83,6 @@ title: Home
             loop
             muted
             playsinline
-            preload="metadata"
             aria-label="{{ project.title }} preview video">
             {% if project.video_sources %}
               {% for video_source in project.video_sources %}
@@ -153,7 +147,6 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
           aria-label="{{ project.title }} secondary preview video">
           <source src="{{ project.secondary_video }}" type="video/mp4">
         </video>
@@ -209,7 +202,6 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
           {% if project.tertiary_video_position %}style="object-position: {{ project.tertiary_video_position }};"{% endif %}
           aria-label="{{ project.title }} tertiary preview video">
           <source src="{{ project.tertiary_video }}" type="video/mp4">
@@ -266,7 +258,6 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
           {% if project.quinary_video_position %}style="object-position: {{ project.quinary_video_position }};"{% endif %}
           aria-label="{{ project.title }} quinary preview video">
           <source src="{{ project.quinary_video }}" type="video/mp4">
@@ -323,7 +314,6 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
           {% if project.quaternary_video_position %}style="object-position: {{ project.quaternary_video_position }};"{% endif %}
           aria-label="{{ project.title }} quaternary preview video">
           <source src="{{ project.quaternary_video }}" type="video/mp4">
@@ -502,12 +492,6 @@ title: Home
       data-portfolio-page="writing-samples"
       aria-hidden="true">
       <div class="portfolio-page__surface portfolio-page__surface--writing">
-        <header class="portfolio-page__header">
-          <p class="portfolio-page__eyebrow">Prose Collection</p>
-          <h2 class="portfolio-page__title">Writing Samples</h2>
-          <p class="portfolio-page__intro">Fiction, scripts, and narrative work collected in the same layered showcase.</p>
-        </header>
-
   {% assign sorted_prose = site.prose | sort: "order" %}
   {% if sorted_prose.size > 0 %}
   <div class="writing-grid">
