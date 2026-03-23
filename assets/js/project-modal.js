@@ -223,7 +223,7 @@
           stack.classList.remove('is-transitioning');
           previousActive.classList.remove('was-active');
           transitionTimer = null;
-        }, 560);
+        }, 440);
       }
 
       tabs.forEach((tab) => {
