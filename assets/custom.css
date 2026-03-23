@@ -177,11 +177,25 @@ h2 {
   gap: 0;
   width: min(calc(1120px - var(--portfolio-peek)), 100%);
   margin: 52px auto 0;
-  padding: 0;
+  padding: 12px 0 0;
   position: sticky;
-  top: 14px;
+  top: 0;
   isolation: isolate;
   z-index: 20;
+}
+
+.portfolio-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .portfolio-nav__link {
@@ -233,11 +247,22 @@ h2 {
 .portfolio-nav__link--active::after {
   content: "";
   position: absolute;
-  left: 1px;
+  left: 0;
   right: 1px;
   bottom: -4px;
   height: 6px;
   background: #000000;
+  pointer-events: none;
+}
+
+.portfolio-nav__link--active::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  bottom: -4px;
+  width: 2px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.18);
   pointer-events: none;
 }
 
