@@ -188,11 +188,18 @@ h2 {
   content: "";
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: -32px;
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  background: #000000;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 58%,
+    rgba(0, 0, 0, 0.92) 74%,
+    rgba(0, 0, 0, 0.64) 88%,
+    rgba(0, 0, 0, 0) 100%
+  );
   pointer-events: none;
   z-index: -1;
 }
