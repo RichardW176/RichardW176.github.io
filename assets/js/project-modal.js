@@ -176,11 +176,12 @@
 
   document.querySelectorAll('[data-portfolio-switcher]').forEach((switcher) => {
     const stack = switcher.querySelector('.portfolio-stack');
+    const nav = switcher.querySelector('.portfolio-nav');
     const tabs = Array.from(switcher.querySelectorAll('[data-portfolio-tab]'));
     const pages = Array.from(switcher.querySelectorAll('[data-portfolio-page]'));
     let transitionTimer = null;
 
-    if (!stack || !tabs.length || !pages.length) {
+    if (!stack || !nav || !tabs.length || !pages.length) {
       return;
     }
 
@@ -196,6 +197,21 @@
 
       const surface = activePage.querySelector('.portfolio-page__surface') || activePage;
       stack.style.height = `${surface.scrollHeight}px`;
+    };
+
+    const syncOutlineGap = () => {
+      const activeTab = tabs.find((tab) => tab.dataset.portfolioTab === activePageId);
+      if (!activeTab) {
+        return;
+      }
+
+      const navRect = nav.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      const left = Math.max(0, tabRect.left - navRect.left);
+      const right = Math.max(left, tabRect.right - navRect.left);
+
+      switcher.style.setProperty('--portfolio-outline-left', `${left}px`);
+      switcher.style.setProperty('--portfolio-outline-right', `${right}px`);
     };
 
     const applyActivePage = (pageId) => {
@@ -241,7 +257,10 @@
         hydrateVisibleVideos(activePage);
       }
 
-      window.requestAnimationFrame(syncStackHeight);
+      window.requestAnimationFrame(() => {
+        syncOutlineGap();
+        syncStackHeight();
+      });
     };
 
     tabs.forEach((tab) => {
@@ -261,7 +280,10 @@
     });
 
     applyActivePage(activePageId);
-    window.addEventListener('resize', syncStackHeight);
+    window.addEventListener('resize', () => {
+      syncOutlineGap();
+      syncStackHeight();
+    });
   });
 
   if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {
