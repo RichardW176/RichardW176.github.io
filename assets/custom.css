@@ -223,7 +223,7 @@ h2 {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.3);
   border-bottom-color: #000000;
-  transform: translateY(1px);
+  margin-bottom: -1px;
   opacity: 1;
   background: #000000;
   z-index: 3;
