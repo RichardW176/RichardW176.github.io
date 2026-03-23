@@ -986,6 +986,9 @@ h2 {
     height: auto !important;
     width: 100%;
   }
+  .portfolio-stack::before {
+    display: none;
+  }
   .portfolio-page,
   .portfolio-page.is-active,
   .portfolio-page.is-underlay,
