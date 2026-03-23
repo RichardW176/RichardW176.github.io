@@ -18,11 +18,8 @@ title: Home
   <div class="hero-inner">
     <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
     <div class="hero-name-stack">
-      <h1 class="hero-title">Ruiqian<br>Wang</h1>
+      <h1 class="hero-title">Richard<br>Wang</h1>
     </div>
-    <p class="hero-tagline">
-      Hi! I'm Ruiqian (Richard), a creative passionate about narrative, boss design, and screenwriting.
-    </p>
   </div>
 </section>
 
