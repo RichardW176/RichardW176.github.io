@@ -242,7 +242,7 @@ h2 {
 
 .portfolio-nav__link--active {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.28);
   border-bottom-color: transparent;
   margin-bottom: -1px;
   opacity: 1;
@@ -307,7 +307,7 @@ h2 {
 
 .portfolio-page.is-active::before {
   opacity: 1;
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .portfolio-page.is-underlay {
@@ -360,9 +360,9 @@ h2 {
   opacity: 0;
   padding: 1px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.22) 18%, rgba(255, 255, 255, 0.08) 42%, rgba(255, 255, 255, 0) 100%) top / 100% 84px no-repeat,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.14) 26%, rgba(255, 255, 255, 0) 100%) left top / 1px 90px no-repeat,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.14) 26%, rgba(255, 255, 255, 0) 100%) right top / 1px 90px no-repeat;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.28) 18%, rgba(255, 255, 255, 0.16) 42%, rgba(255, 255, 255, 0) 100%) top / 100% 84px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.16) 28%, rgba(255, 255, 255, 0) 100%) left top / 1px 90px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.16) 28%, rgba(255, 255, 255, 0) 100%) right top / 1px 90px no-repeat;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
