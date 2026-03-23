@@ -8,6 +8,11 @@ defaults:
       type: projects
     values:
       layout: project
+  - scope:
+      path: ""
+      type: prose
+    values:
+      layout: project
 
 collections:
   projects:

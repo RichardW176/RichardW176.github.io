@@ -28,7 +28,11 @@ title: Home
 
 <link rel="stylesheet" href="/assets/custom.css">
 
-## Video Games
+<section class="portfolio-panel" id="video-games">
+  <nav class="portfolio-nav" aria-label="Portfolio sections">
+    <a class="portfolio-nav__link portfolio-nav__link--active" href="#video-games" aria-current="page">Video Games</a>
+    <a class="portfolio-nav__link" href="#writing-samples">Writing Samples</a>
+  </nav>
 
 <div class="project-sequence">
 {% assign sorted_projects = site.projects | sort: "order" %}
@@ -463,5 +467,38 @@ title: Home
 
 {% endfor %}
 </div>
+</section>
+
+<section class="portfolio-panel portfolio-panel--writing" id="writing-samples">
+  <nav class="portfolio-nav" aria-label="Portfolio sections">
+    <a class="portfolio-nav__link" href="#video-games">Video Games</a>
+    <a class="portfolio-nav__link portfolio-nav__link--active" href="#writing-samples" aria-current="page">Writing Samples</a>
+  </nav>
+
+  {% assign sorted_prose = site.prose | sort: "order" %}
+  {% if sorted_prose.size > 0 %}
+  <div class="writing-grid">
+    {% for piece in sorted_prose %}
+    <article class="writing-card">
+      <p class="writing-card__eyebrow">Writing Sample</p>
+      <h3 class="writing-card__title">{{ piece.title }}</h3>
+      <p class="writing-card__summary">
+        {% if piece.description %}
+          {{ piece.description }}
+        {% else %}
+          {{ piece.excerpt | strip_html | strip_newlines | truncate: 220 }}
+        {% endif %}
+      </p>
+      <div class="writing-card__content">
+        {{ piece.content | markdownify }}
+      </div>
+      <a class="writing-card__link" href="{{ piece.url }}">Open Sample</a>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="writing-empty-state">Add files to <code>_prose</code> to populate this section.</p>
+  {% endif %}
+</section>
 
 <script src="/assets/js/project-modal.js" defer></script>

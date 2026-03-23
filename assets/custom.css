@@ -12,6 +12,10 @@ body {
   font-family: "Roboto Flex", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 button,
 input,
 textarea,
@@ -139,6 +143,70 @@ h2 {
   margin: 52px auto 26px auto;
   padding: 0 24px;
   font-size: 1.9rem;
+}
+
+.portfolio-panel {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.portfolio-panel--writing {
+  margin-bottom: 112px;
+}
+
+.portfolio-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: min(1300px, calc(100% - 48px));
+  margin: 52px auto 0;
+  padding: 0 24px;
+}
+
+.portfolio-nav__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0 10px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: #999fab;
+  text-decoration: none;
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.05;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.writing-card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f5f5f7;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.portfolio-nav__link:hover,
+.writing-card__link:hover {
+  color: #ffffff;
+}
+
+.writing-card__link:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.portfolio-nav__link--active {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.34);
 }
 
 /* ===== PROJECT SEQUENCE ===== */
@@ -598,6 +666,73 @@ h2 {
   pointer-events: auto;
 }
 
+.writing-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 1300px;
+  margin: 56px auto 0;
+  padding: 0 24px;
+}
+
+.writing-card {
+  display: grid;
+  gap: 18px;
+  padding: 28px 30px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 140px),
+    linear-gradient(180deg, rgba(10, 10, 12, 0.96), #0b0b0f);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
+}
+
+.writing-card__eyebrow {
+  margin: 0;
+  color: #8d93a2;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.writing-card__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.95;
+  color: #ffffff;
+}
+
+.writing-card__summary {
+  margin: 0;
+  color: rgba(214, 220, 232, 0.76);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.writing-card__content {
+  display: grid;
+  gap: 14px;
+}
+
+.writing-card__content > * {
+  max-width: none;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.writing-card__content p,
+.writing-card__content li {
+  color: #cfcfd6;
+  line-height: 1.7;
+}
+
+.writing-empty-state {
+  max-width: 1300px;
+  margin: 56px auto 0;
+  padding: 0 24px;
+  color: rgba(214, 220, 232, 0.76);
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1100px) {
@@ -621,6 +756,9 @@ h2 {
   }
   .hero-media__video {
     object-position: center 34%;
+  }
+  .portfolio-nav {
+    width: calc(100% - 48px);
   }
   .project-sequence { gap: 60px; margin: 38px auto 78px; }
   .project-showcase__stage { grid-template-columns: 1fr; gap: 24px; }
@@ -685,6 +823,15 @@ h2 {
     transform: none;
     filter: none;
     pointer-events: auto;
+  }
+  .portfolio-panel--writing {
+    margin-bottom: 78px;
+  }
+  .writing-grid {
+    margin-top: 38px;
+  }
+  .writing-card {
+    padding: 22px;
   }
 }
 /* =========================
