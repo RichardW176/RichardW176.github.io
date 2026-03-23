@@ -28,17 +28,37 @@ title: Home
 
 <link rel="stylesheet" href="/assets/custom.css">
 
-<section class="portfolio-panel" id="video-games">
+<section class="portfolio-panel portfolio-switcher" id="portfolio-showcase" data-portfolio-switcher>
   <nav class="portfolio-nav" aria-label="Portfolio sections">
-    <a class="portfolio-nav__link portfolio-nav__link--active" href="#video-games" aria-current="page">Video Games</a>
+    <button
+      class="portfolio-nav__link portfolio-nav__link--active"
+      type="button"
+      data-portfolio-tab="video-games"
+      aria-selected="true"
+      aria-controls="portfolio-page-video">
+      Video Games
+    </button>
     <button
       class="portfolio-nav__link"
       type="button"
-      data-modal-template="writing-samples-template"
-      aria-haspopup="dialog">
+      data-portfolio-tab="writing-samples"
+      aria-selected="false"
+      aria-controls="portfolio-page-writing">
       Writing Samples
     </button>
   </nav>
+
+  <div class="portfolio-stack">
+    <section
+      class="portfolio-page portfolio-page--video is-active"
+      id="portfolio-page-video"
+      data-portfolio-page="video-games"
+      aria-hidden="false">
+      <div class="portfolio-page__surface">
+        <header class="portfolio-page__header">
+          <p class="portfolio-page__eyebrow">Selected Work</p>
+          <h2 class="portfolio-page__title">Video Games</h2>
+        </header>
 
 <div class="project-sequence">
 {% assign sorted_projects = site.projects | sort: "order" %}
@@ -473,16 +493,24 @@ title: Home
 
 {% endfor %}
 </div>
-</section>
+      </div>
+    </section>
 
-<template id="writing-samples-template">
-  <div class="project-page-inner writing-modal-page">
-    <p class="writing-modal-page__eyebrow">Writing Samples</p>
-    <h1 id="project-modal-title">Writing Samples</h1>
-    <p class="writing-modal-page__intro">A prose collection that opens over the games page, so readers can explore writing without leaving the portfolio.</p>
+    <section
+      class="portfolio-page portfolio-page--writing is-peek-right"
+      id="portfolio-page-writing"
+      data-portfolio-page="writing-samples"
+      aria-hidden="true">
+      <div class="portfolio-page__surface portfolio-page__surface--writing">
+        <header class="portfolio-page__header">
+          <p class="portfolio-page__eyebrow">Prose Collection</p>
+          <h2 class="portfolio-page__title">Writing Samples</h2>
+          <p class="portfolio-page__intro">Fiction, scripts, and narrative work collected in the same layered showcase.</p>
+        </header>
+
   {% assign sorted_prose = site.prose | sort: "order" %}
   {% if sorted_prose.size > 0 %}
-  <div class="writing-grid writing-grid--modal">
+  <div class="writing-grid">
     {% for piece in sorted_prose %}
     <article class="writing-card">
       <p class="writing-card__eyebrow">Writing Sample</p>
@@ -504,8 +532,10 @@ title: Home
   {% else %}
   <p class="writing-empty-state">Add files to <code>_prose</code> to populate this section.</p>
   {% endif %}
+      </div>
+    </section>
   </div>
-</template>
+</section>
 
 <div class="project-modal" id="project-modal" aria-hidden="true">
   <div class="project-modal__backdrop" data-modal-close></div>

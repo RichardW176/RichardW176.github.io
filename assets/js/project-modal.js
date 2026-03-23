@@ -174,6 +174,78 @@
     });
   }
 
+  document.querySelectorAll('[data-portfolio-switcher]').forEach((switcher) => {
+    const stack = switcher.querySelector('.portfolio-stack');
+    const tabs = Array.from(switcher.querySelectorAll('[data-portfolio-tab]'));
+    const pages = Array.from(switcher.querySelectorAll('[data-portfolio-page]'));
+
+    if (!stack || !tabs.length || !pages.length) {
+      return;
+    }
+
+    let activePageId = tabs.find((tab) => tab.classList.contains('portfolio-nav__link--active'))?.dataset.portfolioTab
+      || pages[0]?.dataset.portfolioPage
+      || '';
+
+    const syncStackHeight = () => {
+      const activePage = pages.find((page) => page.dataset.portfolioPage === activePageId);
+      if (!activePage) {
+        return;
+      }
+
+      const surface = activePage.querySelector('.portfolio-page__surface') || activePage;
+      stack.style.height = `${surface.scrollHeight}px`;
+    };
+
+    const applyActivePage = (pageId) => {
+      if (!pageId) {
+        return;
+      }
+
+      activePageId = pageId;
+
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.portfolioTab === pageId;
+        tab.classList.toggle('portfolio-nav__link--active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      pages.forEach((page) => {
+        const isActive = page.dataset.portfolioPage === pageId;
+        page.classList.toggle('is-active', isActive);
+        page.classList.toggle('is-peek-left', !isActive && pageId === 'writing-samples');
+        page.classList.toggle('is-peek-right', !isActive && pageId === 'video-games');
+        page.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      const activePage = pages.find((page) => page.dataset.portfolioPage === pageId);
+      if (activePage) {
+        hydrateVisibleVideos(activePage);
+      }
+
+      window.requestAnimationFrame(syncStackHeight);
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        applyActivePage(tab.dataset.portfolioTab);
+      });
+    });
+
+    switcher.querySelectorAll('img, video').forEach((media) => {
+      if (media.dataset.portfolioResizeBound === 'true') {
+        return;
+      }
+
+      media.dataset.portfolioResizeBound = 'true';
+      media.addEventListener('load', syncStackHeight);
+      media.addEventListener('loadedmetadata', syncStackHeight);
+    });
+
+    applyActivePage(activePageId);
+    window.addEventListener('resize', syncStackHeight);
+  });
+
   if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {
     return;
   }
