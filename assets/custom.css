@@ -178,9 +178,10 @@ h2 {
   width: min(calc(1120px - var(--portfolio-peek)), 100%);
   margin: 52px auto 0;
   padding: 0;
-  position: relative;
+  position: sticky;
+  top: 14px;
   isolation: isolate;
-  z-index: 6;
+  z-index: 20;
 }
 
 .portfolio-nav__link {
