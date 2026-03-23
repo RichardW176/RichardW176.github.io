@@ -213,18 +213,7 @@
         transitionTimer = null;
       }
 
-      stack.classList.remove('is-transitioning');
-      pages.forEach((page) => page.classList.remove('was-active'));
-
-      if (isSwitching && previousActive) {
-        stack.classList.add('is-transitioning');
-        previousActive.classList.add('was-active');
-        transitionTimer = window.setTimeout(() => {
-          stack.classList.remove('is-transitioning');
-          previousActive.classList.remove('was-active');
-          transitionTimer = null;
-        }, 440);
-      }
+      pages.forEach((page) => page.classList.remove('is-entering'));
 
       tabs.forEach((tab) => {
         const isActive = tab.dataset.portfolioTab === pageId;
@@ -241,6 +230,14 @@
 
       const activePage = pages.find((page) => page.dataset.portfolioPage === pageId);
       if (activePage) {
+        if (isSwitching) {
+          activePage.classList.add('is-entering');
+          transitionTimer = window.setTimeout(() => {
+            activePage.classList.remove('is-entering');
+            transitionTimer = null;
+          }, 380);
+        }
+
         hydrateVisibleVideos(activePage);
       }
 

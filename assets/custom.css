@@ -226,8 +226,6 @@ h2 {
 
 .portfolio-switcher {
   --portfolio-peek: clamp(22px, 3vw, 42px);
-  --portfolio-stack-drop: 12px;
-  --portfolio-tilt: -0.8deg;
 }
 
 .portfolio-stack {
@@ -243,7 +241,7 @@ h2 {
   inset: 0;
   transform-origin: center center;
   will-change: transform, opacity;
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease, filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, filter 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portfolio-page::after {
@@ -282,23 +280,11 @@ h2 {
 
 .portfolio-page.is-underlay {
   z-index: 1;
-  opacity: 0.96;
+  opacity: 0.92;
   pointer-events: none;
   overflow: hidden;
-  transform: translate(var(--portfolio-peek), var(--portfolio-stack-drop)) rotate(var(--portfolio-tilt)) scale(0.992);
+  transform: translate(var(--portfolio-peek), 0) scale(0.996);
   filter: brightness(0.9);
-}
-
-.portfolio-page.was-active {
-  z-index: 4;
-  opacity: 1;
-  overflow: visible;
-  pointer-events: none;
-  animation: portfolio-card-flip-out 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.portfolio-page.was-active .portfolio-page__surface > * {
-  opacity: 1;
 }
 
 .portfolio-page.is-underlay::before {
@@ -316,11 +302,11 @@ h2 {
 
 .portfolio-page.is-active .portfolio-page__surface > * {
   opacity: 1;
-  transition: opacity 180ms ease 60ms;
+  transition: opacity 220ms ease;
 }
 
-.portfolio-stack.is-transitioning .portfolio-page.is-active:not(.was-active) {
-  animation: portfolio-card-flip-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+.portfolio-page.is-entering {
+  animation: portfolio-card-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .portfolio-page__surface {
@@ -337,29 +323,16 @@ h2 {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-@keyframes portfolio-card-flip-in {
+@keyframes portfolio-card-enter {
   0% {
-    opacity: 0.9;
-    transform: translate(calc(var(--portfolio-peek) * 0.9), var(--portfolio-stack-drop)) rotate(var(--portfolio-tilt)) scale(0.992);
+    opacity: 0.72;
+    transform: translate(calc(var(--portfolio-peek) * 0.72), 0) scale(0.996);
     filter: brightness(0.9);
   }
   100% {
     opacity: 1;
     transform: translate(0, 0) rotate(0deg) scale(1);
     filter: none;
-  }
-}
-
-@keyframes portfolio-card-flip-out {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg) scale(1);
-    filter: none;
-  }
-  100% {
-    opacity: 0.96;
-    transform: translate(var(--portfolio-peek), var(--portfolio-stack-drop)) rotate(var(--portfolio-tilt)) scale(0.992);
-    filter: brightness(0.9);
   }
 }
 
@@ -992,7 +965,8 @@ h2 {
   }
   .portfolio-page,
   .portfolio-page.is-active,
-  .portfolio-page.is-underlay {
+  .portfolio-page.is-underlay,
+  .portfolio-page.is-entering {
     position: relative;
     inset: auto;
     display: none;
