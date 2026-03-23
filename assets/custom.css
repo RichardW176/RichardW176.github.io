@@ -241,6 +241,17 @@ h2 {
   transition: left 320ms ease, right 320ms ease, opacity 320ms ease, box-shadow 320ms ease, transform 320ms ease;
 }
 
+.portfolio-page::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  width: 54px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
 .portfolio-page[data-portfolio-page="video-games"] {
   left: 0;
   right: var(--portfolio-peek);
@@ -257,14 +268,30 @@ h2 {
   pointer-events: auto;
 }
 
+.portfolio-page.is-active::after {
+  opacity: 1;
+}
+
 .portfolio-page[data-portfolio-page="video-games"].is-active {
   left: 0;
   right: var(--portfolio-peek);
 }
 
+.portfolio-page[data-portfolio-page="video-games"].is-active::after {
+  right: -30px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.18) 32%, rgba(0, 0, 0, 0.08) 62%, rgba(0, 0, 0, 0) 100%);
+  filter: blur(18px);
+}
+
 .portfolio-page[data-portfolio-page="writing-samples"].is-active {
   left: var(--portfolio-peek);
   right: 0;
+}
+
+.portfolio-page[data-portfolio-page="writing-samples"].is-active::after {
+  left: -30px;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.18) 32%, rgba(0, 0, 0, 0.08) 62%, rgba(0, 0, 0, 0) 100%);
+  filter: blur(18px);
 }
 
 .portfolio-page.is-peek-right,
@@ -939,6 +966,9 @@ h2 {
     right: auto;
     display: none;
     overflow: visible;
+  }
+  .portfolio-page::after {
+    display: none;
   }
   .portfolio-page.is-active {
     display: block;
