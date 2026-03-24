@@ -375,17 +375,23 @@ h2 {
   height: 1px;
   pointer-events: none;
   background: rgba(255, 255, 255, 0.12);
-  clip-path: polygon(
-    0% 0%,
-    var(--tab-left) 0%,
-    var(--tab-left) 100%,
-    0% 100%,
-    0% 0%,
-    var(--tab-right) 0%,
-    var(--tab-right) 100%,
-    100% 100%,
-    100% 0%,
-    var(--tab-right) 0%
+  -webkit-mask: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 var(--tab-left),
+    transparent var(--tab-left),
+    transparent var(--tab-right),
+    #000 var(--tab-right),
+    #000 100%
+  );
+  mask: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 var(--tab-left),
+    transparent var(--tab-left),
+    transparent var(--tab-right),
+    #000 var(--tab-right),
+    #000 100%
   );
   transition: background 320ms ease;
 }
