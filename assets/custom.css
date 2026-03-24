@@ -671,10 +671,7 @@ h2 {
 
 .project-showcase__storm-rain {
   position: absolute;
-  top: -200%;
-  left: -8%;
-  right: -8%;
-  bottom: -6%;
+  inset: -8%;
   z-index: 2;
   pointer-events: none;
   opacity: 0;
@@ -695,9 +692,9 @@ h2 {
       transparent 0 22px, rgba(110, 200, 255, 0.06) 22px 23px, transparent 23px 51px),
     repeating-linear-gradient(93deg,
       transparent 0 31px, rgba(140, 218, 255, 0.05) 31px 32px, transparent 32px 67px);
-  background-size: 41px 503px, 59px 607px, 73px 709px, 51px 557px, 67px 653px;
+  background-size: 41px 600px, 59px 600px, 73px 600px, 51px 600px, 67px 600px;
   filter: blur(0.4px);
-  animation: floodsong-rain-far 1.2s linear infinite;
+  animation: floodsong-rain-far 0.8s linear infinite;
 }
 
 .project-showcase__storm-rain--near {
@@ -712,9 +709,9 @@ h2 {
       transparent 0 15px, rgba(160, 232, 255, 0.12) 15px 16.5px, transparent 16.5px 37px),
     repeating-linear-gradient(84deg,
       transparent 0 23px, rgba(190, 240, 255, 0.08) 23px 24.5px, transparent 24.5px 53px);
-  background-size: 31px 461px, 47px 541px, 61px 631px, 37px 499px, 53px 577px;
+  background-size: 31px 500px, 47px 500px, 61px 500px, 37px 500px, 53px 500px;
   filter: blur(0.15px);
-  animation: floodsong-rain-near 0.6s linear infinite;
+  animation: floodsong-rain-near 0.4s linear infinite;
 }
 
 .project-showcase__summary-video--storm.is-visible::before,
@@ -968,19 +965,19 @@ h2 {
 
 @keyframes floodsong-rain-far {
   from {
-    transform: translateY(-66%);
+    background-position-y: 0;
   }
   to {
-    transform: translateY(0%);
+    background-position-y: 600px;
   }
 }
 
 @keyframes floodsong-rain-near {
   from {
-    transform: translateY(-66%);
+    background-position-y: 0;
   }
   to {
-    transform: translateY(0%);
+    background-position-y: 500px;
   }
 }
 
