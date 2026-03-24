@@ -181,11 +181,10 @@ h2 {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: transparent;
   isolation: isolate;
 }
 
-.portfolio-nav.is-stuck::before {
+.portfolio-nav::before {
   content: "";
   position: absolute;
   top: 0;
@@ -198,7 +197,7 @@ h2 {
   z-index: -1;
 }
 
-.portfolio-nav.is-stuck::after {
+.portfolio-nav::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -337,8 +336,9 @@ h2 {
   opacity: 0;
 }
 
-.portfolio-page.is-underlay .portfolio-page__surface::before {
-  opacity: 0;
+.portfolio-page.is-underlay .portfolio-page__surface {
+  border-color: rgba(255, 255, 255, 0.12);
+  border-top-color: transparent;
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -354,45 +354,15 @@ h2 {
   min-height: 100%;
   padding: clamp(34px, 4vw, 52px);
   border-radius: 0 32px 32px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-top-color: transparent;
   background: #000000;
   box-shadow: 0 32px 110px rgba(0, 0, 0, 0.42);
   position: relative;
 }
 
-.portfolio-page__surface::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 320ms ease;
-}
-
-.portfolio-page.is-active .portfolio-page__surface::before {
-  opacity: 1;
-}
-
-.portfolio-page.is-active .portfolio-page__surface {
-  border-right-color: rgba(255, 255, 255, 0.28);
-  border-left-color: rgba(255, 255, 255, 0.28);
-}
-
-.portfolio-page.is-underlay .portfolio-page__surface {
-  border-right-color: rgba(255, 255, 255, 0.12);
-  border-left-color: rgba(255, 255, 255, 0.12);
-}
-
 .portfolio-page__surface--writing {
   background: #000000;
-}
-
-.portfolio-page.is-active .portfolio-page__surface--writing {
-  border-top-color: rgba(255, 255, 255, 0.28);
-  border-right-color: rgba(255, 255, 255, 0.28);
-  border-left-color: rgba(255, 255, 255, 0.28);
 }
 
 @keyframes portfolio-card-enter {
