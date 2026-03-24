@@ -6,6 +6,9 @@ video: /assets/Doodle%20Cards%20preview.mp4
 secondary_video: /assets/Doodle%20Art.mp4
 secondary_video_title: Stickers
 secondary_video_subtitle: Archetype Art
+secondary_feature_items:
+  - label: Art
+    text: Drawing final 2D art assets
 role: Art
 role_display: Art
 engine: Web-based
