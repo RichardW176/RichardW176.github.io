@@ -980,53 +980,73 @@ h2 {
 }
 
 @keyframes floodsong-lightning-flash {
-  0%, 14%, 28%, 44%, 62%, 78%, 100% {
+  0%, 9%, 11%, 27%, 29%, 42%, 44%, 58%, 60%, 74%, 76%, 88%, 90%, 100% {
     opacity: 0;
+    background: none;
   }
-  14.5% {
-    opacity: 0.16;
+  9.5% {
+    opacity: 0.8;
+    background: radial-gradient(ellipse at 25% 15%, rgba(220, 245, 255, 0.5) 0%, transparent 35%);
   }
-  15.2% {
-    opacity: 0.04;
+  10% {
+    opacity: 0.3;
+    background: radial-gradient(ellipse at 25% 15%, rgba(220, 245, 255, 0.3) 0%, transparent 25%);
   }
-  15.6% {
-    opacity: 0.12;
+  10.5% {
+    opacity: 0.6;
+    background: radial-gradient(ellipse at 28% 18%, rgba(220, 245, 255, 0.4) 0%, transparent 30%);
   }
-  16.2% {
-    opacity: 0;
+  27.5% {
+    opacity: 0.9;
+    background: radial-gradient(ellipse at 72% 12%, rgba(236, 250, 255, 0.6) 0%, transparent 40%);
   }
-  29% {
-    opacity: 0.22;
-  }
-  29.6% {
-    opacity: 0.06;
-  }
-  30.2% {
-    opacity: 0;
-  }
-  44.8% {
-    opacity: 0.14;
-  }
-  45.4% {
-    opacity: 0;
-  }
-  63% {
+  28% {
     opacity: 0.2;
+    background: radial-gradient(ellipse at 72% 12%, rgba(236, 250, 255, 0.3) 0%, transparent 25%);
   }
-  63.5% {
-    opacity: 0.08;
+  28.5% {
+    opacity: 0.5;
+    background: radial-gradient(ellipse at 75% 15%, rgba(236, 250, 255, 0.4) 0%, transparent 30%);
   }
-  64.2% {
-    opacity: 0.14;
+  42.5% {
+    opacity: 0.6;
+    background: radial-gradient(ellipse at 50% 8%, rgba(210, 240, 255, 0.5) 0%, transparent 45%);
   }
-  64.8% {
-    opacity: 0;
+  43% {
+    opacity: 0.2;
+    background: radial-gradient(ellipse at 50% 8%, rgba(210, 240, 255, 0.2) 0%, transparent 30%);
   }
-  78.6% {
-    opacity: 0.1;
+  58.5% {
+    opacity: 0.7;
+    background: radial-gradient(ellipse at 85% 25%, rgba(200, 235, 255, 0.5) 0%, transparent 35%);
   }
-  79.2% {
-    opacity: 0;
+  59% {
+    opacity: 0.25;
+    background: radial-gradient(ellipse at 85% 25%, rgba(200, 235, 255, 0.3) 0%, transparent 25%);
+  }
+  59.5% {
+    opacity: 0.5;
+    background: radial-gradient(ellipse at 82% 22%, rgba(200, 235, 255, 0.35) 0%, transparent 30%);
+  }
+  74.5% {
+    opacity: 0.5;
+    background: radial-gradient(ellipse at 15% 30%, rgba(230, 248, 255, 0.4) 0%, transparent 30%);
+  }
+  75% {
+    opacity: 0.15;
+    background: radial-gradient(ellipse at 15% 30%, rgba(230, 248, 255, 0.2) 0%, transparent 20%);
+  }
+  88.5% {
+    opacity: 0.8;
+    background: radial-gradient(ellipse at 60% 20%, rgba(240, 252, 255, 0.55) 0%, transparent 40%);
+  }
+  89% {
+    opacity: 0.3;
+    background: radial-gradient(ellipse at 60% 20%, rgba(240, 252, 255, 0.3) 0%, transparent 25%);
+  }
+  89.5% {
+    opacity: 0.55;
+    background: radial-gradient(ellipse at 62% 18%, rgba(240, 252, 255, 0.4) 0%, transparent 30%);
   }
 }
 
