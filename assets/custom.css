@@ -1265,6 +1265,15 @@ h2 {
   color: #ffffff;
 }
 
+#doodle-cards .project-showcase__summary-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .project-showcase__summary--with-video .project-showcase__title {
   font-size: clamp(2.24rem, 4.96vw, 4rem);
   line-height: 0.9;
