@@ -168,24 +168,28 @@ select {
   margin-bottom: 18px;
 }
 
-.hero-linkedin {
+.hero-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.hero-social-btn {
   display: block;
   width: 36px;
   height: 36px;
-  margin-top: 18px;
   text-decoration: none;
   border: none;
   background: none;
 }
-.hero-linkedin,
-.hero-linkedin:hover,
-.hero-linkedin:focus,
-.hero-linkedin:active {
+.hero-social-btn,
+.hero-social-btn:hover,
+.hero-social-btn:focus,
+.hero-social-btn:active {
   color: inherit;
   transform: none !important;
   transition: none !important;
 }
-.hero-linkedin img {
+.hero-social-btn img {
   width: 36px;
   height: 36px;
   display: block;
@@ -193,7 +197,7 @@ select {
   transition: none !important;
   transform: none !important;
 }
-.hero-linkedin:hover img {
+.hero-social-btn:hover img {
   opacity: 0.75;
 }
 

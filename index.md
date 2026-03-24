@@ -20,9 +20,14 @@ title: Home
     <div class="hero-name-stack">
       <h1 class="hero-title">Richard<br>Wang</h1>
     </div>
-    <a class="hero-linkedin" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
-      <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
-    </a>
+    <div class="hero-socials">
+      <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
+        <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
+      </a>
+      <a class="hero-social-btn" href="mailto:richardwangsgs@gmail.com">
+        <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
+      </a>
+    </div>
   </div>
 </section>
 
