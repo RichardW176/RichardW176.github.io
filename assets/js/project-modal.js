@@ -312,6 +312,14 @@
         }
 
         hydrateVisibleVideos(activePage);
+        activePage.querySelectorAll('[data-animate-when-visible="true"]').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const visibleWidth = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+          const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+          const visibleArea = visibleWidth * visibleHeight;
+          const totalArea = Math.max(rect.width * rect.height, 1);
+          el.classList.toggle('is-visible', (visibleArea / totalArea) >= visibleAnimationThreshold);
+        });
       }
 
       window.requestAnimationFrame(() => {
