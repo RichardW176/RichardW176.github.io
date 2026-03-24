@@ -71,8 +71,8 @@ title: Home
         </div>
       </div>
 
-      <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image %} project-showcase__summary--with-video{% endif %}">
-        {% if project.video or project.video_sources or project.summary_image %}
+      <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %} project-showcase__summary--with-video{% endif %}">
+        {% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %}
         <div class="project-showcase__summary-video{% if project.snow_overlay and project.summary_image %} project-showcase__summary-video--snow{% endif %}"{% if project.snow_overlay and project.summary_image %} data-animate-when-visible="true"{% endif %}>
           {% if project.summary_image %}
           <img
@@ -80,6 +80,8 @@ title: Home
             src="{{ project.summary_image }}"
             {% if project.summary_image_position %}style="object-position: {{ project.summary_image_position }};"{% endif %}
             alt="{{ project.summary_image_alt | default: project.title }}">
+          {% elsif project.summary_placeholder %}
+          <div class="project-showcase__summary-video-media project-showcase__summary-placeholder" aria-hidden="true"></div>
           {% else %}
           <video
             class="project-showcase__summary-video-media"

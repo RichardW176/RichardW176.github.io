@@ -50,8 +50,8 @@ hide_summary_intro: true
 hide_body: true
 inline_awards: true
 order: 1
-role: Narrative, Design, Art, Usability
-role_display: Narrative &middot; Design &middot; Art &middot; Usability
+role: Design, Narrative, Art, Usability
+role_display: Design &middot; Narrative &middot; Art &middot; Usability
 engine: Unity
 stage: Published
 timeline: May 2025 - Feb 2026

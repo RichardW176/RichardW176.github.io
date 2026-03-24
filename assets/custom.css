@@ -474,20 +474,6 @@ h2 {
   gap: 26px;
 }
 
-.project-showcase + .project-showcase {
-  position: relative;
-}
-
-.project-showcase + .project-showcase::before {
-  content: "";
-  position: absolute;
-  top: calc(var(--project-sequence-gap) * -0.5);
-  left: 0;
-  right: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.28);
-  pointer-events: none;
-}
-
 .project-showcase__stage {
   display: grid;
   grid-template-columns: minmax(264px, 355px) minmax(430px, 675px);
@@ -761,6 +747,15 @@ h2 {
 
 .project-showcase__summary-image {
   border: 0;
+}
+
+.project-showcase__summary-placeholder {
+  display: block;
+  background:
+    radial-gradient(circle at 18% 20%, rgb(var(--project-accent-rgb, 255 255 255) / 0.22) 0, transparent 28%),
+    radial-gradient(circle at 78% 72%, rgb(var(--project-accent-rgb, 255 255 255) / 0.16) 0, transparent 34%),
+    linear-gradient(140deg, rgba(8, 14, 24, 0.96), rgba(6, 18, 34, 0.98)),
+    linear-gradient(180deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.08), transparent 44%);
 }
 
 .project-showcase__summary-content {
