@@ -2,7 +2,7 @@
 title: "Unchained: Tale of Enra"
 media_type: "Video Game"
 description: "Boss negotiation dialogue with differing effectiveness."
-order: 4
+order: 0
 ---
 
 **Honor**
