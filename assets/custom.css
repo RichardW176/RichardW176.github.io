@@ -1064,11 +1064,10 @@ h2 {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.18) 18%, rgba(0, 0, 0, 0.08) 40%, rgba(0, 0, 0, 0.2) 64%, rgba(0, 0, 0, 0.48) 100%),
-    linear-gradient(90deg, rgba(10, 10, 14, 0.68) 0%, rgba(10, 10, 14, 0.34) 28%, rgba(10, 10, 14, 0.14) 56%, rgba(10, 10, 14, 0.04) 100%),
-    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.16) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.08) 34%, rgb(var(--project-accent-rgb, 255 255 255) / 0.03) 62%, transparent 100%),
-    radial-gradient(circle at 18% 22%, rgb(var(--project-accent-rgb, 255 255 255) / 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(5, 7, 14, 0.2) 0%, rgba(5, 7, 14, 0.24) 32%, rgba(5, 7, 14, 0.66) 72%, rgba(5, 7, 14, 0.9) 100%);
+    linear-gradient(90deg, rgba(8, 8, 12, 0.86) 0%, rgba(8, 8, 12, 0.58) 24%, rgba(8, 8, 12, 0.26) 46%, rgba(8, 8, 12, 0.1) 66%, rgba(8, 8, 12, 0.04) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.08) 22%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.38) 100%),
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.12) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.06) 34%, transparent 64%),
+    radial-gradient(circle at 18% 22%, rgb(var(--project-accent-rgb, 255 255 255) / 0.1), transparent 34%);
 }
 
 .project-showcase__summary-video {
