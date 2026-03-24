@@ -1,8 +1,9 @@
 ---
 title: "Namesake"
-media_type: "Short Film"
+media_type: "Prose"
 description: ""
 image: /assets/images/namesake.png
+pdf: /assets/NAMESAKE%20-%20Prose%20%281%29.pdf
 order: 1
 ---
 
