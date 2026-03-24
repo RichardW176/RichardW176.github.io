@@ -219,6 +219,7 @@ h2 {
   min-height: 60px;
   padding: 12px 18px 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom-color: rgba(255, 255, 255, 0.28);
   border-radius: 18px 18px 0 0;
   margin-bottom: -1px;
   background: #000000;
@@ -361,6 +362,16 @@ h2 {
   position: relative;
 }
 
+.portfolio-page.is-active .portfolio-page__surface::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 40px, transparent 200px);
+  mask: linear-gradient(180deg, #000 0%, #000 40px, transparent 200px);
+}
 
 .portfolio-page__surface--writing {
   background: #000000;
