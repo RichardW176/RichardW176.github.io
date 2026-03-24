@@ -4,6 +4,9 @@ image: /assets/images/IMG_6550.png
 secondary_video: /assets/Thang%20Preview.mp4
 secondary_video_title: Freeze Tag / Ovens
 secondary_video_subtitle: Core Mechanics
+tertiary_video: /assets/Thang%20Map%20Preview.mp4
+tertiary_video_title: Ice Arena
+tertiary_video_subtitle: Map Blockout
 snow_overlay: true
 role: Lead Narrative Designer, Designer
 stage: Production
