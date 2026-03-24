@@ -444,7 +444,7 @@ h2 {
   padding: clamp(34px, 4vw, 52px) clamp(34px, 4vw, 52px) clamp(20px, 3vw, 30px);
   border-radius: 0 32px 32px 32px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top-color: rgba(255, 255, 255, 0.28);
+  border-top-color: transparent;
   background: #000000;
   box-shadow: 0 32px 110px rgba(0, 0, 0, 0.42);
   position: relative;
@@ -458,8 +458,8 @@ h2 {
   border-bottom: none;
   border-radius: inherit;
   pointer-events: none;
-  -webkit-mask: linear-gradient(180deg, #000 0%, #000 60px, transparent 280px);
-  mask: linear-gradient(180deg, #000 0%, #000 60px, transparent 280px);
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 40px, transparent 280px);
+  mask: linear-gradient(180deg, #000 0%, #000 40px, transparent 280px);
 }
 
 .portfolio-page__surface--writing {
