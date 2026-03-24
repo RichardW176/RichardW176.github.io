@@ -323,6 +323,10 @@
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         applyActivePage(tab.dataset.portfolioTab);
+        switcher.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
       });
     });
 
