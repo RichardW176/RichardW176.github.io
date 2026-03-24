@@ -6,14 +6,12 @@ summary_image_alt: Thang ice arena banner art
 secondary_video: /assets/Thang%20Preview.mp4
 secondary_video_title: Freeze Tag / Ovens
 secondary_video_subtitle: Core Mechanics
-secondary_feature_heading: Freeze Tag
 secondary_feature_items:
   - label: Combat Design
     text: Initial design documentation, balancing
 tertiary_video: /assets/Thang%20Map%20Preview.mp4
 tertiary_video_title: Ice Arena
 tertiary_video_subtitle: Map Blockout
-tertiary_feature_heading: Ice Arena
 tertiary_feature_items:
   - label: Level Design
     text: Mock-up sketches, blockout implementation, usability testing
