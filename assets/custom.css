@@ -517,6 +517,7 @@ h2 {
   overflow: hidden;
   isolation: isolate;
   border-radius: inherit;
+  z-index: 2;
 }
 
 .project-showcase__mist {
@@ -526,14 +527,15 @@ h2 {
   pointer-events: none;
   opacity: 0;
   background:
-    radial-gradient(ellipse at 14% 26%, rgba(198, 236, 255, 0.12) 0%, rgba(198, 236, 255, 0.08) 18%, transparent 42%),
-    radial-gradient(ellipse at 68% 74%, rgba(210, 242, 255, 0.11) 0%, rgba(210, 242, 255, 0.07) 22%, transparent 48%),
-    radial-gradient(ellipse at 82% 18%, rgba(188, 230, 255, 0.1) 0%, rgba(188, 230, 255, 0.06) 16%, transparent 40%);
-  filter: blur(18px);
-  transform: translate3d(0, 0, 0) scale(1.02);
+    radial-gradient(ellipse at 18% 72%, rgba(218, 244, 255, 0.24) 0%, rgba(218, 244, 255, 0.16) 18%, transparent 46%),
+    radial-gradient(ellipse at 56% 82%, rgba(208, 238, 255, 0.22) 0%, rgba(208, 238, 255, 0.14) 22%, transparent 50%),
+    radial-gradient(ellipse at 86% 64%, rgba(194, 232, 255, 0.18) 0%, rgba(194, 232, 255, 0.1) 16%, transparent 42%);
+  filter: blur(26px);
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0) scale(1.06);
   animation: thang-mist-drift 18s ease-in-out infinite alternate;
   animation-play-state: paused;
-  transition: opacity 320ms ease;
+  transition: opacity 320ms ease, transform 900ms ease;
 }
 
 .project-showcase__snow {
@@ -548,7 +550,7 @@ h2 {
 }
 
 .project-showcase__summary-video--snow.is-visible .project-showcase__mist {
-  opacity: 1;
+  opacity: 0.72;
   animation-play-state: running;
 }
 
@@ -643,7 +645,7 @@ h2 {
 }
 
 .project-showcase__poster-frame--borderless .project-showcase__poster {
-  border: 0;
+  border: 1px solid rgb(var(--project-accent-rgb, 255 255 255) / 0.34);
   border-radius: 26px;
 }
 
@@ -1767,7 +1769,7 @@ h2 {
   }
 
   .project-showcase__summary-video--snow.is-visible .project-showcase__mist {
-    opacity: 0.16;
+    opacity: 0.28;
   }
 
   .project-showcase__summary-video--snow.is-visible .project-showcase__snow {
