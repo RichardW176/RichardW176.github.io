@@ -292,12 +292,12 @@
     if (nav && 'IntersectionObserver' in window) {
       const sentinel = document.createElement('div');
       sentinel.setAttribute('aria-hidden', 'true');
-      sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;visibility:hidden;';
-      switcher.insertBefore(sentinel, switcher.firstChild);
+      sentinel.style.cssText = 'height:0;overflow:hidden;pointer-events:none;';
+      nav.parentNode.insertBefore(sentinel, nav);
 
       new IntersectionObserver(
         ([entry]) => nav.classList.toggle('is-stuck', !entry.isIntersecting),
-        { threshold: 0 }
+        { rootMargin: '0px', threshold: 0 }
       ).observe(sentinel);
     }
   });
