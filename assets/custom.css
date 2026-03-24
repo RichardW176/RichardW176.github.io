@@ -169,7 +169,6 @@ select {
 }
 
 .hero-linkedin {
-  display: inline-flex;
   width: 36px;
   height: 36px;
   margin-top: 18px;
@@ -179,7 +178,6 @@ select {
   height: 36px;
   display: block;
   filter: invert(1);
-  transition: opacity 0.15s ease;
 }
 .hero-linkedin:hover img {
   opacity: 0.75;
