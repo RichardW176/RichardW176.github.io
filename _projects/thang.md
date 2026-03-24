@@ -1,7 +1,7 @@
 ---
 title: Thang!
 image: /assets/images/thang.png
-summary_image: /assets/images/IMG_6550.png
+summary_image: /assets/images/thang%20new%20side.png
 summary_image_alt: Thang ice arena banner art
 secondary_video: /assets/Thang%20Preview.mp4
 secondary_video_title: Freeze Tag / Ovens

@@ -537,8 +537,8 @@ h2 {
 
 .project-showcase__snow--far {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.56) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle, rgba(197, 225, 255, 0.38) 0 1.5px, transparent 2.1px);
+    radial-gradient(circle, rgba(228, 247, 255, 0.5) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle, rgba(208, 238, 255, 0.34) 0 1.5px, transparent 2.1px);
   background-size: 168px 168px, 228px 228px;
   background-position: 24px -120px, 112px -52px;
   filter: blur(0.4px);
@@ -547,8 +547,8 @@ h2 {
 
 .project-showcase__snow--mid {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.76) 0 1.6px, transparent 2.4px),
-    radial-gradient(circle, rgba(214, 236, 255, 0.54) 0 2.2px, transparent 3px);
+    radial-gradient(circle, rgba(232, 248, 255, 0.68) 0 1.6px, transparent 2.4px),
+    radial-gradient(circle, rgba(214, 241, 255, 0.46) 0 2.2px, transparent 3px);
   background-size: 136px 136px, 192px 192px;
   background-position: 16px -100px, 84px -40px;
   filter: blur(0.2px);
@@ -557,8 +557,8 @@ h2 {
 
 .project-showcase__snow--near {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 2.2px, transparent 3.2px),
-    radial-gradient(circle, rgba(232, 244, 255, 0.72) 0 3px, transparent 4.2px);
+    radial-gradient(circle, rgba(239, 251, 255, 0.82) 0 2.2px, transparent 3.2px),
+    radial-gradient(circle, rgba(224, 246, 255, 0.62) 0 3px, transparent 4.2px);
   background-size: 112px 112px, 176px 176px;
   background-position: 12px -84px, 62px -24px;
   filter: blur(0.1px);
@@ -928,21 +928,17 @@ h2 {
 }
 
 #thang {
-  --thang-glow-strong: rgba(116, 236, 255, 0.34);
-  --thang-glow-soft: rgba(116, 236, 255, 0.16);
-  --thang-glow-line: rgba(144, 241, 255, 0.42);
+  --thang-outline: rgba(144, 241, 255, 0.42);
 }
 
-#thang .project-showcase__poster-frame {
-  box-shadow: 0 0 24px var(--thang-glow-soft), 0 0 54px var(--thang-glow-strong);
-}
-
-#thang .project-showcase__poster,
 #thang .project-showcase__summary--with-video,
+#thang .project-showcase__secondary-video,
+#thang .project-showcase__secondary-panel,
+#thang .project-showcase__secondary-panel-card,
 #thang .project-media-card,
-#thang .collaboration-card {
-  border-color: var(--thang-glow-line);
-  box-shadow: 0 0 18px var(--thang-glow-soft), 0 0 38px var(--thang-glow-strong);
+#thang .collaboration-card,
+#thang .project-doc-card {
+  border-color: var(--thang-outline);
 }
 
 #thang .project-showcase__summary--with-video {
