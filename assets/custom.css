@@ -381,7 +381,12 @@ h2 {
 
 .portfolio-page__surface--writing {
   background: #000000;
-  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-page.is-active .portfolio-page__surface--writing {
+  border-top-color: rgba(255, 255, 255, 0.28);
+  border-right-color: rgba(255, 255, 255, 0.28);
+  border-left-color: rgba(255, 255, 255, 0.28);
 }
 
 @keyframes portfolio-card-enter {
