@@ -180,20 +180,8 @@ h2 {
   padding: 12px 0 0;
   position: sticky;
   top: 0;
-  isolation: isolate;
   z-index: 20;
-}
-
-.portfolio-nav::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 1px;
-  left: 1px;
-  right: 1px;
-  background: rgba(0, 0, 0, 1);
-  pointer-events: none;
-  z-index: -1;
+  background: #000000;
 }
 
 .portfolio-nav__link {
