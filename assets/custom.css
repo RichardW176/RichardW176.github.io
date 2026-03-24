@@ -598,6 +598,22 @@ h2 {
   animation-play-state: paused;
 }
 
+.project-showcase__mist--storm {
+  inset: -10% -10% -4%;
+  z-index: 1;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse at 16% 70%, rgba(170, 223, 255, 0.3) 0%, rgba(170, 223, 255, 0.2) 18%, transparent 46%),
+    radial-gradient(ellipse at 58% 78%, rgba(210, 241, 255, 0.28) 0%, rgba(210, 241, 255, 0.18) 20%, transparent 48%),
+    radial-gradient(ellipse at 86% 42%, rgba(132, 201, 255, 0.22) 0%, rgba(132, 201, 255, 0.12) 18%, transparent 42%);
+  filter: blur(34px);
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0) scale(1.08);
+  animation: floodsong-mist-drift 13s ease-in-out infinite alternate;
+  animation-play-state: paused;
+  transition: opacity 320ms ease, transform 900ms ease;
+}
+
 .project-showcase__storm-flecks {
   position: absolute;
   inset: -16% 0 0;
@@ -605,28 +621,35 @@ h2 {
   pointer-events: none;
   opacity: 0;
   background-image:
-    radial-gradient(circle, rgba(230, 247, 255, 0.54) 0 1.2px, transparent 1.9px),
-    radial-gradient(circle, rgba(184, 226, 255, 0.34) 0 1.8px, transparent 2.5px),
-    radial-gradient(circle, rgba(132, 199, 255, 0.24) 0 2.3px, transparent 3.2px);
-  background-size: 122px 122px, 184px 184px, 244px 244px;
+    radial-gradient(circle, rgba(237, 249, 255, 0.84) 0 1.6px, transparent 2.6px),
+    radial-gradient(circle, rgba(197, 233, 255, 0.52) 0 2.2px, transparent 3.4px),
+    radial-gradient(circle, rgba(136, 204, 255, 0.34) 0 2.8px, transparent 4px);
+  background-size: 118px 118px, 176px 176px, 232px 232px;
   background-position: 12px -82px, 84px -28px, 148px -102px;
-  filter: blur(0.18px);
+  filter: blur(0.08px);
+  mix-blend-mode: screen;
   animation: floodsong-flecks-drift 12s linear infinite;
   animation-play-state: paused;
   transition: opacity 260ms ease;
 }
 
 .project-showcase__summary-video--storm.is-visible::before {
-  opacity: 0.62;
+  opacity: 0.34;
   animation-play-state: running;
 }
 
 .project-showcase__summary-video--storm.is-visible::after {
+  opacity: 0.78;
+  animation-play-state: running;
+}
+
+.project-showcase__summary-video--storm.is-visible .project-showcase__mist--storm {
+  opacity: 0.82;
   animation-play-state: running;
 }
 
 .project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
-  opacity: 1;
+  opacity: 0.98;
   animation-play-state: running;
 }
 
@@ -646,6 +669,17 @@ h2 {
   animation: thang-mist-drift 18s ease-in-out infinite alternate;
   animation-play-state: paused;
   transition: opacity 320ms ease, transform 900ms ease;
+}
+
+.project-showcase__summary-video--storm .project-showcase__mist--storm {
+  inset: -10% -10% -4%;
+  background:
+    radial-gradient(ellipse at 16% 70%, rgba(170, 223, 255, 0.3) 0%, rgba(170, 223, 255, 0.2) 18%, transparent 46%),
+    radial-gradient(ellipse at 58% 78%, rgba(210, 241, 255, 0.28) 0%, rgba(210, 241, 255, 0.18) 20%, transparent 48%),
+    radial-gradient(ellipse at 86% 42%, rgba(132, 201, 255, 0.22) 0%, rgba(132, 201, 255, 0.12) 18%, transparent 42%);
+  filter: blur(34px);
+  transform: translate3d(0, 0, 0) scale(1.08);
+  animation: floodsong-mist-drift 13s ease-in-out infinite alternate;
 }
 
 .project-showcase__snow {
@@ -1936,6 +1970,11 @@ h2 {
     opacity: 0;
   }
 
+  .project-showcase__mist--storm {
+    animation: none;
+    opacity: 0;
+  }
+
   .project-showcase__snow {
     animation: none;
     opacity: 0;
@@ -1950,14 +1989,18 @@ h2 {
   }
 
   .project-showcase__summary-video--storm.is-visible::before {
-    opacity: 0.24;
+    opacity: 0.16;
   }
 
   .project-showcase__summary-video--storm.is-visible::after {
-    opacity: 0;
+    opacity: 0.24;
+  }
+
+  .project-showcase__summary-video--storm.is-visible .project-showcase__mist--storm {
+    opacity: 0.28;
   }
 
   .project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
-    opacity: 0.26;
+    opacity: 0.32;
   }
 }
