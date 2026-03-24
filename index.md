@@ -16,13 +16,13 @@ title: Home
     </video>
   </div>
   <div class="hero-inner">
-    <a class="hero-linkedin" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
-      <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
-    </a>
     <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
     <div class="hero-name-stack">
       <h1 class="hero-title">Richard<br>Wang</h1>
     </div>
+    <a class="hero-linkedin" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
+      <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
+    </a>
   </div>
 </section>
 
