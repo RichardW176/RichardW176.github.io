@@ -520,6 +520,22 @@ h2 {
   --project-accent-rgb: 255 58 138;
   display: grid;
   gap: 26px;
+  position: relative;
+}
+
+.project-showcase::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: rgb(var(--project-accent-rgb));
+  box-shadow:
+    0 0 8px rgb(var(--project-accent-rgb) / 0.4),
+    0 0 20px rgb(var(--project-accent-rgb) / 0.2);
+  opacity: 0.7;
 }
 
 .project-showcase__stage {
@@ -649,7 +665,7 @@ h2 {
 
 .project-showcase__storm-rain {
   position: absolute;
-  top: -100%;
+  top: -200%;
   left: -8%;
   right: -8%;
   bottom: -6%;
@@ -663,38 +679,36 @@ h2 {
 
 .project-showcase__storm-rain--far {
   background-image:
-    repeating-linear-gradient(86deg,
+    repeating-linear-gradient(87deg,
       transparent 0 47px, rgba(170, 230, 255, 0.1) 47px 48px, transparent 48px 97px),
-    repeating-linear-gradient(92deg,
+    repeating-linear-gradient(91deg,
       transparent 0 71px, rgba(130, 215, 255, 0.08) 71px 72px, transparent 72px 163px),
-    repeating-linear-gradient(84deg,
+    repeating-linear-gradient(85deg,
       transparent 0 103px, rgba(150, 222, 255, 0.07) 103px 104px, transparent 104px 211px),
     repeating-linear-gradient(89deg,
       transparent 0 59px, rgba(110, 200, 255, 0.06) 59px 60px, transparent 60px 139px),
-    repeating-linear-gradient(94deg,
+    repeating-linear-gradient(93deg,
       transparent 0 83px, rgba(140, 218, 255, 0.05) 83px 84px, transparent 84px 181px);
-  background-size: 97px 100%, 163px 100%, 211px 100%, 139px 100%, 181px 100%;
-  background-position: 7px 0px, 41px 0px, 23px 0px, 67px 0px, 13px 0px;
+  background-size: 97px 503px, 163px 607px, 211px 709px, 139px 557px, 181px 653px;
   filter: blur(0.4px);
-  animation: floodsong-rain-far 0.4s linear infinite;
+  animation: floodsong-rain-far 1.2s linear infinite;
 }
 
 .project-showcase__storm-rain--near {
   background-image:
-    repeating-linear-gradient(85deg,
+    repeating-linear-gradient(86deg,
       transparent 0 31px, rgba(210, 245, 255, 0.18) 31px 32.5px, transparent 32.5px 79px),
-    repeating-linear-gradient(93deg,
+    repeating-linear-gradient(92deg,
       transparent 0 53px, rgba(180, 238, 255, 0.14) 53px 54.5px, transparent 54.5px 127px),
     repeating-linear-gradient(88deg,
       transparent 0 89px, rgba(200, 242, 255, 0.1) 89px 90.5px, transparent 90.5px 191px),
-    repeating-linear-gradient(91deg,
+    repeating-linear-gradient(90deg,
       transparent 0 41px, rgba(160, 232, 255, 0.12) 41px 42.5px, transparent 42.5px 103px),
-    repeating-linear-gradient(87deg,
+    repeating-linear-gradient(84deg,
       transparent 0 67px, rgba(190, 240, 255, 0.08) 67px 68.5px, transparent 68.5px 157px);
-  background-size: 79px 100%, 127px 100%, 191px 100%, 103px 100%, 157px 100%;
-  background-position: 11px 0px, 53px 0px, 31px 0px, 79px 0px, 3px 0px;
+  background-size: 79px 461px, 127px 541px, 191px 631px, 103px 499px, 157px 577px;
   filter: blur(0.15px);
-  animation: floodsong-rain-near 0.2s linear infinite;
+  animation: floodsong-rain-near 0.6s linear infinite;
 }
 
 .project-showcase__summary-video--storm.is-visible::before,
@@ -948,7 +962,7 @@ h2 {
 
 @keyframes floodsong-rain-far {
   from {
-    transform: translateY(-50%);
+    transform: translateY(-66%);
   }
   to {
     transform: translateY(0%);
@@ -957,7 +971,7 @@ h2 {
 
 @keyframes floodsong-rain-near {
   from {
-    transform: translateY(-50%);
+    transform: translateY(-66%);
   }
   to {
     transform: translateY(0%);
@@ -1290,7 +1304,7 @@ h2 {
   color: #ffffff;
 }
 
-#doodle-cards .project-showcase__summary-video::after {
+.project-showcase__summary-video::after {
   content: "";
   position: absolute;
   inset: 0;
