@@ -323,6 +323,7 @@ h2 {
 
 .portfolio-page.is-underlay::before {
   opacity: 1;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .portfolio-page.is-underlay::after {
