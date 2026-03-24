@@ -286,14 +286,11 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-bottom: none;
+  border: none;
   border-radius: 0 32px 32px 32px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 320ms ease;
-  -webkit-mask: linear-gradient(180deg, #000 0%, #000 80px, transparent 220px);
-  mask: linear-gradient(180deg, #000 0%, #000 80px, transparent 220px);
 }
 
 .portfolio-page.is-active {
@@ -322,8 +319,7 @@ h2 {
 }
 
 .portfolio-page.is-underlay::before {
-  opacity: 1;
-  border-color: rgba(255, 255, 255, 0.12);
+  opacity: 0;
 }
 
 .portfolio-page.is-underlay::after {
@@ -332,6 +328,11 @@ h2 {
 
 .portfolio-page.is-underlay .portfolio-page__surface > * {
   opacity: 0;
+}
+
+.portfolio-page.is-underlay .portfolio-page__surface::before {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -356,23 +357,14 @@ h2 {
 .portfolio-page__surface::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -1px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  padding: 1px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.28) 18%, rgba(255, 255, 255, 0.16) 42%, rgba(255, 255, 255, 0) 100%) top / 100% 84px no-repeat,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.16) 28%, rgba(255, 255, 255, 0) 100%) left top / 1px 90px no-repeat,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.16) 28%, rgba(255, 255, 255, 0) 100%) right top / 1px 90px no-repeat;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+  z-index: 1;
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 60px, transparent 240px);
+  mask: linear-gradient(180deg, #000 0%, #000 60px, transparent 240px);
   transition: opacity 320ms ease;
 }
 
