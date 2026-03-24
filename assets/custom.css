@@ -623,6 +623,16 @@ h2 {
   inset: 0;
   z-index: 3;
   pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.1) 75%, transparent 100%);
+  mix-blend-mode: multiply;
+}
+
+.project-showcase__summary-video--storm .project-showcase__storm-lightning {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
   opacity: 0;
   background:
     linear-gradient(102deg, transparent 0%, transparent 58%, rgba(214, 244, 255, 0.3) 63%, transparent 71%),
@@ -720,8 +730,8 @@ h2 {
   animation-play-state: running;
 }
 
-.project-showcase__summary-video--storm.is-visible::after,
-.portfolio-page.is-active .project-showcase__summary-video--storm::after {
+.project-showcase__summary-video--storm.is-visible .project-showcase__storm-lightning,
+.portfolio-page.is-active .project-showcase__summary-video--storm .project-showcase__storm-lightning {
   opacity: 0.78;
   animation-play-state: running;
 }
@@ -2219,7 +2229,7 @@ h2 {
 
 @media (prefers-reduced-motion: reduce) {
   .project-showcase__summary-video--storm::before,
-  .project-showcase__summary-video--storm::after,
+  .project-showcase__storm-lightning,
   .project-showcase__storm-flecks,
   .project-showcase__storm-rain {
     animation: none;
