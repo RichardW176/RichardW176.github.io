@@ -1,7 +1,7 @@
 ---
 title: "Icarus"
 media_type: "Animated Short Film"
-description: "A father and son on the shore confront dreams, failure, and the myth of flight."
+description: "A son argues his ambitions to his father a day before Icarus's fall."
 order: 3
 ---
 

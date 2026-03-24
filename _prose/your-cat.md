@@ -1,7 +1,7 @@
 ---
 title: "Your Cat"
 media_type: "Film"
-description: "Diego and Annie confront the fragility of their relationship in a public square."
+description: "A man tries to win someone back after proposing to them the night before."
 pdf: /assets/Your%20Cat%20First%20Draft.pdf
 order: 2
 ---
