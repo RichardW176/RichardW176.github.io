@@ -1,11 +1,14 @@
 ---
 title: Thang!
-image: /assets/images/thang.png
+image: /assets/images/IMG_6550.png
+secondary_video: /assets/Thang%20Preview.mp4
+secondary_video_title: Freeze Tag / Ovens
+secondary_video_subtitle: Core Mechanics
 role: Lead Narrative Designer, Designer
 stage: Production
 timeline: Dec 2025 - Present
 description: 3v3 party shooter inspired by the Korean playground game Freeze Tag.
-order: 5
+order: 3
 docs:
   - title: "Global Design Documentation - EXPO"
     file: /assets/Thang GDD - EXP.pdf

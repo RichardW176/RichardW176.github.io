@@ -6,7 +6,7 @@ role: Lead Narrative Designer
 stage: Pre-production
 timeline: Jan 2026 - Present
 description: A high-velocity third person action adventure where you surf through tsunamis, parkour over ruins, and battle leviathans.
-order: 4
+order: 5
 docs:
   - title: "Global Narrative Documentation - Sample"
     file: /assets/floodsong-doc.pdf
