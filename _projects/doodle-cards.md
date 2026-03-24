@@ -7,6 +7,7 @@ role_display: Art
 engine: Web-based
 stage: Production
 timeline: Feb 2026 - Present
+description: Turn-based drawing game with power-ups
 accent_rgb: 214 191 156
 poster_frame_borderless: true
 order: 6

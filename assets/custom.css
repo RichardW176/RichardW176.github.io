@@ -997,6 +997,7 @@ h2 {
   color: rgba(227, 233, 244, 0.9);
   font-size: 0.98rem;
   line-height: 1.66;
+  font-weight: 700;
 }
 
 .project-showcase__role strong {
