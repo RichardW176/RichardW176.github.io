@@ -62,23 +62,18 @@ title: Home
     {% if project.accent_rgb %}style="--project-accent-rgb: {{ project.accent_rgb }};"{% endif %}>
     <div class="project-showcase__stage">
       <div class="project-showcase__poster-column">
-        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if project.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}{% if project.snow_overlay %} project-showcase__poster-frame--snow{% endif %}"{% if project.snow_overlay %} data-animate-when-visible="true"{% endif %}>
+        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if project.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
           <img
             class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
             src="{{ project.image }}"
             {% if project.poster_position %}style="object-position: {{ project.poster_position }};"{% endif %}
             alt="{{ project.title }}">
-          {% if project.snow_overlay %}
-          <span class="project-showcase__snow project-showcase__snow--far" aria-hidden="true"></span>
-          <span class="project-showcase__snow project-showcase__snow--mid" aria-hidden="true"></span>
-          <span class="project-showcase__snow project-showcase__snow--near" aria-hidden="true"></span>
-          {% endif %}
         </div>
       </div>
 
       <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image %} project-showcase__summary--with-video{% endif %}">
         {% if project.video or project.video_sources or project.summary_image %}
-        <div class="project-showcase__summary-video">
+        <div class="project-showcase__summary-video{% if project.snow_overlay and project.summary_image %} project-showcase__summary-video--snow{% endif %}"{% if project.snow_overlay and project.summary_image %} data-animate-when-visible="true"{% endif %}>
           {% if project.summary_image %}
           <img
             class="project-showcase__summary-video-media project-showcase__summary-image"
@@ -101,6 +96,11 @@ title: Home
             <source src="{{ project.video }}" type="video/mp4">
             {% endif %}
           </video>
+          {% endif %}
+          {% if project.snow_overlay and project.summary_image %}
+          <span class="project-showcase__snow project-showcase__snow--far" aria-hidden="true"></span>
+          <span class="project-showcase__snow project-showcase__snow--mid" aria-hidden="true"></span>
+          <span class="project-showcase__snow project-showcase__snow--near" aria-hidden="true"></span>
           {% endif %}
         </div>
         {% if project.inline_awards and project.awards %}

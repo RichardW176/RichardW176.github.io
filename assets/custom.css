@@ -513,9 +513,10 @@ h2 {
   box-shadow: none;
 }
 
-.project-showcase__poster-frame--snow {
+.project-showcase__summary-video--snow {
   overflow: hidden;
   isolation: isolate;
+  border-radius: inherit;
 }
 
 .project-showcase__snow {
@@ -529,7 +530,7 @@ h2 {
   transition: opacity 260ms ease;
 }
 
-.project-showcase__poster-frame--snow.is-visible .project-showcase__snow {
+.project-showcase__summary-video--snow.is-visible .project-showcase__snow {
   opacity: 1;
   animation-play-state: running;
 }
@@ -1730,7 +1731,7 @@ h2 {
     opacity: 0;
   }
 
-  .project-showcase__poster-frame--snow.is-visible .project-showcase__snow {
+  .project-showcase__summary-video--snow.is-visible .project-showcase__snow {
     opacity: 0.22;
   }
 }
