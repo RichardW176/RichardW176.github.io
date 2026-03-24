@@ -1064,8 +1064,8 @@ h2 {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(6, 6, 10, 0.94) 0%, rgba(6, 6, 10, 0.76) 24%, rgba(6, 6, 10, 0.42) 46%, rgba(6, 6, 10, 0.16) 68%, rgba(6, 6, 10, 0.02) 100%),
-    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.12) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.05) 34%, transparent 62%);
+    linear-gradient(90deg, rgba(6, 6, 10, 0.42) 0%, rgba(6, 6, 10, 0.22) 14%, rgba(6, 6, 10, 0.08) 24%, rgba(6, 6, 10, 0.02) 34%, transparent 44%),
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.05) 0%, transparent 22%);
 }
 
 .project-showcase__summary-video {
@@ -1245,16 +1245,7 @@ h2 {
 }
 
 .project-showcase__summary--with-video > .project-showcase__summary-content::before {
-  content: "";
-  position: absolute;
-  inset: -26px;
-  width: auto;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(6, 6, 10, 0.34) 0%, rgba(6, 6, 10, 0.18) 12%, rgba(6, 6, 10, 0.06) 22%, transparent 34%),
-    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.04) 0%, transparent 22%);
-  filter: blur(8px);
+  content: none;
 }
 
 .project-showcase__summary--with-video .project-showcase__summary-content > * {
