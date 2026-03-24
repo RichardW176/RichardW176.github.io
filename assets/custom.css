@@ -548,7 +548,7 @@ h2 {
   display: grid;
   gap: var(--project-sequence-gap);
   max-width: 1300px;
-  margin: 56px auto 112px;
+  margin: 56px auto 32px;
   padding: 0 24px;
 }
 
@@ -1626,7 +1626,8 @@ h2 {
 
 .writing-card__body {
   padding: 24px 30px 28px;
-  background: #000000;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .writing-card__content {
