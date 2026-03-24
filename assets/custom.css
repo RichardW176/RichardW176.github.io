@@ -169,15 +169,29 @@ select {
 }
 
 .hero-linkedin {
+  display: block;
   width: 36px;
   height: 36px;
   margin-top: 18px;
+  text-decoration: none;
+  border: none;
+  background: none;
+}
+.hero-linkedin,
+.hero-linkedin:hover,
+.hero-linkedin:focus,
+.hero-linkedin:active {
+  color: inherit;
+  transform: none !important;
+  transition: none !important;
 }
 .hero-linkedin img {
   width: 36px;
   height: 36px;
   display: block;
   filter: invert(1);
+  transition: none !important;
+  transform: none !important;
 }
 .hero-linkedin:hover img {
   opacity: 0.75;
