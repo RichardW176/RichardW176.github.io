@@ -289,6 +289,17 @@
       syncTabGap();
     });
 
+    if (nav && 'IntersectionObserver' in window) {
+      const sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;visibility:hidden;';
+      switcher.insertBefore(sentinel, switcher.firstChild);
+
+      new IntersectionObserver(
+        ([entry]) => nav.classList.toggle('is-stuck', !entry.isIntersecting),
+        { threshold: 0 }
+      ).observe(sentinel);
+    }
   });
 
   if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {

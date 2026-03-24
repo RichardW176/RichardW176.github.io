@@ -184,7 +184,7 @@ h2 {
   isolation: isolate;
 }
 
-.portfolio-nav::before {
+.portfolio-nav.is-stuck::before {
   content: "";
   position: absolute;
   top: 0;
@@ -197,7 +197,7 @@ h2 {
   z-index: -1;
 }
 
-.portfolio-nav::after {
+.portfolio-nav.is-stuck::after {
   content: "";
   position: absolute;
   left: 50%;
