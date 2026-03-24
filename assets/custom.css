@@ -197,18 +197,6 @@ h2 {
   z-index: -1;
 }
 
-.portfolio-nav.is-stuck::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  bottom: -32px;
-  height: 32px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-  pointer-events: none;
-  z-index: -1;
-}
 
 .portfolio-nav__link {
   display: inline-flex;
@@ -338,7 +326,6 @@ h2 {
 
 .portfolio-page.is-underlay .portfolio-page__surface {
   border-color: rgba(255, 255, 255, 0.12);
-  border-top-color: transparent;
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -355,10 +342,22 @@ h2 {
   padding: clamp(34px, 4vw, 52px);
   border-radius: 0 32px 32px 32px;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  border-top-color: transparent;
   background: #000000;
   box-shadow: 0 32px 110px rgba(0, 0, 0, 0.42);
   position: relative;
+}
+
+.portfolio-nav.is-stuck ~ .portfolio-stack .portfolio-page.is-active .portfolio-page__surface::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 0 32px 0 0;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .portfolio-page__surface--writing {
