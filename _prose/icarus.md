@@ -41,8 +41,6 @@ But I will not be your failure.
 
 *The SON takes the crook and fish and walks up the hill, back towards the house. The FATHER sighs and looks out into the sea.*
 
----
-
 **EXT. FIELD - MORNING**
 
 *Next day. Close up of a sheep bleating and grazing. The FATHER walks through the herd, bent, picking up droppings. The SON is behind him, at a distance. A strong gust of wind shifts the tall grass at his feet.*
