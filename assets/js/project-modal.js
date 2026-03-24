@@ -188,6 +188,26 @@
       || pages[0]?.dataset.portfolioPage
       || '';
 
+    const nav = switcher.querySelector('.portfolio-nav');
+
+    const syncTabGap = () => {
+      const activeTab = tabs.find((t) => t.classList.contains('portfolio-nav__link--active'));
+      if (!activeTab || !nav) return;
+
+      const navRect = nav.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      const tabLeft = tabRect.left - navRect.left;
+      const tabRight = tabRect.right - navRect.left;
+
+      pages.forEach((page) => {
+        const surface = page.querySelector('.portfolio-page__surface');
+        if (surface) {
+          surface.style.setProperty('--tab-left', `${tabLeft}px`);
+          surface.style.setProperty('--tab-right', `${tabRight}px`);
+        }
+      });
+    };
+
     const syncStackHeight = () => {
       const activePage = pages.find((page) => page.dataset.portfolioPage === activePageId);
       if (!activePage) {
@@ -241,7 +261,10 @@
         hydrateVisibleVideos(activePage);
       }
 
-      window.requestAnimationFrame(syncStackHeight);
+      window.requestAnimationFrame(() => {
+        syncStackHeight();
+        syncTabGap();
+      });
     };
 
     tabs.forEach((tab) => {
@@ -261,7 +284,10 @@
     });
 
     applyActivePage(activePageId);
-    window.addEventListener('resize', syncStackHeight);
+    window.addEventListener('resize', () => {
+      syncStackHeight();
+      syncTabGap();
+    });
 
     const nav = switcher.querySelector('.portfolio-nav');
     if (nav) {
