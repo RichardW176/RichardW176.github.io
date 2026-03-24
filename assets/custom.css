@@ -1067,6 +1067,17 @@ h2 {
   z-index: 3;
 }
 
+#doodle-cards .project-showcase__summary-video::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(20, 14, 10, 0.72) 0%, rgba(20, 14, 10, 0.48) 34%, rgba(20, 14, 10, 0.16) 62%, rgba(20, 14, 10, 0.06) 100%),
+    linear-gradient(180deg, rgba(52, 36, 20, 0.18) 0%, rgba(24, 18, 14, 0.08) 100%);
+}
+
 .project-showcase__summary--with-video .project-showcase__eyebrow,
 .project-showcase__summary--with-video .project-showcase__meta {
   color: rgba(224, 229, 242, 0.92);

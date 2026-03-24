@@ -1,6 +1,6 @@
 ---
 title: "Doodle Cards"
-image: /assets/images/Frame%203%20%282%29.png
+image: /assets/images/Frame%202%20%284%29.png
 video: /assets/Doodle%20Cards%20preview.mp4
 role: Art
 role_display: Art
