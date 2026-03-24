@@ -1,13 +1,17 @@
 ---
 title: Thang!
-image: /assets/images/IMG_6550.png
+image: /assets/images/thang.png
+summary_image: /assets/images/IMG_6550.png
+summary_image_alt: Thang ice arena banner art
 secondary_video: /assets/Thang%20Preview.mp4
 secondary_video_title: Freeze Tag / Ovens
 secondary_video_subtitle: Core Mechanics
 tertiary_video: /assets/Thang%20Map%20Preview.mp4
 tertiary_video_title: Ice Arena
 tertiary_video_subtitle: Map Blockout
+accent_rgb: 116 236 255
 snow_overlay: true
+poster_frame_borderless: true
 role: Lead Narrative Designer, Designer
 stage: Production
 timeline: Dec 2025 - Present

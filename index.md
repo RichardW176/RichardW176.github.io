@@ -76,9 +76,16 @@ title: Home
         </div>
       </div>
 
-      <aside class="project-showcase__summary{% if project.video or project.video_sources %} project-showcase__summary--with-video{% endif %}">
-        {% if project.video or project.video_sources %}
+      <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image %} project-showcase__summary--with-video{% endif %}">
+        {% if project.video or project.video_sources or project.summary_image %}
         <div class="project-showcase__summary-video">
+          {% if project.summary_image %}
+          <img
+            class="project-showcase__summary-video-media project-showcase__summary-image"
+            src="{{ project.summary_image }}"
+            {% if project.summary_image_position %}style="object-position: {{ project.summary_image_position }};"{% endif %}
+            alt="{{ project.summary_image_alt | default: project.title }}">
+          {% else %}
           <video
             class="project-showcase__summary-video-media"
             data-autoplay-when-visible="true"
@@ -94,6 +101,7 @@ title: Home
             <source src="{{ project.video }}" type="video/mp4">
             {% endif %}
           </video>
+          {% endif %}
         </div>
         {% if project.inline_awards and project.awards %}
         <div class="project-showcase__summary-awards" aria-label="{{ project.title }} awards">
