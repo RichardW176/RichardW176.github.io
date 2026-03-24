@@ -1247,14 +1247,15 @@ h2 {
 .project-showcase__summary--with-video > .project-showcase__summary-content::before {
   content: "";
   position: absolute;
-  inset: -22px auto -22px -24px;
-  width: min(74%, 540px);
+  inset: -18px auto -18px -20px;
+  width: min(78%, 560px);
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(6, 6, 10, 0.86) 0%, rgba(6, 6, 10, 0.72) 42%, rgba(6, 6, 10, 0.34) 76%, transparent 100%);
-  clip-path: polygon(0 0, 82% 0, 62% 100%, 0 100%);
-  filter: blur(10px);
+    linear-gradient(90deg, rgba(6, 6, 10, 0.68) 0%, rgba(6, 6, 10, 0.56) 34%, rgba(6, 6, 10, 0.3) 66%, rgba(6, 6, 10, 0.08) 88%, transparent 100%),
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.08) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.03) 42%, transparent 78%);
+  border-radius: 18px;
+  filter: blur(12px);
 }
 
 .project-showcase__summary--with-video .project-showcase__summary-content > * {
