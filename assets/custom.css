@@ -207,6 +207,7 @@ h2 {
   border-top: 1px solid rgba(255, 255, 255, 0.28);
   border-left: 1px solid rgba(255, 255, 255, 0.28);
   border-right: 1px solid rgba(255, 255, 255, 0.28);
+  border-top-right-radius: 32px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
   -webkit-mask: linear-gradient(180deg, #000 0%, #000 1px, rgba(0,0,0,0.6) 10px, transparent 100%);
