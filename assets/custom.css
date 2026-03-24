@@ -14,6 +14,38 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: rgba(255, 255, 255, 0.34) transparent;
+  scrollbar-width: thin;
+}
+
+body {
+  scrollbar-color: rgba(255, 255, 255, 0.34) transparent;
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.project-modal__panel::-webkit-scrollbar,
+.doc-modal__panel::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.project-modal__panel::-webkit-scrollbar-track,
+.doc-modal__panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.project-modal__panel::-webkit-scrollbar-thumb,
+.doc-modal__panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
 }
 
 body,
@@ -168,7 +200,7 @@ h2 {
 
 .portfolio-panel {
   max-width: 1300px;
-  margin: 0 auto 120px;
+  margin: 0 auto 48px;
   padding: 0 24px;
 }
 
@@ -345,6 +377,19 @@ h2 {
 
 .portfolio-page.is-underlay .portfolio-page__surface {
   border-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.portfolio-page.is-underlay .portfolio-page__surface::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 52px, transparent 240px);
+  mask: linear-gradient(180deg, #000 0%, #000 52px, transparent 240px);
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -358,7 +403,7 @@ h2 {
 
 .portfolio-page__surface {
   min-height: 100%;
-  padding: clamp(34px, 4vw, 52px);
+  padding: clamp(34px, 4vw, 52px) clamp(34px, 4vw, 52px) clamp(20px, 3vw, 30px);
   border-radius: 0 32px 32px 32px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-top-color: rgba(255, 255, 255, 0.28);
@@ -1165,7 +1210,7 @@ h2 {
     object-position: center 34%;
   }
   .portfolio-panel {
-    margin-bottom: 78px;
+    margin-bottom: 42px;
     padding: 0 16px;
   }
   .portfolio-nav {
