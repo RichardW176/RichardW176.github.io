@@ -244,6 +244,7 @@ h2 {
 
 .portfolio-nav__link[data-portfolio-tab="writing-samples"] {
   background: #000000;
+  border-bottom-color: rgba(255, 255, 255, 0.28);
 }
 
 .portfolio-nav__link:hover,
@@ -813,7 +814,7 @@ h2 {
   inset: 0;
   pointer-events: none;
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.9) 16%, rgba(0, 0, 0, 0.62) 30%, rgba(0, 0, 0, 0.18) 46%, rgba(0, 0, 0, 0) 58%);
-  clip-path: polygon(0 0, 52% 0, 0 66%);
+  clip-path: polygon(0 0, 54% 0, 0 70%);
 }
 
 .project-showcase__secondary-video-copy {
