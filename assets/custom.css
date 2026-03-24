@@ -1064,10 +1064,8 @@ h2 {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(8, 8, 12, 0.86) 0%, rgba(8, 8, 12, 0.58) 24%, rgba(8, 8, 12, 0.26) 46%, rgba(8, 8, 12, 0.1) 66%, rgba(8, 8, 12, 0.04) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.08) 22%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.38) 100%),
-    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.12) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.06) 34%, transparent 64%),
-    radial-gradient(circle at 18% 22%, rgb(var(--project-accent-rgb, 255 255 255) / 0.1), transparent 34%);
+    linear-gradient(90deg, rgba(6, 6, 10, 0.94) 0%, rgba(6, 6, 10, 0.76) 24%, rgba(6, 6, 10, 0.42) 46%, rgba(6, 6, 10, 0.16) 68%, rgba(6, 6, 10, 0.02) 100%),
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.12) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.05) 34%, transparent 62%);
 }
 
 .project-showcase__summary-video {
@@ -1261,6 +1259,18 @@ h2 {
 .project-showcase__summary--with-video .project-showcase__role,
 .project-showcase__summary--with-video .project-showcase__role strong {
   color: #ffffff;
+}
+
+.project-showcase__summary--with-video .project-showcase__eyebrow,
+.project-showcase__summary--with-video .project-showcase__index,
+.project-showcase__summary--with-video .project-showcase__title,
+.project-showcase__summary--with-video .project-showcase__role,
+.project-showcase__summary--with-video .project-showcase__role strong,
+.project-showcase__summary--with-video .project-showcase__meta,
+.project-showcase__summary--with-video .project-showcase__desc {
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(0, 0, 0, 0.22);
 }
 
 .project-showcase__summary--with-video .project-showcase__title {
