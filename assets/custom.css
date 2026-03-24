@@ -207,6 +207,7 @@ h2 {
   padding: 12px 18px 10px;
   border: 1px solid rgba(255, 255, 255, 1);
   border-radius: 18px 18px 0 0;
+  margin-bottom: -1px;
   background: #000000;
   color: rgba(241, 244, 255, 0.78);
   cursor: pointer;
