@@ -1186,6 +1186,10 @@ h2 {
   margin: -8px auto 0;
 }
 
+.project-showcase__secondary-feature--panel-only {
+  margin: 18px auto 0;
+}
+
 .project-showcase__secondary-feature + .project-showcase__secondary-feature {
   margin-top: 26px;
 }
@@ -1284,6 +1288,11 @@ h2 {
   border-radius: 0 0 22px 22px;
   background: #000000;
   box-shadow: 0 0 10px rgb(var(--project-accent-rgb) / 0.08);
+}
+
+.project-showcase__secondary-panel--standalone {
+  border-top: 1px solid rgb(var(--project-accent-rgb) / 0.34);
+  border-radius: 22px;
 }
 
 .project-showcase__secondary-panel-heading {

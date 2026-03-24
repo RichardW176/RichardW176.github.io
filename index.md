@@ -156,6 +156,23 @@ title: Home
       </aside>
     </div>
 
+    {% if project.plain_feature_heading or project.plain_feature_items %}
+    <div class="project-showcase__secondary-feature project-showcase__secondary-feature--panel-only">
+      <div class="project-showcase__secondary-panel project-showcase__secondary-panel--standalone">
+        {% if project.plain_feature_heading %}
+        <h3 class="project-showcase__secondary-panel-heading">{{ project.plain_feature_heading }}</h3>
+        {% endif %}
+        {% if project.plain_feature_items %}
+        <div class="project-showcase__secondary-panel-copy">
+          {% for item in project.plain_feature_items %}
+          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
     {% if project.secondary_video %}
     <div class="project-showcase__secondary-feature">
       <div class="project-showcase__secondary-video">

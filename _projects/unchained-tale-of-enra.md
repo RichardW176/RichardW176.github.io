@@ -11,6 +11,13 @@ engine: Unity
 stage: Post-production
 timeline: June 2025 - Present
 description: Turn / negotiation based action RPG set in a fantasy world.
+plain_feature_items:
+  - label: Combat Design
+    text: Ability documentation, enemy design
+  - label: Level Design
+    text: Mock-up sketches, sequencing documentation
+  - label: Narrative Design
+    text: Character documentation, scriptwriting and dialogue
 order: 4
 docs:
   - title: "Marlow Character Brief"
