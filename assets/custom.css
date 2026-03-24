@@ -168,6 +168,22 @@ select {
   margin-bottom: 18px;
 }
 
+.hero-linkedin {
+  display: inline-block;
+  margin-bottom: 18px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.hero-linkedin img {
+  width: 36px;
+  height: 36px;
+  display: block;
+  filter: invert(1);
+}
+.hero-linkedin:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
 .hero-role {
   color: #999;
   letter-spacing: 3.4px;
