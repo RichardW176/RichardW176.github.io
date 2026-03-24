@@ -109,6 +109,8 @@ title: Home
           {% if project.storm_overlay and project.summary_image %}
           <span class="project-showcase__mist project-showcase__mist--storm" aria-hidden="true"></span>
           <span class="project-showcase__storm-flecks" aria-hidden="true"></span>
+          <span class="project-showcase__storm-rain project-showcase__storm-rain--far" aria-hidden="true"></span>
+          <span class="project-showcase__storm-rain project-showcase__storm-rain--near" aria-hidden="true"></span>
           {% endif %}
         </div>
         {% if project.inline_awards and project.awards %}

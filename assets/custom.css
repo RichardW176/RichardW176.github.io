@@ -542,12 +542,26 @@ h2 {
   padding: 18px;
   display: grid;
   aspect-ratio: 5 / 7;
+  overflow: hidden;
+  isolation: isolate;
   border-radius: 26px;
   border: 1px solid rgb(var(--project-accent-rgb, 255 255 255) / 0.3);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+}
+
+.project-showcase__poster-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.12) 18%, rgba(0, 0, 0, 0.04) 42%, rgba(0, 0, 0, 0.08) 68%, rgba(0, 0, 0, 0.18) 100%),
+    linear-gradient(90deg, rgba(8, 8, 12, 0.14) 0%, transparent 24%, transparent 78%, rgba(8, 8, 12, 0.1) 100%);
 }
 
 .project-showcase__poster-frame--flush {
@@ -645,6 +659,49 @@ h2 {
   transition: opacity 260ms ease;
 }
 
+.project-showcase__storm-rain {
+  position: absolute;
+  inset: -16% -8% -6%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background-repeat: repeat;
+  animation-play-state: paused;
+  transition: opacity 260ms ease;
+}
+
+.project-showcase__storm-rain--far {
+  background-image:
+    repeating-linear-gradient(113deg,
+      transparent 0 26px,
+      rgba(190, 236, 255, 0.18) 26px 28px,
+      transparent 28px 60px),
+    repeating-linear-gradient(113deg,
+      transparent 0 34px,
+      rgba(122, 212, 255, 0.14) 34px 35px,
+      transparent 35px 72px);
+  background-size: 180px 180px, 240px 240px;
+  background-position: 12px -60px, 90px -20px;
+  filter: blur(0.35px);
+  animation: floodsong-rain-far 1.9s linear infinite;
+}
+
+.project-showcase__storm-rain--near {
+  background-image:
+    repeating-linear-gradient(111deg,
+      transparent 0 20px,
+      rgba(221, 247, 255, 0.38) 20px 23px,
+      transparent 23px 48px),
+    repeating-linear-gradient(111deg,
+      transparent 0 28px,
+      rgba(123, 232, 255, 0.28) 28px 30px,
+      transparent 30px 58px);
+  background-size: 128px 128px, 176px 176px;
+  background-position: 24px -72px, 102px -30px;
+  filter: blur(0.12px);
+  animation: floodsong-rain-near 1.15s linear infinite;
+}
+
 .project-showcase__summary-video--storm.is-visible::before {
   opacity: 0.34;
   animation-play-state: running;
@@ -665,6 +722,11 @@ h2 {
   animation-play-state: running;
 }
 
+.project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain {
+  opacity: 1;
+  animation-play-state: running;
+}
+
 #floodsong .project-showcase__summary-video--storm::before {
   inset: -6% -4% -2%;
   background:
@@ -681,16 +743,44 @@ h2 {
 
 #floodsong .project-showcase__storm-flecks {
   inset: -8% -2% 0;
-  z-index: 4;
+  z-index: 3;
   background-image:
-    radial-gradient(circle, rgba(244, 252, 255, 0.96) 0 1.8px, transparent 2.8px),
-    radial-gradient(circle, rgba(211, 239, 255, 0.72) 0 2.6px, transparent 3.8px),
-    radial-gradient(circle, rgba(150, 213, 255, 0.46) 0 3.1px, transparent 4.5px);
-  background-size: 84px 84px, 126px 126px, 176px 176px;
+    radial-gradient(circle, rgba(244, 252, 255, 0.72) 0 1.3px, transparent 2.2px),
+    radial-gradient(circle, rgba(176, 234, 255, 0.48) 0 1.8px, transparent 2.8px),
+    radial-gradient(circle, rgba(111, 242, 255, 0.34) 0 2.2px, transparent 3.4px);
+  background-size: 96px 96px, 144px 144px, 198px 198px;
   background-position: 18px -76px, 90px -34px, 142px -88px;
   filter: none;
   mix-blend-mode: normal;
   animation: floodsong-flecks-drift-strong 7.5s linear infinite;
+}
+
+#floodsong .project-showcase__storm-rain {
+  z-index: 2;
+}
+
+#floodsong .project-showcase__storm-rain--far {
+  background-image:
+    repeating-linear-gradient(113deg,
+      transparent 0 24px,
+      rgba(122, 234, 255, 0.24) 24px 26px,
+      transparent 26px 52px),
+    repeating-linear-gradient(113deg,
+      transparent 0 32px,
+      rgba(86, 215, 255, 0.18) 32px 33px,
+      transparent 33px 64px);
+}
+
+#floodsong .project-showcase__storm-rain--near {
+  background-image:
+    repeating-linear-gradient(111deg,
+      transparent 0 18px,
+      rgba(224, 250, 255, 0.48) 18px 21px,
+      transparent 21px 44px),
+    repeating-linear-gradient(111deg,
+      transparent 0 24px,
+      rgba(110, 241, 255, 0.34) 24px 26px,
+      transparent 26px 52px);
 }
 
 #floodsong .project-showcase__summary-video--storm.is-visible::before {
@@ -702,11 +792,19 @@ h2 {
 }
 
 #floodsong .project-showcase__summary-video--storm.is-visible .project-showcase__mist--storm {
-  opacity: 0.6;
+  opacity: 0.64;
 }
 
 #floodsong .project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
-  opacity: 0.78;
+  opacity: 0.62;
+}
+
+#floodsong .project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain--far {
+  opacity: 0.44;
+}
+
+#floodsong .project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain--near {
+  opacity: 0.72;
 }
 
 .project-showcase__mist {
@@ -860,6 +958,24 @@ h2 {
   }
 }
 
+@keyframes floodsong-rain-far {
+  from {
+    background-position: 12px -60px, 90px -20px;
+  }
+  to {
+    background-position: -48px 156px, 38px 210px;
+  }
+}
+
+@keyframes floodsong-rain-near {
+  from {
+    background-position: 24px -72px, 102px -30px;
+  }
+  to {
+    background-position: -54px 244px, 30px 304px;
+  }
+}
+
 @keyframes floodsong-lightning-flash {
   0%, 18%, 42%, 58%, 100% {
     opacity: 0;
@@ -962,10 +1078,11 @@ h2 {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(10, 10, 14, 0.48) 0%, rgba(10, 10, 14, 0.24) 30%, rgba(10, 10, 14, 0.1) 58%, rgba(10, 10, 14, 0.04) 100%),
-    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.14) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.08) 34%, rgb(var(--project-accent-rgb, 255 255 255) / 0.03) 62%, transparent 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.18) 18%, rgba(0, 0, 0, 0.08) 40%, rgba(0, 0, 0, 0.2) 64%, rgba(0, 0, 0, 0.48) 100%),
+    linear-gradient(90deg, rgba(10, 10, 14, 0.68) 0%, rgba(10, 10, 14, 0.34) 28%, rgba(10, 10, 14, 0.14) 56%, rgba(10, 10, 14, 0.04) 100%),
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.16) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.08) 34%, rgb(var(--project-accent-rgb, 255 255 255) / 0.03) 62%, transparent 100%),
     radial-gradient(circle at 18% 22%, rgb(var(--project-accent-rgb, 255 255 255) / 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(5, 7, 14, 0.18) 0%, rgba(5, 7, 14, 0.22) 32%, rgba(5, 7, 14, 0.62) 72%, rgba(5, 7, 14, 0.84) 100%);
+    linear-gradient(180deg, rgba(5, 7, 14, 0.2) 0%, rgba(5, 7, 14, 0.24) 32%, rgba(5, 7, 14, 0.66) 72%, rgba(5, 7, 14, 0.9) 100%);
 }
 
 .project-showcase__summary-video {
@@ -1168,6 +1285,18 @@ h2 {
 
 .project-showcase__summary--with-video .project-showcase__desc {
   color: rgba(230, 234, 243, 0.9);
+}
+
+#floodsong .project-showcase__poster,
+#floodsong .project-showcase__summary--with-video,
+#floodsong .project-showcase__secondary-video,
+#floodsong .project-showcase__secondary-panel,
+#floodsong .project-showcase__secondary-panel--standalone {
+  border-color: rgba(103, 246, 255, 0.46);
+  box-shadow:
+    0 0 0 1px rgba(103, 246, 255, 0.08),
+    0 0 16px rgba(103, 246, 255, 0.12),
+    0 28px 90px rgba(0, 0, 0, 0.45);
 }
 
 .project-showcase__details {
@@ -2053,7 +2182,8 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   .project-showcase__summary-video--storm::before,
   .project-showcase__summary-video--storm::after,
-  .project-showcase__storm-flecks {
+  .project-showcase__storm-flecks,
+  .project-showcase__storm-rain {
     animation: none;
   }
 
@@ -2094,5 +2224,9 @@ h2 {
 
   .project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
     opacity: 0.32;
+  }
+
+  .project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain {
+    opacity: 0.18;
   }
 }
