@@ -427,19 +427,19 @@ title: Home
   <div class="writing-grid">
     {% for piece in sorted_prose %}
     <article class="writing-card">
-      <p class="writing-card__eyebrow">Writing Sample</p>
-      <h3 class="writing-card__title">{{ piece.title }}</h3>
-      <p class="writing-card__summary">
-        {% if piece.description %}
-          {{ piece.description }}
-        {% else %}
-          {{ piece.excerpt | strip_html | strip_newlines | truncate: 220 }}
+      <div class="writing-card__header">
+        <h3 class="writing-card__title">{{ piece.title }}</h3>
+        {% if piece.media_type %}<p class="writing-card__media-type">{{ piece.media_type }}</p>{% endif %}
+        {% if piece.description and piece.description != "" %}
+        <p class="writing-card__summary">{{ piece.description }}</p>
         {% endif %}
-      </p>
-      <div class="writing-card__content">
-        {{ piece.content | markdownify }}
       </div>
-      <a class="writing-card__link" href="{{ piece.url }}">Open Sample</a>
+      <div class="writing-card__body">
+        <div class="writing-card__content">
+          {{ piece.content | markdownify }}
+        </div>
+        {% if piece.pdf %}<a class="writing-card__link" href="{{ piece.pdf }}" target="_blank" rel="noopener noreferrer">Full Sample</a>{% endif %}
+      </div>
     </article>
     {% endfor %}
   </div>
