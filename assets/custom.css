@@ -363,12 +363,21 @@ h2 {
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: transparent;
   overflow: hidden;
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface::before {
-  content: none;
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: calc(var(--portfolio-peek) + 56px);
+  height: 76px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-top-right-radius: 32px;
+  pointer-events: none;
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
