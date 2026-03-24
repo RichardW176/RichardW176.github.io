@@ -291,8 +291,8 @@ h2 {
   min-width: 168px;
   min-height: 60px;
   padding: 12px 18px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-bottom-color: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-bottom-color: rgba(255, 255, 255, 0.10);
   border-radius: 18px 18px 0 0;
   margin-bottom: -1px;
   background: #000000;
