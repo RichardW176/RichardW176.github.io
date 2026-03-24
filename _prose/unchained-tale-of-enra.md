@@ -2,6 +2,7 @@
 title: "Unchained: Tale of Enra"
 media_type: "Video Game"
 description: "Boss negotiation dialogue with differing effectiveness."
+pdf: /assets/Marlow%20Full%20Sample.pdf
 order: 0
 ---
 
