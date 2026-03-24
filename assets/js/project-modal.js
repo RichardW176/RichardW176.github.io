@@ -6,7 +6,9 @@
   const docModalLink = document.getElementById('doc-modal-link');
   const projectShowcases = document.querySelectorAll('.project-showcase');
   let visibleVideoObserver = null;
+  let visibleAnimationObserver = null;
   const visibleVideoThreshold = 0.35;
+  const visibleAnimationThreshold = 0.2;
 
   async function hydrateScriptCards(root) {
     const cards = root.querySelectorAll('.project-script-card[data-script-file]:not([data-script-loaded]):not([data-script-inline="true"])');
@@ -118,8 +120,59 @@
     });
   }
 
+  function hydrateVisibleAnimations(root) {
+    const animatedEls = root.querySelectorAll('[data-animate-when-visible="true"]:not([data-visible-animation-bound])');
+    if (!animatedEls.length) {
+      return;
+    }
+
+    const getVisibleRatio = (el) => {
+      const rect = el.getBoundingClientRect();
+      const visibleWidth = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+      const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      const visibleArea = visibleWidth * visibleHeight;
+      const totalArea = Math.max(rect.width * rect.height, 1);
+      return visibleArea / totalArea;
+    };
+
+    const syncAnimationState = (el, visibleRatio = getVisibleRatio(el)) => {
+      el.classList.toggle('is-visible', visibleRatio >= visibleAnimationThreshold);
+    };
+
+    animatedEls.forEach((el) => {
+      el.dataset.visibleAnimationBound = 'true';
+      window.requestAnimationFrame(() => {
+        syncAnimationState(el);
+      });
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      animatedEls.forEach((el) => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    if (!visibleAnimationObserver) {
+      visibleAnimationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          syncAnimationState(entry.target, entry.intersectionRatio);
+        });
+      }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0, 0.1, 0.2, 0.35, 0.5, 0.75, 1],
+      });
+    }
+
+    animatedEls.forEach((el) => {
+      visibleAnimationObserver.observe(el);
+    });
+  }
+
   hydrateScriptCards(document);
   hydrateVisibleVideos(document);
+  hydrateVisibleAnimations(document);
 
   if (projectShowcases.length) {
     let activeFrame = null;
