@@ -1,7 +1,7 @@
 ---
 title: "Doodle Cards"
 image: /assets/images/Frame%202%20%284%29.png
-poster_position: 44% center
+poster_position: center
 video: /assets/Doodle%20Cards%20preview.mp4
 secondary_video: /assets/Doodle%20Art.mp4
 secondary_video_title: Stickers

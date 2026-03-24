@@ -10,12 +10,14 @@ body {
   background-color: #000000 !important;
   color: #e6e6e6;
   font-family: "Manrope", sans-serif;
+  overflow-x: clip;
 }
 
 html {
   scroll-behavior: smooth;
   scrollbar-color: rgba(255, 255, 255, 0.34) transparent;
   scrollbar-width: thin;
+  overflow-x: clip;
 }
 
 body {
@@ -375,11 +377,21 @@ h2 {
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: transparent;
+  overflow: hidden;
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface::before {
-  content: none;
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: calc(var(--portfolio-peek) + 76px);
+  height: 92px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-right-radius: 38px;
+  pointer-events: none;
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -945,7 +957,10 @@ h2 {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(5, 7, 14, 0.12) 0%, rgba(5, 7, 14, 0.18) 32%, rgba(5, 7, 14, 0.58) 72%, rgba(5, 7, 14, 0.82) 100%);
+  background:
+    linear-gradient(90deg, rgb(var(--project-accent-rgb, 255 255 255) / 0.14) 0%, rgb(var(--project-accent-rgb, 255 255 255) / 0.08) 34%, rgb(var(--project-accent-rgb, 255 255 255) / 0.03) 62%, transparent 100%),
+    radial-gradient(circle at 18% 22%, rgb(var(--project-accent-rgb, 255 255 255) / 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(5, 7, 14, 0.12) 0%, rgba(5, 7, 14, 0.16) 32%, rgba(5, 7, 14, 0.54) 72%, rgba(5, 7, 14, 0.78) 100%);
 }
 
 .project-showcase__summary-video {
