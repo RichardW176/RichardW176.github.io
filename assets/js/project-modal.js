@@ -262,6 +262,21 @@
 
     applyActivePage(activePageId);
     window.addEventListener('resize', syncStackHeight);
+
+    const nav = switcher.querySelector('.portfolio-nav');
+    if (nav) {
+      const sentinel = document.createElement('div');
+      sentinel.style.cssText = 'height:1px;margin-bottom:-1px;pointer-events:none;visibility:hidden;';
+      nav.parentNode.insertBefore(sentinel, nav);
+
+      const stickyObserver = new IntersectionObserver(
+        ([entry]) => {
+          nav.classList.toggle('is-stuck', !entry.isIntersecting);
+        },
+        { threshold: 0 }
+      );
+      stickyObserver.observe(sentinel);
+    }
   });
 
   if (!projectModal || !projectModalInner || !docModal || !docModalFrame || !docModalLink) {

@@ -181,7 +181,22 @@ h2 {
   position: sticky;
   top: 0;
   z-index: 20;
+  background: transparent;
+}
+
+.portfolio-nav.is-stuck {
   background: #000000;
+}
+
+.portfolio-nav.is-stuck::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -32px;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
 }
 
 .portfolio-nav__link {
