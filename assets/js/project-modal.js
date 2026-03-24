@@ -136,7 +136,12 @@
     };
 
     const syncAnimationState = (el, visibleRatio = getVisibleRatio(el)) => {
-      el.classList.toggle('is-visible', visibleRatio >= visibleAnimationThreshold);
+      const isCurrentlyVisible = el.classList.contains('is-visible');
+      if (!isCurrentlyVisible && visibleRatio >= visibleAnimationThreshold) {
+        el.classList.add('is-visible');
+      } else if (isCurrentlyVisible && visibleRatio < 0.05) {
+        el.classList.remove('is-visible');
+      }
     };
 
     animatedEls.forEach((el) => {
