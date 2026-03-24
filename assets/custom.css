@@ -286,11 +286,14 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: none;
   border-radius: 0 32px 32px 32px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 320ms ease;
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 80px, transparent 220px);
+  mask: linear-gradient(180deg, #000 0%, #000 80px, transparent 220px);
 }
 
 .portfolio-page.is-active {
