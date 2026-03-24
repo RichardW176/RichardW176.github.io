@@ -177,7 +177,7 @@ h2 {
   gap: 0;
   width: min(calc(1120px - var(--portfolio-peek)), 100%);
   margin: 52px auto 0;
-  padding: 12px 0 1px;
+  padding: 12px 0 0;
   position: sticky;
   top: 0;
   isolation: isolate;
