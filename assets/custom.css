@@ -649,7 +649,10 @@ h2 {
 
 .project-showcase__storm-rain {
   position: absolute;
-  inset: -16% -8% -6%;
+  top: -100%;
+  left: -8%;
+  right: -8%;
+  bottom: -6%;
   z-index: 2;
   pointer-events: none;
   opacity: 0;
@@ -660,38 +663,38 @@ h2 {
 
 .project-showcase__storm-rain--far {
   background-image:
-    repeating-linear-gradient(176deg,
+    repeating-linear-gradient(86deg,
       transparent 0 47px, rgba(170, 230, 255, 0.1) 47px 48px, transparent 48px 97px),
-    repeating-linear-gradient(182deg,
+    repeating-linear-gradient(92deg,
       transparent 0 71px, rgba(130, 215, 255, 0.08) 71px 72px, transparent 72px 163px),
-    repeating-linear-gradient(174deg,
+    repeating-linear-gradient(84deg,
       transparent 0 103px, rgba(150, 222, 255, 0.07) 103px 104px, transparent 104px 211px),
-    repeating-linear-gradient(179deg,
+    repeating-linear-gradient(89deg,
       transparent 0 59px, rgba(110, 200, 255, 0.06) 59px 60px, transparent 60px 139px),
-    repeating-linear-gradient(184deg,
+    repeating-linear-gradient(94deg,
       transparent 0 83px, rgba(140, 218, 255, 0.05) 83px 84px, transparent 84px 181px);
-  background-size: 97px 293px, 163px 347px, 211px 401px, 139px 271px, 181px 359px;
+  background-size: 97px 100%, 163px 100%, 211px 100%, 139px 100%, 181px 100%;
   background-position: 7px 0px, 41px 0px, 23px 0px, 67px 0px, 13px 0px;
   filter: blur(0.4px);
-  animation: floodsong-rain-far 0.45s linear infinite;
+  animation: floodsong-rain-far 0.4s linear infinite;
 }
 
 .project-showcase__storm-rain--near {
   background-image:
-    repeating-linear-gradient(175deg,
+    repeating-linear-gradient(85deg,
       transparent 0 31px, rgba(210, 245, 255, 0.18) 31px 32.5px, transparent 32.5px 79px),
-    repeating-linear-gradient(183deg,
+    repeating-linear-gradient(93deg,
       transparent 0 53px, rgba(180, 238, 255, 0.14) 53px 54.5px, transparent 54.5px 127px),
-    repeating-linear-gradient(178deg,
+    repeating-linear-gradient(88deg,
       transparent 0 89px, rgba(200, 242, 255, 0.1) 89px 90.5px, transparent 90.5px 191px),
-    repeating-linear-gradient(181deg,
+    repeating-linear-gradient(91deg,
       transparent 0 41px, rgba(160, 232, 255, 0.12) 41px 42.5px, transparent 42.5px 103px),
-    repeating-linear-gradient(177deg,
+    repeating-linear-gradient(87deg,
       transparent 0 67px, rgba(190, 240, 255, 0.08) 67px 68.5px, transparent 68.5px 157px);
-  background-size: 79px 251px, 127px 307px, 191px 383px, 103px 269px, 157px 337px;
+  background-size: 79px 100%, 127px 100%, 191px 100%, 103px 100%, 157px 100%;
   background-position: 11px 0px, 53px 0px, 31px 0px, 79px 0px, 3px 0px;
   filter: blur(0.15px);
-  animation: floodsong-rain-near 0.25s linear infinite;
+  animation: floodsong-rain-near 0.2s linear infinite;
 }
 
 .project-showcase__summary-video--storm.is-visible::before,
@@ -945,19 +948,19 @@ h2 {
 
 @keyframes floodsong-rain-far {
   from {
-    background-position: 7px 0px, 41px 0px, 23px 0px, 67px 0px, 13px 0px;
+    transform: translateY(-50%);
   }
   to {
-    background-position: 7px 293px, 41px 347px, 23px 401px, 67px 271px, 13px 359px;
+    transform: translateY(0%);
   }
 }
 
 @keyframes floodsong-rain-near {
   from {
-    background-position: 11px 0px, 53px 0px, 31px 0px, 79px 0px, 3px 0px;
+    transform: translateY(-50%);
   }
   to {
-    background-position: 11px 251px, 53px 307px, 31px 383px, 79px 269px, 3px 337px;
+    transform: translateY(0%);
   }
 }
 
