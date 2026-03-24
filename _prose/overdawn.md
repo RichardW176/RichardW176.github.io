@@ -1,24 +1,54 @@
 ---
 title: "Overdawn"
 media_type: "Video Game"
-description: "Boss phase Yarnspinner dialogues."
+description: "Primary antagonist narrates over launch cinematic."
 order: 0.5
 ---
 
-**title: A1C3_RevPhase1Start**
-**tags:**
-\---
-Rev: Never liked her voice. #line:01787f6
-Rev: I told that defecto bitch that killin' you over omakase is fucked up. #line:078c359
-Rev: But hey- I tried to appeal. So no hard feelings now, ey Koi? #line:0ca7274
-\<\<CallEvent RevEngage\>\>
-===
+*BLACK SCREEN.*
 
-**title: A1C3_RevPhase1End**
-**tags:**
-\---
-Rev: [speed = 400/]Fuckin' A. #line:0badedb
-Rev: [speed = 400/]I only took this job because I thought we could have a good duel. #line:064713c
-Rev: [speed = 200/]I'm not dealing with this shit. I'll be at the courtyard down the hall. #line:04fc16d
-Rev: [speed = 100/]Don't [deadly]circ' out[/deadly] [Koi]Pink Pops[/Koi]. We're not done. #line:075b368
-===
+**PINKILL**
+"Aetherbounds die as any human would."
+
+*SCENE 1: Koi is seen bleeding out in the penthouse and clutching her pulsating core. Front shot of THEO walking towards her as his hands light up.*
+
+**PINKILL**
+"They bleed."
+
+*SCENE 2: Koi looks up at REV in the final room of Doyama. REV unsheathes his katana.*
+
+**PINKILL**
+"They're forgotten."
+
+*SCENE 3: KOI stares up at a floating PINKILL in Aetherspace, above her army of Titans.*
+
+**PINKILL**
+"Replaced."
+
+*SCENE 4: KOI meeting the TRUE TITAN in Aetherspace.*
+
+**PINKILL**
+"Rebuilt."
+
+*Blackout.*
+
+**PINKILL**
+"And it goes on and on."
+
+*SCENE 5: KOI dashes out the penthouse elevator and fanfires two bodyguards → KOI shoots an explosive barrel during a gangster shootout in the subway station → KOI fighting THEO in the penthouse.*
+
+**PINKILL**
+"We're all tragically human..."
+"But you?"
+
+*SCENE 6: Flashback to young KOI, THEO, REV, and VELENA sitting on a rooftop facing the Andrean city skyline.*
+
+**PINKILL**
+"You are the exception."
+
+*SCENE 7: KOI faces a fully assembled ARCHANGEL.*
+
+**PINKILL**
+"You can be so much more."
+
+*CUT TO BLACK.*
