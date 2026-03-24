@@ -6,9 +6,17 @@ summary_image_alt: Thang ice arena banner art
 secondary_video: /assets/Thang%20Preview.mp4
 secondary_video_title: Freeze Tag / Ovens
 secondary_video_subtitle: Core Mechanics
+secondary_feature_heading: Freeze Tag
+secondary_feature_items:
+  - label: Combat Design
+    text: Initial design documentation, balancing
 tertiary_video: /assets/Thang%20Map%20Preview.mp4
 tertiary_video_title: Ice Arena
 tertiary_video_subtitle: Map Blockout
+tertiary_feature_heading: Ice Arena
+tertiary_feature_items:
+  - label: Level Design
+    text: Mock-up sketches, blockout implementation, usability testing
 accent_rgb: 116 236 255
 snow_overlay: true
 poster_frame_borderless: true
@@ -23,13 +31,6 @@ docs:
   - title: "Global Design Documentation - EXPO"
     file: /assets/Thang GDD - EXP.pdf
     preview: true
-media:
-  - file: /assets/images/Screenshot 2026-03-08 234221.png
-    alt: Thang screenshot 1
-    description: Assisted with implementing rigging and rig transfers for placeholder character assets.
-  - file: /assets/images/Screenshot 2026-03-08 234608.png
-    alt: Thang screenshot 2
-    description: Sketched and implemented map blockout for expo submission.
 collaborations:
   - file: /assets/images/icc.png
     alt: International Consulting Club (ICC) at USC
