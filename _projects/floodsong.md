@@ -4,6 +4,7 @@ title: Floodsong
 image: /assets/images/floodsong.png
 summary_image: /assets/images/3.5%20Floodsong%20Week%203%20Boss%20V4%20%281%29.png
 summary_image_alt: Floodsong side banner art
+storm_overlay: true
 accent_rgb: 87 195 255
 poster_frame_borderless: true
 role: Narrative

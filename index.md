@@ -73,7 +73,7 @@ title: Home
 
       <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %} project-showcase__summary--with-video{% endif %}">
         {% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %}
-        <div class="project-showcase__summary-video{% if project.snow_overlay and project.summary_image %} project-showcase__summary-video--snow{% endif %}"{% if project.snow_overlay and project.summary_image %} data-animate-when-visible="true"{% endif %}>
+        <div class="project-showcase__summary-video{% if project.snow_overlay and project.summary_image %} project-showcase__summary-video--snow{% endif %}{% if project.storm_overlay and project.summary_image %} project-showcase__summary-video--storm{% endif %}"{% if (project.snow_overlay and project.summary_image) or (project.storm_overlay and project.summary_image) %} data-animate-when-visible="true"{% endif %}>
           {% if project.summary_image %}
           <img
             class="project-showcase__summary-video-media project-showcase__summary-image"
@@ -104,6 +104,9 @@ title: Home
           <span class="project-showcase__snow project-showcase__snow--far" aria-hidden="true"></span>
           <span class="project-showcase__snow project-showcase__snow--mid" aria-hidden="true"></span>
           <span class="project-showcase__snow project-showcase__snow--near" aria-hidden="true"></span>
+          {% endif %}
+          {% if project.storm_overlay and project.summary_image %}
+          <span class="project-showcase__storm-flecks" aria-hidden="true"></span>
           {% endif %}
         </div>
         {% if project.inline_awards and project.awards %}

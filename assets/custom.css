@@ -361,7 +361,13 @@ h2 {
 }
 
 .portfolio-page.is-underlay::before {
-  opacity: 0;
+  inset: 0 0 auto auto;
+  width: 54px;
+  height: 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0 32px 0 0;
+  opacity: 1;
 }
 
 .portfolio-page.is-underlay::after {
@@ -378,15 +384,7 @@ h2 {
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: none;
-  border-radius: inherit;
-  pointer-events: none;
-  -webkit-mask: linear-gradient(180deg, #000 0%, #000 34px, transparent 56px);
-  mask: linear-gradient(180deg, #000 0%, #000 34px, transparent 56px);
+  content: none;
 }
 
 .portfolio-page.is-active .portfolio-page__surface > * {
@@ -564,6 +562,79 @@ h2 {
   z-index: 2;
 }
 
+.project-showcase__summary-video--storm {
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: inherit;
+  z-index: 2;
+}
+
+.project-showcase__summary-video--storm::before {
+  content: "";
+  position: absolute;
+  inset: -8% -6% -4%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse at 18% 68%, rgba(169, 225, 255, 0.18) 0%, rgba(169, 225, 255, 0.12) 18%, transparent 46%),
+    radial-gradient(ellipse at 64% 74%, rgba(201, 239, 255, 0.16) 0%, rgba(201, 239, 255, 0.1) 22%, transparent 48%),
+    radial-gradient(ellipse at 84% 38%, rgba(134, 205, 255, 0.12) 0%, rgba(134, 205, 255, 0.08) 18%, transparent 42%);
+  filter: blur(24px);
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0) scale(1.05);
+  animation: floodsong-mist-drift 16s ease-in-out infinite alternate;
+  animation-play-state: paused;
+  transition: opacity 320ms ease;
+}
+
+.project-showcase__summary-video--storm::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(102deg, transparent 0%, transparent 58%, rgba(214, 244, 255, 0.14) 63%, transparent 71%),
+    radial-gradient(circle at 72% 22%, rgba(236, 250, 255, 0.34), transparent 22%);
+  mix-blend-mode: screen;
+  animation: floodsong-lightning-flash 10s linear infinite;
+  animation-play-state: paused;
+}
+
+.project-showcase__storm-flecks {
+  position: absolute;
+  inset: -16% 0 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background-image:
+    radial-gradient(circle, rgba(230, 247, 255, 0.54) 0 1.2px, transparent 1.9px),
+    radial-gradient(circle, rgba(184, 226, 255, 0.34) 0 1.8px, transparent 2.5px),
+    radial-gradient(circle, rgba(132, 199, 255, 0.24) 0 2.3px, transparent 3.2px);
+  background-size: 122px 122px, 184px 184px, 244px 244px;
+  background-position: 12px -82px, 84px -28px, 148px -102px;
+  filter: blur(0.18px);
+  animation: floodsong-flecks-drift 12s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 260ms ease;
+}
+
+.project-showcase__summary-video--storm.is-visible::before {
+  opacity: 0.62;
+  animation-play-state: running;
+}
+
+.project-showcase__summary-video--storm.is-visible::after {
+  animation-play-state: running;
+}
+
+.project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
+  opacity: 1;
+  animation-play-state: running;
+}
+
 .project-showcase__mist {
   position: absolute;
   inset: -6% -8% -2%;
@@ -669,6 +740,54 @@ h2 {
   }
   100% {
     transform: translate3d(2.2%, -1.2%, 0) scale(1.03);
+  }
+}
+
+@keyframes floodsong-mist-drift {
+  0% {
+    transform: translate3d(-2%, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(1.6%, 1.4%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(2.8%, -1.2%, 0) scale(1.06);
+  }
+}
+
+@keyframes floodsong-flecks-drift {
+  from {
+    background-position: 12px -82px, 84px -28px, 148px -102px;
+  }
+  to {
+    background-position: -42px 224px, 118px 296px, 208px 268px;
+  }
+}
+
+@keyframes floodsong-lightning-flash {
+  0%, 18%, 42%, 58%, 100% {
+    opacity: 0;
+  }
+  18.8% {
+    opacity: 0.12;
+  }
+  19.4% {
+    opacity: 0;
+  }
+  42.2% {
+    opacity: 0.18;
+  }
+  42.8% {
+    opacity: 0.06;
+  }
+  43.3% {
+    opacity: 0;
+  }
+  58.6% {
+    opacity: 0.1;
+  }
+  59.2% {
+    opacity: 0;
   }
 }
 
@@ -1811,6 +1930,12 @@ h2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .project-showcase__summary-video--storm::before,
+  .project-showcase__summary-video--storm::after,
+  .project-showcase__storm-flecks {
+    animation: none;
+  }
+
   .project-showcase__mist {
     animation: none;
     opacity: 0;
@@ -1827,5 +1952,17 @@ h2 {
 
   .project-showcase__summary-video--snow.is-visible .project-showcase__snow {
     opacity: 0.22;
+  }
+
+  .project-showcase__summary-video--storm.is-visible::before {
+    opacity: 0.24;
+  }
+
+  .project-showcase__summary-video--storm.is-visible::after {
+    opacity: 0;
+  }
+
+  .project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
+    opacity: 0.26;
   }
 }
