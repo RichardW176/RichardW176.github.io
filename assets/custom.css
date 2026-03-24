@@ -415,6 +415,16 @@ h2 {
 .portfolio-page.is-underlay .portfolio-page__surface {
   border-color: transparent;
   overflow: hidden;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+.portfolio-page.is-underlay,
+.portfolio-page.is-underlay .portfolio-page__surface,
+.portfolio-page.is-underlay .portfolio-page__surface::before,
+.portfolio-page.is-underlay .portfolio-page__surface::after,
+.portfolio-page.is-underlay::before,
+.portfolio-page.is-underlay::after {
+  border-radius: 0 !important;
 }
 
 .portfolio-page.is-underlay .portfolio-page__surface::before {
