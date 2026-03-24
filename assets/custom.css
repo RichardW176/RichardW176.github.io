@@ -527,11 +527,17 @@ h2 {
   content: "";
   position: absolute;
   left: -20px;
-  top: 0;
-  bottom: 0;
+  top: -12px;
+  bottom: -12px;
   width: 3px;
-  border-radius: 3px;
-  background: rgb(var(--project-accent-rgb));
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(var(--project-accent-rgb)) 24px,
+    rgb(var(--project-accent-rgb)) calc(100% - 24px),
+    transparent 100%
+  );
   box-shadow:
     0 0 8px rgb(var(--project-accent-rgb) / 0.4),
     0 0 20px rgb(var(--project-accent-rgb) / 0.2);
@@ -680,16 +686,16 @@ h2 {
 .project-showcase__storm-rain--far {
   background-image:
     repeating-linear-gradient(87deg,
-      transparent 0 47px, rgba(170, 230, 255, 0.1) 47px 48px, transparent 48px 97px),
+      transparent 0 18px, rgba(170, 230, 255, 0.1) 18px 19px, transparent 19px 41px),
     repeating-linear-gradient(91deg,
-      transparent 0 71px, rgba(130, 215, 255, 0.08) 71px 72px, transparent 72px 163px),
+      transparent 0 27px, rgba(130, 215, 255, 0.08) 27px 28px, transparent 28px 59px),
     repeating-linear-gradient(85deg,
-      transparent 0 103px, rgba(150, 222, 255, 0.07) 103px 104px, transparent 104px 211px),
+      transparent 0 34px, rgba(150, 222, 255, 0.07) 34px 35px, transparent 35px 73px),
     repeating-linear-gradient(89deg,
-      transparent 0 59px, rgba(110, 200, 255, 0.06) 59px 60px, transparent 60px 139px),
+      transparent 0 22px, rgba(110, 200, 255, 0.06) 22px 23px, transparent 23px 51px),
     repeating-linear-gradient(93deg,
-      transparent 0 83px, rgba(140, 218, 255, 0.05) 83px 84px, transparent 84px 181px);
-  background-size: 97px 503px, 163px 607px, 211px 709px, 139px 557px, 181px 653px;
+      transparent 0 31px, rgba(140, 218, 255, 0.05) 31px 32px, transparent 32px 67px);
+  background-size: 41px 503px, 59px 607px, 73px 709px, 51px 557px, 67px 653px;
   filter: blur(0.4px);
   animation: floodsong-rain-far 1.2s linear infinite;
 }
@@ -697,16 +703,16 @@ h2 {
 .project-showcase__storm-rain--near {
   background-image:
     repeating-linear-gradient(86deg,
-      transparent 0 31px, rgba(210, 245, 255, 0.18) 31px 32.5px, transparent 32.5px 79px),
+      transparent 0 12px, rgba(210, 245, 255, 0.18) 12px 13.5px, transparent 13.5px 31px),
     repeating-linear-gradient(92deg,
-      transparent 0 53px, rgba(180, 238, 255, 0.14) 53px 54.5px, transparent 54.5px 127px),
+      transparent 0 19px, rgba(180, 238, 255, 0.14) 19px 20.5px, transparent 20.5px 47px),
     repeating-linear-gradient(88deg,
-      transparent 0 89px, rgba(200, 242, 255, 0.1) 89px 90.5px, transparent 90.5px 191px),
+      transparent 0 28px, rgba(200, 242, 255, 0.1) 28px 29.5px, transparent 29.5px 61px),
     repeating-linear-gradient(90deg,
-      transparent 0 41px, rgba(160, 232, 255, 0.12) 41px 42.5px, transparent 42.5px 103px),
+      transparent 0 15px, rgba(160, 232, 255, 0.12) 15px 16.5px, transparent 16.5px 37px),
     repeating-linear-gradient(84deg,
-      transparent 0 67px, rgba(190, 240, 255, 0.08) 67px 68.5px, transparent 68.5px 157px);
-  background-size: 79px 461px, 127px 541px, 191px 631px, 103px 499px, 157px 577px;
+      transparent 0 23px, rgba(190, 240, 255, 0.08) 23px 24.5px, transparent 24.5px 53px);
+  background-size: 31px 461px, 47px 541px, 61px 631px, 37px 499px, 53px 577px;
   filter: blur(0.15px);
   animation: floodsong-rain-near 0.6s linear infinite;
 }
