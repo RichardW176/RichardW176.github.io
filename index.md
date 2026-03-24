@@ -129,8 +129,6 @@ title: Home
         {% endif %}
         <div class="project-showcase__summary-content">
         {% unless project.hide_summary_intro %}
-        <p class="project-showcase__eyebrow">Overview</p>
-        <p class="project-showcase__index">{{ forloop.index | prepend: '0' }}</p>
         {% endunless %}
         <h2 class="project-showcase__title">{{ project.title }}</h2>
         {% if project.role_display %}
