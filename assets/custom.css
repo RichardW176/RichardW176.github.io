@@ -494,7 +494,7 @@ h2 {
   display: grid;
   aspect-ratio: 5 / 7;
   border-radius: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgb(var(--project-accent-rgb, 255 255 255) / 0.3);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
@@ -599,7 +599,7 @@ h2 {
   object-fit: cover;
   object-position: center;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgb(var(--project-accent-rgb, 255 255 255) / 0.34);
   background: rgba(8, 8, 12, 0.92);
 }
 
