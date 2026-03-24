@@ -685,27 +685,32 @@ h2 {
   animation: floodsong-rain-near 1.15s linear infinite;
 }
 
-.project-showcase__summary-video--storm.is-visible::before {
+.project-showcase__summary-video--storm.is-visible::before,
+.portfolio-page.is-active .project-showcase__summary-video--storm::before {
   opacity: 0.34;
   animation-play-state: running;
 }
 
-.project-showcase__summary-video--storm.is-visible::after {
+.project-showcase__summary-video--storm.is-visible::after,
+.portfolio-page.is-active .project-showcase__summary-video--storm::after {
   opacity: 0.78;
   animation-play-state: running;
 }
 
-.project-showcase__summary-video--storm.is-visible .project-showcase__mist--storm {
+.project-showcase__summary-video--storm.is-visible .project-showcase__mist--storm,
+.portfolio-page.is-active .project-showcase__summary-video--storm .project-showcase__mist--storm {
   opacity: 0.82;
   animation-play-state: running;
 }
 
-.project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks {
+.project-showcase__summary-video--storm.is-visible .project-showcase__storm-flecks,
+.portfolio-page.is-active .project-showcase__summary-video--storm .project-showcase__storm-flecks {
   opacity: 0.98;
   animation-play-state: running;
 }
 
-.project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain {
+.project-showcase__summary-video--storm.is-visible .project-showcase__storm-rain,
+.portfolio-page.is-active .project-showcase__summary-video--storm .project-showcase__storm-rain {
   opacity: 1;
   animation-play-state: running;
 }
@@ -1069,7 +1074,6 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: 0;
-  transform: translateZ(0);
 }
 
 .project-showcase__summary-awards {
