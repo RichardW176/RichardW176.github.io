@@ -82,8 +82,7 @@ select {
 
 .site-header,
 .site-footer {
-  background-color: #000000 !important;
-  border: none;
+  display: none;
 }
 
 .site-header,
