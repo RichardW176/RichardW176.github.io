@@ -1,6 +1,6 @@
 ---
 title: "Icarus"
-media_type: "Animated Short Film"
+media_type: "Animated Short"
 description: "A son argues his ambitions to his father a day before Icarus's fall."
 order: 3
 ---

@@ -742,7 +742,7 @@ h2 {
       transparent 0 38px, rgba(150, 222, 255, 0.03) 38px 39px, transparent 39px 79px);
   background-size: 47px 47px, 67px 67px, 79px 79px;
   filter: blur(0.5px);
-  animation: floodsong-rain-far 1.4s linear infinite;
+  animation: floodsong-rain-far 2.8s linear infinite;
 }
 
 .project-showcase__storm-rain--near {
@@ -755,7 +755,7 @@ h2 {
       transparent 0 29px, rgba(200, 242, 255, 0.05) 29px 30px, transparent 30px 61px);
   background-size: 37px 37px, 53px 53px, 61px 61px;
   filter: blur(0.15px);
-  animation: floodsong-rain-near 0.7s linear infinite;
+  animation: floodsong-rain-near 1.4s linear infinite;
 }
 
 .project-showcase__summary-video--storm.is-visible::before,
