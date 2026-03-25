@@ -102,6 +102,10 @@
           const video = entry.target;
 
           if (entry.isIntersecting) {
+            if (video.preload === 'none') {
+              video.preload = 'auto';
+              video.load();
+            }
             syncVideoPlayback(video, entry.intersectionRatio);
             return;
           }

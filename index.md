@@ -11,7 +11,7 @@ title: Home
       loop
       muted
       playsinline
-      preload="metadata">
+      preload="none">
       <source src="/assets/Overdawn%20Menu.mp4" type="video/mp4">
     </video>
   </div>
@@ -97,7 +97,7 @@ title: Home
             loop
             muted
             playsinline
-            preload="metadata"
+            preload="none"
             aria-label="{{ project.title }} preview video">
             {% if project.video_sources %}
               {% for video_source in project.video_sources %}
@@ -191,7 +191,7 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           aria-label="{{ project.title }} secondary preview video">
           <source src="{{ project.secondary_video }}" type="video/mp4">
         </video>
@@ -247,7 +247,7 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           {% if project.tertiary_video_position %}style="object-position: {{ project.tertiary_video_position }};"{% endif %}
           aria-label="{{ project.title }} tertiary preview video">
           <source src="{{ project.tertiary_video }}" type="video/mp4">
@@ -304,7 +304,7 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           {% if project.quinary_video_position %}style="object-position: {{ project.quinary_video_position }};"{% endif %}
           aria-label="{{ project.title }} quinary preview video">
           <source src="{{ project.quinary_video }}" type="video/mp4">
@@ -361,7 +361,7 @@ title: Home
           loop
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           {% if project.quaternary_video_position %}style="object-position: {{ project.quaternary_video_position }};"{% endif %}
           aria-label="{{ project.title }} quaternary preview video">
           <source src="{{ project.quaternary_video }}" type="video/mp4">

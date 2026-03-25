@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lhS \"c:\\\\Users\\\\richa\\\\Desktop\\\\Unreal\\\\RichardW176.github.io\\\\assets/\"*.mp4)"
+    ]
+  }
+}
