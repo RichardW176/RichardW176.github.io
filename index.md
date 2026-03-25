@@ -3,6 +3,8 @@ layout: page
 title: Home
 ---
 
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <video
