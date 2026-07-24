@@ -2840,3 +2840,57 @@ h2 {
   [data-panel] { padding-left: 16px; padding-right: 16px; }
   .showcase-tab { min-width: 0; flex: 1; text-align: center; font-size: 0.92rem; }
 }
+
+/* ===================================================================
+   Restore the ORIGINAL card architecture (poster left, banner video
+   panel right), keeping click-to-open. Appended AFTER the showcase
+   block so it overrides the interim flat-card styles.
+   =================================================================== */
+
+/* Cards stack full-width again -- no multi-column grid of small cards */
+.project-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 84px;
+}
+
+/* The clickable shell IS the original two-column stage.
+   .project-showcase__stage supplies the grid-template-columns. */
+.project-list .project-card__shell {
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: none;
+}
+
+/* The poster frame is sticky in the full project pages; inside a
+   clickable card it should sit still. */
+.project-list .project-showcase__poster-frame { position: relative; top: auto; }
+
+/* Retire the interim flat-card styles */
+.project-list .project-card__poster,
+.project-list .project-card__info { all: unset; }
+
+/* Actions row sits with the rest of the summary copy, over the video */
+.project-showcase__summary-content .project-card__actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 3;
+}
+
+/* Glow tracks the wider card */
+.project-list .project-card__glow { inset: -18px -14px; border-radius: 36px; }
+
+@media (max-width: 700px) {
+  .project-list { gap: 56px; }
+  /* the existing mobile rules already collapse .project-showcase__stage
+     to one column and reset the -33px overlap */
+}

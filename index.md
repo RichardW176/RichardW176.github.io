@@ -67,28 +67,62 @@ title: Home
         {% if p.tertiary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
         {% if p.quaternary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
         {% if p.quinary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
+
         <div class="project-card" data-goto="{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
           <div class="project-card__glow"></div>
-          <div class="project-card__shell">
-            <img class="project-card__poster" src="{{ p.image }}" alt="{{ p.title }} poster"{% if p.poster_position %} style="object-position: {{ p.poster_position }};"{% endif %}>
-            <div class="project-card__info">
-              <h3>{{ p.title }}</h3>
-              {% if p.role_display or p.role %}<p class="project-card__role">{{ p.role_display | default: p.role }}</p>{% endif %}
-              {% if p.stage or p.timeline or p.engine %}
-              <p class="project-card__meta">
-                {% if p.stage %}<span>{{ p.stage }}</span>{% endif %}
-                {% if p.stage and p.timeline %}<span class="dot">&middot;</span>{% endif %}
-                {% if p.timeline %}<span>{{ p.timeline }}</span>{% endif %}
-                {% if p.engine and (p.stage or p.timeline) %}<span class="dot">&middot;</span>{% endif %}
-                {% if p.engine %}<span>{{ p.engine }}</span>{% endif %}
-              </p>
-              {% endif %}
-              {% if p.description and p.description != "" %}<p class="project-card__desc">{{ p.description }}</p>{% endif %}
-              <div class="project-card__actions">
-                <span class="project-cta">View project <span class="project-cta__arrow">&rarr;</span></span>
-                {% if hl > 0 %}<span class="project-card__count">{{ hl }} highlight{% unless hl == 1 %}s{% endunless %} inside</span>{% endif %}
+
+          <div class="project-card__shell project-showcase__stage">
+
+            <!-- LEFT: portrait poster (5 / 7) -->
+            <div class="project-showcase__poster-column">
+              <div class="project-showcase__poster-frame{% if p.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if p.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
+                <img class="project-showcase__poster" src="{{ p.image }}" alt="{{ p.title }} poster"{% if p.poster_position %} style="object-position: {{ p.poster_position }};"{% endif %}>
               </div>
             </div>
+
+            <!-- RIGHT: banner video / side art with the title over it -->
+            <div class="project-showcase__summary project-showcase__summary--with-video">
+              <div class="project-showcase__summary-video{% if p.storm_overlay %} project-showcase__summary-video--storm{% endif %}{% if p.snow_overlay %} project-showcase__summary-video--snow{% endif %}">
+                {% if p.video %}
+                <video class="project-showcase__summary-video-media" data-autoplay-when-visible="true" loop muted playsinline preload="none">
+                  <source src="{{ p.video }}" type="video/mp4">
+                </video>
+                {% elsif p.summary_image %}
+                <img class="project-showcase__summary-video-media project-showcase__summary-image" src="{{ p.summary_image }}" alt="{{ p.summary_image_alt | default: p.title }}">
+                {% else %}
+                <span class="project-showcase__summary-placeholder" aria-hidden="true"></span>
+                {% endif %}
+                {% if p.storm_overlay %}<span class="project-showcase__storm-lightning" aria-hidden="true"></span>{% endif %}
+              </div>
+
+              <div class="project-showcase__summary-content">
+                <h3 class="project-showcase__title">{{ p.title }}</h3>
+
+                {% if p.role_display or p.role %}
+                <p class="project-showcase__role">{{ p.role_display | default: p.role }}</p>
+                {% endif %}
+
+                {% if p.stage or p.timeline or p.engine %}
+                <p class="project-showcase__meta">
+                  {% if p.stage %}<span>{{ p.stage }}</span>{% endif %}
+                  {% if p.stage and p.timeline %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
+                  {% if p.timeline %}<span>{{ p.timeline }}</span>{% endif %}
+                  {% if p.engine and (p.stage or p.timeline) %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
+                  {% if p.engine %}<span>{{ p.engine }}</span>{% endif %}
+                </p>
+                {% endif %}
+
+                {% if p.description and p.description != "" %}
+                <p class="project-showcase__desc">{{ p.description }}</p>
+                {% endif %}
+
+                <div class="project-card__actions">
+                  <span class="project-cta">View project <span class="project-cta__arrow">&rarr;</span></span>
+                  {% if hl > 0 %}<span class="project-card__count">{{ hl }} highlight{% unless hl == 1 %}s{% endunless %} inside</span>{% endif %}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       {% endfor %}
