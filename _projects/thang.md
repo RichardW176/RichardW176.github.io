@@ -24,6 +24,9 @@ engine: Unity
 stage: Production
 timeline: Dec 2025 - Present
 description: Explosive freeze tag party game with chaotic power ups
+links:
+  - label: Playtest
+    url: "https://discord.gg/pHNuqs3ch"
 order: 3
 docs:
   - title: "Global Design Documentation - EXPO"
