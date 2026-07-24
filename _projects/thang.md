@@ -23,7 +23,7 @@ role_display: Design &middot; Narrative
 engine: Unity
 stage: Production
 timeline: Dec 2025 - Present
-description: 3v3 party shooter inspired by the Korean playground game Freeze Tag.
+description: Explosive freeze tag party game with chaotic power ups
 order: 3
 docs:
   - title: "Global Design Documentation - EXPO"
