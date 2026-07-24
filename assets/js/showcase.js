@@ -12,13 +12,22 @@
       pages[i].style.display =
         pages[i].getAttribute('data-view') === view ? 'block' : 'none';
     }
-    // returning to the grid lands on the cards, not back up the tall hero
+    // Toggle the scroll-pinned hero FIRST, so the page height is correct
+    // before we set the scroll position. (If we scroll to the grid and only
+    // then re-show the 300vh hero track above it, the browser pushes the grid
+    // down and we land on the hero instead.)
+    var track = document.querySelector('[data-hero-track]');
+    if (track) track.style.display = view === 'index' ? '' : 'none';
+
+    // Now place the scroll position: opening a detail starts at its top;
+    // returning to the grid lands on the cards, not back up the tall hero.
     if (view === 'index') {
       var showcase = document.getElementById('portfolio-showcase');
       if (showcase) { showcase.scrollIntoView(); } else { window.scrollTo(0, 0); }
     } else {
       window.scrollTo(0, 0);
     }
+
     var active = document.querySelector('[data-view="' + view + '"]');
     if (active) {
       active.style.animation = 'none';
@@ -27,9 +36,6 @@
       var vids = active.querySelectorAll('video');
       for (var j = 0; j < vids.length; j++) { try { vids[j].play(); } catch (e) {} }
     }
-    // hide the scroll-pinned hero while a detail view is open
-    var track = document.querySelector('[data-hero-track]');
-    if (track) track.style.display = view === 'index' ? '' : 'none';
   }
 
   function selectTab(name) {
