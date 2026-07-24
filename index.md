@@ -62,12 +62,6 @@ title: Home
       {% assign games = site.projects | sort: "order" %}
       {% for p in games %}
         {% assign accent = p.accent_rgb | default: "255 58 138" %}
-        {% assign hl = 0 %}
-        {% if p.secondary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
-        {% if p.tertiary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
-        {% if p.quaternary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
-        {% if p.quinary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
-
         <div class="project-card" data-goto="{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
           <div class="project-card__glow"></div>
 
@@ -126,7 +120,6 @@ title: Home
                   </span>
                   {% endfor %}
                   {% endif %}
-                  {% if hl > 0 %}<span class="project-card__count">{{ hl }} highlight{% unless hl == 1 %}s{% endunless %} inside</span>{% endif %}
                 </div>
               </div>
             </div>
