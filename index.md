@@ -5,6 +5,7 @@ title: Home
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
+<div class="hero-pin-track" data-hero-track>
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <video
@@ -22,6 +23,10 @@ title: Home
     <div class="hero-name-stack">
       <h1 class="hero-title">Richard<br>Wang</h1>
     </div>
+    <div class="hero-about">
+      <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
+      <p>Feel free to contact me using either of the methods below!</p>
+    </div>
     <div class="hero-socials">
       <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
         <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
@@ -30,8 +35,15 @@ title: Home
         <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
       </a>
     </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="hero-scroll-hint__label">Scroll</span>
+      <span class="hero-scroll-hint__chev">
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </div>
   </div>
 </section>
+</div>
 
 <link rel="stylesheet" href="/assets/custom.css">
 
@@ -473,3 +485,4 @@ title: Home
 </div>
 
 <script src="/assets/js/project-modal.js" defer></script>
+<script src="/assets/js/hero-scroll.js" defer></script>

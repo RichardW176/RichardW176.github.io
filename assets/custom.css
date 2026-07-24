@@ -2340,3 +2340,139 @@ h2 {
     opacity: 0.18;
   }
 }
+
+/* ===================================================================
+   Scroll-driven hero
+   Overrides the hero to become a scroll-pinned stage and reveals the
+   About + socials sequentially, then lifts to show the work.
+   All the reveal math is fed in as CSS variables by hero-scroll.js.
+   =================================================================== */
+
+/* ---- Pin track: hero stays fixed while you scroll through it ---- */
+.hero-pin-track {
+  position: relative;
+  height: 300vh;              /* length of the scroll sequence */
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 0;              /* override the original clamp() */
+  padding: 0;
+  align-items: stretch;
+}
+
+/* ---- Hero content sits lower in the video frame, lifts on scroll ---- */
+.hero-inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 32vh;                  /* vertical position in the frame */
+  bottom: auto;
+  align-content: start;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 0 5.5vw;
+  box-sizing: border-box;
+  transform: translateY(var(--hero-y, 0px));
+  opacity: var(--hero-o, 1);
+  will-change: transform, opacity;
+}
+
+/* video dims as the work panel rises */
+.hero-media__video {
+  filter: saturate(1.05) brightness(var(--video-bright, 0.84));
+}
+
+/* ---- Entrance (on load) for role + name ---- */
+@keyframes heroRoleIn { 0% { opacity: 0; transform: translateY(26px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes heroNameIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+.hero-role  { animation: heroRoleIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-title { animation: heroNameIn 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; }
+
+/* ---- About: revealed on first scroll ---- */
+.hero-about {
+  margin-top: 26px;
+  overflow: hidden;
+  opacity: var(--about-o, 0);
+  max-height: var(--about-mh, 0px);
+  transform: translateY(var(--about-y, 22px));
+}
+.hero-about p {
+  margin: 0 0 14px;
+  max-width: 620px;
+  color: #d3d6dd;
+  font-size: 1.16rem;
+  line-height: 1.75;
+  font-weight: 400;
+}
+.hero-about p:last-child { margin-bottom: 0; }
+
+/* ---- Socials: follow the About ---- */
+.hero-socials {
+  opacity: var(--social-o, 0);
+  transform: translateY(var(--social-y, 18px));
+}
+
+/* ---- Scroll hint ---- */
+.hero-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  z-index: 3;
+  text-align: center;
+  opacity: var(--hint-o, 1);
+  pointer-events: none;
+}
+.hero-scroll-hint__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.hero-scroll-hint__chev {
+  display: block;
+  margin-top: 10px;
+  animation: heroChevBob 1.6s ease-in-out infinite;
+}
+@keyframes heroChevBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* ---- Work panel rises up over the fading hero ---- */
+#portfolio-showcase {
+  position: relative;
+  z-index: 5;
+  margin-top: -30vh;
+  background: #000000;
+}
+
+/* ---- Mobile: no scroll-jacking; show everything normally ---- */
+@media (max-width: 700px) {
+  .hero-pin-track { height: auto; }
+  .hero {
+    position: relative;
+    height: auto;
+    min-height: clamp(520px, 72vh, 760px);
+    padding-top: 108px;
+    padding-bottom: 64px;
+  }
+  .hero-inner {
+    position: relative;
+    top: auto;
+    padding: 0 16px;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .hero-about {
+    max-height: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-socials {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-scroll-hint { display: none; }
+  #portfolio-showcase { margin-top: 0; }
+}
