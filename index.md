@@ -45,7 +45,7 @@ title: Home
 </section>
 </div>
 
-<link rel="stylesheet" href="/assets/custom.css">
+<link rel="stylesheet" href="/assets/custom.css?v={{ site.time | date: '%s' }}">
 
 <!-- ============================ SHOWCASE (index view) ============================ -->
 <div id="portfolio-showcase" data-view="index">
@@ -294,6 +294,6 @@ title: Home
   </div>
 </div>
 
-<script src="/assets/js/project-modal.js" defer></script>
-<script src="/assets/js/hero-scroll.js" defer></script>
-<script src="/assets/js/showcase.js" defer></script>
+<script src="/assets/js/project-modal.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/hero-scroll.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/showcase.js?v={{ site.time | date: '%s' }}" defer></script>

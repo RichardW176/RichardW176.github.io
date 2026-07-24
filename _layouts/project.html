@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<link rel="stylesheet" href="/assets/custom.css">
+<link rel="stylesheet" href="/assets/custom.css?v={{ site.time | date: '%s' }}">
 
 <div class="project-page">
   <div class="project-page-inner">
@@ -151,4 +151,4 @@ layout: default
   </div>
 </div>
 
-<script src="/assets/js/project-modal.js" defer></script>
+<script src="/assets/js/project-modal.js?v={{ site.time | date: '%s' }}" defer></script>
