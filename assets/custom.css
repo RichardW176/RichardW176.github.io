@@ -2901,9 +2901,12 @@ h2 {
 .project-showcase__summary-content .project-card__actions {
   display: flex;
   align-items: center;
+  justify-content: flex-start;   /* pack from the left so links sit next to the CTA (was space-between) */
   flex-wrap: nowrap;
+  gap: 0;                        /* spacing comes from each sleeve's own margin, not row gap */
 }
 .project-card__actions .project-cta { flex: none; }
+.project-card__actions .project-card__count { margin-left: 14px; }
 
 /* Each link sits in a collapsing sleeve so it takes no space at rest */
 .project-card__store {
