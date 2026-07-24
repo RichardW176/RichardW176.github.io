@@ -1,6 +1,6 @@
 ---
 title: Thang!
-image: /assets/images/thang.png
+image: /assets/images/thang-poster.jpg
 summary_image: /assets/images/thang%20new%20side.png
 summary_image_alt: Thang ice arena banner art
 secondary_video: /assets/Thang%20Preview.mp4
