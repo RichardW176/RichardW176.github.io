@@ -47,423 +47,198 @@ title: Home
 
 <link rel="stylesheet" href="/assets/custom.css">
 
-<section class="portfolio-panel portfolio-switcher" id="portfolio-showcase" data-portfolio-switcher>
-  <nav class="portfolio-nav" aria-label="Portfolio sections">
-    <button
-      class="portfolio-nav__link portfolio-nav__link--active"
-      type="button"
-      data-portfolio-tab="video-games"
-      aria-selected="true"
-      aria-controls="portfolio-page-video">
-      Video Games
-    </button>
-    <button
-      class="portfolio-nav__link"
-      type="button"
-      data-portfolio-tab="writing-samples"
-      aria-selected="false"
-      aria-controls="portfolio-page-writing">
-      Writing Samples
-    </button>
+<!-- ============================ SHOWCASE (index view) ============================ -->
+<div id="portfolio-showcase" data-view="index">
+
+  <nav role="tablist" class="showcase-tabs" aria-label="Portfolio sections">
+    <button class="showcase-tab is-active" data-tab="games" role="tab" aria-selected="true" type="button">Video Games</button>
+    <button class="showcase-tab" data-tab="writing" role="tab" aria-selected="false" type="button">Writing Samples</button>
   </nav>
 
-  <div class="portfolio-stack">
-    <section
-      class="portfolio-page portfolio-page--video is-active"
-      id="portfolio-page-video"
-      data-portfolio-page="video-games"
-      aria-hidden="false">
-      <div class="portfolio-page__surface">
-<div class="project-sequence">
-{% assign sorted_projects = site.projects | sort: "order" %}
-{% for project in sorted_projects %}
-
-  <section
-    class="project-showcase"
-    id="{{ project.title | slugify }}"
-    {% if project.accent_rgb %}style="--project-accent-rgb: {{ project.accent_rgb }};"{% endif %}>
-    <div class="project-showcase__stage">
-      <div class="project-showcase__poster-column">
-        <div class="project-showcase__poster-frame{% if project.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if project.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
-          <img
-            class="project-showcase__poster{% if project.poster_fit %} project-showcase__poster--{{ project.poster_fit }}{% endif %}"
-            src="{{ project.image }}"
-            {% if project.poster_position %}style="object-position: {{ project.poster_position }};"{% endif %}
-            alt="{{ project.title }}">
+  <!-- ---------- VIDEO GAMES ---------- -->
+  <div data-panel="games" style="display: block;">
+    <p class="showcase-hint">Select a project to see the breakdown</p>
+    <div class="project-list">
+      {% assign games = site.projects | sort: "order" %}
+      {% for p in games %}
+        {% assign accent = p.accent_rgb | default: "255 58 138" %}
+        {% assign hl = 0 %}
+        {% if p.secondary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
+        {% if p.tertiary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
+        {% if p.quaternary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
+        {% if p.quinary_video %}{% assign hl = hl | plus: 1 %}{% endif %}
+        <div class="project-card" data-goto="{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
+          <div class="project-card__glow"></div>
+          <div class="project-card__shell">
+            <img class="project-card__poster" src="{{ p.image }}" alt="{{ p.title }} poster"{% if p.poster_position %} style="object-position: {{ p.poster_position }};"{% endif %}>
+            <div class="project-card__info">
+              <h3>{{ p.title }}</h3>
+              {% if p.role_display or p.role %}<p class="project-card__role">{{ p.role_display | default: p.role }}</p>{% endif %}
+              {% if p.stage or p.timeline or p.engine %}
+              <p class="project-card__meta">
+                {% if p.stage %}<span>{{ p.stage }}</span>{% endif %}
+                {% if p.stage and p.timeline %}<span class="dot">&middot;</span>{% endif %}
+                {% if p.timeline %}<span>{{ p.timeline }}</span>{% endif %}
+                {% if p.engine and (p.stage or p.timeline) %}<span class="dot">&middot;</span>{% endif %}
+                {% if p.engine %}<span>{{ p.engine }}</span>{% endif %}
+              </p>
+              {% endif %}
+              {% if p.description and p.description != "" %}<p class="project-card__desc">{{ p.description }}</p>{% endif %}
+              <div class="project-card__actions">
+                <span class="project-cta">View project <span class="project-cta__arrow">&rarr;</span></span>
+                {% if hl > 0 %}<span class="project-card__count">{{ hl }} highlight{% unless hl == 1 %}s{% endunless %} inside</span>{% endif %}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <aside class="project-showcase__summary{% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %} project-showcase__summary--with-video{% endif %}">
-        {% if project.video or project.video_sources or project.summary_image or project.summary_placeholder %}
-        <div class="project-showcase__summary-video{% if project.snow_overlay and project.summary_image %} project-showcase__summary-video--snow{% endif %}{% if project.storm_overlay and project.summary_image %} project-showcase__summary-video--storm{% endif %}"{% if (project.snow_overlay and project.summary_image) or (project.storm_overlay and project.summary_image) %} data-animate-when-visible="true"{% endif %}>
-          {% if project.summary_image %}
-          <img
-            class="project-showcase__summary-video-media project-showcase__summary-image"
-            src="{{ project.summary_image }}"
-            {% if project.summary_image_position %}style="object-position: {{ project.summary_image_position }};"{% endif %}
-            alt="{{ project.summary_image_alt | default: project.title }}">
-          {% elsif project.summary_placeholder %}
-          <div class="project-showcase__summary-video-media project-showcase__summary-placeholder" aria-hidden="true"></div>
-          {% else %}
-          <video
-            class="project-showcase__summary-video-media"
-            data-autoplay-when-visible="true"
-            loop
-            muted
-            playsinline
-            preload="none"
-            aria-label="{{ project.title }} preview video">
-            {% if project.video_sources %}
-              {% for video_source in project.video_sources %}
-            <source src="{{ video_source }}" type="video/mp4">
-              {% endfor %}
-            {% elsif project.video %}
-            <source src="{{ project.video }}" type="video/mp4">
-            {% endif %}
-          </video>
-          {% endif %}
-          {% if project.snow_overlay and project.summary_image %}
-          <span class="project-showcase__mist" aria-hidden="true"></span>
-          <span class="project-showcase__snow project-showcase__snow--far" aria-hidden="true"></span>
-          <span class="project-showcase__snow project-showcase__snow--mid" aria-hidden="true"></span>
-          <span class="project-showcase__snow project-showcase__snow--near" aria-hidden="true"></span>
-          {% endif %}
-          {% if project.storm_overlay and project.summary_image %}
-          <span class="project-showcase__mist project-showcase__mist--storm" aria-hidden="true"></span>
-          <span class="project-showcase__storm-lightning" aria-hidden="true"></span>
-          <span class="project-showcase__storm-flecks" aria-hidden="true"></span>
-          <span class="project-showcase__storm-rain project-showcase__storm-rain--far" aria-hidden="true"></span>
-          <span class="project-showcase__storm-rain project-showcase__storm-rain--near" aria-hidden="true"></span>
-          {% endif %}
-        </div>
-        {% if project.inline_awards and project.awards %}
-        <div class="project-showcase__summary-awards" aria-label="{{ project.title }} awards">
-          {% for award in project.awards %}
-          <figure class="project-showcase__summary-award">
-            <img
-              src="{{ award.file }}"
-              alt="{{ award.alt | default: award.title | default: project.title }}"
-              class="project-showcase__summary-award-image">
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% endif %}
-        <div class="project-showcase__summary-content">
-        {% unless project.hide_summary_intro %}
-        {% endunless %}
-        <h2 class="project-showcase__title">{{ project.title }}</h2>
-        {% if project.role_display %}
-        <p class="project-showcase__role">{{ project.role_display }}</p>
-        {% else %}
-        <p class="project-showcase__role">
-          {% assign project_roles = project.role | split: ", " %}
-          {% for role in project_roles %}
-            <strong>{{ role }}</strong>{% unless forloop.last %}, {% endunless %}
-          {% endfor %}
-        </p>
-        {% endif %}
-        {% if project.stage or project.timeline or project.engine %}
-        <p class="project-showcase__meta">
-          {% if project.stage %}<span>{{ project.stage }}</span>{% endif %}
-          {% if project.stage and project.timeline %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
-          {% if project.timeline %}<span>{{ project.timeline }}</span>{% endif %}
-          {% if project.engine and (project.stage or project.timeline) %}<span class="project-showcase__meta-sep">&middot;</span>{% endif %}
-          {% if project.engine %}<span>{{ project.engine }}</span>{% endif %}
-        </p>
-        {% endif %}
-        {% if project.description and project.description != "" %}
-        <p class="project-showcase__desc">{{ project.description }}</p>
-        {% endif %}
-        </div>
-      </aside>
+      {% endfor %}
     </div>
+  </div>
 
-    {% if project.plain_feature_heading or project.plain_feature_items %}
-    <div class="project-showcase__secondary-feature project-showcase__secondary-feature--panel-only">
-      <div class="project-showcase__secondary-panel project-showcase__secondary-panel--standalone">
-        {% if project.plain_feature_heading %}
-        <h3 class="project-showcase__secondary-panel-heading">{{ project.plain_feature_heading }}</h3>
-        {% endif %}
-        {% if project.plain_feature_items %}
-        <div class="project-showcase__secondary-panel-copy">
-          {% for item in project.plain_feature_items %}
-          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-          {% endfor %}
+  <!-- ---------- WRITING SAMPLES ---------- -->
+  <div data-panel="writing" style="display: none;">
+    <p class="showcase-hint" style="--project-accent-rgb: 122 217 255;">Select a sample to read it</p>
+    <div class="writing-grid">
+      {% assign samples = site.prose | sort: "order" %}
+      {% for s in samples %}
+        <div class="project-card writing-card" data-goto="w-{{ s.title | slugify }}" role="button" tabindex="0" aria-label="Read {{ s.title }}">
+          <div class="project-card__glow"></div>
+          <div class="project-card__shell">
+            {% if s.media_type %}<span class="writing-card__type">{{ s.media_type }}</span>{% endif %}
+            <h3>{{ s.title }}</h3>
+            {% if s.description and s.description != "" %}<p>{{ s.description }}</p>{% endif %}
+            <span class="project-cta">Read sample <span class="project-cta__arrow">&rarr;</span></span>
+          </div>
         </div>
-        {% endif %}
-      </div>
+      {% endfor %}
     </div>
-    {% endif %}
+  </div>
 
-    {% if project.secondary_video %}
-    <div class="project-showcase__secondary-feature">
-      <div class="project-showcase__secondary-video">
-        <video
-          class="project-showcase__secondary-video-media"
-          data-autoplay-when-visible="true"
-          loop
-          muted
-          playsinline
-          preload="none"
-          aria-label="{{ project.title }} secondary preview video">
-          <source src="{{ project.secondary_video }}" type="video/mp4">
-        </video>
-        {% if project.secondary_video_title or project.secondary_video_subtitle %}
-        <div class="project-showcase__secondary-video-copy">
-          {% if project.secondary_video_title %}
-          <h3 class="project-showcase__secondary-video-title">{{ project.secondary_video_title }}</h3>
-          {% endif %}
-          {% if project.secondary_video_subtitle %}
-          <p class="project-showcase__secondary-video-subtitle">{{ project.secondary_video_subtitle }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-      </div>
-      {% if project.secondary_feature_heading or project.secondary_feature_items or project.secondary_feature_media %}
-      <div class="project-showcase__secondary-panel">
-        {% if project.secondary_feature_heading %}
-        <h3 class="project-showcase__secondary-panel-heading">{{ project.secondary_feature_heading }}</h3>
-        {% endif %}
-        {% if project.secondary_feature_items %}
-        <div class="project-showcase__secondary-panel-copy">
-          {% for item in project.secondary_feature_items %}
-          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% if project.secondary_feature_media %}
-        <div class="project-showcase__secondary-panel-media">
-          {% for item in project.secondary_feature_media %}
-          <figure class="project-showcase__secondary-panel-card">
-            <img
-              src="{{ item.file }}"
-              alt="{{ item.alt | default: project.title }}"
-              class="project-showcase__secondary-panel-image">
-            {% if item.description %}
-            <figcaption>{{ item.description }}</figcaption>
-            {% endif %}
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-
-    {% if project.tertiary_video %}
-    <div class="project-showcase__secondary-feature">
-      <div class="project-showcase__secondary-video">
-        <video
-          class="project-showcase__secondary-video-media"
-          data-autoplay-when-visible="true"
-          loop
-          muted
-          playsinline
-          preload="none"
-          {% if project.tertiary_video_position %}style="object-position: {{ project.tertiary_video_position }};"{% endif %}
-          aria-label="{{ project.title }} tertiary preview video">
-          <source src="{{ project.tertiary_video }}" type="video/mp4">
-        </video>
-        {% if project.tertiary_video_title or project.tertiary_video_subtitle %}
-        <div class="project-showcase__secondary-video-copy">
-          {% if project.tertiary_video_title %}
-          <h3 class="project-showcase__secondary-video-title">{{ project.tertiary_video_title }}</h3>
-          {% endif %}
-          {% if project.tertiary_video_subtitle %}
-          <p class="project-showcase__secondary-video-subtitle">{{ project.tertiary_video_subtitle }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-      </div>
-      {% if project.tertiary_feature_heading or project.tertiary_feature_items or project.tertiary_feature_media %}
-      <div class="project-showcase__secondary-panel">
-        {% if project.tertiary_feature_heading %}
-        <h3 class="project-showcase__secondary-panel-heading">{{ project.tertiary_feature_heading }}</h3>
-        {% endif %}
-        {% if project.tertiary_feature_items %}
-        <div class="project-showcase__secondary-panel-copy">
-          {% for item in project.tertiary_feature_items %}
-          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% if project.tertiary_feature_media %}
-        <div class="project-showcase__secondary-panel-media">
-          {% for item in project.tertiary_feature_media %}
-          <figure class="project-showcase__secondary-panel-card">
-            <img
-              src="{{ item.file }}"
-              alt="{{ item.alt | default: project.title }}"
-              class="project-showcase__secondary-panel-image">
-            {% if item.description %}
-            <figcaption>{{ item.description }}</figcaption>
-            {% endif %}
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-
-    {% if project.quinary_video %}
-    <div class="project-showcase__secondary-feature">
-      <div class="project-showcase__secondary-video">
-        <video
-          class="project-showcase__secondary-video-media"
-          data-autoplay-when-visible="true"
-          loop
-          muted
-          playsinline
-          preload="none"
-          {% if project.quinary_video_position %}style="object-position: {{ project.quinary_video_position }};"{% endif %}
-          aria-label="{{ project.title }} quinary preview video">
-          <source src="{{ project.quinary_video }}" type="video/mp4">
-        </video>
-        {% if project.quinary_video_title or project.quinary_video_subtitle %}
-        <div class="project-showcase__secondary-video-copy">
-          {% if project.quinary_video_title %}
-          <h3 class="project-showcase__secondary-video-title">{{ project.quinary_video_title }}</h3>
-          {% endif %}
-          {% if project.quinary_video_subtitle %}
-          <p class="project-showcase__secondary-video-subtitle">{{ project.quinary_video_subtitle }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-      </div>
-      {% if project.quinary_feature_heading or project.quinary_feature_items or project.quinary_feature_media %}
-      <div class="project-showcase__secondary-panel">
-        {% if project.quinary_feature_heading %}
-        <h3 class="project-showcase__secondary-panel-heading">{{ project.quinary_feature_heading }}</h3>
-        {% endif %}
-        {% if project.quinary_feature_items %}
-        <div class="project-showcase__secondary-panel-copy">
-          {% for item in project.quinary_feature_items %}
-          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% if project.quinary_feature_media %}
-        <div class="project-showcase__secondary-panel-media">
-          {% for item in project.quinary_feature_media %}
-          <figure class="project-showcase__secondary-panel-card">
-            <img
-              src="{{ item.file }}"
-              alt="{{ item.alt | default: project.title }}"
-              class="project-showcase__secondary-panel-image">
-            {% if item.description %}
-            <figcaption>{{ item.description }}</figcaption>
-            {% endif %}
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-
-    {% if project.quaternary_video %}
-    <div class="project-showcase__secondary-feature">
-      <div class="project-showcase__secondary-video">
-        <video
-          class="project-showcase__secondary-video-media"
-          data-autoplay-when-visible="true"
-          loop
-          muted
-          playsinline
-          preload="none"
-          {% if project.quaternary_video_position %}style="object-position: {{ project.quaternary_video_position }};"{% endif %}
-          aria-label="{{ project.title }} quaternary preview video">
-          <source src="{{ project.quaternary_video }}" type="video/mp4">
-        </video>
-        {% if project.quaternary_video_title or project.quaternary_video_subtitle %}
-        <div class="project-showcase__secondary-video-copy">
-          {% if project.quaternary_video_title %}
-          <h3 class="project-showcase__secondary-video-title">{{ project.quaternary_video_title }}</h3>
-          {% endif %}
-          {% if project.quaternary_video_subtitle %}
-          <p class="project-showcase__secondary-video-subtitle">{{ project.quaternary_video_subtitle }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-      </div>
-      {% if project.quaternary_feature_heading or project.quaternary_feature_items or project.quaternary_feature_media %}
-      <div class="project-showcase__secondary-panel">
-        {% if project.quaternary_feature_heading %}
-        <h3 class="project-showcase__secondary-panel-heading">{{ project.quaternary_feature_heading }}</h3>
-        {% endif %}
-        {% if project.quaternary_feature_items %}
-        <div class="project-showcase__secondary-panel-copy">
-          {% for item in project.quaternary_feature_items %}
-          <p class="project-showcase__secondary-panel-line"><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% if project.quaternary_feature_media %}
-        <div class="project-showcase__secondary-panel-media">
-          {% for item in project.quaternary_feature_media %}
-          <figure class="project-showcase__secondary-panel-card">
-            <img
-              src="{{ item.file }}"
-              alt="{{ item.alt | default: project.title }}"
-              class="project-showcase__secondary-panel-image">
-            {% if item.description %}
-            <figcaption>{{ item.description }}</figcaption>
-            {% endif %}
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-
-  </section>
-
-{% endfor %}
 </div>
-      </div>
-    </section>
 
-    <section
-      class="portfolio-page portfolio-page--writing is-peek-right"
-      id="portfolio-page-writing"
-      data-portfolio-page="writing-samples"
-      aria-hidden="true">
-      <div class="portfolio-page__surface portfolio-page__surface--writing">
-  {% assign sorted_prose = site.prose | sort: "order" %}
-  {% if sorted_prose.size > 0 %}
-  <div class="writing-grid">
-    {% for piece in sorted_prose %}
-    <article class="writing-card">
-      <div class="writing-card__header">
-        <h3 class="writing-card__title">{{ piece.title }}</h3>
-        {% if piece.media_type %}<p class="writing-card__media-type">{{ piece.media_type }}</p>{% endif %}
-        {% if piece.description and piece.description != "" %}
-        <p class="writing-card__summary">{{ piece.description }}</p>
+<!-- ============================ PROJECT DETAIL VIEWS ============================ -->
+{% assign games = site.projects | sort: "order" %}
+{% for p in games %}
+  {% assign accent = p.accent_rgb | default: "255 58 138" %}
+  <div data-view="{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
+    <div class="detail-hero">
+      {% if p.video %}
+      <video class="detail-hero__media" data-autoplay-when-visible="true" loop muted playsinline preload="none">
+        <source src="{{ p.video }}" type="video/mp4">
+      </video>
+      {% else %}
+      <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
+      {% endif %}
+      <div class="detail-hero__inner">
+        <button class="detail-back" data-back="games" type="button"><span>&larr;</span> All projects</button>
+        <div class="detail-hero__text">
+          {% if p.stage or p.timeline or p.engine %}
+          <span class="detail-eyebrow">
+            {%- if p.stage %}{{ p.stage }}{% endif -%}
+            {%- if p.stage and p.timeline %} &middot; {% endif -%}
+            {%- if p.timeline %}{{ p.timeline }}{% endif -%}
+            {%- if p.engine and (p.stage or p.timeline) %} &middot; {% endif -%}
+            {%- if p.engine %}{{ p.engine }}{% endif -%}
+          </span>
+          {% endif %}
+          <h1>{{ p.title }}</h1>
+          {% if p.description and p.description != "" %}<p class="detail-hero__desc">{{ p.description }}</p>{% endif %}
+          {% if p.role_display or p.role %}<p class="detail-hero__roles">{{ p.role_display | default: p.role }}</p>{% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="detail-body">
+
+      {% if p.secondary_video or p.tertiary_video or p.quaternary_video or p.quinary_video %}
+      <h2>Highlights</h2>
+      <div class="highlight-grid">
+        {% if p.secondary_video %}
+        <figure>
+          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.secondary_video }}" type="video/mp4"></video>
+          <figcaption>
+            <strong>{{ p.secondary_video_title }}</strong>
+            {% if p.secondary_video_subtitle %}<span>{{ p.secondary_video_subtitle }}</span>{% endif %}
+            {% if p.secondary_feature_items %}<ul class="hl-notes">{% for item in p.secondary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
+          </figcaption>
+        </figure>
+        {% endif %}
+        {% if p.tertiary_video %}
+        <figure>
+          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.tertiary_video }}" type="video/mp4"></video>
+          <figcaption>
+            <strong>{{ p.tertiary_video_title }}</strong>
+            {% if p.tertiary_video_subtitle %}<span>{{ p.tertiary_video_subtitle }}</span>{% endif %}
+            {% if p.tertiary_feature_items %}<ul class="hl-notes">{% for item in p.tertiary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
+          </figcaption>
+        </figure>
+        {% endif %}
+        {% if p.quaternary_video %}
+        <figure>
+          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.quaternary_video }}" type="video/mp4"></video>
+          <figcaption>
+            <strong>{{ p.quaternary_video_title }}</strong>
+            {% if p.quaternary_video_subtitle %}<span>{{ p.quaternary_video_subtitle }}</span>{% endif %}
+            {% if p.quaternary_feature_items %}<ul class="hl-notes">{% for item in p.quaternary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
+          </figcaption>
+        </figure>
+        {% endif %}
+        {% if p.quinary_video %}
+        <figure>
+          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.quinary_video }}" type="video/mp4"></video>
+          <figcaption>
+            <strong>{{ p.quinary_video_title }}</strong>
+            {% if p.quinary_video_subtitle %}<span>{{ p.quinary_video_subtitle }}</span>{% endif %}
+            {% if p.quinary_feature_items %}<ul class="hl-notes">{% for item in p.quinary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
+          </figcaption>
+        </figure>
         {% endif %}
       </div>
-      <div class="writing-card__body">
-        <div class="writing-card__content">
-          {{ piece.content | markdownify }}
+      {% endif %}
+
+      {% if p.plain_feature_items %}
+      <h2>{{ p.plain_feature_heading | default: "What I did" }}</h2>
+      <div class="detail-notes">
+        {% for item in p.plain_feature_items %}
+        <p><strong>{{ item.label }}:</strong> {{ item.text }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if p.awards %}
+      <h2>Awards</h2>
+      <div class="detail-awards">
+        {% for award in p.awards %}
+        <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: p.title }}">
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <a class="detail-fulllink" href="{{ p.url }}">Full project page &mdash; documents, scripts &amp; gallery <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- ============================ WRITING READING VIEWS ============================ -->
+{% assign samples = site.prose | sort: "order" %}
+{% for s in samples %}
+  <div data-view="w-{{ s.title | slugify }}" style="--project-accent-rgb: 122 217 255;">
+    <div class="detail-hero">
+      {% if s.image %}<img class="detail-hero__media" src="{{ s.image }}" alt="">{% endif %}
+      <div class="detail-hero__inner">
+        <button class="detail-back" data-back="writing" type="button"><span>&larr;</span> All writing samples</button>
+        <div class="detail-hero__text">
+          {% if s.media_type %}<span class="detail-eyebrow">{{ s.media_type }}</span>{% endif %}
+          <h1 style="font-size: clamp(2.6rem, 6vw, 4.4rem);">{{ s.title }}</h1>
+          {% if s.description and s.description != "" %}<p class="detail-hero__desc">{{ s.description }}</p>{% endif %}
+          {% if s.pdf %}<a class="read-pdf" href="{{ s.pdf }}" target="_blank" rel="noopener noreferrer">Full PDF <span aria-hidden="true">&nearr;</span></a>{% endif %}
         </div>
-        {% if piece.pdf %}<a class="writing-card__link" href="{{ piece.pdf }}" target="_blank" rel="noopener noreferrer">Full Sample</a>{% endif %}
       </div>
-    </article>
-    {% endfor %}
+    </div>
+    <div class="read-body">
+      {{ s.content | markdownify }}
+    </div>
   </div>
-  {% else %}
-  <p class="writing-empty-state">Add files to <code>_prose</code> to populate this section.</p>
-  {% endif %}
-      </div>
-    </section>
-  </div>
-</section>
+{% endfor %}
 
 <div class="project-modal" id="project-modal" aria-hidden="true">
   <div class="project-modal__backdrop" data-modal-close></div>
@@ -486,3 +261,4 @@ title: Home
 
 <script src="/assets/js/project-modal.js" defer></script>
 <script src="/assets/js/hero-scroll.js" defer></script>
+<script src="/assets/js/showcase.js" defer></script>
