@@ -2351,7 +2351,7 @@ h2 {
 /* ---- Pin track: hero stays fixed while you scroll through it ---- */
 .hero-pin-track {
   position: relative;
-  height: 300vh;              /* length of the scroll sequence */
+  height: 200vh;              /* length of the scroll sequence */
 }
 
 .hero {
