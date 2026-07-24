@@ -87,3 +87,61 @@
     if (card) card.classList.remove('is-hovered');
   });
 })();
+
+/* ===================================================================
+   STORE LINKS -- behaviour (appended after the showcase IIFE).
+
+   1. A store link must never trigger the card's click-through.
+   2. Touch devices have no hover, so the card nearest the centre of the
+      viewport gets `.is-active` -- which reveals its links and fills the
+      CTA. It hands off to the next card as you scroll.
+   =================================================================== */
+
+/* --- 1. store links don't open the project page --- */
+(function () {
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('.project-card__store-link');
+    if (link) e.stopPropagation();
+  }, true); // capture: runs before the card's own click handler
+})();
+
+/* --- 2. scroll-activated card on touch devices --- */
+(function () {
+  // Only where hover doesn't exist. Desktop keeps pure :hover.
+  if (window.matchMedia('(hover: hover)').matches) return;
+
+  var raf = null;
+
+  function update() {
+    raf = null;
+    var cards = document.querySelectorAll('.project-list .project-card');
+    if (!cards.length) return;
+
+    var mid = window.innerHeight / 2;
+    var best = null;
+    var bestDist = Infinity;
+
+    for (var i = 0; i < cards.length; i++) {
+      var r = cards[i].getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) {
+        cards[i].classList.remove('is-active');
+        continue;
+      }
+      var dist = Math.abs((r.top + r.height / 2) - mid);
+      if (dist < bestDist) { bestDist = dist; best = cards[i]; }
+    }
+
+    for (var j = 0; j < cards.length; j++) {
+      cards[j].classList.toggle('is-active', cards[j] === best);
+    }
+  }
+
+  function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
+
+  // capture:true so it also fires if a scroll container wraps the page
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+  setTimeout(update, 300);
+})();

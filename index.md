@@ -118,6 +118,14 @@ title: Home
 
                 <div class="project-card__actions">
                   <span class="project-cta">View project <span class="project-cta__arrow">&rarr;</span></span>
+                  {% if p.links and p.links.size > 0 %}
+                  <span class="project-card__store" aria-hidden="true"><span class="project-card__store-divider"></span></span>
+                  {% for l in p.links %}
+                  <span class="project-card__store">
+                    <a class="project-card__store-link" href="{{ l.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ p.title }} on {{ l.label }}">{{ l.label }} <span class="ext" aria-hidden="true">&nearr;</span></a>
+                  </span>
+                  {% endfor %}
+                  {% endif %}
                   {% if hl > 0 %}<span class="project-card__count">{{ hl }} highlight{% unless hl == 1 %}s{% endunless %} inside</span>{% endif %}
                 </div>
               </div>

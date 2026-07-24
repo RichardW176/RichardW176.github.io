@@ -2891,3 +2891,111 @@ h2 {
   /* the existing mobile rules already collapse .project-showcase__stage
      to one column and reset the -33px overlap */
 }
+
+/* ===================================================================
+   STORE LINKS -- pop out of the action row on hover (desktop)
+   and on scroll-into-center (touch).
+   =================================================================== */
+
+/* The row never wraps on desktop -- links unfold to the right of the CTA */
+.project-showcase__summary-content .project-card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.project-card__actions .project-cta { flex: none; }
+
+/* Each link sits in a collapsing sleeve so it takes no space at rest */
+.project-card__store {
+  flex: none;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  margin-left: 0;
+  transform: translateX(-10px) scale(0.92);
+  transition:
+    max-width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-left 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+}
+
+/* Revealed: on hover, on keyboard focus, or when scrolled to center (touch) */
+.project-card:hover .project-card__store,
+.project-card.is-hovered .project-card__store,
+.project-card.is-active .project-card__store {
+  max-width: 240px;
+  opacity: 1;
+  margin-left: 10px;
+  transform: translateX(0) scale(1);
+}
+
+/* Stagger outward. Leaving uses the base 0ms delay, so it folds back fast. */
+.project-card:hover .project-card__store:nth-of-type(2),
+.project-card.is-hovered .project-card__store:nth-of-type(2),
+.project-card.is-active .project-card__store:nth-of-type(2) { transition-delay: 70ms; }
+.project-card:hover .project-card__store:nth-of-type(3),
+.project-card.is-hovered .project-card__store:nth-of-type(3),
+.project-card.is-active .project-card__store:nth-of-type(3) { transition-delay: 140ms; }
+.project-card:hover .project-card__store:nth-of-type(4),
+.project-card.is-hovered .project-card__store:nth-of-type(4),
+.project-card.is-active .project-card__store:nth-of-type(4) { transition-delay: 210ms; }
+
+.project-card__store-divider {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.project-card__store-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 17px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+.project-card__store-link:hover,
+.project-card__store-link:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.project-card__store-link .ext { opacity: 0.6; }
+
+/* On a card that's the scroll-active one, mirror the CTA fill too */
+.project-card.is-active .project-cta {
+  background: rgb(var(--project-accent-rgb));
+  border-color: rgb(var(--project-accent-rgb));
+  color: #0a0a0e;
+}
+
+/* ---------- Touch / no-hover: links stay open on the active card ---------- */
+@media (hover: none) {
+  /* nothing extra -- `.is-active` from showcase.js drives the reveal */
+  .project-showcase__summary-content .project-card__actions { flex-wrap: wrap; }
+  .project-card__store { max-width: 240px; } /* no width animation on touch */
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 700px) {
+  .project-showcase__summary-content .project-card__actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .project-card__store { margin-left: 0 !important; }
+  .project-card__store-divider { display: none; }
+  .project-card__store-link { padding: 12px 16px; font-size: 0.9rem; } /* 44px tap target */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__store { transition-duration: 1ms; transition-delay: 0ms !important; }
+}
