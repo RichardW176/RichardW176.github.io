@@ -2391,13 +2391,11 @@ h2 {
 .hero-role  { animation: heroRoleIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 .hero-title { animation: heroNameIn 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; }
 
-/* ---- About: revealed on first scroll ---- */
+/* ---- About + socials: spawn on load with the name (fade up) ---- */
+@keyframes heroAboutIn { 0% { opacity: 0; transform: translateY(22px); } 100% { opacity: 1; transform: translateY(0); } }
 .hero-about {
   margin-top: 26px;
-  overflow: hidden;
-  opacity: var(--about-o, 0);
-  max-height: var(--about-mh, 0px);
-  transform: translateY(var(--about-y, 22px));
+  animation: heroAboutIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
 }
 .hero-about p {
   margin: 0 0 14px;
@@ -2409,10 +2407,9 @@ h2 {
 }
 .hero-about p:last-child { margin-bottom: 0; }
 
-/* ---- Socials: follow the About ---- */
+/* ---- Socials: spawn just after the About ---- */
 .hero-socials {
-  opacity: var(--social-o, 0);
-  transform: translateY(var(--social-y, 18px));
+  animation: heroAboutIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms both;
 }
 
 /* ---- Scroll hint ---- */
