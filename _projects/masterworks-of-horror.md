@@ -28,6 +28,11 @@ engine: Unity
 stage: Production
 timeline: Nov 2025 - Present
 description: PvP card battler inspired by classic horror literature.
+links:
+  - label: itch.io
+    url: "https://masterworks-of-horror.itch.io/masterworks-of-horror-the-prologue"
+  - label: Website
+    url: "https://www.masterworksgame.com/"
 order: 2
 docs:
   - title: "Masterworks GDD V1.9 - Richard Revisions"

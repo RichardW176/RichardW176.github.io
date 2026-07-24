@@ -15,6 +15,9 @@ engine: Web-based
 stage: Production
 timeline: Feb 2026 - Present
 description: Turn-based drawing game with power-ups
+links:
+  - label: Play
+    url: "https://doodle-cards.fly.dev/"
 accent_rgb: 214 191 156
 poster_frame_borderless: true
 order: 6
