@@ -20,7 +20,7 @@
 
     var aboutT  = clamp((p - 0.12) / 0.28);   // About reveal
     var socialT = clamp((p - 0.30) / 0.24);   // Socials follow
-    var lift    = clamp((p - 0.58) / 0.42);   // Hero lifts / dims
+    var lift    = clamp((p - 0.58) / 0.30);   // Hero lifts / dims
 
     var s = track.style;
     s.setProperty('--about-o', aboutT);
@@ -29,7 +29,7 @@
     s.setProperty('--social-o', socialT);
     s.setProperty('--social-y', ((1 - socialT) * 18) + 'px');
     s.setProperty('--hero-y', (-80 * lift) + 'px');
-    s.setProperty('--hero-o', (1 - 0.92 * lift));
+    s.setProperty('--hero-o', (1 - lift));
     s.setProperty('--video-bright', (0.84 - 0.46 * lift));
     s.setProperty('--hint-o', clamp(1 - p / 0.08));
   }
