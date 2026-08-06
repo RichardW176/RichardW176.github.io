@@ -72,13 +72,16 @@
     return track ? track.getBoundingClientRect() : null;
   }
 
-  // Sitting at/near the top of the work section, just below the pinned hero.
-  // Scrolling up from here must jump straight back to the Background beat
-  // instead of slowly free-scrolling and showing hero + portfolio together.
+  // Sitting just below the pinned hero — i.e. right at the top of the work
+  // section. Scrolling up from here jumps back to the Background beat instead
+  // of slowly free-scrolling and showing hero + portfolio together.
+  // Kept tight (~8% of a viewport) so it doesn't fire while you're already
+  // reading the portfolio. Raise SEAM for a larger catch zone.
+  var SEAM = 0.08;
   function atseam() {
     var r = rect();
     if (!r) return false;
-    return r.top <= 2 && r.bottom > -window.innerHeight * 0.34;
+    return r.top <= 2 && r.bottom > -window.innerHeight * SEAM;
   }
 
   // true while the pinned hero owns the viewport
@@ -92,8 +95,9 @@
     var dir = e.deltaY > 0 ? 1 : -1;
     // scrolling back up off the work section: snap instantly to Background
     if (dir < 0 && step >= maxstep && atseam()) {
+      if (Math.abs(e.deltaY) < 16) return;   // ignore faint upward drift
       e.preventDefault();
-      if (busy || Date.now() - settled < 200) return;
+      if (busy || Date.now() - settled < 320) return;
       step = maxstep;              // so go(-1) lands on maxstep - 1
       go(-1, true);
       return;
@@ -119,6 +123,7 @@
     if (Math.abs(dy) < 40) return;
     var dir = dy > 0 ? 1 : -1;
     if (dir < 0 && step >= maxstep && atseam()) {
+      if (Math.abs(dy) < 70) return;         // needs a deliberate swipe
       e.preventDefault();
       starty = e.touches[0].clientY;
       step = maxstep;
