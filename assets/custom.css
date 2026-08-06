@@ -2343,15 +2343,16 @@ h2 {
 
 /* ===================================================================
    Scroll-driven hero
-   Overrides the hero to become a scroll-pinned stage and reveals the
-   About + socials sequentially, then lifts to show the work.
-   All the reveal math is fed in as CSS variables by hero-scroll.js.
+   The hero becomes a scroll-pinned stage with TWO panels stacked in one
+   grid cell. Panel 1 (name) fades out and up as panel 2 (background +
+   contact) fades in — they swap rather than stack, so nothing overflows
+   a laptop screen. All values are fed in by hero-scroll.js.
    =================================================================== */
 
 /* ---- Pin track: hero stays fixed while you scroll through it ---- */
 .hero-pin-track {
   position: relative;
-  height: 160vh;              /* length of the scroll sequence */
+  height: 300vh;              /* length of the scroll sequence */
 }
 
 .hero {
@@ -2363,21 +2364,40 @@ h2 {
   align-items: stretch;
 }
 
-/* ---- Hero content sits lower in the video frame, lifts on scroll ---- */
+/* ---- Content is vertically centred and lifts on the last beat ---- */
 .hero-inner {
   position: absolute;
   left: 0;
   right: 0;
-  top: 32vh;                  /* vertical position in the frame */
+  top: 50%;
   bottom: auto;
   align-content: start;
   width: min(1120px, 100%);
+  min-height: 0;              /* override the original 100% */
   margin: 0 auto;
   padding: 0 5.5vw;
   box-sizing: border-box;
-  transform: translateY(var(--hero-y, 0px));
+  transform: translateY(calc(-50% + var(--hero-y, 0px)));
   opacity: var(--hero-o, 1);
   will-change: transform, opacity;
+}
+
+/* ---- The two panels share one grid cell ---- */
+.hero-panels {
+  position: relative;
+  display: grid;
+}
+.hero-panel {
+  grid-area: 1 / 1;
+  will-change: transform, opacity;
+}
+.hero-panel--name {
+  opacity: var(--name-o, 1);
+  transform: translateY(var(--name-y, 0px));
+}
+.hero-panel--bio {
+  opacity: var(--bio-o, 0);
+  transform: translateY(var(--bio-y, 42px));
 }
 
 /* video dims as the work panel rises */
@@ -2389,28 +2409,33 @@ h2 {
 @keyframes heroRoleIn { 0% { opacity: 0; transform: translateY(26px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes heroNameIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 .hero-role  { animation: heroRoleIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-.hero-title { animation: heroNameIn 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; }
-
-/* ---- About + socials: spawn on load with the name (fade up) ---- */
-@keyframes heroAboutIn { 0% { opacity: 0; transform: translateY(22px); } 100% { opacity: 1; transform: translateY(0); } }
-.hero-about {
-  margin-top: 26px;
-  animation: heroAboutIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+.hero-title {
+  animation: heroNameIn 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  font-size: clamp(56px, 7.4vw, 104px);   /* fits a 13" laptop */
+  line-height: 0.95;
+  max-width: 980px;
+  margin: 0;
 }
-.hero-about p {
+
+/* ---- Beat 2 copy ---- */
+.hero-eyebrow {
+  color: #999;
+  letter-spacing: 3.4px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+.hero-panel--bio p:not(.hero-eyebrow) {
   margin: 0 0 14px;
   max-width: 620px;
-  color: #d3d6dd;
-  font-size: 1.16rem;
-  line-height: 1.75;
+  color: #e4e7ee;
+  font-size: 1.1rem;
+  line-height: 1.7;
   font-weight: 400;
+  text-wrap: pretty;
 }
-.hero-about p:last-child { margin-bottom: 0; }
-
-/* ---- Socials: spawn just after the About ---- */
-.hero-socials {
-  animation: heroAboutIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms both;
-}
+.hero-panel--bio .hero-socials { margin-top: 26px; }
 
 /* ---- Scroll hint ---- */
 .hero-scroll-hint {
@@ -2444,7 +2469,14 @@ h2 {
   background: #000000;
 }
 
-/* ---- Mobile: no scroll-jacking; show everything normally ---- */
+/* ---- Short viewports: tighten so beat 2 always fits ---- */
+@media (max-height: 760px) {
+  .hero-title { font-size: clamp(44px, 6vw, 72px); }
+  .hero-panel--bio p:not(.hero-eyebrow) { font-size: 1rem; line-height: 1.6; }
+  .hero-panel--bio .hero-socials { margin-top: 18px; }
+}
+
+/* ---- Mobile: no scroll-jacking; both panels shown in flow ---- */
 @media (max-width: 700px) {
   .hero-pin-track { height: auto; }
   .hero {
@@ -2461,17 +2493,20 @@ h2 {
     transform: none !important;
     opacity: 1 !important;
   }
-  .hero-about {
-    max-height: none !important;
+  .hero-panels { display: block; }        /* stack normally, no overlap */
+  .hero-panel {
     opacity: 1 !important;
     transform: none !important;
+    pointer-events: auto !important;
   }
-  .hero-socials {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  .hero-panel--bio { margin-top: 28px; }
   .hero-scroll-hint { display: none; }
   #portfolio-showcase { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-panel { transition: none; }
+  .hero-role, .hero-title { animation: none; }
 }
 
 /* ===================================================================

@@ -19,28 +19,37 @@ title: Home
     </video>
   </div>
   <div class="hero-inner">
-    <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
-    <div class="hero-name-stack">
-      <h1 class="hero-title">Richard<br>Wang</h1>
+    <div class="hero-panels">
+
+      <!-- BEAT 1 — name -->
+      <div class="hero-panel hero-panel--name" data-hero-panel="name">
+        <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
+        <h1 class="hero-title">Richard<br>Wang</h1>
+      </div>
+
+      <!-- BEAT 2 — background + contact -->
+      <div class="hero-panel hero-panel--bio" data-hero-panel="bio">
+        <p class="hero-eyebrow">Background</p>
+        <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
+        <p>Feel free to contact me using either of the methods below!</p>
+        <div class="hero-socials">
+          <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
+          </a>
+          <a class="hero-social-btn" href="mailto:richardwangsgs@gmail.com">
+            <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
+          </a>
+        </div>
+      </div>
+
     </div>
-    <div class="hero-about">
-      <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
-      <p>Feel free to contact me using either of the methods below!</p>
-    </div>
-    <div class="hero-socials">
-      <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
-        <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
-      </a>
-      <a class="hero-social-btn" href="mailto:richardwangsgs@gmail.com">
-        <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
-      </a>
-    </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <span class="hero-scroll-hint__label">Scroll</span>
-      <span class="hero-scroll-hint__chev">
-        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="hero-scroll-hint__label">Scroll</span>
+    <span class="hero-scroll-hint__chev">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
   </div>
 </section>
 </div>
