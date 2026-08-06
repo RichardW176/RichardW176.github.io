@@ -23,7 +23,7 @@ title: Home
 
       <!-- BEAT 1 — name -->
       <div class="hero-panel hero-panel--name" data-hero-panel="name">
-        <p class="hero-role">COMBAT DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
+        <p class="hero-role">COMBAT DESIGNER • LEVEL DESIGNER • NARRATIVE DESIGNER • FILMMAKER</p>
         <h1 class="hero-title">Richard<br>Wang</h1>
       </div>
 
