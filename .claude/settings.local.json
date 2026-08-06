@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls -lhS \"c:\\\\Users\\\\richa\\\\Desktop\\\\Unreal\\\\RichardW176.github.io\\\\assets/\"*.mp4)"
+      "Bash(ls -lhS \"c:\\\\Users\\\\richa\\\\Desktop\\\\Unreal\\\\RichardW176.github.io\\\\assets/\"*.mp4)",
+      "Bash(ls -la /Users/yewang/Desktop/RichardWebsite/RichardW176.github.io/assets /Users/yewang/Desktop/RichardWebsite/RichardW176.github.io/assets/js 2>&1; ls /Users/yewang/Desktop/RichardWebsite/ )",
+      "Read(//Users/yewang/Desktop/RichardWebsite/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(node --check assets/js/hero-scroll.js)",
+      "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
+      "Read(//Users/yewang/**)",
+      "Bash(ln -sfn /Users/yewang/Desktop/RichardWebsite/RichardW176.github.io/assets /private/tmp/claude-501/-Users-yewang-Desktop-RichardWebsite-RichardW176-github-io/b488d8ac-aad0-4571-9809-1f6021751208/scratchpad/preview/assets)",
+      "Bash(python3 -)",
+      "Bash(python3 -m http.server 8731)",
+      "Bash(git -C /Users/yewang/Desktop/RichardWebsite/RichardW176.github.io diff --stat)",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(gh auth *)"
     ]
   }
 }
