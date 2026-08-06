@@ -2342,17 +2342,21 @@ h2 {
 }
 
 /* ===================================================================
-   Scroll-driven hero
-   The hero becomes a scroll-pinned stage with TWO panels stacked in one
-   grid cell. Panel 1 (name) fades out and up as panel 2 (background +
-   contact) fades in — they swap rather than stack, so nothing overflows
-   a laptop screen. All values are fed in by hero-scroll.js.
+   Step-driven hero
+   The hero is a scroll-pinned stage with TWO panels stacked in one grid
+   cell. Which beat is showing is driven by `data-step` on the pin track
+   (set by hero-scroll.js) — NOT by scroll fraction — so the panels
+   crossfade cleanly with CSS transitions and never sit half-transparent.
    =================================================================== */
 
-/* ---- Pin track: hero stays fixed while you scroll through it ---- */
+/* ---- Pin track: hero stays fixed while you step through it ---- */
 .hero-pin-track {
   position: relative;
-  height: 300vh;              /* length of the scroll sequence */
+  /* Two PINNED beats (name, background) at one viewport each. No empty tail:
+     extra track length is space the user can free-scroll through, which shows
+     the hero and the portfolio at the same time. The final beat is not pinned
+     — it scrolls to the work section. */
+  height: 200vh;
 }
 
 .hero {
@@ -2364,7 +2368,7 @@ h2 {
   align-items: stretch;
 }
 
-/* ---- Content is vertically centred and lifts on the last beat ---- */
+/* ---- Content is vertically centred; lifts on the last beat ---- */
 .hero-inner {
   position: absolute;
   left: 0;
@@ -2377,9 +2381,16 @@ h2 {
   margin: 0 auto;
   padding: 0 5.5vw;
   box-sizing: border-box;
-  transform: translateY(calc(-50% + var(--hero-y, 0px)));
-  opacity: var(--hero-o, 1);
+  transform: translateY(-50%);
+  opacity: 1;
   will-change: transform, opacity;
+  transition:
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 620ms ease;
+}
+.hero-pin-track[data-step="2"] .hero-inner {
+  transform: translateY(calc(-50% - 70px));
+  opacity: 0.08;
 }
 
 /* ---- The two panels share one grid cell ---- */
@@ -2390,19 +2401,45 @@ h2 {
 .hero-panel {
   grid-area: 1 / 1;
   will-change: transform, opacity;
-}
-.hero-panel--name {
-  opacity: var(--name-o, 1);
-  transform: translateY(var(--name-y, 0px));
-}
-.hero-panel--bio {
-  opacity: var(--bio-o, 0);
-  transform: translateY(var(--bio-y, 42px));
+  transition:
+    opacity 480ms ease,
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 480ms;
 }
 
-/* video dims as the work panel rises */
+/* Beat 1 — name (default) */
+.hero-panel--name { opacity: 1; visibility: visible; transform: translateY(0); }
+
+/* Beat 2 — background + contact */
+.hero-panel--bio {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(42px);
+  pointer-events: none;
+  transition-delay: 120ms;
+}
+.hero-pin-track[data-step="1"] .hero-panel--name,
+.hero-pin-track[data-step="2"] .hero-panel--name {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-42px);
+  pointer-events: none;
+}
+.hero-pin-track[data-step="1"] .hero-panel--bio,
+.hero-pin-track[data-step="2"] .hero-panel--bio {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* video dims as the work panel takes over */
 .hero-media__video {
-  filter: saturate(1.05) brightness(var(--video-bright, 0.84));
+  filter: saturate(1.05) brightness(0.84);
+  transition: filter 620ms ease;
+}
+.hero-pin-track[data-step="2"] .hero-media__video {
+  filter: saturate(1.05) brightness(0.38);
 }
 
 /* ---- Entrance (on load) for role + name ---- */
@@ -2437,7 +2474,7 @@ h2 {
 }
 .hero-panel--bio .hero-socials { margin-top: 26px; }
 
-/* ---- Scroll hint ---- */
+/* ---- Scroll hint: names the beat the next scroll brings ---- */
 .hero-scroll-hint {
   position: absolute;
   left: 50%;
@@ -2445,14 +2482,30 @@ h2 {
   transform: translateX(-50%);
   z-index: 3;
   text-align: center;
-  opacity: var(--hint-o, 1);
+  opacity: 1;
   pointer-events: none;
+  transition: opacity 400ms ease;
 }
+.hero-pin-track[data-step="2"] .hero-scroll-hint { opacity: 0; }
+
 .hero-scroll-hint__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
   font-size: 0.72rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
+}
+.hero-scroll-hint__next {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
+}
+.hero-scroll-hint__rule {
+  width: 14px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.32);
 }
 .hero-scroll-hint__chev {
   display: block;
@@ -2461,11 +2514,13 @@ h2 {
 }
 @keyframes heroChevBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
-/* ---- Work panel rises up over the fading hero ---- */
+/* ---- Work panel sits BELOW the hero ----
+   No negative margin: an overlap lets the portfolio bleed into the bottom of
+   the pinned hero, which is exactly the awkward middle state we're avoiding. */
 #portfolio-showcase {
   position: relative;
   z-index: 5;
-  margin-top: -30vh;
+  margin-top: 0;
   background: #000000;
 }
 
@@ -2476,7 +2531,7 @@ h2 {
   .hero-panel--bio .hero-socials { margin-top: 18px; }
 }
 
-/* ---- Mobile: no scroll-jacking; both panels shown in flow ---- */
+/* ---- Mobile: no step-jacking; both panels shown in flow ---- */
 @media (max-width: 700px) {
   .hero-pin-track { height: auto; }
   .hero {
@@ -2496,17 +2551,29 @@ h2 {
   .hero-panels { display: block; }        /* stack normally, no overlap */
   .hero-panel {
     opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
     pointer-events: auto !important;
   }
   .hero-panel--bio { margin-top: 28px; }
   .hero-scroll-hint { display: none; }
-  #portfolio-showcase { margin-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-panel { transition: none; }
+  .hero-pin-track { height: auto; }
+  .hero { position: relative; height: auto; padding: 108px 0 64px; }
+  .hero-inner { position: relative; top: auto; transform: none; opacity: 1; }
+  .hero-panels { display: block; }
+  .hero-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    transition: none;
+  }
+  .hero-panel--bio { margin-top: 28px; }
   .hero-role, .hero-title { animation: none; }
+  .hero-scroll-hint { display: none; }
 }
 
 /* ===================================================================

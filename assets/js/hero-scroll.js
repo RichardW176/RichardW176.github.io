@@ -1,65 +1,177 @@
 /* ===================================================================
-   Scroll-driven hero
-   Drives a two-beat hero: the name panel hands off to the background
-   panel as you scroll (they SWAP in the same slot, so the text never
-   stacks past the bottom of a laptop screen), then the whole hero
-   lifts as the work panel rises over it.
+   Step-driven hero
 
-   Tuning (fractions of the pin track):
-     swap  0.16 -> 0.42   name hands off to background
-     lift  0.66 -> 1.00   hero lifts and dims
+   DISCRETE beats. One wheel gesture / swipe / arrow key advances the hero
+   to the next beat and animates the page there; the panels crossfade via
+   CSS transitions. Nothing is driven by raw scroll fraction, so there is
+   no awkward half-transparent middle state.
+
+     step 0 — name + role
+     step 1 — background copy + contact links
+     step 2 — scrolls to #portfolio-showcase; the hero clears the screen
+
+   Steps 0 and 1 are the two PINNED beats, so the track is 200vh with no empty
+   tail. Step 2 is not a pinned beat — it hands you to the work section.
+   Scrolling back UP off the work section jumps instantly to beat 1 rather than
+   easing, so the hero and portfolio are never on screen together.
+
+   Below 700px the whole thing is inert (see the media query in
+   custom.css) and the page scrolls normally.
    =================================================================== */
 
 (function () {
-  var clamp = function (v) { return Math.min(Math.max(v, 0), 1); };
-  var raf = null;
+  if (window.matchMedia('(max-width: 700px)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  function update() {
-    raf = null;
+  var step = 0;
+  var maxstep = 2;
+  var busy = false;
+  var settled = 0;   // guards against trackpad inertia firing extra steps
+
+  function apply() {
     var track = document.querySelector('[data-hero-track]');
     if (!track) return;
-    var rect = track.getBoundingClientRect();
-    var total = track.offsetHeight - window.innerHeight;
-    var scrolled = Math.min(Math.max(-rect.top, 0), total);
-    var p = total > 0 ? scrolled / total : 0;
+    track.setAttribute('data-step', step);
 
-    var swap = clamp((p - 0.16) / 0.26);   // 0 = name, 1 = background
-    var lift = clamp((p - 0.66) / 0.34);   // hero lifts / dims
-
-    var s = track.style;
-    s.setProperty('--name-o', (1 - swap));
-    s.setProperty('--name-y', (-42 * swap) + 'px');
-    s.setProperty('--bio-o', swap);
-    s.setProperty('--bio-y', ((1 - swap) * 42) + 'px');
-    s.setProperty('--hero-y', (-70 * lift) + 'px');
-    s.setProperty('--hero-o', (1 - 0.92 * lift));
-    s.setProperty('--video-bright', (0.84 - 0.46 * lift));
-    s.setProperty('--hint-o', clamp(1 - p / 0.08));
-
-    // Only the visible panel should be clickable or reachable by keyboard.
-    // Under 700px both panels render in normal flow, so nothing is hidden.
-    var stacked = window.matchMedia('(max-width: 700px)').matches;
-    var showBio = swap > 0.5;
-    setPanelActive(track.querySelector('[data-hero-panel="name"]'), stacked || !showBio);
-    setPanelActive(track.querySelector('[data-hero-panel="bio"]'), stacked || showBio);
+    var label = track.querySelector('[data-hero-hint-label]');
+    if (label) {
+      var next = step >= 1 ? 'Portfolio' : 'Background';
+      if (label.textContent !== next) label.textContent = next;
+    }
   }
 
-  function setPanelActive(panel, active) {
-    if (!panel) return;
-    panel.style.pointerEvents = active ? 'auto' : 'none';
-    if (active) panel.removeAttribute('inert');
-    else panel.setAttribute('inert', '');
+  function targetY() {
+    var track = document.querySelector('[data-hero-track]');
+    if (!track) return 0;
+    var pagetop = window.pageYOffset || document.documentElement.scrollTop;
+    // The final beat lands ON the portfolio — scroll straight to the work
+    // section so the hero clears the screen instead of parking mid-track
+    // with a dimmed hero and a half-visible portfolio behind it.
+    if (step >= maxstep) {
+      var work = document.querySelector('#portfolio-showcase');
+      if (work) return work.getBoundingClientRect().top + pagetop;
+    }
+    return track.getBoundingClientRect().top + pagetop + step * window.innerHeight;
   }
 
-  function onScroll() {
-    if (!raf) raf = requestAnimationFrame(update);
+  function go(dir, instant) {
+    var next = Math.min(Math.max(step + dir, 0), maxstep);
+    if (next === step) return;
+    step = next;
+    busy = true;
+    apply();
+    window.scrollTo({ top: targetY(), behavior: instant ? 'auto' : 'smooth' });
+    setTimeout(function () {
+      busy = false;
+      settled = Date.now();
+    }, instant ? 260 : 700);
   }
 
-  // capture:true so it also works if the page scrolls an inner container
-  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
-  document.addEventListener('scroll', onScroll, { passive: true, capture: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  update();
-  setTimeout(update, 200);
-  setTimeout(update, 800);
+  function rect() {
+    var track = document.querySelector('[data-hero-track]');
+    return track ? track.getBoundingClientRect() : null;
+  }
+
+  // Sitting at/near the top of the work section, just below the pinned hero.
+  // Scrolling up from here must jump straight back to the Background beat
+  // instead of slowly free-scrolling and showing hero + portfolio together.
+  function atseam() {
+    var r = rect();
+    if (!r) return false;
+    return r.top <= 2 && r.bottom > -window.innerHeight * 0.34;
+  }
+
+  // true while the pinned hero owns the viewport
+  function inzone() {
+    var r = rect();
+    if (!r) return false;
+    return r.top <= 2 && r.bottom >= window.innerHeight - 2;
+  }
+
+  document.addEventListener('wheel', function (e) {
+    var dir = e.deltaY > 0 ? 1 : -1;
+    // scrolling back up off the work section: snap instantly to Background
+    if (dir < 0 && step >= maxstep && atseam()) {
+      e.preventDefault();
+      if (busy || Date.now() - settled < 200) return;
+      step = maxstep;              // so go(-1) lands on maxstep - 1
+      go(-1, true);
+      return;
+    }
+    if (!inzone()) return;
+    // at the ends, hand scrolling back to the page
+    if (dir > 0 && step >= maxstep) return;
+    if (dir < 0 && step <= 0) return;
+    e.preventDefault();
+    if (busy || Date.now() - settled < 260) return;
+    if (Math.abs(e.deltaY) < 4) return;
+    go(dir);
+  }, { passive: false });
+
+  var starty = 0;
+  document.addEventListener('touchstart', function (e) {
+    starty = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function (e) {
+    if (busy) return;
+    var dy = starty - e.touches[0].clientY;
+    if (Math.abs(dy) < 40) return;
+    var dir = dy > 0 ? 1 : -1;
+    if (dir < 0 && step >= maxstep && atseam()) {
+      e.preventDefault();
+      starty = e.touches[0].clientY;
+      step = maxstep;
+      go(-1, true);
+      return;
+    }
+    if (!inzone()) return;
+    if (dir > 0 && step >= maxstep) return;
+    if (dir < 0 && step <= 0) return;
+    e.preventDefault();
+    starty = e.touches[0].clientY;
+    go(dir);
+  }, { passive: false });
+
+  document.addEventListener('keydown', function (e) {
+    var up = (e.key === 'ArrowUp' || e.key === 'PageUp');
+    if (up && step >= maxstep && atseam()) {
+      e.preventDefault();
+      step = maxstep;
+      go(-1, true);
+      return;
+    }
+    if (!inzone()) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      if (step < maxstep) { e.preventDefault(); go(1); }
+    } else if (up) {
+      if (step > 0) { e.preventDefault(); go(-1); }
+    }
+  });
+
+  // resync if the user drags the scrollbar or lands via an anchor
+  window.addEventListener('scroll', function () {
+    if (busy) return;
+    var track = document.querySelector('[data-hero-track]');
+    if (!track) return;
+    var r = track.getBoundingClientRect();
+    // scrolled past the pinned region entirely — treat as the final beat
+    if (r.bottom < window.innerHeight - 2) {
+      if (step !== maxstep) { step = maxstep; apply(); }
+      return;
+    }
+    var guess = Math.min(
+      Math.round(Math.max(-r.top, 0) / window.innerHeight),
+      maxstep - 1
+    );
+    if (guess !== step) { step = guess; apply(); }
+  }, { passive: true, capture: true });
+
+  window.addEventListener('resize', function () {
+    if (!busy && inzone()) window.scrollTo({ top: targetY() });
+  }, { passive: true });
+
+  apply();
+  setTimeout(apply, 200);
+  setTimeout(apply, 800);
 })();

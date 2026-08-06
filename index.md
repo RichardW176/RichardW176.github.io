@@ -5,7 +5,7 @@ title: Home
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-<div class="hero-pin-track" data-hero-track>
+<div class="hero-pin-track" data-hero-track data-step="0">
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <video
@@ -46,7 +46,7 @@ title: Home
   </div>
 
   <div class="hero-scroll-hint" aria-hidden="true">
-    <span class="hero-scroll-hint__label">Scroll</span>
+    <span class="hero-scroll-hint__label">Scroll<span class="hero-scroll-hint__rule"></span><span class="hero-scroll-hint__next" data-hero-hint-label>Background</span></span>
     <span class="hero-scroll-hint__chev">
       <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </span>
