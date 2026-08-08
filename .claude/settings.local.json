@@ -14,7 +14,12 @@
       "Bash(git -C /Users/yewang/Desktop/RichardWebsite/RichardW176.github.io diff --stat)",
       "Bash(git add *)",
       "Bash(git push *)",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "Bash(pkill -f \"http.server 8732\")",
+      "Bash(pkill -f \"http.server 8731\")",
+      "Bash(python3 -c \"s=open\\('assets/custom.css'\\).read\\(\\); print\\(s.count\\('{'\\)==s.count\\('}'\\)\\)\")",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --hide-scrollbars --window-size=780,900 --virtual-time-budget=4000 --screenshot=/private/tmp/claude-501/-Users-yewang-Desktop-RichardWebsite-RichardW176-github-io/b488d8ac-aad0-4571-9809-1f6021751208/scratchpad/shots/role-780.png http://localhost:8733/state.html?step=0)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --window-size=1400,900 --virtual-time-budget=9000 --dump-dom http://localhost:8734/hijack.html)"
     ]
   }
 }
