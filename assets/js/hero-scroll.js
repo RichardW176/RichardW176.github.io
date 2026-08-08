@@ -67,9 +67,27 @@
     }, instant ? 260 : 700);
   }
 
-  function rect() {
+  // showcase.js hides the pin track with display:none when a detail view
+  // opens, and getBoundingClientRect() on a hidden element is all zeros —
+  // which passes both the `top <= 2` and `bottom > -x` guards below. That
+  // made atseam() true on every detail page, so scrolling up inside a
+  // project kept firing the jump-back. A zero-size track means no zone.
+  function heroTrackRect() {
     var track = document.querySelector('[data-hero-track]');
-    return track ? track.getBoundingClientRect() : null;
+    if (!track) return null;
+    var r = track.getBoundingClientRect();
+    if (r.width === 0 || r.height === 0) return null;
+    return r;
+  }
+
+  // true while any project / writing detail view is open
+  function detailViewOpen() {
+    var views = document.querySelectorAll('[data-view]');
+    for (var i = 0; i < views.length; i++) {
+      if (views[i].getAttribute('data-view') === 'index') continue;
+      if (views[i].offsetParent !== null) return true;   // visible
+    }
+    return false;
   }
 
   // Sitting just below the pinned hero — i.e. right at the top of the work
@@ -79,14 +97,16 @@
   // reading the portfolio. Raise SEAM for a larger catch zone.
   var SEAM = 0.08;
   function atseam() {
-    var r = rect();
+    if (detailViewOpen()) return false;
+    var r = heroTrackRect();
     if (!r) return false;
     return r.top <= 2 && r.bottom > -window.innerHeight * SEAM;
   }
 
   // true while the pinned hero owns the viewport
   function inzone() {
-    var r = rect();
+    if (detailViewOpen()) return false;
+    var r = heroTrackRect();
     if (!r) return false;
     return r.top <= 2 && r.bottom >= window.innerHeight - 2;
   }
