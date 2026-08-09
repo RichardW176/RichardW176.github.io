@@ -76,8 +76,20 @@ title: Home
 
           <div class="project-card__shell project-showcase__stage">
 
-            <!-- LEFT: portrait poster (5 / 7) -->
+            <!-- LEFT: portrait poster (5 / 7), with highlight clips fanned behind it -->
             <div class="project-showcase__poster-column">
+              {%- capture fanlist %}{% if p.secondary_video %}{{ p.secondary_video }},{% endif %}{% if p.tertiary_video %}{{ p.tertiary_video }},{% endif %}{% if p.quaternary_video %}{{ p.quaternary_video }},{% endif %}{% endcapture -%}
+              {%- assign fan = fanlist | split: "," | slice: 0, 3 -%}
+              {% for clip in fan %}
+              <div class="project-fan__card">
+                <video loop muted playsinline preload="none">
+                  <source src="{{ clip }}" type="video/mp4">
+                </video>
+              </div>
+              {% endfor %}
+              {% if fan.size > 0 %}
+              <span class="project-fan__count">{{ fan.size }} highlight{% unless fan.size == 1 %}s{% endunless %}</span>
+              {% endif %}
               <div class="project-showcase__poster-frame{% if p.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if p.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
                 <img class="project-showcase__poster" src="{{ p.image }}" alt="{{ p.title }} poster"{% if p.poster_position %} style="object-position: {{ p.poster_position }};"{% endif %}>
               </div>

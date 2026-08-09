@@ -145,3 +145,103 @@
   update();
   setTimeout(update, 300);
 })();
+
+/* ===================================================================
+   FANNED HIGHLIGHT CARDS -- behaviour
+
+   Highlight clips peek from behind the project poster and fan out in a
+   wide arc on hover. Handles 1-3 cards; the geometry is picked to suit
+   however many a project actually has.
+   =================================================================== */
+
+(function () {
+  // Fan geometry per card index, chosen by how many cards are present.
+  // [x, y, rotation(deg), scale]
+  var LAYOUTS = {
+    1: [[-58,  10, -12, 0.94]],
+    2: [[-34, -26,  -9, 0.94], [-78,   8, -18, 0.89]],
+    3: [[-30, -30,  -8, 0.94], [-72,   4, -16, 0.90], [-104, 44, -24, 0.86]]
+  };
+
+  // At rest the cards sit at a fraction of their fanned position. Parked at
+  // translate(0,0) they land exactly under the poster -- which covers the
+  // column edge to edge -- so nothing peeks out and the stack reads as a
+  // plain poster. Deriving the resting offset from LAYOUTS keeps the spread
+  // tunable from one place.
+  // 0.28 is the smallest fraction that still peeks for a single-card project,
+  // whose only card sits furthest out (-58px) and so moves least at rest.
+  var REST = 0.28;
+
+  function fanCards(card) {
+    return card.querySelectorAll('.project-fan__card');
+  }
+
+  function setFan(card, open) {
+    var cards = fanCards(card);
+    var layout = LAYOUTS[Math.min(cards.length, 3)];
+    if (!layout) return;
+
+    for (var i = 0; i < cards.length; i++) {
+      var el = cards[i];
+      var pos = layout[i];
+      var k = open ? 1 : REST;
+      el.style.transitionDelay = (open ? i * 65 : (cards.length - 1 - i) * 40) + 'ms';
+      el.style.transform =
+        'translate(' + (pos[0] * k) + 'px,' + (pos[1] * k) + 'px) rotate(' +
+        (pos[2] * k) + 'deg) scale(' + (open ? pos[3] : 1) + ')';
+      el.style.opacity = open ? '1' : '0.42';
+
+      // Only play what's visible -- a fanned-out clip, nothing at rest.
+      var v = el.querySelector('video');
+      if (v) {
+        if (open) { try { v.play(); } catch (e) {} }
+        else { try { v.pause(); } catch (e) {} }
+      }
+    }
+
+    var label = card.querySelector('.project-fan__count');
+    if (label) label.style.opacity = open ? '1' : '0';
+  }
+
+  document.addEventListener('pointerover', function (e) {
+    var c = e.target.closest && e.target.closest('.project-card');
+    if (c && !c.contains(e.relatedTarget)) setFan(c, true);
+  });
+  document.addEventListener('pointerout', function (e) {
+    var c = e.target.closest && e.target.closest('.project-card');
+    if (c && !c.contains(e.relatedTarget)) setFan(c, false);
+  });
+
+  // keyboard parity -- focusing the card fans it open
+  document.addEventListener('focusin', function (e) {
+    var c = e.target.closest && e.target.closest('.project-card');
+    if (c) setFan(c, true);
+  });
+  document.addEventListener('focusout', function (e) {
+    var c = e.target.closest && e.target.closest('.project-card');
+    if (c && !c.contains(e.relatedTarget)) setFan(c, false);
+  });
+
+  // Park the cards in their resting fan on load. Done with transitions
+  // suppressed so they're already peeking at first paint instead of
+  // sliding out once the script runs.
+  function initFans() {
+    var cards = document.querySelectorAll('.project-card');
+    for (var i = 0; i < cards.length; i++) {
+      var clips = fanCards(cards[i]);
+      for (var j = 0; j < clips.length; j++) clips[j].style.transition = 'none';
+      setFan(cards[i], false);
+    }
+    // next frame: hand the transitions back for real interaction
+    requestAnimationFrame(function () {
+      var clips = document.querySelectorAll('.project-fan__card');
+      for (var k = 0; k < clips.length; k++) clips[k].style.transition = '';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFans);
+  } else {
+    initFans();
+  }
+})();
