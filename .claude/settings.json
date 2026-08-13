@@ -15,7 +15,9 @@
       "Bash(python3 -c ' *)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --hide-scrollbars --window-size=1500,700 --virtual-time-budget=5000 --screenshot=/private/tmp/claude-501/-Users-yewang-Desktop-RichardWebsite-RichardW176-github-io/b488d8ac-aad0-4571-9809-1f6021751208/scratchpad/shots/fan-rest2.png http://localhost:8735/fan.html)",
       "Bash(pkill -f \"http.server 8735\")",
-      "Bash(python3 -c \"s=open\\('assets/custom.css'\\).read\\(\\); print\\('css braces balanced:', s.count\\('{'\\)==s.count\\('}'\\)\\)\")"
+      "Bash(python3 -c \"s=open\\('assets/custom.css'\\).read\\(\\); print\\('css braces balanced:', s.count\\('{'\\)==s.count\\('}'\\)\\)\")",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --hide-scrollbars --window-size=1500,700 --virtual-time-budget=5000 --screenshot=/private/tmp/claude-501/-Users-yewang-Desktop-RichardWebsite-RichardW176-github-io/b488d8ac-aad0-4571-9809-1f6021751208/scratchpad/shots/fan-off.png http://localhost:8736/off.html)",
+      "Bash(pkill -f \"http.server 8736\")"
     ]
   }
 }
