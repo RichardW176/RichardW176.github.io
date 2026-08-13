@@ -38,7 +38,21 @@
     }
   }
 
-  function selectTab(name) {
+  // Where the reader was in each tab, so switching back doesn't lose their
+  // place. The panes differ a lot in height, and swapping to a shorter one
+  // collapses the page -- the browser then clamps the scroll position, which
+  // reads as the page jumping to the top.
+  var tabScroll = {};
+
+  // `restore` is only true for a tab click. The detail-page back button also
+  // calls this, and there show() sets the scroll position itself -- restoring
+  // here would run a frame later and stomp on it.
+  function selectTab(name, restore) {
+    var current = document.querySelector('[data-tab].is-active');
+    if (restore && current && current.getAttribute('data-tab') !== name) {
+      tabScroll[current.getAttribute('data-tab')] = window.scrollY;
+    }
+
     var tabs = document.querySelectorAll('[data-tab]');
     for (var i = 0; i < tabs.length; i++) {
       var on = tabs[i].getAttribute('data-tab') === name;
@@ -50,6 +64,13 @@
       panels[j].style.display =
         panels[j].getAttribute('data-panel') === name ? 'block' : 'none';
     }
+
+    if (!restore) return;
+    var want = tabScroll[name] || 0;
+    requestAnimationFrame(function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo(0, Math.min(want, Math.max(max, 0)));
+    });
   }
 
   document.addEventListener('click', function (e) {
@@ -65,7 +86,7 @@
     }
 
     var t = e.target.closest && e.target.closest('[data-tab]');
-    if (t) selectTab(t.getAttribute('data-tab'));
+    if (t) selectTab(t.getAttribute('data-tab'), true);
   });
 
   // keyboard: cards and tabs are role="button"/tabindex=0
@@ -74,7 +95,7 @@
     var c = e.target.closest && e.target.closest('[data-goto]');
     if (c) { e.preventDefault(); show(c.getAttribute('data-goto')); return; }
     var t = e.target.closest && e.target.closest('[data-tab]');
-    if (t) { e.preventDefault(); selectTab(t.getAttribute('data-tab')); }
+    if (t) { e.preventDefault(); selectTab(t.getAttribute('data-tab'), true); }
   });
 
   // focus mirrors hover so keyboard users see the same affordance

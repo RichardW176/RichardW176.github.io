@@ -3199,3 +3199,118 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   .project-fan__card { transition-duration: 1ms; transition-delay: 0ms !important; }
 }
+
+/* ===================================================================
+   PERSISTENT PORTFOLIO TABS
+   Games / Writing Samples pinned to the top of the viewport for the
+   whole showcase, so the reader can switch at any scroll depth.
+
+   Sticky needs a clean ancestor chain: html/body use overflow-x: clip,
+   which does NOT create a scroll container, so the pin holds. Switching
+   either to overflow-x: hidden would compute overflow-y to auto and
+   silently break this.
+   =================================================================== */
+
+.portfolio-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 400;
+  padding: 20px 0;
+  background: linear-gradient(180deg, rgba(7, 7, 11, 0.97) 68%, rgba(7, 7, 11, 0));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Bar spans full width so the backdrop covers everything scrolling under
+   it, but the buttons line up with the cards. */
+.portfolio-tabs__row {
+  display: flex;
+  gap: 10px;
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 0 min(5.5vw, 48px);
+  box-sizing: border-box;
+}
+
+.portfolio-tabs__tab {
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: rgba(230, 234, 243, 0.55);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.portfolio-tabs__tab:hover { color: rgba(255, 255, 255, 0.85); }
+
+.portfolio-tabs__tab.is-active {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ---------- Writing sample rows ---------- */
+.prose-list {
+  display: grid;
+  gap: 18px;
+  max-width: 1080px;
+}
+
+.prose-row {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  align-items: center;
+  gap: 26px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 255 255), 0.28);
+  background: linear-gradient(180deg, rgba(12, 12, 18, 0.96), rgba(7, 7, 11, 0.98));
+  text-decoration: none;
+  cursor: pointer;   /* it's a div acting as a button, not an <a> */
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.prose-row:hover,
+.prose-row:focus-visible {
+  border-color: rgba(var(--project-accent-rgb, 255 255 255), 0.6);
+  transform: translateY(-2px);
+}
+
+.prose-row__type {
+  color: rgba(var(--project-accent-rgb, 255 255 255), 0.9);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.prose-row__title {
+  margin: 0 0 5px;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+}
+.prose-row__desc {
+  margin: 0;
+  color: rgba(230, 234, 243, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.prose-row__cta {
+  color: rgb(var(--project-accent-rgb, 255 255 255));
+  font-weight: 800;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .portfolio-tabs { padding: 16px 0; }
+  .portfolio-tabs__row { padding: 0 20px; }
+  .prose-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .prose-row__cta { justify-self: start; }
+}

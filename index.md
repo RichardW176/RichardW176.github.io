@@ -59,10 +59,14 @@ title: Home
 <!-- ============================ SHOWCASE (index view) ============================ -->
 <div id="portfolio-showcase" data-view="index">
 
-  <nav role="tablist" class="showcase-tabs" aria-label="Portfolio sections">
-    <button class="showcase-tab is-active" data-tab="games" role="tab" aria-selected="true" type="button">Video Games</button>
-    <button class="showcase-tab" data-tab="writing" role="tab" aria-selected="false" type="button">Writing Samples</button>
-  </nav>
+  <!-- Sticky for the whole showcase. Must stay a sibling that precedes the
+       panes, and no ancestor may become a scroll container or the pin breaks. -->
+  <div class="portfolio-tabs">
+    <div class="portfolio-tabs__row" role="tablist" aria-label="Portfolio sections">
+      <button class="portfolio-tabs__tab is-active" data-tab="games" role="tab" aria-selected="true" type="button">Games</button>
+      <button class="portfolio-tabs__tab" data-tab="writing" role="tab" aria-selected="false" type="button">Writing Samples</button>
+    </div>
+  </div>
 
   <!-- ---------- VIDEO GAMES ---------- -->
   <div data-panel="games" style="display: block;">
@@ -164,17 +168,16 @@ title: Home
   <!-- ---------- WRITING SAMPLES ---------- -->
   <div data-panel="writing" style="display: none;">
     <p class="showcase-hint" style="--project-accent-rgb: 122 217 255;">Select a sample to read it</p>
-    <div class="writing-grid">
+    <div class="prose-list">
       {% assign samples = site.prose | sort: "order" %}
       {% for s in samples %}
-        <div class="project-card writing-card" data-goto="w-{{ s.title | slugify }}" role="button" tabindex="0" aria-label="Read {{ s.title }}">
-          <div class="project-card__glow"></div>
-          <div class="project-card__shell">
-            {% if s.media_type %}<span class="writing-card__type">{{ s.media_type }}</span>{% endif %}
-            <h3>{{ s.title }}</h3>
-            {% if s.description and s.description != "" %}<p>{{ s.description }}</p>{% endif %}
-            <span class="project-cta">Read sample <span class="project-cta__arrow">&rarr;</span></span>
+        <div class="prose-row" data-goto="w-{{ s.title | slugify }}" role="button" tabindex="0" aria-label="Read {{ s.title }}" style="--project-accent-rgb: 122 217 255;">
+          {% if s.media_type %}<span class="prose-row__type">{{ s.media_type }}</span>{% endif %}
+          <div>
+            <h3 class="prose-row__title">{{ s.title }}</h3>
+            {% if s.description and s.description != "" %}<p class="prose-row__desc">{{ s.description }}</p>{% endif %}
           </div>
+          <span class="prose-row__cta">Read &rarr;</span>
         </div>
       {% endfor %}
     </div>
