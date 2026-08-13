@@ -147,11 +147,16 @@
 })();
 
 /* ===================================================================
-   FANNED HIGHLIGHT CARDS -- behaviour
+   FANNED HIGHLIGHT CARDS -- behaviour -- CURRENTLY OFF
 
    Highlight clips peek from behind the project poster and fan out in a
    wide arc on hover. Handles 1-3 cards; the geometry is picked to suit
    however many a project actually has.
+
+   The markup is gated behind `fan_enabled` in index.md. With it off there
+   are no .project-fan__card elements, so everything below finds nothing
+   and no-ops -- kept intact so flipping that flag brings the fan straight
+   back. See also the FANNED HIGHLIGHT CARDS block in custom.css.
    =================================================================== */
 
 (function () {

@@ -3097,21 +3097,28 @@ h2 {
 }
 
 /* ===================================================================
-   FANNED HIGHLIGHT CARDS
+   FANNED HIGHLIGHT CARDS -- CURRENTLY OFF
+
    Clips sit stacked behind the poster at rest and sweep out to the left
    in a wide arc on hover. Positions come from showcase.js; this block
    owns the look, the resting state and the responsive fallbacks.
+
+   The markup is gated behind `fan_enabled` in index.md, so nothing here
+   matches anything today. To bring the fan back: set fan_enabled to true
+   AND un-comment the two layout rules directly below -- those are the
+   only rules in this block that touch the cards as they stand now, which
+   is why they're the only ones disabled.
    =================================================================== */
 
 /* Clearance for the arc. The widest card in a 3-card fan reaches ~104px
    left of the poster, so the row needs room or it collides with the panel
    edge. */
-.project-list .project-card { padding-left: 150px; }
+/* .project-list .project-card { padding-left: 150px; } */
 
 /* The poster column stacks the fan behind the poster itself.
    Scoped to .project-list so the sticky poster on the full project
    pages is left alone. */
-.project-list .project-showcase__poster-column { position: relative; z-index: 3; }
+/* .project-list .project-showcase__poster-column { position: relative; z-index: 3; } */
 
 .project-fan__card {
   position: absolute;
@@ -3143,12 +3150,14 @@ h2 {
 .project-fan__card:nth-of-type(2) { z-index: 2; }
 .project-fan__card:nth-of-type(3) { z-index: 1; }
 
-/* the poster sits on top of the whole stack */
-.project-list .project-showcase__poster-frame {
+/* the poster sits on top of the whole stack.
+   Off with the rest: this also deepened the card's shadow, so leaving it
+   live would change how the posters look with no fan behind them. */
+/* .project-list .project-showcase__poster-frame {
   position: relative;
   z-index: 4;
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.6);
-}
+} */
 
 .project-fan__count {
   position: absolute;

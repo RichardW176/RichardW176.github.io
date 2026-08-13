@@ -76,8 +76,17 @@ title: Home
 
           <div class="project-card__shell project-showcase__stage">
 
-            <!-- LEFT: portrait poster (5 / 7), with highlight clips fanned behind it -->
+            <!-- LEFT: portrait poster (5 / 7) -->
             <div class="project-showcase__poster-column">
+              {%- comment -%}
+                Fanned highlight clips: OFF. Flip fan_enabled to true to bring
+                them back — the CSS (.project-fan__*) and the behaviour in
+                showcase.js are both still in place and go live with it. Two
+                layout rules in custom.css are commented out alongside them;
+                see the FANNED HIGHLIGHT CARDS block there.
+              {%- endcomment -%}
+              {%- assign fan_enabled = false -%}
+              {%- if fan_enabled -%}
               {%- capture fanlist %}{% if p.secondary_video %}{{ p.secondary_video }},{% endif %}{% if p.tertiary_video %}{{ p.tertiary_video }},{% endif %}{% if p.quaternary_video %}{{ p.quaternary_video }},{% endif %}{% endcapture -%}
               {%- assign fan = fanlist | split: "," | slice: 0, 3 -%}
               {% for clip in fan %}
@@ -90,6 +99,7 @@ title: Home
               {% if fan.size > 0 %}
               <span class="project-fan__count">{{ fan.size }} highlight{% unless fan.size == 1 %}s{% endunless %}</span>
               {% endif %}
+              {%- endif -%}
               <div class="project-showcase__poster-frame{% if p.poster_frame_flush %} project-showcase__poster-frame--flush{% endif %}{% if p.poster_frame_borderless %} project-showcase__poster-frame--borderless{% endif %}">
                 <img class="project-showcase__poster" src="{{ p.image }}" alt="{{ p.title }} poster"{% if p.poster_position %} style="object-position: {{ p.poster_position }};"{% endif %}>
               </div>
