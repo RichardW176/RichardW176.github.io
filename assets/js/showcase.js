@@ -271,3 +271,88 @@
     initFans();
   }
 })();
+
+/* ===================================================================
+   ONE-SCROLL-PER-GAME SNAP
+
+   One wheel gesture advances exactly one project and centres it below
+   the sticky tab bar. Further input is swallowed while the snap runs, so
+   trackpad momentum cannot skip two projects at once.
+
+   Panes live on [data-panel] and are toggled with an inline display,
+   not .portfolio-pane/[hidden] -- so visibility is checked via
+   offsetParent rather than the hidden property.
+   =================================================================== */
+
+(function () {
+  var LOCK_MS = 620;   // must outlast the smooth-scroll animation
+
+  var locked = false;
+  var unlock = null;
+
+  function sections() {
+    var pane = document.querySelector('[data-panel="games"]');
+    if (!pane || pane.offsetParent === null) return [];   // pane is display:none
+    return Array.prototype.slice.call(pane.querySelectorAll('.project-card'));
+  }
+
+  function currentIndex(list) {
+    var mid = window.innerHeight / 2;
+    var best = 0, bestd = Infinity;
+    for (var i = 0; i < list.length; i++) {
+      var r = list[i].getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestd) { bestd = d; best = i; }
+    }
+    return best;
+  }
+
+  function snapTo(el) {
+    var bar = document.querySelector('.portfolio-tabs');
+    var offset = bar ? bar.getBoundingClientRect().height : 0;
+    var r = el.getBoundingClientRect();
+    var target = window.scrollY + r.top - offset
+               - Math.max((window.innerHeight - offset - r.height) / 2, 0);
+
+    locked = true;
+    window.scrollTo({ top: Math.max(target, 0), behavior: 'smooth' });
+    clearTimeout(unlock);
+    unlock = setTimeout(function () { locked = false; }, LOCK_MS);
+  }
+
+  window.addEventListener('wheel', function (e) {
+    var list = sections();
+    if (!list.length) return;
+
+    // Only take over while the games list actually occupies the viewport,
+    // so the hero above and anything below scroll normally.
+    var first = list[0].getBoundingClientRect();
+    var last = list[list.length - 1].getBoundingClientRect();
+    var inside = first.top < window.innerHeight * 0.6
+              && last.bottom > window.innerHeight * 0.4;
+    if (!inside) return;
+
+    if (locked) { e.preventDefault(); return; }
+    if (Math.abs(e.deltaY) < 4) return;
+
+    var i = currentIndex(list);
+    var next = e.deltaY > 0 ? i + 1 : i - 1;
+
+    // Past either end, release and let the page scroll away normally.
+    if (next < 0 || next >= list.length) return;
+
+    e.preventDefault();
+    snapTo(list[next]);
+  }, { passive: false });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    var list = sections();
+    if (!list.length || locked) return;
+    var i = currentIndex(list);
+    var next = e.key === 'ArrowDown' ? i + 1 : i - 1;
+    if (next < 0 || next >= list.length) return;
+    e.preventDefault();
+    snapTo(list[next]);
+  });
+})();
