@@ -595,7 +595,7 @@ h2 {
      narrower panel crops the wide ones hard. Widening the column (not
      shrinking the poster) brings more of each clip's width into frame while
      every card keeps identical poster and panel dimensions. */
-  grid-template-columns: minmax(264px, 355px) minmax(430px, 780px);
+  grid-template-columns: minmax(264px, 355px) minmax(430px, 1000px);
   gap: 0;
   align-items: stretch;
   justify-content: center;
@@ -1670,7 +1670,7 @@ h2 {
 
 @media (max-width: 1100px) {
   .project-sequence { --project-sequence-gap: 84px; gap: var(--project-sequence-gap); }
-  .project-showcase__stage { grid-template-columns: minmax(232px, 320px) minmax(352px, 640px); gap: 0; }
+  .project-showcase__stage { grid-template-columns: minmax(232px, 320px) minmax(352px, 720px); gap: 0; }
   .project-showcase__summary--with-video { margin-left: -26px; }
   .project-showcase__secondary-video { width: min(100%, 876px); }
 }
@@ -2871,14 +2871,17 @@ h2 {
 .showcase-tabs {
   display: flex;
   gap: 6px;
-  width: min(1200px, 100%);
+  width: min(1440px, 100%);
   margin: 0 auto 22px;
   /* capped to match [data-panel] so the tabs stay flush with the cards */
   padding: 0 min(5.5vw, 48px);
   box-sizing: border-box;
 }
 [data-panel] {
-  width: min(1200px, 100%);
+  /* 1440 rather than 1200: the panel height is pinned to the poster (5:7 at
+     355px = 547px tall), so the only way to show more of a 2.17-aspect clip
+     without letterboxing or a smaller poster is a wider container. */
+  width: min(1440px, 100%);
   margin: 0 auto;
   /* Capped: the box maxes out at 1200px but 5.5vw keeps growing, so on a wide
      screen the padding ate into the cards -- 1920px showed LESS of each video
