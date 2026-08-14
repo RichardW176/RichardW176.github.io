@@ -275,20 +275,22 @@
 /* ===================================================================
    ONE-SCROLL-PER-GAME SNAP
 
-   One wheel gesture advances exactly one project and centres it below
-   the sticky tab bar. Further input is swallowed while the snap runs, so
-   trackpad momentum cannot skip two projects at once.
+   One wheel GESTURE advances exactly one project and centres it below the
+   sticky tab bar. The lock is gesture-based, not time-based: momentum events
+   refresh it, so a second snap needs a real pause in scrolling first.
 
-   Panes live on [data-panel] and are toggled with an inline display,
-   not .portfolio-pane/[hidden] -- so visibility is checked via
-   offsetParent rather than the hidden property.
+   Panes live on [data-panel] and are toggled with an inline display, not
+   .portfolio-pane/[hidden] -- so visibility is checked via offsetParent.
    =================================================================== */
 
 (function () {
-  var LOCK_MS = 620;   // must outlast the smooth-scroll animation
+  var DUR = 300;      // ms the snap animation runs
+  var QUIET = 90;     // gap below this = same gesture (a momentum tail)
+  var SETTLE = 180;   // ms the lock holds after the last momentum event
 
   var locked = false;
   var unlock = null;
+  var lastwheel = 0;
 
   function sections() {
     var pane = document.querySelector('[data-panel="games"]');
@@ -307,6 +309,25 @@
     return best;
   }
 
+  // Native behavior:'smooth' animates for a duration the browser chooses,
+  // typically 500ms+, which reads as sluggish and cannot be shortened. A short
+  // custom tween is what makes the snap feel immediate.
+  var anim = null;
+  function tween(to) {
+    if (anim) cancelAnimationFrame(anim);
+    var from = window.scrollY;
+    var dist = to - from;
+    if (Math.abs(dist) < 2) return;
+    var t0 = performance.now();
+    (function step(now) {
+      var p = Math.min((now - t0) / DUR, 1);
+      var e = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+      window.scrollTo(0, from + dist * e);
+      if (p < 1) anim = requestAnimationFrame(step);
+      else anim = null;
+    })(t0);
+  }
+
   function snapTo(el) {
     var bar = document.querySelector('.portfolio-tabs');
     var offset = bar ? bar.getBoundingClientRect().height : 0;
@@ -315,9 +336,9 @@
                - Math.max((window.innerHeight - offset - r.height) / 2, 0);
 
     locked = true;
-    window.scrollTo({ top: Math.max(target, 0), behavior: 'smooth' });
+    tween(Math.max(target, 0));
     clearTimeout(unlock);
-    unlock = setTimeout(function () { locked = false; }, LOCK_MS);
+    unlock = setTimeout(function () { locked = false; }, SETTLE);
   }
 
   window.addEventListener('wheel', function (e) {
@@ -332,7 +353,28 @@
               && last.bottom > window.innerHeight * 0.4;
     if (!inside) return;
 
-    if (locked) { e.preventDefault(); return; }
+    var now = Date.now();
+    var gap = now - lastwheel;
+    lastwheel = now;
+
+    // The momentum logic applies ONLY while a snap is animating. A trackpad
+    // flick fires a tail of wheel events after your fingers lift; those arrive
+    // in rapid succession, so a gap under QUIET means "still the same
+    // gesture" and refreshes the lock rather than counting as new input. A
+    // real pause lets the lock expire.
+    //
+    // When NOT locked, input passes straight through untouched. Gating fresh
+    // scrolling on the gap makes the page feel broken, because ordinary
+    // scrolling also produces sub-100ms gaps.
+    if (locked) {
+      e.preventDefault();
+      if (gap < QUIET) {
+        clearTimeout(unlock);
+        unlock = setTimeout(function () { locked = false; }, SETTLE);
+      }
+      return;
+    }
+
     if (Math.abs(e.deltaY) < 4) return;
 
     var i = currentIndex(list);
