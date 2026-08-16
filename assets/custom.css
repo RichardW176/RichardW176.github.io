@@ -1185,7 +1185,7 @@ h2 {
   transform: translateZ(0);
 }
 
-.project-showcase__summary-awards {
+.project-showcase__summary--with-video .project-showcase__summary-awards {
   position: absolute;
   top: 18px;
   right: 20px;
@@ -1766,7 +1766,7 @@ h2 {
     min-height: 420px;
     padding: 22px;
   }
-  .project-showcase__summary-awards {
+  .project-showcase__summary--with-video .project-showcase__summary-awards {
     top: 12px;
     right: 12px;
     gap: 6px;
