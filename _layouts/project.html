@@ -4,7 +4,7 @@ layout: default
 
 <link rel="stylesheet" href="/assets/custom.css?v={{ site.time | date: '%s' }}">
 
-<div class="project-page">
+<div class="project-page" style="--project-accent-rgb: {{ page.accent_rgb | default: '255 58 138' }};">
   <div class="project-page-inner">
 
     <h1>{{ page.title }}</h1>
@@ -21,19 +21,58 @@ layout: default
       {{ content }}
     </div>
 
-    {% if page.media %}
-    <section class="project-media">
-      <h2>Media</h2>
-      <div class="project-media-grid">
-        {% for item in page.media %}
-        <figure class="project-media-card">
-          <img src="{{ item.file }}" alt="{{ item.alt | default: page.title }}" class="project-media-image">
-          {% if item.description %}
-          <figcaption>{{ item.description }}</figcaption>
+    {% assign slots = "secondary,tertiary,quaternary,quinary" | split: "," %}
+
+    {% assign has_highlight = false %}
+    {% for slot in slots %}
+      {% assign vid_key = slot | append: "_video" %}
+      {% if page[vid_key] %}{% assign has_highlight = true %}{% endif %}
+    {% endfor %}
+
+    {% if has_highlight %}
+    <section class="project-highlights">
+      <h2 class="project-highlights__heading">Highlights</h2>
+
+      {% for slot in slots %}
+        {% assign vid_key   = slot | append: "_video" %}
+        {% assign title_key = slot | append: "_video_title" %}
+        {% assign sub_key   = slot | append: "_video_subtitle" %}
+        {% assign pos_key   = slot | append: "_video_position" %}
+        {% assign items_key = slot | append: "_feature_items" %}
+
+        {% if page[vid_key] %}
+        <figure class="project-highlight">
+          <div class="project-highlight__frame">
+            <video class="project-highlight__video"
+                   autoplay loop muted playsinline preload="metadata"
+                   {% if page[pos_key] %}style="object-position: {{ page[pos_key] }};"{% endif %}>
+              <source src="{{ page[vid_key] }}" type="video/mp4">
+            </video>
+
+            {% if page[title_key] %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ page[title_key] }}</span>
+              {% if page[sub_key] %}
+              <span class="project-highlight__tab-sub">{{ page[sub_key] }}</span>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+
+          {% if page[items_key] %}
+          <div class="project-highlight__work">
+            {% for item in page[items_key] %}
+            <div class="project-highlight__row">
+              <span class="project-highlight__label">{{ item.label }}</span>
+              <span class="project-highlight__text">{{ item.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
           {% endif %}
         </figure>
-        {% endfor %}
-      </div>
+        {% endif %}
+      {% endfor %}
+
     </section>
     {% endif %}
 

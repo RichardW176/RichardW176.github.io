@@ -3323,3 +3323,142 @@ h2 {
   }
   .prose-row__cta { justify-self: start; }
 }
+
+/* ===================================================================
+   PROJECT DETAIL PAGE -- visuals-first highlights
+   One clip per row, near full width, with a translucent corner tab and
+   the work breakdown underneath.
+   =================================================================== */
+
+/* The page shell is narrower than these clips want. Widen it and cut the
+   side gutters so the video is the first thing that reads. */
+.project-page-inner {
+  max-width: 1720px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.project-highlights {
+  margin-top: 56px;
+  padding-bottom: 40px;
+}
+
+.project-highlights__heading {
+  margin: 0 0 28px;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(231, 235, 245, 0.55);
+  font-weight: 700;
+}
+
+.project-highlight {
+  margin: 0 0 64px;
+}
+.project-highlight:last-child { margin-bottom: 0; }
+
+.project-highlight__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 58 138) / 0.28);
+  background: #000;
+}
+
+.project-highlight__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: rgba(8, 8, 12, 0.92);
+}
+
+/* ---- corner tab ----
+   A trapezoid, NOT a triangle. A true triangle
+   (polygon(0 0, 100% 0, 0 100%)) puts the hypotenuse straight through
+   the text: usable width shrinks as y grows, so the second line gets
+   cut mid-word no matter how much right padding you add. The 76% stop
+   keeps the angled look while leaving the text block full width. */
+.project-highlight__tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 22px 140px 24px 32px;
+  background: rgba(8, 8, 12, 0.62);
+  backdrop-filter: blur(8px);
+  clip-path: polygon(0 0, 100% 0, 76% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.project-highlight__tab-title {
+  display: block;
+  color: #fff;
+  font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.02;
+  white-space: nowrap;
+}
+
+.project-highlight__tab-sub {
+  display: block;
+  margin-top: 7px;
+  color: rgba(var(--project-accent-rgb, 255 58 138) / 0.95);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---- work breakdown ---- */
+.project-highlight__work {
+  margin: 20px 4px 0;
+  max-width: 1040px;
+}
+
+.project-highlight__row {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.project-highlight__label {
+  color: rgba(var(--project-accent-rgb, 255 58 138) / 1);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-highlight__text {
+  color: rgba(230, 234, 243, 0.8);
+  font-size: 1.04rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .project-page-inner { padding-left: 16px; padding-right: 16px; }
+  .project-highlight { margin-bottom: 44px; }
+
+  /* The tab's nowrap titles and the diagonal both cost width. Below this
+     width there is not enough room, so square it off and let it wrap. */
+  .project-highlight__tab {
+    padding: 14px 20px 14px 18px;
+    clip-path: none;
+    border-bottom-right-radius: 14px;
+  }
+  .project-highlight__tab-title { font-size: 1.15rem; white-space: normal; }
+  .project-highlight__tab-sub { font-size: 0.76rem; white-space: normal; }
+
+  .project-highlight__row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
