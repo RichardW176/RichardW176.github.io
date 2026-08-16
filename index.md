@@ -229,49 +229,114 @@ title: Home
     <div class="detail-body">
 
       {% if p.secondary_video or p.tertiary_video or p.quaternary_video or p.quinary_video %}
-      <h2>Highlights</h2>
-      <div class="highlight-grid">
+      <section class="project-highlights">
+        <h2 class="project-highlights__heading">Highlights</h2>
+
         {% if p.secondary_video %}
-        <figure>
-          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.secondary_video }}" type="video/mp4"></video>
-          <figcaption>
-            <strong>{{ p.secondary_video_title }}</strong>
-            {% if p.secondary_video_subtitle %}<span>{{ p.secondary_video_subtitle }}</span>{% endif %}
-            {% if p.secondary_feature_items %}<ul class="hl-notes">{% for item in p.secondary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
-          </figcaption>
+        <figure class="project-highlight">
+          <div class="project-highlight__frame">
+            <video class="project-highlight__video" data-autoplay-when-visible="true" loop muted playsinline preload="none"{% if p.secondary_video_position %} style="object-position: {{ p.secondary_video_position }};"{% endif %}>
+              <source src="{{ p.secondary_video }}" type="video/mp4">
+            </video>
+            {% if p.secondary_video_title %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.secondary_video_title }}</span>
+              {% if p.secondary_video_subtitle %}<span class="project-highlight__tab-sub">{{ p.secondary_video_subtitle }}</span>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% if p.secondary_feature_items %}
+          <div class="project-highlight__work">
+            {% for item in p.secondary_feature_items %}
+            <div class="project-highlight__row">
+              <span class="project-highlight__label">{{ item.label }}</span>
+              <span class="project-highlight__text">{{ item.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
         </figure>
         {% endif %}
+
         {% if p.tertiary_video %}
-        <figure>
-          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.tertiary_video }}" type="video/mp4"></video>
-          <figcaption>
-            <strong>{{ p.tertiary_video_title }}</strong>
-            {% if p.tertiary_video_subtitle %}<span>{{ p.tertiary_video_subtitle }}</span>{% endif %}
-            {% if p.tertiary_feature_items %}<ul class="hl-notes">{% for item in p.tertiary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
-          </figcaption>
+        <figure class="project-highlight">
+          <div class="project-highlight__frame">
+            <video class="project-highlight__video" data-autoplay-when-visible="true" loop muted playsinline preload="none"{% if p.tertiary_video_position %} style="object-position: {{ p.tertiary_video_position }};"{% endif %}>
+              <source src="{{ p.tertiary_video }}" type="video/mp4">
+            </video>
+            {% if p.tertiary_video_title %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.tertiary_video_title }}</span>
+              {% if p.tertiary_video_subtitle %}<span class="project-highlight__tab-sub">{{ p.tertiary_video_subtitle }}</span>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% if p.tertiary_feature_items %}
+          <div class="project-highlight__work">
+            {% for item in p.tertiary_feature_items %}
+            <div class="project-highlight__row">
+              <span class="project-highlight__label">{{ item.label }}</span>
+              <span class="project-highlight__text">{{ item.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
         </figure>
         {% endif %}
+
         {% if p.quaternary_video %}
-        <figure>
-          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.quaternary_video }}" type="video/mp4"></video>
-          <figcaption>
-            <strong>{{ p.quaternary_video_title }}</strong>
-            {% if p.quaternary_video_subtitle %}<span>{{ p.quaternary_video_subtitle }}</span>{% endif %}
-            {% if p.quaternary_feature_items %}<ul class="hl-notes">{% for item in p.quaternary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
-          </figcaption>
+        <figure class="project-highlight">
+          <div class="project-highlight__frame">
+            <video class="project-highlight__video" data-autoplay-when-visible="true" loop muted playsinline preload="none"{% if p.quaternary_video_position %} style="object-position: {{ p.quaternary_video_position }};"{% endif %}>
+              <source src="{{ p.quaternary_video }}" type="video/mp4">
+            </video>
+            {% if p.quaternary_video_title %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.quaternary_video_title }}</span>
+              {% if p.quaternary_video_subtitle %}<span class="project-highlight__tab-sub">{{ p.quaternary_video_subtitle }}</span>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% if p.quaternary_feature_items %}
+          <div class="project-highlight__work">
+            {% for item in p.quaternary_feature_items %}
+            <div class="project-highlight__row">
+              <span class="project-highlight__label">{{ item.label }}</span>
+              <span class="project-highlight__text">{{ item.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
         </figure>
         {% endif %}
+
         {% if p.quinary_video %}
-        <figure>
-          <video data-autoplay-when-visible="true" loop muted playsinline preload="none"><source src="{{ p.quinary_video }}" type="video/mp4"></video>
-          <figcaption>
-            <strong>{{ p.quinary_video_title }}</strong>
-            {% if p.quinary_video_subtitle %}<span>{{ p.quinary_video_subtitle }}</span>{% endif %}
-            {% if p.quinary_feature_items %}<ul class="hl-notes">{% for item in p.quinary_feature_items %}<li><b>{{ item.label }}:</b> {{ item.text }}</li>{% endfor %}</ul>{% endif %}
-          </figcaption>
+        <figure class="project-highlight">
+          <div class="project-highlight__frame">
+            <video class="project-highlight__video" data-autoplay-when-visible="true" loop muted playsinline preload="none"{% if p.quinary_video_position %} style="object-position: {{ p.quinary_video_position }};"{% endif %}>
+              <source src="{{ p.quinary_video }}" type="video/mp4">
+            </video>
+            {% if p.quinary_video_title %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.quinary_video_title }}</span>
+              {% if p.quinary_video_subtitle %}<span class="project-highlight__tab-sub">{{ p.quinary_video_subtitle }}</span>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% if p.quinary_feature_items %}
+          <div class="project-highlight__work">
+            {% for item in p.quinary_feature_items %}
+            <div class="project-highlight__row">
+              <span class="project-highlight__label">{{ item.label }}</span>
+              <span class="project-highlight__text">{{ item.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
         </figure>
         {% endif %}
-      </div>
+
+      </section>
       {% endif %}
 
       {% if p.plain_feature_items %}
@@ -292,7 +357,6 @@ title: Home
       </div>
       {% endif %}
 
-      <a class="detail-fulllink" href="{{ p.url }}">Full project page &mdash; documents, scripts &amp; gallery <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 {% endfor %}
