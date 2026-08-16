@@ -2732,7 +2732,7 @@ h2 {
 .detail-hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(420px, 60vh, 640px);
+  min-height: clamp(360px, 50vh, 540px);
   background: #08080c;
   border-bottom: 1px solid rgba(var(--project-accent-rgb), 0.24);
 }
@@ -2743,6 +2743,21 @@ h2 {
   height: 100%;
   object-fit: cover;
   opacity: 0.4;
+}
+.detail-hero__awards {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .detail-hero__awards { top: 14px; right: 14px; gap: 8px; }
+  .detail-hero__awards .project-showcase__summary-award { width: 74px; }
+  .detail-hero__awards .project-showcase__summary-award--wide { width: 148px; }
 }
 .detail-hero::after {
   content: "";

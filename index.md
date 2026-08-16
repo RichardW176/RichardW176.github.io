@@ -208,6 +208,15 @@ title: Home
       {% else %}
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
       {% endif %}
+      {% if p.inline_awards and p.awards %}
+      <div class="detail-hero__awards">
+        {% for award in p.awards %}
+        <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
+          <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
+        </figure>
+        {% endfor %}
+      </div>
+      {% endif %}
       <div class="detail-hero__inner">
         <button class="detail-back" data-back="games" type="button"><span>&larr;</span> All projects</button>
         <div class="detail-hero__text">
