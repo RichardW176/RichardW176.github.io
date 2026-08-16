@@ -353,6 +353,12 @@
               && last.bottom > window.innerHeight * 0.4;
     if (!inside) return;
 
+    // While the pinned hero is still handing off to the portfolio, its own
+    // smooth-scroll owns the gesture; snapping now fights it and reads as
+    // janky. Wait until the hero track has mostly left the viewport.
+    var ht = document.querySelector('[data-hero-track]');
+    if (ht && ht.getBoundingClientRect().bottom > window.innerHeight * 0.5) return;
+
     var now = Date.now();
     var gap = now - lastwheel;
     lastwheel = now;
