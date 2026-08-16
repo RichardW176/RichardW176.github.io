@@ -124,6 +124,16 @@ title: Home
                 {% if p.storm_overlay %}<span class="project-showcase__storm-lightning" aria-hidden="true"></span>{% endif %}
               </div>
 
+              {% if p.inline_awards and p.awards %}
+              <div class="project-showcase__summary-awards">
+                {% for award in p.awards %}
+                <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
+                  <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
+                </figure>
+                {% endfor %}
+              </div>
+              {% endif %}
+
               <div class="project-showcase__summary-content">
                 <h3 class="project-showcase__title">{{ p.title }}</h3>
 

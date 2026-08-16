@@ -1187,12 +1187,13 @@ h2 {
 
 .project-showcase__summary-awards {
   position: absolute;
-  top: -6px;
-  right: -38px;
+  top: 18px;
+  right: 20px;
   z-index: 3;
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: 8px;
+  pointer-events: none;
 }
 
 .project-showcase__summary-award {
@@ -1200,14 +1201,26 @@ h2 {
   width: 112px;
 }
 
-.project-showcase__summary-award-image {
+/* The Student Games Festival mark is a wide 4:1 logo rather than a
+   laurel, so it needs more width to carry the same visual weight. */
+.project-showcase__summary-award--wide {
+  width: 232px;
+}
+
+.project-showcase__summary-award img {
   display: block;
   width: 100%;
   height: auto;
   max-width: none;
   object-fit: contain;
   background: transparent;
-  transform: translateY(-156px);
+}
+
+/* Colored third-party logos fight the card's accent. Monochrome keeps
+   the mark legible; brightness(0) invert(1) would flatten the four
+   squares into solid blocks and lose the shapes inside them. */
+.project-showcase__summary-award--mono img {
+  filter: grayscale(1) brightness(1.9) contrast(1.15);
 }
 
 .project-showcase__summary-video-media {
@@ -1754,16 +1767,12 @@ h2 {
     padding: 22px;
   }
   .project-showcase__summary-awards {
-    top: -4px;
-    right: -18px;
-    gap: 4px;
+    top: 12px;
+    right: 12px;
+    gap: 6px;
   }
-  .project-showcase__summary-award {
-    width: 80px;
-  }
-  .project-showcase__summary-award-image {
-    transform: translateY(-88px);
-  }
+  .project-showcase__summary-award { width: 80px; }
+  .project-showcase__summary-award--wide { width: 164px; }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
   }
