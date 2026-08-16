@@ -2744,18 +2744,21 @@ h2 {
   object-fit: cover;
   opacity: 0.4;
 }
-.detail-hero__awards {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 3;
+.detail-hero__titlerow {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+.detail-hero__awards {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
   gap: 10px;
   pointer-events: none;
 }
 @media (max-width: 700px) {
-  .detail-hero__awards { top: 14px; right: 14px; gap: 8px; }
+  .detail-hero__titlerow { gap: 14px; }
   .detail-hero__awards .project-showcase__summary-award { width: 74px; }
   .detail-hero__awards .project-showcase__summary-award--wide { width: 148px; }
 }

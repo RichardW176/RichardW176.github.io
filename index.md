@@ -208,15 +208,6 @@ title: Home
       {% else %}
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
       {% endif %}
-      {% if p.inline_awards and p.awards %}
-      <div class="detail-hero__awards">
-        {% for award in p.awards %}
-        <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
-          <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
-        </figure>
-        {% endfor %}
-      </div>
-      {% endif %}
       <div class="detail-hero__inner">
         <button class="detail-back" data-back="games" type="button"><span>&larr;</span> All projects</button>
         <div class="detail-hero__text">
@@ -229,7 +220,18 @@ title: Home
             {%- if p.engine %}{{ p.engine }}{% endif -%}
           </span>
           {% endif %}
-          <h1>{{ p.title }}</h1>
+          <div class="detail-hero__titlerow">
+            <h1>{{ p.title }}</h1>
+            {% if p.inline_awards and p.awards %}
+            <div class="detail-hero__awards">
+              {% for award in p.awards %}
+              <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
+                <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
+              </figure>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
           {% if p.description and p.description != "" %}<p class="detail-hero__desc">{{ p.description }}</p>{% endif %}
           {% if p.role_display or p.role %}<p class="detail-hero__roles">{{ p.role_display | default: p.role }}</p>{% endif %}
         </div>
@@ -353,15 +355,6 @@ title: Home
       <div class="detail-notes">
         {% for item in p.plain_feature_items %}
         <p><strong>{{ item.label }}:</strong> {{ item.text }}</p>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      {% if p.awards %}
-      <h2>Awards</h2>
-      <div class="detail-awards">
-        {% for award in p.awards %}
-        <img src="{{ award.file }}" alt="{{ award.alt | default: award.title | default: p.title }}">
         {% endfor %}
       </div>
       {% endif %}
