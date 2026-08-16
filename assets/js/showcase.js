@@ -391,6 +391,14 @@
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
     var list = sections();
     if (!list.length || locked) return;
+    // Only handle arrows while the games list actually occupies the viewport
+    // (same gate as the wheel handler). Otherwise an ArrowDown up in the hero
+    // fired BOTH the hero beat AND a project snap, jumping two projects down.
+    var first = list[0].getBoundingClientRect();
+    var last = list[list.length - 1].getBoundingClientRect();
+    var inside = first.top < window.innerHeight * 0.6
+              && last.bottom > window.innerHeight * 0.4;
+    if (!inside) return;
     var i = currentIndex(list);
     var next = e.key === 'ArrowDown' ? i + 1 : i - 1;
     if (next < 0 || next >= list.length) return;
