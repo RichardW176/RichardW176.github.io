@@ -287,8 +287,10 @@
   var DUR = 300;      // ms the snap animation runs
   var QUIET = 90;     // gap below this = same gesture (a momentum tail)
   var SETTLE = 180;   // ms the lock holds after the last momentum event
+  var MAXLOCK = 520;  // hard ceiling: one snap can never swallow input longer
 
   var locked = false;
+  var lockedAt = 0;
   var unlock = null;
   var lastwheel = 0;
 
@@ -336,6 +338,7 @@
                - Math.max((window.innerHeight - offset - r.height) / 2, 0);
 
     locked = true;
+    lockedAt = Date.now();
     tween(Math.max(target, 0));
     clearTimeout(unlock);
     unlock = setTimeout(function () { locked = false; }, SETTLE);
@@ -366,13 +369,23 @@
     // When NOT locked, input passes straight through untouched. Gating fresh
     // scrolling on the gap makes the page feel broken, because ordinary
     // scrolling also produces sub-100ms gaps.
+    // MAXLOCK is what keeps this honest. A trackpad fires every ~16ms while
+    // your fingers are still moving, which by gap alone is indistinguishable
+    // from a momentum tail -- so without a ceiling every event refreshes the
+    // lock and sustained scrolling never gets through at all. Measured before
+    // this guard: 2s of scrolling = 125 events, 100% swallowed, one card.
     if (locked) {
-      e.preventDefault();
-      if (gap < QUIET) {
+      if (Date.now() - lockedAt >= MAXLOCK) {
+        locked = false;              // ceiling hit: treat this as fresh input
         clearTimeout(unlock);
-        unlock = setTimeout(function () { locked = false; }, SETTLE);
+      } else {
+        e.preventDefault();
+        if (gap < QUIET) {
+          clearTimeout(unlock);
+          unlock = setTimeout(function () { locked = false; }, SETTLE);
+        }
+        return;
       }
-      return;
     }
 
     if (Math.abs(e.deltaY) < 4) return;
