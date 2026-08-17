@@ -28,6 +28,12 @@ engine: Unity
 stage: Production
 timeline: Nov 2025 - Present
 description: PvP card battler inspired by classic horror literature.
+inline_awards: true
+awards:
+  - name: Student Games Festival
+    image: /assets/images/logo_big.webp
+    wide: true
+    mono: true
 links:
   - label: itch.io
     url: "https://masterworks-of-horror.itch.io/masterworks-of-horror-the-prologue"

@@ -17,7 +17,6 @@ tertiary_feature_items:
   - label: Level Design
     text: Mock-up sketches, blockout implementation, usability testing
 accent_rgb: 116 236 255
-snow_overlay: true
 poster_frame_borderless: true
 role: Lead Narrative Designer, Designer
 role_display: Design &middot; Narrative

@@ -285,3 +285,33 @@
    The old implementation is in git history at a477ed2 if it is ever
    wanted back.
    =================================================================== */
+
+/* ===================================================================
+   HOLD SNAPPING OFF WHILE THE HERO IS HANDING OVER
+
+   Ports the intent of e28ed10, which fixed the same fight when the snap
+   was JS: while the pinned hero is still handing off to the portfolio,
+   its own smooth-scroll owns the gesture, and proximity snapping pulls
+   that landing toward the first card. Same threshold as that fix.
+
+   This only toggles a class -- it never intercepts input, so it cannot
+   reintroduce the resistance the wheel hijack caused.
+   =================================================================== */
+
+(function () {
+  var root = document.documentElement;
+  var raf = null;
+
+  function sync() {
+    raf = null;
+    var ht = document.querySelector('[data-hero-track]');
+    var heroOwns = !!ht && ht.getBoundingClientRect().bottom > window.innerHeight * 0.5;
+    root.classList.toggle('hero-owns-scroll', heroOwns);
+  }
+
+  function onScroll() { if (!raf) raf = requestAnimationFrame(sync); }
+
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  sync();
+})();
