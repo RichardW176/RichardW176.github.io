@@ -273,141 +273,15 @@
 })();
 
 /* ===================================================================
-   ONE-SCROLL-PER-GAME SNAP
+   ONE-SCROLL-PER-GAME SNAP -- REMOVED
 
-   One wheel GESTURE advances exactly one project and centres it below the
-   sticky tab bar. The lock is gesture-based, not time-based: momentum events
-   refresh it, so a second snap needs a real pause in scrolling first.
+   This used to hijack `wheel` and animate the page one card per gesture.
+   It could not tell an active scroll from a momentum tail (a trackpad
+   fires ~16ms apart either way), so the lock refreshed forever and
+   sustained scrolling was 100% swallowed -- the page simply stopped.
 
-   Panes live on [data-panel] and are toggled with an inline display, not
-   .portfolio-pane/[hidden] -- so visibility is checked via offsetParent.
+   Replaced by native CSS scroll-snap; see "PROJECT LIST SCROLL SNAP" in
+   custom.css. The browser owns momentum, so it can never block input.
+   The old implementation is in git history at a477ed2 if it is ever
+   wanted back.
    =================================================================== */
-
-(function () {
-  var DUR = 300;      // ms the snap animation runs
-  var QUIET = 90;     // gap below this = same gesture (a momentum tail)
-  var SETTLE = 180;   // ms the lock holds after the last momentum event
-  var MAXLOCK = 520;  // hard ceiling: one snap can never swallow input longer
-
-  var locked = false;
-  var lockedAt = 0;
-  var unlock = null;
-  var lastwheel = 0;
-
-  function sections() {
-    var pane = document.querySelector('[data-panel="games"]');
-    if (!pane || pane.offsetParent === null) return [];   // pane is display:none
-    return Array.prototype.slice.call(pane.querySelectorAll('.project-card'));
-  }
-
-  function currentIndex(list) {
-    var mid = window.innerHeight / 2;
-    var best = 0, bestd = Infinity;
-    for (var i = 0; i < list.length; i++) {
-      var r = list[i].getBoundingClientRect();
-      var d = Math.abs(r.top + r.height / 2 - mid);
-      if (d < bestd) { bestd = d; best = i; }
-    }
-    return best;
-  }
-
-  // Native behavior:'smooth' animates for a duration the browser chooses,
-  // typically 500ms+, which reads as sluggish and cannot be shortened. A short
-  // custom tween is what makes the snap feel immediate.
-  var anim = null;
-  function tween(to) {
-    if (anim) cancelAnimationFrame(anim);
-    var from = window.scrollY;
-    var dist = to - from;
-    if (Math.abs(dist) < 2) return;
-    var t0 = performance.now();
-    (function step(now) {
-      var p = Math.min((now - t0) / DUR, 1);
-      var e = 1 - Math.pow(1 - p, 3);   // ease-out cubic
-      window.scrollTo(0, from + dist * e);
-      if (p < 1) anim = requestAnimationFrame(step);
-      else anim = null;
-    })(t0);
-  }
-
-  function snapTo(el) {
-    var bar = document.querySelector('.portfolio-tabs');
-    var offset = bar ? bar.getBoundingClientRect().height : 0;
-    var r = el.getBoundingClientRect();
-    var target = window.scrollY + r.top - offset
-               - Math.max((window.innerHeight - offset - r.height) / 2, 0);
-
-    locked = true;
-    lockedAt = Date.now();
-    tween(Math.max(target, 0));
-    clearTimeout(unlock);
-    unlock = setTimeout(function () { locked = false; }, SETTLE);
-  }
-
-  window.addEventListener('wheel', function (e) {
-    var list = sections();
-    if (!list.length) return;
-
-    // Only take over while the games list actually occupies the viewport,
-    // so the hero above and anything below scroll normally.
-    var first = list[0].getBoundingClientRect();
-    var last = list[list.length - 1].getBoundingClientRect();
-    var inside = first.top < window.innerHeight * 0.6
-              && last.bottom > window.innerHeight * 0.4;
-    if (!inside) return;
-
-    var now = Date.now();
-    var gap = now - lastwheel;
-    lastwheel = now;
-
-    // The momentum logic applies ONLY while a snap is animating. A trackpad
-    // flick fires a tail of wheel events after your fingers lift; those arrive
-    // in rapid succession, so a gap under QUIET means "still the same
-    // gesture" and refreshes the lock rather than counting as new input. A
-    // real pause lets the lock expire.
-    //
-    // When NOT locked, input passes straight through untouched. Gating fresh
-    // scrolling on the gap makes the page feel broken, because ordinary
-    // scrolling also produces sub-100ms gaps.
-    // MAXLOCK is what keeps this honest. A trackpad fires every ~16ms while
-    // your fingers are still moving, which by gap alone is indistinguishable
-    // from a momentum tail -- so without a ceiling every event refreshes the
-    // lock and sustained scrolling never gets through at all. Measured before
-    // this guard: 2s of scrolling = 125 events, 100% swallowed, one card.
-    if (locked) {
-      if (Date.now() - lockedAt >= MAXLOCK) {
-        locked = false;              // ceiling hit: treat this as fresh input
-        clearTimeout(unlock);
-      } else {
-        e.preventDefault();
-        if (gap < QUIET) {
-          clearTimeout(unlock);
-          unlock = setTimeout(function () { locked = false; }, SETTLE);
-        }
-        return;
-      }
-    }
-
-    if (Math.abs(e.deltaY) < 4) return;
-
-    var i = currentIndex(list);
-    var next = e.deltaY > 0 ? i + 1 : i - 1;
-
-    // Past either end, release and let the page scroll away normally.
-    if (next < 0 || next >= list.length) return;
-
-    e.preventDefault();
-    snapTo(list[next]);
-  }, { passive: false });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-    var list = sections();
-    if (!list.length || locked) return;
-    var i = currentIndex(list);
-    var next = e.key === 'ArrowDown' ? i + 1 : i - 1;
-    if (next < 0 || next >= list.length) return;
-    e.preventDefault();
-    snapTo(list[next]);
-  });
-})();

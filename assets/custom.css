@@ -3314,3 +3314,31 @@ h2 {
   }
   .prose-row__cta { justify-self: start; }
 }
+
+/* ===================================================================
+   PROJECT LIST SCROLL SNAP
+
+   Native snapping instead of a wheel hijack. The browser handles
+   momentum itself, so this can never swallow input or feel resistant --
+   which is exactly what the JS version did.
+
+   `proximity`, not `mandatory`: the page scroll container is the
+   document, shared with the hero and everything below, and mandatory
+   would drag those toward a card whenever one came near.
+   =================================================================== */
+
+html { scroll-snap-type: y proximity; }
+
+.project-list .project-card {
+  scroll-snap-align: center;
+  /* clears the 79px sticky tab bar, so a card centres in the space below
+     it rather than behind it */
+  scroll-margin-top: 79px;
+}
+
+/* Under 900px the stage collapses to one column and a card grows taller
+   than the viewport, so centring one would trap its top and bottom
+   off-screen. Phones scroll plainly. */
+@media (max-width: 900px) {
+  html { scroll-snap-type: none; }
+}
