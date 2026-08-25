@@ -1198,7 +1198,8 @@ h2 {
 
 .project-showcase__summary-award {
   margin: 0;
-  width: 112px;
+  /* Laurels only -- the wide logos below set their own width. */
+  width: 168px;
 }
 
 /* The Student Games Festival mark is a wide 4:1 logo rather than a
@@ -1771,7 +1772,7 @@ h2 {
     right: 12px;
     gap: 6px;
   }
-  .project-showcase__summary-award { width: 80px; }
+  .project-showcase__summary-award { width: 120px; }
   .project-showcase__summary-award--wide { width: 164px; }
   .project-showcase__summary--with-video .project-showcase__summary-content {
     padding-left: 0;
@@ -2759,7 +2760,7 @@ h2 {
 }
 @media (max-width: 700px) {
   .detail-hero__titlerow { gap: 14px; }
-  .detail-hero__awards .project-showcase__summary-award { width: 74px; }
+  .detail-hero__awards .project-showcase__summary-award { width: 111px; }
   .detail-hero__awards .project-showcase__summary-award--wide { width: 148px; }
 }
 .detail-hero::after {
