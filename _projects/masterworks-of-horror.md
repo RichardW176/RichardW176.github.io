@@ -34,6 +34,10 @@ awards:
     image: /assets/images/logo_big.webp
     wide: true
     mono: true
+  - name: DevGAMM
+    image: /assets/images/Devgamm.png
+    wide: true
+    mono: true
 links:
   - label: itch.io
     url: "https://masterworks-of-horror.itch.io/masterworks-of-horror-the-prologue"
