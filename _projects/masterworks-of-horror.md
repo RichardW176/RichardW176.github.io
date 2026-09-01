@@ -1,6 +1,6 @@
 ---
 title: Masterworks of Horror
-image: /assets/images/GDC Banner Wide.png
+image: /assets/images/gdc-banner-wide.webp
 video: /assets/Necronomicon%20Landscape.mp4
 secondary_video: /assets/Trapped%20Author.mp4
 secondary_video_title: Trapped Author

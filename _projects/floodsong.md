@@ -2,7 +2,7 @@
 layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
-summary_image: /assets/images/3.5%20Floodsong%20Week%203%20Boss%20V4%20%281%29.png
+summary_image: /assets/images/floodsong-week3-boss.webp
 summary_image_alt: Floodsong side banner art
 accent_rgb: 103 246 255
 poster_frame_borderless: true
