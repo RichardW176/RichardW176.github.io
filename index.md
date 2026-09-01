@@ -54,6 +54,8 @@ title: Home
 </section>
 </div>
 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/custom.css?v={{ site.time | date: '%s' }}">
 
 <!-- ============================ SHOWCASE (index view) ============================ -->
@@ -262,6 +264,106 @@ title: Home
         </div>
       </div>
     </div>
+    {% if card_panel == "films" %}
+    <div class="detail-body">
+
+      <section class="film-visuals">
+        <h2 class="film-section__heading">Visuals</h2>
+
+        {% if p.storyboard %}
+        <figure class="film-storyboard">
+          <div class="film-frame">
+            <video controls loop muted playsinline preload="metadata">
+              <source src="{{ p.storyboard }}" type="video/mp4">
+            </video>
+            {% if p.storyboard_title %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.storyboard_title }}</span>
+              <span class="project-highlight__tab-sub">Storyboard</span>
+            </div>
+            {% endif %}
+          </div>
+          {% if p.storyboard_caption %}
+          <figcaption class="film-cap">{{ p.storyboard_caption }}</figcaption>
+          {% endif %}
+        </figure>
+        {% endif %}
+
+        {% if p.hero_art or p.backgrounds %}
+        <p class="film-subhead">Backgrounds</p>
+
+        {% if p.hero_art %}
+        {% assign a = p.hero_art %}
+        <figure class="film-art film-art--lead">
+          <div class="film-frame"><img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async"></div>
+          <figcaption>
+            <div class="film-art__head">
+              <p class="film-art__title">{{ a.title }}</p>
+              {% if a.credit %}<span class="film-credit">Art by {{ a.credit }}</span>{% endif %}
+            </div>
+            {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
+          </figcaption>
+        </figure>
+        {% endif %}
+
+        {% if p.backgrounds %}
+        <div class="film-art-row">
+          {% for a in p.backgrounds %}
+          <figure class="film-art">
+            <div class="film-frame"><img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async"></div>
+            <figcaption>
+              <p class="film-art__title film-art__title--sm">{{ a.title }}</p>
+              {% if a.quote %}<p class="film-art__quote film-art__quote--sm">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
+              {% if a.credit %}<p class="film-credit film-credit--line">Art by {{ a.credit }}</p>{% endif %}
+            </figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% if p.concept_art %}
+        <p class="film-subhead">Concept &amp; character design</p>
+        <div class="film-art-grid">
+          {% for a in p.concept_art %}
+          <figure class="film-art{% if a.wide %} film-art--wide{% endif %}">
+            <div class="film-frame{% if a.mat == 'light' %} film-frame--mat-light{% elsif a.mat == 'white' %} film-frame--mat-white{% endif %}">
+              <img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async">
+            </div>
+            <figcaption>
+              <div class="film-art__head">
+                <p class="film-art__title">{{ a.title }}</p>
+                {% if a.credit %}<span class="film-credit">Art by {{ a.credit }}</span>{% endif %}
+              </div>
+              {% if a.description %}<p class="film-art__desc">{{ a.description }}</p>{% endif %}
+              {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
+            </figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </section>
+
+      {% if p.content and p.content != "" %}
+      <section class="film-script-section">
+        <div class="film-script__head">
+          <h2 class="film-section__heading">Script</h2>
+          {% if p.pdf %}<a class="film-script__pdf" href="{{ p.pdf }}" target="_blank" rel="noopener noreferrer">Full PDF <span aria-hidden="true">&nearr;</span></a>{% endif %}
+        </div>
+        <p class="film-script__byline">Written by Richard Wang</p>
+
+        <div class="film-script__wrap">
+          <div class="film-script" data-scriptpane data-open="false">
+            {{ p.content | markdownify }}
+          </div>
+          <span class="film-script__fade" data-fade></span>
+        </div>
+        <button class="film-script__toggle" data-expand type="button">Read full script</button>
+      </section>
+      {% endif %}
+
+    </div>
+    {% else %}
     <div class="detail-body">
 
       {% if p.secondary_video or p.tertiary_video or p.quaternary_video or p.quinary_video %}
@@ -385,6 +487,7 @@ title: Home
       {% endif %}
 
     </div>
+    {% endif %}
   </div>
 {% endfor %}
 {% endfor %}

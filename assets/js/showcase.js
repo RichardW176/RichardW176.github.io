@@ -437,3 +437,32 @@
     tween(targetFor(list[next]));
   });
 })();
+
+/* ===================================================================
+   FILM SCRIPT PANE -- expand / collapse
+   =================================================================== */
+
+(function () {
+  if (window.__filmScriptBound) return;
+  window.__filmScriptBound = true;
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-expand]');
+    if (!t) return;
+
+    // Query fresh -- do not cache. View switching replaces these nodes, and a
+    // stale reference silently reports the wrong geometry.
+    var pane = t.parentNode.querySelector('[data-scriptpane]')
+            || document.querySelector('[data-scriptpane]');
+    if (!pane) return;
+
+    var open = pane.getAttribute('data-open') === 'true';
+    pane.setAttribute('data-open', open ? 'false' : 'true');
+    pane.style.maxHeight = open ? '460px' : (pane.scrollHeight + 40) + 'px';
+
+    var fade = pane.parentNode.querySelector('[data-fade]');
+    if (fade) fade.style.opacity = open ? '1' : '0';
+
+    t.textContent = open ? 'Read full script' : 'Collapse';
+  });
+})();

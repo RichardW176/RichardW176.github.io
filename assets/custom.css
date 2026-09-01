@@ -3551,3 +3551,284 @@ html.hero-owns-scroll { scroll-snap-type: none; }
   font-size: 0.82rem; letter-spacing: 0.16em;
   text-transform: uppercase; font-weight: 700;
 }
+
+/* ===================================================================
+   FILM DETAIL VIEW
+   Scoped entirely to .film-* so it cannot disturb the games or writing
+   views. Reuses --project-accent-rgb, set on the view wrapper from the
+   entry's accent_rgb.
+   =================================================================== */
+
+/* ---------- film detail: sections ---------- */
+.film-section__heading {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(231, 235, 245, 0.55);
+  font-weight: 700;
+}
+
+.film-visuals { margin-top: 56px; }
+
+.film-subhead {
+  margin: 48px 0 18px;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ---------- frames ---------- */
+.film-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.film-frame img,
+.film-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.film-frame video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0b0b10;
+}
+
+/* Concept art sits on light paper. Forcing it onto the dark page looks like a
+   mistake, so give those pieces a mat and let them read as artboards.
+   Finished background paintings get NO mat -- they are full-bleed images. */
+.film-frame--mat-light { background: #f1eee6; }
+.film-frame--mat-white { background: #fff; }
+
+.film-storyboard { margin: 0 0 48px; }
+.film-storyboard .film-frame {
+  border-radius: 18px;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.28);
+}
+
+/* ---------- art captions ---------- */
+.film-art { margin: 0; }
+.film-art figcaption { padding: 14px 4px 0; }
+
+.film-art__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.film-art__title {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.film-art__title--sm { font-size: 0.98rem; }
+
+.film-art__desc {
+  margin: 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Script lines are quoted verbatim, so mark them as quotation not commentary. */
+.film-art__quote {
+  margin: 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+.film-art__quote--sm { font-size: 0.86rem; color: rgba(230, 234, 243, 0.6); }
+
+/* ---------- credits ---------- */
+.film-credit {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.4);
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+/* In the 3-across row there is no width for a chip, so credit runs as a line. */
+.film-credit--line {
+  display: block;
+  margin: 6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.9);
+  font-size: 0.8rem;
+}
+
+.film-cap {
+  padding: 14px 4px 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+}
+
+/* ---------- layout ---------- */
+.film-art-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 48px;
+}
+
+.film-art-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.film-art--wide { grid-column: 1 / -1; }
+
+/* ---------- script ---------- */
+.film-script-section { padding: 64px 0 90px; }
+
+.film-script__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.film-script__head .film-section__heading { flex: none; }
+.film-script__head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  order: 1;
+}
+.film-script__pdf {
+  order: 2;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-weight: 700;
+  font-size: 0.86rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.film-script__byline {
+  margin: 0 0 26px;
+  color: rgba(230, 234, 243, 0.6);
+  font-size: 0.92rem;
+}
+
+/* Width lives ONCE on the wrapper. Do not also put max-width on the pane or the
+   fade: the pane is padded, so a max-width on both makes the fade land ~88px
+   short of the pane's right edge and the collapsed text tears at that corner. */
+.film-script__wrap {
+  position: relative;
+  max-width: 64ch;
+}
+
+.film-script {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  max-height: 460px;
+  transition: max-height 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 38px 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.028);
+  font-family: "Courier Prime", ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: rgba(236, 239, 247, 0.9);
+}
+
+.film-script__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(180deg, rgba(8,8,12,0) 0%, rgba(8,8,12,0.86) 62%, #08080c 100%);
+  transition: opacity 300ms ease;
+}
+
+.film-script__toggle {
+  margin-top: 20px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.5);
+  background: rgba(var(--project-accent-rgb, 255 176 92) / 0.1);
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.film-script__toggle:hover {
+  background: rgba(var(--project-accent-rgb, 255 176 92) / 0.18);
+}
+
+/* ---------- screenplay formatting from markdownify ----------
+   The prose files follow a consistent convention, which is what makes this
+   possible without hand-marking every line:
+
+     **EXT. SHORE - NIGHT**      scene heading   -> <p><strong>only child</strong></p>
+     *The SON stands...*         action          -> <p><em>only child</em></p>
+     **FATHER**                  cue + dialogue  -> <p><strong>..</strong> text</p>
+     How many times...
+
+   Kramdown joins the cue and its dialogue into ONE paragraph, so the cue is a
+   leading <strong> followed by text. Hence the three rules below. If you ever
+   write a scene heading that is not the sole content of its paragraph, it will
+   fall through to the dialogue rule -- keep the convention. */
+
+.film-script p {
+  margin: 0 0 18px 6ch;
+  max-width: 36ch;
+}
+
+/* cue: character name above its dialogue, pushed further right */
+.film-script p > strong:first-child {
+  display: block;
+  margin-left: 6ch;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* scene heading: full width, no dialogue indent */
+.film-script p:has(> strong:only-child) {
+  margin: 0 0 20px;
+  max-width: none;
+  letter-spacing: 0.06em;
+}
+.film-script p:has(> strong:only-child) > strong:first-child {
+  margin-left: 0;
+}
+
+/* action: full width, muted, not italicised twice */
+.film-script p:has(> em:only-child) {
+  margin: 0 0 22px;
+  max-width: none;
+  color: rgba(230, 234, 243, 0.72);
+}
+.film-script p:has(> em:only-child) em { font-style: normal; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 900px) {
+  .film-art-row,
+  .film-art-grid { grid-template-columns: 1fr; }
+  .film-art--wide { grid-column: auto; }
+  .film-script { padding: 24px 22px; font-size: 0.94rem; }
+  .film-script p { margin-left: 3ch; max-width: none; }
+  .film-script p > strong:first-child { margin-left: 3ch; }
+  .film-credit { margin-left: 0; }
+}
