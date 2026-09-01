@@ -80,7 +80,7 @@
     var back = e.target.closest && e.target.closest('[data-back]');
     if (back) {
       var tab = back.getAttribute('data-back');
-      if (tab === 'writing' || tab === 'games') selectTab(tab);
+      if (tab === 'writing' || tab === 'games' || tab === 'films') selectTab(tab);
       show('index');
       return;
     }
@@ -339,10 +339,15 @@
   // inactive pane with an inline display:none rather than the `hidden`
   // attribute -- so read the computed style, or this settles cards on the
   // Writing Samples tab too.
+  // Games and Films both use the card layout, so both settle. Only one is
+  // ever visible, so this returns the cards of whichever pane is showing.
   function sections() {
-    var pane = document.querySelector('[data-panel="games"]');
-    if (!pane || getComputedStyle(pane).display === 'none') return [];
-    return Array.prototype.slice.call(pane.querySelectorAll('.project-card'));
+    var panes = document.querySelectorAll('[data-panel="games"], [data-panel="films"]');
+    for (var i = 0; i < panes.length; i++) {
+      if (getComputedStyle(panes[i]).display === 'none') continue;
+      return Array.prototype.slice.call(panes[i].querySelectorAll('.project-card'));
+    }
+    return [];
   }
 
   function barOffset() {

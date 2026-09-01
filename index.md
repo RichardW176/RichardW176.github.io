@@ -65,17 +65,31 @@ title: Home
     <div class="portfolio-tabs__row" role="tablist" aria-label="Portfolio sections">
       <button class="portfolio-tabs__tab is-active" data-tab="games" role="tab" aria-selected="true" type="button">Games</button>
       <button class="portfolio-tabs__tab" data-tab="writing" role="tab" aria-selected="false" type="button">Writing Samples</button>
+      <button class="portfolio-tabs__tab" data-tab="films" role="tab" aria-selected="false" type="button">Films</button>
     </div>
   </div>
 
-  <!-- ---------- VIDEO GAMES ---------- -->
-  <div data-panel="games" style="display: block;">
-    <p class="showcase-hint">Select a project to see the breakdown</p>
+  <!-- ---------- VIDEO GAMES + FILMS ----------
+       Both tabs render an identical card, so the markup lives here once and
+       the loop below swaps which collection feeds it. To add another
+       card-style tab, name it in card_panels and give it a branch. -->
+  {% assign card_panels = "games,films" | split: "," %}
+  {% for card_panel in card_panels %}
+    {% if card_panel == "games" %}
+      {% assign items = site.projects | sort: "order" %}
+      {% assign viewprefix = "" %}
+      {% assign panel_hint = "Select a project to see the breakdown" %}
+    {% else %}
+      {% assign items = site.films | sort: "order" %}
+      {% assign viewprefix = "f-" %}
+      {% assign panel_hint = "Select a film to see the breakdown" %}
+    {% endif %}
+  <div data-panel="{{ card_panel }}" style="display: {% if card_panel == 'games' %}block{% else %}none{% endif %};">
+    <p class="showcase-hint">{{ panel_hint }}</p>
     <div class="project-list">
-      {% assign games = site.projects | sort: "order" %}
-      {% for p in games %}
+      {% for p in items %}
         {% assign accent = p.accent_rgb | default: "255 58 138" %}
-        <div class="project-card" data-goto="{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
+        <div class="project-card" data-goto="{{ viewprefix }}{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
           <div class="project-card__glow"></div>
 
           <div class="project-card__shell project-showcase__stage">
@@ -174,6 +188,7 @@ title: Home
       {% endfor %}
     </div>
   </div>
+  {% endfor %}
 
   <!-- ---------- WRITING SAMPLES ---------- -->
   <div data-panel="writing" style="display: none;">
@@ -196,10 +211,20 @@ title: Home
 </div>
 
 <!-- ============================ PROJECT DETAIL VIEWS ============================ -->
-{% assign games = site.projects | sort: "order" %}
-{% for p in games %}
+{% assign card_panels = "games,films" | split: "," %}
+{% for card_panel in card_panels %}
+{% if card_panel == "games" %}
+  {% assign items = site.projects | sort: "order" %}
+  {% assign viewprefix = "" %}
+  {% assign back_label = "All projects" %}
+{% else %}
+  {% assign items = site.films | sort: "order" %}
+  {% assign viewprefix = "f-" %}
+  {% assign back_label = "All films" %}
+{% endif %}
+{% for p in items %}
   {% assign accent = p.accent_rgb | default: "255 58 138" %}
-  <div data-view="{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
+  <div data-view="{{ viewprefix }}{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
     <div class="detail-hero">
       {% if p.video %}
       <video class="detail-hero__media" data-autoplay-when-visible="true" loop muted playsinline preload="none">
@@ -209,7 +234,7 @@ title: Home
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
       {% endif %}
       <div class="detail-hero__inner">
-        <button class="detail-back" data-back="games" type="button"><span>&larr;</span> All projects</button>
+        <button class="detail-back" data-back="{{ card_panel }}" type="button"><span>&larr;</span> {{ back_label }}</button>
         <div class="detail-hero__text">
           {% if p.stage or p.timeline or p.engine %}
           <span class="detail-eyebrow">
@@ -361,6 +386,7 @@ title: Home
 
     </div>
   </div>
+{% endfor %}
 {% endfor %}
 
 <!-- ============================ WRITING READING VIEWS ============================ -->
