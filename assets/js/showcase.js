@@ -66,8 +66,22 @@
     }
 
     if (!restore) return;
-    var want = tabScroll[name] || 0;
+    // A tab opened for the first time has no remembered position, and the old
+    // `|| 0` fallback meant the top of the DOCUMENT -- which is the pinned
+    // hero. So the first click on any tab threw the reader back to the top of
+    // the site. The floor is the top of the showcase, never the hero above it,
+    // and a remembered position is clamped to it too: if you scrolled up into
+    // the hero while on a tab, coming back should not restore you there.
     requestAnimationFrame(function () {
+      var floor = 0;
+      var showcase = document.getElementById('portfolio-showcase');
+      if (showcase) {
+        floor = showcase.getBoundingClientRect().top +
+                (window.pageYOffset || document.documentElement.scrollTop);
+      }
+      var want = tabScroll.hasOwnProperty(name)
+        ? Math.max(tabScroll[name], floor)
+        : floor;
       var max = document.documentElement.scrollHeight - window.innerHeight;
       window.scrollTo(0, Math.min(want, Math.max(max, 0)));
     });
