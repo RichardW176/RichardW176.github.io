@@ -1,7 +1,7 @@
 ---
 title: "Unchained: Tale of Enra"
 image: /assets/images/unchained-tale-of-enra.png
-video: /assets/Unchained%20Preview.mp4
+video: /assets/video/Unchained%20Preview.mp4
 accent_rgb: 72 255 140
 poster_frame_borderless: true
 hide_summary_intro: true
@@ -24,9 +24,9 @@ plain_feature_items:
 order: 4
 docs:
   - title: "Marlow Character Brief"
-    file: /assets/MARLOW - Character Brief.pdf
+    file: /assets/docs/MARLOW - Character Brief.pdf
     preview: true
   - title: "Marlow Scripts + Design"
-    file: /assets/MARLOW - Scripts + Design.pdf
+    file: /assets/docs/MARLOW - Scripts + Design.pdf
     preview: true
 ---

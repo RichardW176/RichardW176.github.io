@@ -16,6 +16,6 @@ plain_feature_items:
 order: 5
 docs:
   - title: "Global Narrative Documentation - Sample"
-    file: /assets/floodsong-doc.pdf
+    file: /assets/docs/floodsong-doc.pdf
     preview: true
 ---

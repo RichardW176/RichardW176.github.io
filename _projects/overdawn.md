@@ -1,8 +1,8 @@
 ---
 title: Overdawn
 image: /assets/images/overdawn.png
-video: /assets/Overdawn%20Menu.mp4
-secondary_video: /assets/Archangel%20Preview.mp4
+video: /assets/video/Overdawn%20Menu.mp4
+secondary_video: /assets/video/Archangel%20Preview.mp4
 secondary_video_title: Archangel
 secondary_video_subtitle: Secret Ending Boss
 secondary_feature_heading:
@@ -15,7 +15,7 @@ secondary_feature_items:
     text: Character documentation, yarnspinner dialogue
   - label: Art
     text: Boss model, voxelized props, cinematics engineering, post processing
-tertiary_video: /assets/Rev%20Preview.mp4
+tertiary_video: /assets/video/Rev%20Preview.mp4
 tertiary_video_title: Rev
 tertiary_video_subtitle: Final Boss
 tertiary_video_position: center 66%
@@ -27,14 +27,14 @@ tertiary_feature_items:
     text: Character documentation, yarnspinner dialogue
   - label: Level Design
     text: Level documentation / blockout, set dressing, post processing
-quaternary_video: /assets/Slums%20Preview.mp4
+quaternary_video: /assets/video/Slums%20Preview.mp4
 quaternary_video_title: Andrean Slums
 quaternary_video_subtitle: Explorable Region
 quaternary_feature_heading:
 quaternary_feature_items:
   - label: Level Design
     text: Level blockout, set dressing, post processing
-quinary_video: /assets/Gangster%20Hideout%20Preview.mp4
+quinary_video: /assets/video/Gangster%20Hideout%20Preview.mp4
 quinary_video_title: Gangster Hideout
 quinary_video_subtitle: Combat Area
 quinary_feature_heading:
@@ -68,7 +68,7 @@ awards:
     alt: Overdawn award image for Tencet
 docs:
   - title: "Rev Boss Design Document"
-    file: /assets/overdawn-rev-design-document.pdf
+    file: /assets/docs/overdawn-rev-design-document.pdf
     preview: true
 scripts:
   - title: "Wasteland Dialogue"
