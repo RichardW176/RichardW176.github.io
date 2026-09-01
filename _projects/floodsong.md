@@ -10,7 +10,9 @@ summary_image: /assets/images/floodsong-banner-v3.webp
 # could never do. Keeps the figure on the cliff (28% in) and the wave.
 summary_image_position: center
 summary_image_alt: Floodsong side banner art
-detail_video: /assets/video/Floodsong%20Portfolio.mp4
+secondary_video: /assets/video/Floodsong%20Portfolio.mp4
+secondary_video_title: Floodsong
+secondary_video_subtitle: Portfolio Sample
 accent_rgb: 103 246 255
 poster_frame_borderless: true
 role: Narrative
