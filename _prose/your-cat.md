@@ -2,7 +2,7 @@
 title: "Your Cat"
 media_type: "Short Film"
 description: "A man tries to win someone back after proposing to them the night before."
-pdf: /assets/Your%20Cat%20First%20Draft.pdf
+pdf: /assets/docs/Your%20Cat%20First%20Draft.pdf
 order: 2
 ---
 

@@ -13,11 +13,16 @@ defaults:
       type: prose
     values:
       layout: project
+  - scope:
+      path: ""
+      type: films
+    values:
+      layout: project
 
 collections:
   projects:
     output: true
-  prose:
+  films:
     output: true
-  screenwriting:
+  prose:
     output: true

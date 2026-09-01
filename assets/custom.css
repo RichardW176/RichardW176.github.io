@@ -2528,6 +2528,13 @@ h2 {
   z-index: 5;
   margin-top: 0;
   background: #000000;
+
+  /* One width ceiling for all three tabs. Games take theirs from the stage
+     grid -- minmax(264px, 355px) + minmax(430px, 1000px) = 1355px -- while
+     films and writing were capped narrower (1180 / 1080), so they read as
+     inset beside the games cards. Change the stage columns and change this
+     with them, or the tabs drift apart again. */
+  --showcase-max: 1355px;
 }
 
 /* ---- Short viewports: tighten so beat 2 always fits ---- */
@@ -2774,7 +2781,10 @@ h2 {
   z-index: 2;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 32px 40px 64px;
+  /* 72 rather than 32: the back button used to sit here in the flow above
+     .detail-hero__text, so pulling it out into the floating bar would have
+     raised the title by roughly its height. */
+  padding: 72px 40px 64px;
 }
 .detail-back {
   display: inline-flex;
@@ -3284,7 +3294,9 @@ h2 {
 .prose-list {
   display: grid;
   gap: 18px;
-  max-width: 1080px;
+  max-width: var(--showcase-max, 1355px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .prose-row {
@@ -3492,24 +3504,775 @@ h2 {
    `proximity`, not `mandatory`: the page scroll container is the
    document, shared with the hero and everything below, and mandatory
    would drag those toward a card whenever one came near.
-   =================================================================== */
+   ===================================================================
+
+
+   SUPERSEDED by the LOOSE SETTLE-SNAP block in showcase.js, which nudges
+   the nearest card only after scrolling goes quiet. Native proximity snap
+   cannot coexist with it: the browser re-grabs the scroll position after
+   every scrollTo the tween makes, so the two fight and the nudge never
+   lands. Restore this block and delete that IIFE to go back.
 
 html { scroll-snap-type: y proximity; }
 
-/* While the pinned hero still owns the scroll, snapping would pull its
-   handoff toward the first card. Set by showcase.js. */
 html.hero-owns-scroll { scroll-snap-type: none; }
 
 .project-list .project-card {
   scroll-snap-align: center;
-  /* clears the 79px sticky tab bar, so a card centres in the space below
-     it rather than behind it */
   scroll-margin-top: 79px;
 }
 
-/* Under 900px the stage collapses to one column and a card grows taller
-   than the viewport, so centring one would trap its top and bottom
-   off-screen. Phones scroll plainly. */
 @media (max-width: 900px) {
   html { scroll-snap-type: none; }
+}
+*/
+
+/* ===================================================================
+   PROJECT DETAIL PAGE -- sticky back bar
+   Sits above .project-page (full-bleed), so its own 1720px inner is
+   not capped by the 1120px page shell. Carries --project-accent-rgb
+   via an inline style on the bar itself, since it lives outside the
+   .project-page element that otherwise scopes that variable.
+   =================================================================== */
+
+.project-page__bar {
+  position: sticky; top: 0; z-index: 60;
+  padding: 14px 24px;
+  background: rgba(8,8,12,0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(var(--project-accent-rgb, 255 58 138) / 0.22);
+}
+.project-page__bar-inner {
+  max-width: 1720px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px;
+}
+.project-page__back {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.24);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.4);
+  color: #fff; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+}
+.project-page__back:hover {
+  border-color: rgba(var(--project-accent-rgb, 255 58 138) / 0.7);
+  background: rgba(var(--project-accent-rgb, 255 58 138) / 0.12);
+}
+.project-page__bar-title {
+  color: rgba(231,235,245,0.5);
+  font-size: 0.82rem; letter-spacing: 0.16em;
+  text-transform: uppercase; font-weight: 700;
+}
+
+/* ===================================================================
+   FILM DETAIL VIEW
+   Scoped entirely to .film-* so it cannot disturb the games or writing
+   views. Reuses --project-accent-rgb, set on the view wrapper from the
+   entry's accent_rgb.
+   =================================================================== */
+
+/* ---------- film detail: sections ---------- */
+.film-section__heading {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(231, 235, 245, 0.55);
+  font-weight: 700;
+}
+
+.film-visuals { margin-top: 56px; }
+
+.film-subhead {
+  margin: 48px 0 18px;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ---------- frames ---------- */
+.film-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.film-frame img,
+.film-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.film-frame video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0b0b10;
+}
+
+/* Concept art sits on light paper. Forcing it onto the dark page looks like a
+   mistake, so give those pieces a mat and let them read as artboards.
+   Finished background paintings get NO mat -- they are full-bleed images. */
+.film-frame--mat-light { background: #f1eee6; }
+.film-frame--mat-white { background: #fff; }
+
+.film-storyboard { margin: 0 0 48px; }
+.film-storyboard .film-frame {
+  border-radius: 18px;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.28);
+}
+
+/* ---------- art captions ---------- */
+.film-art { margin: 0; }
+.film-art figcaption { padding: 14px 4px 0; }
+
+.film-art__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.film-art__title {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.film-art__title--sm { font-size: 0.98rem; }
+
+.film-art__desc {
+  margin: 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Script lines are quoted verbatim, so mark them as quotation not commentary. */
+.film-art__quote {
+  margin: 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+.film-art__quote--sm { font-size: 0.86rem; color: rgba(230, 234, 243, 0.6); }
+
+/* ---------- credits ---------- */
+.film-credit {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.4);
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+/* In the 3-across row there is no width for a chip, so credit runs as a line. */
+.film-credit--line {
+  display: block;
+  margin: 6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.9);
+  font-size: 0.8rem;
+}
+
+.film-cap {
+  padding: 14px 4px 0;
+  color: rgba(230, 234, 243, 0.62);
+  font-size: 0.9rem;
+}
+
+/* ---------- layout ---------- */
+.film-art-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 48px;
+}
+
+.film-art-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.film-art--wide { grid-column: 1 / -1; }
+
+/* ---------- script ---------- */
+.film-script-section { padding: 64px 0 90px; }
+
+.film-script__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.film-script__head .film-section__heading { flex: none; }
+.film-script__head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  order: 1;
+}
+.film-script__pdf {
+  order: 2;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-weight: 700;
+  font-size: 0.86rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.film-script__byline {
+  margin: 0 0 26px;
+  color: rgba(230, 234, 243, 0.6);
+  font-size: 0.92rem;
+}
+
+/* Width lives ONCE on the wrapper. Do not also put max-width on the pane or the
+   fade: the pane is padded, so a max-width on both makes the fade land ~88px
+   short of the pane's right edge and the collapsed text tears at that corner. */
+.film-script__wrap {
+  position: relative;
+  max-width: 64ch;
+}
+
+.film-script {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  max-height: 460px;
+  transition: max-height 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 38px 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.028);
+  font-family: "Courier Prime", ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: rgba(236, 239, 247, 0.9);
+}
+
+.film-script__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(180deg, rgba(8,8,12,0) 0%, rgba(8,8,12,0.86) 62%, #08080c 100%);
+  transition: opacity 300ms ease;
+}
+
+.film-script__toggle {
+  margin-top: 20px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.5);
+  background: rgba(var(--project-accent-rgb, 255 176 92) / 0.1);
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.95);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.film-script__toggle:hover {
+  background: rgba(var(--project-accent-rgb, 255 176 92) / 0.18);
+}
+
+/* ---------- screenplay formatting from markdownify ----------
+   The prose files follow a consistent convention, which is what makes this
+   possible without hand-marking every line:
+
+     **EXT. SHORE - NIGHT**      scene heading   -> <p><strong>only child</strong></p>
+     *The SON stands...*         action          -> <p><em>only child</em></p>
+     **FATHER**                  cue + dialogue  -> <p><strong>..</strong> text</p>
+     How many times...
+
+   Kramdown joins the cue and its dialogue into ONE paragraph, so the cue is a
+   leading <strong> followed by text. Hence the three rules below. If you ever
+   write a scene heading that is not the sole content of its paragraph, it will
+   fall through to the dialogue rule -- keep the convention. */
+
+.film-script p {
+  margin: 0 0 18px 6ch;
+  max-width: 36ch;
+}
+
+/* cue: character name above its dialogue, pushed further right */
+.film-script p > strong:first-child {
+  display: block;
+  margin-left: 6ch;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* scene heading: full width, no dialogue indent */
+.film-script p:has(> strong:only-child) {
+  margin: 0 0 20px;
+  max-width: none;
+  letter-spacing: 0.06em;
+}
+.film-script p:has(> strong:only-child) > strong:first-child {
+  margin-left: 0;
+}
+
+/* action: full width, muted, not italicised twice */
+.film-script p:has(> em:only-child) {
+  margin: 0 0 22px;
+  max-width: none;
+  color: rgba(230, 234, 243, 0.72);
+}
+.film-script p:has(> em:only-child) em { font-style: normal; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 900px) {
+  .film-art-row,
+  .film-art-grid { grid-template-columns: 1fr; }
+  .film-art--wide { grid-column: auto; }
+  .film-script { padding: 24px 22px; font-size: 0.94rem; }
+  .film-script p { margin-left: 3ch; max-width: none; }
+  .film-script p > strong:first-child { margin-left: 3ch; }
+  .film-credit { margin-left: 0; }
+}
+
+/* ===================================================================
+   FILM CARD -- wide letterbox band, three crops + overlay
+   Scoped to .film-card* so games and writing are untouched.
+   =================================================================== */
+
+.film-card {
+  position: relative;
+  overflow: hidden;
+  max-width: var(--showcase-max, 1355px);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 26px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.34);
+  background: #000;
+  cursor: pointer;
+  transition: border-color 220ms ease, transform 220ms cubic-bezier(0.22,1,0.36,1);
+}
+.film-card:hover,
+.film-card:focus-visible {
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.7);
+  transform: translateY(-3px);
+}
+.film-card:focus-visible { outline: none; }
+
+/* The band. 300px on 1180 is ~3.9:1 -- a letterbox strip, not a block. Raising
+   this much past 340px makes the card read as a square slab; dropping below
+   ~240px starts crowding the title against the description in the band. */
+.film-card__strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;              /* hairline, so the three read as separate frames */
+  height: 300px;
+}
+.film-card__strip[data-count="1"] { grid-template-columns: 1fr; }
+.film-card__strip[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+
+.film-card__strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* per-image object-position comes from front matter */
+  background: #0b0b10;
+}
+
+/* Overlay band. The gradient starts fully transparent so the art is not
+   flattened, and the blur is deliberately small (2px) -- enough to lift the
+   text off busy art without smearing the painting behind it. */
+.film-card__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 36px;
+  background: linear-gradient(180deg,
+    rgba(6,7,12,0) 0%,
+    rgba(6,7,12,0.74) 36%,
+    rgba(6,7,12,0.95) 100%);
+  backdrop-filter: blur(2px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 28px;
+}
+
+.film-card__text { display: grid; gap: 9px; }
+
+.film-card__eyebrow {
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 1);
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.film-card__title {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 0.94;
+  /* the band alone is not always enough over a bright sky */
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+}
+
+.film-card__desc {
+  margin: 0;
+  max-width: 56ch;
+  color: rgba(235, 238, 246, 0.92);
+  font-size: 0.99rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.film-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 1);
+  font-weight: 800;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+.film-card:hover .film-card__cta span { transform: translateX(3px); }
+.film-card__cta span { transition: transform 200ms ease; }
+
+/* Backgrounds row now carries four plates, and repeat(3, 1fr) would strand the
+   fourth alone on a second line. Same data-count idiom as the card strip. */
+.film-art-row[data-count="4"] { grid-template-columns: repeat(4, 1fr); }
+.film-art-row[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+.film-art-row[data-count="1"] { grid-template-columns: 1fr; }
+
+/* ---------- mobile ----------
+   Three crops at phone width would be ~40px slivers, which reads as noise.
+   Drop to one image and let the band sit under it. */
+@media (max-width: 760px) {
+  .film-card__strip {
+    grid-template-columns: 1fr;
+    height: 200px;
+  }
+  .film-card__strip img:not(:first-child) { display: none; }
+
+  .film-card__band {
+    padding: 20px 22px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .film-card__cta { justify-self: start; }
+}
+
+/* ===================================================================
+   DETAIL BACK CONTROL -- floats over the page
+
+   It cannot be position: fixed. showcase.js applies pageIn with `both`
+   fill, so every view keeps transform: translateY(0) permanently, and a
+   transformed ancestor becomes the containing block for fixed
+   descendants -- the button would scroll away exactly as before. Nor can
+   it live inside .detail-hero, which is overflow: hidden and would clip
+   and bound it.
+
+   So: a sticky bar that is a direct child of the view, with zero height
+   so it takes no layout space and the hero still starts flush at the
+   top of the page.
+   =================================================================== */
+
+.detail-backbar {
+  position: sticky;
+  top: 16px;
+  z-index: 500;
+  height: 0;
+  padding-left: 40px;
+  pointer-events: none;   /* the empty bar must not swallow clicks on the hero */
+}
+.detail-backbar .detail-back {
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 700px) {
+  .detail-backbar { padding-left: 18px; top: 12px; }
+}
+
+/* ===================================================================
+   FILM DETAIL -- background summary + three named groups
+   Supersedes the single "Visuals" block. Rules already defined above
+   (.film-frame, .film-art__title, .film-credit, .film-art__quote,
+   .film-cap, the light/white mats) are unchanged.
+   =================================================================== */
+
+/* ---------- background summary ---------- */
+.film-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  padding: 52px 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.film-section__label {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(231, 235, 245, 0.55);
+  font-weight: 700;
+}
+.film-summary__body {
+  max-width: 74ch;
+  color: rgba(230, 234, 243, 0.86);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.film-summary__body p { margin: 0 0 14px; }
+.film-summary__body p:last-child { margin-bottom: 0; }
+
+/* ---------- the three groups ----------
+   Heavier than the old uppercase section labels on purpose: the page now has
+   three peer sections rather than one Visuals block, so they need to read as
+   chapter breaks, not small-caps captions. */
+.film-group { padding-top: 64px; }
+.film-group:first-of-type { padding-top: 52px; }
+
+.film-group__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.film-group__head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.film-group__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- direction note ---------- */
+.film-note {
+  max-width: 74ch;
+  margin-bottom: 28px;
+  color: rgba(230, 234, 243, 0.82);
+  font-size: 0.99rem;
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+.film-note p { margin: 0 0 12px; }
+.film-note p:last-child { margin-bottom: 0; }
+
+/* ---------- layout ---------- */
+.film-art--lead { margin: 0 0 22px; }
+
+.film-art-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.film-art-row[data-count="1"] { grid-template-columns: 1fr; }
+.film-art-row[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+.film-art-row[data-count="3"] { grid-template-columns: repeat(3, 1fr); }
+
+.film-art-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.film-subhead {
+  margin: 34px 0 16px;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.film-art--sm .film-art__title { font-size: 0.98rem; }
+.film-art--sm .film-art__quote { font-size: 0.86rem; }
+.film-art--sm figcaption { padding: 12px 2px 0; }
+
+/* ---------- reel ---------- */
+.film-frame--accent {
+  border-radius: 18px;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.28);
+}
+.film-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0b0b10;
+}
+.film-frame__empty {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 28px;
+  text-align: center;
+  background: #0b0b10;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.film-frame__empty p { margin: 0; max-width: 460px; }
+.film-frame__empty-label {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.9);
+}
+
+/* ---------- mats ----------
+   The robed-figure sheet is drawn on a mid-grey ground, so a white mat rings it
+   with a bright halo. Match the artwork instead. */
+.film-frame--mat-grey { background: #9a9a9a; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 900px) {
+  .film-summary { grid-template-columns: 1fr; gap: 16px; padding-top: 36px; }
+  .film-art-row,
+  .film-art-row[data-count="2"],
+  .film-art-row[data-count="3"],
+  .film-art-pair { grid-template-columns: 1fr; }
+  .film-group { padding-top: 44px; }
+  .film-group__title { font-size: 1.15rem; }
+}
+
+/* ===================================================================
+   BACKGROUND ART -- cycling stage + thumbnail strip
+
+   The strip is what keeps this from being a content trap: a bare
+   carousel hides four of five paintings, and a reviewer skimming a
+   portfolio will not wait through a rotation to see them.
+   =================================================================== */
+
+.bg-cycle { max-width: 1180px; }
+
+.bg-cycle__stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0b0b10;
+}
+
+.bg-cycle__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 700ms ease;
+}
+/* Active state is a class, not an inline style, so each film's accent
+   applies -- Nim is blue, Icarus amber. */
+.bg-cycle__slide.is-active { opacity: 1; pointer-events: auto; }
+
+.bg-cycle__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 44px;                     /* 44px min touch target */
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(8, 8, 12, 0.6);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.bg-cycle__nav:hover,
+.bg-cycle__nav:focus-visible { border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.8); }
+.bg-cycle__nav--prev { left: 16px; }
+.bg-cycle__nav--next { right: 16px; }
+
+.bg-cycle__cap {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px 4px 0;
+  min-height: 2.2rem;              /* reserve space so swapping text cannot shift layout */
+}
+.bg-cycle__cap .film-art__title,
+.bg-cycle__cap .film-art__quote { margin: 0; }
+.bg-cycle__cap .film-credit:empty { display: none; }
+
+/* ---------- thumbnail strip ---------- */
+.bg-cycle__strip {
+  display: flex;
+  gap: 10px;
+  padding: 18px 4px 0;
+}
+
+.bg-cycle__thumb {
+  position: relative;
+  flex: 1;
+  min-width: 0;                    /* lets flex children actually shrink */
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0b0b10;
+  cursor: pointer;
+  opacity: 0.42;
+  transition: opacity 260ms ease, border-color 260ms ease;
+}
+.bg-cycle__thumb:hover,
+.bg-cycle__thumb:focus-visible { opacity: 0.8; }
+.bg-cycle__thumb.is-active {
+  opacity: 1;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.85);
+}
+
+.bg-cycle__thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.bg-cycle__thumb span {
+  display: block;
+  padding: 7px 8px 8px;
+  color: rgba(231, 235, 245, 0.78);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .bg-cycle__strip { overflow-x: auto; }
+  .bg-cycle__thumb { flex: 0 0 132px; }   /* scroll rather than crush to slivers */
+  .bg-cycle__nav { width: 40px; height: 40px; }
 }

@@ -66,8 +66,22 @@
     }
 
     if (!restore) return;
-    var want = tabScroll[name] || 0;
+    // A tab opened for the first time has no remembered position, and the old
+    // `|| 0` fallback meant the top of the DOCUMENT -- which is the pinned
+    // hero. So the first click on any tab threw the reader back to the top of
+    // the site. The floor is the top of the showcase, never the hero above it,
+    // and a remembered position is clamped to it too: if you scrolled up into
+    // the hero while on a tab, coming back should not restore you there.
     requestAnimationFrame(function () {
+      var floor = 0;
+      var showcase = document.getElementById('portfolio-showcase');
+      if (showcase) {
+        floor = showcase.getBoundingClientRect().top +
+                (window.pageYOffset || document.documentElement.scrollTop);
+      }
+      var want = tabScroll.hasOwnProperty(name)
+        ? Math.max(tabScroll[name], floor)
+        : floor;
       var max = document.documentElement.scrollHeight - window.innerHeight;
       window.scrollTo(0, Math.min(want, Math.max(max, 0)));
     });
@@ -80,7 +94,7 @@
     var back = e.target.closest && e.target.closest('[data-back]');
     if (back) {
       var tab = back.getAttribute('data-back');
-      if (tab === 'writing' || tab === 'games') selectTab(tab);
+      if (tab === 'writing' || tab === 'games' || tab === 'films') selectTab(tab);
       show('index');
       return;
     }
@@ -314,4 +328,254 @@
   window.addEventListener('scroll', onScroll, { passive: true, capture: true });
   window.addEventListener('resize', onScroll, { passive: true });
   sync();
+})();
+
+/* ===================================================================
+   LOOSE SETTLE-SNAP ON THE PROJECT LIST
+
+   Scrolling is never hijacked. The user scrolls freely; once they STOP,
+   a short settle timer fires and nudges the nearest card into place.
+
+   Replaces the CSS scroll-snap block in custom.css (now commented out) --
+   the two cannot coexist: proximity snap re-grabs the scroll position
+   after every scrollTo the tween makes.
+   =================================================================== */
+
+(function () {
+  // TEMPORARILY OFF -- checking whether the settle is what causes the jitter.
+  // Flip to true to bring it back; nothing below was removed. The CSS
+  // proximity snap this replaced is still commented out in custom.css, so
+  // with this false the project list is plain free scrolling.
+  var ENABLED = false;
+  if (!ENABLED) return;
+
+  var DUR = 260;       // nudge animation length, ms
+  var IDLE = 140;      // silence after the last scroll event = "stopped", ms
+  var DEADZONE = 26;   // already this close to centred? leave it alone, px
+
+  var idle = null;
+  var settling = false;
+
+  // The games pane is a bare [data-panel] div, and showcase.js hides the
+  // inactive pane with an inline display:none rather than the `hidden`
+  // attribute -- so read the computed style, or this settles cards on the
+  // Writing Samples tab too.
+  // Games and Films both use the card layout, so both settle. Only one is
+  // ever visible, so this returns the cards of whichever pane is showing.
+  function sections() {
+    var panes = document.querySelectorAll('[data-panel="games"], [data-panel="films"]');
+    for (var i = 0; i < panes.length; i++) {
+      if (getComputedStyle(panes[i]).display === 'none') continue;
+      return Array.prototype.slice.call(panes[i].querySelectorAll('.project-card'));
+    }
+    return [];
+  }
+
+  function barOffset() {
+    var bar = document.querySelector('.portfolio-tabs');
+    return bar ? bar.getBoundingClientRect().height : 0;
+  }
+
+  // Where the card would sit if it were centred below the sticky tab bar.
+  function targetFor(el) {
+    var offset = barOffset();
+    var r = el.getBoundingClientRect();
+    return Math.max(window.scrollY + r.top - offset
+         - Math.max((window.innerHeight - offset - r.height) / 2, 0), 0);
+  }
+
+  function nearest(list) {
+    var offset = barOffset();
+    var mid = offset + (window.innerHeight - offset) / 2;
+    var best = null, bestd = Infinity;
+    for (var i = 0; i < list.length; i++) {
+      var r = list[i].getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestd) { bestd = d; best = list[i]; }
+    }
+    return best;
+  }
+
+  // Native behavior:'smooth' animates for a browser-chosen duration, typically
+  // 500ms+, which cannot be shortened and reads as sluggish. Custom tween.
+  //
+  // html carries `scroll-behavior: smooth` (custom.css:20), and a bare
+  // scrollTo inherits it -- every frame of this tween would be handed to the
+  // browser's own smooth animation, which never lands. behavior:'auto' opts
+  // each frame out without disturbing the hero's smooth scrolling.
+  var anim = null;
+  function tween(to) {
+    if (anim) cancelAnimationFrame(anim);
+    var from = window.scrollY;
+    var dist = to - from;
+    if (Math.abs(dist) < 2) return;
+    var t0 = performance.now();
+    settling = true;
+    (function step(now) {
+      var p = Math.min((now - t0) / DUR, 1);
+      var e = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+      window.scrollTo({ top: from + dist * e, behavior: 'auto' });
+      if (p < 1) { anim = requestAnimationFrame(step); }
+      else { anim = null; settling = false; }
+    })(t0);
+  }
+
+  function settle() {
+    var list = sections();
+    if (!list.length) return;
+
+    // Only nudge while the games list actually holds the viewport, so the hero
+    // above and anything below are left alone.
+    var first = list[0].getBoundingClientRect();
+    var last = list[list.length - 1].getBoundingClientRect();
+    if (!(first.top < window.innerHeight * 0.75
+       && last.bottom > window.innerHeight * 0.25)) return;
+
+    var el = nearest(list);
+    if (!el) return;
+    var to = targetFor(el);
+    if (Math.abs(to - window.scrollY) < DEADZONE) return;   // close enough
+    tween(to);
+  }
+
+  window.addEventListener('scroll', function () {
+    // Ignore scroll events our own tween generates, or it re-triggers itself.
+    if (settling) return;
+    clearTimeout(idle);
+    idle = setTimeout(settle, IDLE);
+  }, { passive: true });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    var list = sections();
+    if (!list.length) return;
+    var el = nearest(list);
+    var i = list.indexOf(el);
+    var next = e.key === 'ArrowDown' ? i + 1 : i - 1;
+    if (next < 0 || next >= list.length) return;
+    e.preventDefault();
+    clearTimeout(idle);
+    tween(targetFor(list[next]));
+  });
+})();
+
+/* ===================================================================
+   FILM SCRIPT PANE -- expand / collapse
+   =================================================================== */
+
+(function () {
+  if (window.__filmScriptBound) return;
+  window.__filmScriptBound = true;
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-expand]');
+    if (!t) return;
+
+    // Query fresh -- do not cache. View switching replaces these nodes, and a
+    // stale reference silently reports the wrong geometry.
+    var pane = t.parentNode.querySelector('[data-scriptpane]')
+            || document.querySelector('[data-scriptpane]');
+    if (!pane) return;
+
+    var open = pane.getAttribute('data-open') === 'true';
+    pane.setAttribute('data-open', open ? 'false' : 'true');
+    pane.style.maxHeight = open ? '460px' : (pane.scrollHeight + 40) + 'px';
+
+    var fade = pane.parentNode.querySelector('[data-fade]');
+    if (fade) fade.style.opacity = open ? '1' : '0';
+
+    t.textContent = open ? 'Read full script' : 'Collapse';
+  });
+})();
+
+/* ===================================================================
+   BACKGROUND ART -- cycling stage
+
+   Scoped per [data-bg-cycle] block, NOT document-wide. Every film's
+   detail view is in the DOM at once (views toggle with display, they
+   are not removed), so a global [data-slide] query mixes all films'
+   slides into one rotation and a single window.__bgIndex is shared
+   between them. State lives on each block instead.
+   =================================================================== */
+
+(function () {
+  if (window.__bgCycleBound) return;
+  window.__bgCycleBound = true;
+
+  function state(root) {
+    if (!root.__bg) root.__bg = { i: 0, paused: false };
+    return root.__bg;
+  }
+
+  function show(root, i) {
+    var s = root.querySelectorAll('[data-slide]');
+    var d = root.querySelectorAll('[data-dot]');
+    if (!s.length) return;
+    var n = ((i % s.length) + s.length) % s.length;   // wraps both directions
+
+    for (var k = 0; k < s.length; k++) s[k].classList.toggle('is-active', k === n);
+    for (var j = 0; j < d.length; j++) d[j].classList.toggle('is-active', j === n);
+
+    var cap = root.querySelector('[data-caption]');
+    if (cap) {
+      cap.querySelector('[data-cap-title]').textContent  = s[n].getAttribute('data-title')  || '';
+      cap.querySelector('[data-cap-quote]').textContent  = s[n].getAttribute('data-quote')  || '';
+      cap.querySelector('[data-cap-credit]').textContent = s[n].getAttribute('data-credit') || '';
+    }
+    state(root).i = n;
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest) return;
+    var root = e.target.closest('[data-bg-cycle]');
+    if (!root) return;
+
+    var nav = e.target.closest('[data-nav]');
+    if (nav) { show(root, state(root).i + (nav.getAttribute('data-nav') === 'next' ? 1 : -1)); return; }
+
+    var dot = e.target.closest('[data-dot]');
+    if (dot) show(root, parseInt(dot.getAttribute('data-dot'), 10));
+  });
+
+  // WCAG 2.2.2 Pause/Stop/Hide -- anything auto-advancing past 5s needs a way
+  // to stop it. Pausing on hover/focus also stops the motion nagging at the
+  // reader while they are reading something else on the page.
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // capture:true -- pointerenter/leave and focusin/out need capture here
+  ['pointerenter', 'focusin'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      var r = e.target.closest && e.target.closest('[data-bg-cycle]');
+      if (r) state(r).paused = true;
+    }, true);
+  });
+  ['pointerleave', 'focusout'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      var r = e.target.closest && e.target.closest('[data-bg-cycle]');
+      if (r) state(r).paused = false;
+    }, true);
+  });
+
+  if (!reduced) {
+    setInterval(function () {
+      var blocks = document.querySelectorAll('[data-bg-cycle]');
+      for (var i = 0; i < blocks.length; i++) {
+        var r = blocks[i];
+        // offsetParent is null while the view is display:none -- no point
+        // advancing a carousel nobody is looking at.
+        if (r.offsetParent === null || state(r).paused) continue;
+        show(r, state(r).i + 1);
+      }
+    }, 4200);
+  }
+
+  function init() {
+    var blocks = document.querySelectorAll('[data-bg-cycle]');
+    for (var i = 0; i < blocks.length; i++) show(blocks[i], 0);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

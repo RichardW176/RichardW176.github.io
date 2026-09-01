@@ -3,7 +3,7 @@ title: "Namesake"
 media_type: "Prose"
 description: "Three child soldiers meet their senile sergeant."
 image: /assets/images/namesake.png
-pdf: /assets/NAMESAKE%20-%20Prose%20%281%29.pdf
+pdf: /assets/docs/NAMESAKE%20-%20Prose%20%281%29.pdf
 order: 1
 ---
 

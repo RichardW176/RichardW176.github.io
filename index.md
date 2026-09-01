@@ -14,8 +14,9 @@ title: Home
       loop
       muted
       playsinline
-      preload="none">
-      <source src="/assets/Overdawn%20Menu.mp4" type="video/mp4">
+      poster="/assets/images/posters/overdawn-menu.webp"
+      preload="auto">
+      <source src="/assets/video/Overdawn%20Menu.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-inner">
@@ -54,6 +55,8 @@ title: Home
 </section>
 </div>
 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/custom.css?v={{ site.time | date: '%s' }}">
 
 <!-- ============================ SHOWCASE (index view) ============================ -->
@@ -65,17 +68,57 @@ title: Home
     <div class="portfolio-tabs__row" role="tablist" aria-label="Portfolio sections">
       <button class="portfolio-tabs__tab is-active" data-tab="games" role="tab" aria-selected="true" type="button">Games</button>
       <button class="portfolio-tabs__tab" data-tab="writing" role="tab" aria-selected="false" type="button">Writing Samples</button>
+      <button class="portfolio-tabs__tab" data-tab="films" role="tab" aria-selected="false" type="button">Films</button>
     </div>
   </div>
 
-  <!-- ---------- VIDEO GAMES ---------- -->
-  <div data-panel="games" style="display: block;">
-    <p class="showcase-hint">Select a project to see the breakdown</p>
+  <!-- ---------- VIDEO GAMES + FILMS ----------
+       Both tabs render an identical card, so the markup lives here once and
+       the loop below swaps which collection feeds it. To add another
+       card-style tab, name it in card_panels and give it a branch. -->
+  {% assign card_panels = "games,films" | split: "," %}
+  {% for card_panel in card_panels %}
+    {% if card_panel == "games" %}
+      {% assign items = site.projects | sort: "order" %}
+      {% assign viewprefix = "" %}
+      {% assign panel_hint = "Select a project to see the breakdown" %}
+    {% else %}
+      {% assign items = site.films | sort: "order" %}
+      {% assign viewprefix = "f-" %}
+      {% assign panel_hint = "Select a film to see the breakdown" %}
+    {% endif %}
+  <div data-panel="{{ card_panel }}" style="display: {% if card_panel == 'games' %}block{% else %}none{% endif %};">
+    <p class="showcase-hint">{{ panel_hint }}</p>
     <div class="project-list">
-      {% assign games = site.projects | sort: "order" %}
-      {% for p in games %}
+      {% for p in items %}
         {% assign accent = p.accent_rgb | default: "255 58 138" %}
-        <div class="project-card" data-goto="{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
+        {% if p.card_art %}
+        <div class="film-card" data-goto="{{ viewprefix }}{{ p.title | slugify }}" role="button" tabindex="0"
+             aria-label="Open {{ p.title }}"
+             style="--project-accent-rgb: {{ p.accent_rgb | default: '255 176 92' }};">
+
+          <div class="film-card__strip" data-count="{{ p.card_art | size }}">
+            {% for a in p.card_art %}
+            <img src="{{ a.file }}" alt=""
+                 {% if a.position %}style="object-position: {{ a.position }};"{% endif %}
+                 {% unless forloop.first %}loading="lazy"{% endunless %} decoding="async">
+            {% endfor %}
+          </div>
+
+          <div class="film-card__band">
+            <div class="film-card__text">
+              <span class="film-card__eyebrow">
+                {{ p.media_type }}{% if p.role_display %} &middot; {{ p.role_display }}{% endif %}
+              </span>
+              <h3 class="film-card__title">{{ p.title }}</h3>
+              {% if p.description %}<p class="film-card__desc">{{ p.description }}</p>{% endif %}
+            </div>
+            <span class="film-card__cta">View film <span aria-hidden="true">&rarr;</span></span>
+          </div>
+
+        </div>
+        {% else %}
+        <div class="project-card" data-goto="{{ viewprefix }}{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
           <div class="project-card__glow"></div>
 
           <div class="project-card__shell project-showcase__stage">
@@ -117,7 +160,7 @@ title: Home
                   <source src="{{ p.video }}" type="video/mp4">
                 </video>
                 {% elsif p.summary_image %}
-                <img class="project-showcase__summary-video-media project-showcase__summary-image" src="{{ p.summary_image }}" alt="{{ p.summary_image_alt | default: p.title }}">
+                <img class="project-showcase__summary-video-media project-showcase__summary-image" src="{{ p.summary_image }}" alt="{{ p.summary_image_alt | default: p.title }}"{% if p.summary_image_position %} style="object-position: {{ p.summary_image_position }};"{% endif %}>
                 {% else %}
                 <span class="project-showcase__summary-placeholder" aria-hidden="true"></span>
                 {% endif %}
@@ -171,9 +214,11 @@ title: Home
 
           </div>
         </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
+  {% endfor %}
 
   <!-- ---------- WRITING SAMPLES ---------- -->
   <div data-panel="writing" style="display: none;">
@@ -196,10 +241,23 @@ title: Home
 </div>
 
 <!-- ============================ PROJECT DETAIL VIEWS ============================ -->
-{% assign games = site.projects | sort: "order" %}
-{% for p in games %}
+{% assign card_panels = "games,films" | split: "," %}
+{% for card_panel in card_panels %}
+{% if card_panel == "games" %}
+  {% assign items = site.projects | sort: "order" %}
+  {% assign viewprefix = "" %}
+  {% assign back_label = "All projects" %}
+{% else %}
+  {% assign items = site.films | sort: "order" %}
+  {% assign viewprefix = "f-" %}
+  {% assign back_label = "All films" %}
+{% endif %}
+{% for p in items %}
   {% assign accent = p.accent_rgb | default: "255 58 138" %}
-  <div data-view="{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
+  <div data-view="{{ viewprefix }}{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
+    <div class="detail-backbar">
+      <button class="detail-back" data-back="{{ card_panel }}" type="button"><span>&larr;</span> {{ back_label }}</button>
+    </div>
     <div class="detail-hero">
       {%- comment -%}
         detail_video swaps the hero clip on the detail view only; projects that
@@ -214,7 +272,6 @@ title: Home
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
       {% endif %}
       <div class="detail-hero__inner">
-        <button class="detail-back" data-back="games" type="button"><span>&larr;</span> All projects</button>
         <div class="detail-hero__text">
           {% if p.stage or p.timeline or p.engine %}
           <span class="detail-eyebrow">
@@ -242,6 +299,142 @@ title: Home
         </div>
       </div>
     </div>
+    {% if card_panel == "films" %}
+    <div class="detail-body">
+
+      {% if p.summary %}
+      <section class="film-summary">
+        <h2 class="film-section__label">Background</h2>
+        <div class="film-summary__body">{{ p.summary | markdownify }}</div>
+      </section>
+      {% endif %}
+
+      {%- comment -%} 1. storyboard & animation. Opt-in via animation_section:
+      Icarus declares it and shows the empty state until the reel is cut, while
+      a film with no animation at all (Nim) must not render a "drop the reel
+      here" box it will never fill. Content alone cannot decide this -- Icarus
+      currently HAS no reel and still wants the section.
+      {%- endcomment -%}
+      {% if p.animation_section or p.animation_reel or p.animation_note %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.animation_label | default: "Storyboard &amp; Animation" }}</h2></div>
+        {% if p.animation_note %}<div class="film-note">{{ p.animation_note | markdownify }}</div>{% endif %}
+
+        <figure class="film-reel">
+          <div class="film-frame film-frame--accent">
+            {% if p.animation_reel %}
+            <video controls playsinline preload="metadata"{% if p.animation_reel_poster %} poster="{{ p.animation_reel_poster }}"{% endif %}>
+              <source src="{{ p.animation_reel }}" type="video/mp4">
+            </video>
+            {% else %}
+            <div class="film-frame__empty">
+              <p class="film-frame__empty-label">Compilation reel</p>
+              <p>Drop the reel here as MP4 (H.264 + AAC).</p>
+            </div>
+            {% endif %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.title }}</span>
+              <span class="project-highlight__tab-sub">{{ p.animation_reel_label | default: "Animation reel" }}</span>
+            </div>
+          </div>
+          {% if p.animation_reel_caption and p.animation_reel_caption != "" %}
+          <figcaption class="film-cap">{{ p.animation_reel_caption }}</figcaption>
+          {% endif %}
+        </figure>
+      </section>
+      {% endif %}
+
+      {%- comment -%} 2. background art -- cycling stage + thumbnail strip.
+      Nim relabels the heading "Stills" and its credits read "Cinematography by".
+      {%- endcomment -%}
+      {% if p.backgrounds %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.backgrounds_label | default: "Background Art" }}</h2></div>
+        {% if p.backgrounds_note %}<div class="film-note">{{ p.backgrounds_note | markdownify }}</div>{% endif %}
+
+        <div class="bg-cycle" data-bg-cycle>
+
+          <div class="bg-cycle__stage" data-stage>
+            {% for a in p.backgrounds %}
+            <img class="bg-cycle__slide"
+                 data-slide
+                 data-title="{{ a.title | escape }}"
+                 data-quote="{% if a.quote %}&ldquo;{{ a.quote | escape }}&rdquo;{% endif %}"
+                 data-credit="{% if a.credit %}{{ a.credit_label | default: p.credit_label | default: 'Art by' }} {{ a.credit | escape }}{% endif %}"
+                 src="{{ a.file }}"
+                 alt="{{ a.title | escape }}"
+                 {% unless forloop.first %}loading="lazy"{% endunless %} decoding="async">
+            {% endfor %}
+
+            <button class="bg-cycle__nav bg-cycle__nav--prev" data-nav="prev" type="button" aria-label="Previous background">&larr;</button>
+            <button class="bg-cycle__nav bg-cycle__nav--next" data-nav="next" type="button" aria-label="Next background">&rarr;</button>
+          </div>
+
+          <div class="bg-cycle__cap" data-caption aria-live="polite">
+            <p class="film-art__title" data-cap-title></p>
+            <p class="film-art__quote" data-cap-quote></p>
+            <span class="film-credit" data-cap-credit></span>
+          </div>
+
+          <div class="bg-cycle__strip">
+            {% for a in p.backgrounds %}
+            <button class="bg-cycle__thumb" data-dot="{{ forloop.index0 }}" type="button" aria-label="{{ a.title | escape }}">
+              <img src="{{ a.file }}" alt="" loading="lazy" decoding="async">
+              <span>{{ a.title }}</span>
+            </button>
+            {% endfor %}
+          </div>
+
+        </div>
+      </section>
+      {% endif %}
+
+      {%- comment -%} 3. character design {%- endcomment -%}
+      {% if p.characters_lead or p.characters or p.character_iterations %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.characters_label | default: "Character Design" }}</h2></div>
+        {% if p.characters_note %}<div class="film-note">{{ p.characters_note | markdownify }}</div>{% endif %}
+
+        {% if p.characters_lead %}
+          {% assign a = p.characters_lead %}
+          {% include film-art.html a=a size="lead" label=p.credit_label %}
+        {% endif %}
+
+        {% if p.characters %}
+        <div class="film-art-pair">
+          {% for a in p.characters %}{% include film-art.html a=a size="md" label=p.credit_label %}{% endfor %}
+        </div>
+        {% endif %}
+
+        {% if p.character_iterations %}
+        <p class="film-subhead">{{ p.character_iterations_label | default: "Iterations" }}</p>
+        <div class="film-art-pair">
+          {% for a in p.character_iterations %}{% include film-art.html a=a size="md" label=p.credit_label %}{% endfor %}
+        </div>
+        {% endif %}
+      </section>
+      {% endif %}
+
+      {% if p.content and p.content != "" %}
+      <section class="film-script-section">
+        <div class="film-script__head">
+          <h2 class="film-section__heading">Script</h2>
+          {% if p.pdf %}<a class="film-script__pdf" href="{{ p.pdf }}" target="_blank" rel="noopener noreferrer">Full PDF <span aria-hidden="true">&nearr;</span></a>{% endif %}
+        </div>
+        <p class="film-script__byline">Written by Richard Wang{% if p.script_note %} &middot; {{ p.script_note }}{% endif %}</p>
+
+        <div class="film-script__wrap">
+          <div class="film-script" data-scriptpane data-open="false">
+            {{ p.content | markdownify }}
+          </div>
+          <span class="film-script__fade" data-fade></span>
+        </div>
+        <button class="film-script__toggle" data-expand type="button">Read full script</button>
+      </section>
+      {% endif %}
+
+    </div>
+    {% else %}
     <div class="detail-body">
 
       {% if p.secondary_video or p.tertiary_video or p.quaternary_video or p.quinary_video %}
@@ -365,17 +558,21 @@ title: Home
       {% endif %}
 
     </div>
+    {% endif %}
   </div>
+{% endfor %}
 {% endfor %}
 
 <!-- ============================ WRITING READING VIEWS ============================ -->
 {% assign samples = site.prose | sort: "order" %}
 {% for s in samples %}
   <div data-view="w-{{ s.title | slugify }}" style="--project-accent-rgb: 122 217 255;">
+    <div class="detail-backbar">
+      <button class="detail-back" data-back="writing" type="button"><span>&larr;</span> All writing samples</button>
+    </div>
     <div class="detail-hero">
       {% if s.image %}<img class="detail-hero__media" src="{{ s.image }}" alt="">{% endif %}
       <div class="detail-hero__inner">
-        <button class="detail-back" data-back="writing" type="button"><span>&larr;</span> All writing samples</button>
         <div class="detail-hero__text">
           {% if s.media_type %}<span class="detail-eyebrow">{{ s.media_type }}</span>{% endif %}
           <h1 style="font-size: clamp(2.6rem, 6vw, 4.4rem);">{{ s.title }}</h1>
