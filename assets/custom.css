@@ -2781,7 +2781,10 @@ h2 {
   z-index: 2;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 32px 40px 64px;
+  /* 72 rather than 32: the back button used to sit here in the flow above
+     .detail-hero__text, so pulling it out into the floating bar would have
+     raised the title by roughly its height. */
+  padding: 72px 40px 64px;
 }
 .detail-back {
   display: inline-flex;
@@ -3970,4 +3973,36 @@ html.hero-owns-scroll { scroll-snap-type: none; }
     gap: 14px;
   }
   .film-card__cta { justify-self: start; }
+}
+
+/* ===================================================================
+   DETAIL BACK CONTROL -- floats over the page
+
+   It cannot be position: fixed. showcase.js applies pageIn with `both`
+   fill, so every view keeps transform: translateY(0) permanently, and a
+   transformed ancestor becomes the containing block for fixed
+   descendants -- the button would scroll away exactly as before. Nor can
+   it live inside .detail-hero, which is overflow: hidden and would clip
+   and bound it.
+
+   So: a sticky bar that is a direct child of the view, with zero height
+   so it takes no layout space and the hero still starts flush at the
+   top of the page.
+   =================================================================== */
+
+.detail-backbar {
+  position: sticky;
+  top: 16px;
+  z-index: 500;
+  height: 0;
+  padding-left: 40px;
+  pointer-events: none;   /* the empty bar must not swallow clicks on the hero */
+}
+.detail-backbar .detail-back {
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 700px) {
+  .detail-backbar { padding-left: 18px; top: 12px; }
 }

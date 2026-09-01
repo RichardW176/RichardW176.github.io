@@ -255,6 +255,9 @@ title: Home
 {% for p in items %}
   {% assign accent = p.accent_rgb | default: "255 58 138" %}
   <div data-view="{{ viewprefix }}{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
+    <div class="detail-backbar">
+      <button class="detail-back" data-back="{{ card_panel }}" type="button"><span>&larr;</span> {{ back_label }}</button>
+    </div>
     <div class="detail-hero">
       {% if p.video %}
       <video class="detail-hero__media" data-autoplay-when-visible="true" loop muted playsinline preload="none">
@@ -264,7 +267,6 @@ title: Home
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
       {% endif %}
       <div class="detail-hero__inner">
-        <button class="detail-back" data-back="{{ card_panel }}" type="button"><span>&larr;</span> {{ back_label }}</button>
         <div class="detail-hero__text">
           {% if p.stage or p.timeline or p.engine %}
           <span class="detail-eyebrow">
@@ -524,10 +526,12 @@ title: Home
 {% assign samples = site.prose | sort: "order" %}
 {% for s in samples %}
   <div data-view="w-{{ s.title | slugify }}" style="--project-accent-rgb: 122 217 255;">
+    <div class="detail-backbar">
+      <button class="detail-back" data-back="writing" type="button"><span>&larr;</span> All writing samples</button>
+    </div>
     <div class="detail-hero">
       {% if s.image %}<img class="detail-hero__media" src="{{ s.image }}" alt="">{% endif %}
       <div class="detail-hero__inner">
-        <button class="detail-back" data-back="writing" type="button"><span>&larr;</span> All writing samples</button>
         <div class="detail-hero__text">
           {% if s.media_type %}<span class="detail-eyebrow">{{ s.media_type }}</span>{% endif %}
           <h1 style="font-size: clamp(2.6rem, 6vw, 4.4rem);">{{ s.title }}</h1>
