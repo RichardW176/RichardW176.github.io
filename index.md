@@ -160,7 +160,7 @@ title: Home
                   <source src="{{ p.video }}" type="video/mp4">
                 </video>
                 {% elsif p.summary_image %}
-                <img class="project-showcase__summary-video-media project-showcase__summary-image" src="{{ p.summary_image }}" alt="{{ p.summary_image_alt | default: p.title }}">
+                <img class="project-showcase__summary-video-media project-showcase__summary-image" src="{{ p.summary_image }}" alt="{{ p.summary_image_alt | default: p.title }}"{% if p.summary_image_position %} style="object-position: {{ p.summary_image_position }};"{% endif %}>
                 {% else %}
                 <span class="project-showcase__summary-placeholder" aria-hidden="true"></span>
                 {% endif %}

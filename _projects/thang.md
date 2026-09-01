@@ -27,7 +27,7 @@ description: Explosive freeze tag party game with chaotic power ups
 links:
   - label: Playtest
     url: "https://discord.gg/pHNuqs3ch"
-order: 3
+order: 4
 docs:
   - title: "Global Design Documentation - EXPO"
     file: /assets/docs/Thang GDD - EXP.pdf

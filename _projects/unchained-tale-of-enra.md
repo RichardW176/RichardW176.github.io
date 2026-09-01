@@ -21,7 +21,7 @@ plain_feature_items:
     text: Mock-up sketches, sequencing documentation
   - label: Narrative Design
     text: Character documentation, scriptwriting and dialogue
-order: 4
+order: 5
 docs:
   - title: "Marlow Character Brief"
     file: /assets/docs/MARLOW - Character Brief.pdf
