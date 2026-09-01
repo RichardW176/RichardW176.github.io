@@ -2528,6 +2528,13 @@ h2 {
   z-index: 5;
   margin-top: 0;
   background: #000000;
+
+  /* One width ceiling for all three tabs. Games take theirs from the stage
+     grid -- minmax(264px, 355px) + minmax(430px, 1000px) = 1355px -- while
+     films and writing were capped narrower (1180 / 1080), so they read as
+     inset beside the games cards. Change the stage columns and change this
+     with them, or the tabs drift apart again. */
+  --showcase-max: 1355px;
 }
 
 /* ---- Short viewports: tighten so beat 2 always fits ---- */
@@ -3284,7 +3291,9 @@ h2 {
 .prose-list {
   display: grid;
   gap: 18px;
-  max-width: 1080px;
+  max-width: var(--showcase-max, 1355px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .prose-row {
@@ -3841,7 +3850,9 @@ html.hero-owns-scroll { scroll-snap-type: none; }
 .film-card {
   position: relative;
   overflow: hidden;
-  max-width: 1180px;
+  max-width: var(--showcase-max, 1355px);
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 26px;
   border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.34);
   background: #000;
