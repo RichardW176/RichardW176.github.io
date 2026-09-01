@@ -318,7 +318,7 @@ title: Home
         {% endif %}
 
         {% if p.hero_art or p.backgrounds %}
-        <p class="film-subhead">Backgrounds</p>
+        <p class="film-subhead">{{ p.backgrounds_label | default: "Backgrounds" }}</p>
 
         {% if p.hero_art %}
         {% assign a = p.hero_art %}
@@ -327,7 +327,7 @@ title: Home
           <figcaption>
             <div class="film-art__head">
               <p class="film-art__title">{{ a.title }}</p>
-              {% if a.credit %}<span class="film-credit">Art by {{ a.credit }}</span>{% endif %}
+              {% if a.credit %}<span class="film-credit">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</span>{% endif %}
             </div>
             {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
           </figcaption>
@@ -342,7 +342,7 @@ title: Home
             <figcaption>
               <p class="film-art__title film-art__title--sm">{{ a.title }}</p>
               {% if a.quote %}<p class="film-art__quote film-art__quote--sm">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
-              {% if a.credit %}<p class="film-credit film-credit--line">Art by {{ a.credit }}</p>{% endif %}
+              {% if a.credit %}<p class="film-credit film-credit--line">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</p>{% endif %}
             </figcaption>
           </figure>
           {% endfor %}
@@ -351,7 +351,7 @@ title: Home
         {% endif %}
 
         {% if p.concept_art %}
-        <p class="film-subhead">Concept &amp; character design</p>
+        <p class="film-subhead">{{ p.concept_label | default: "Concept &amp; character design" }}</p>
         <div class="film-art-grid">
           {% for a in p.concept_art %}
           <figure class="film-art{% if a.wide %} film-art--wide{% endif %}">
@@ -361,7 +361,7 @@ title: Home
             <figcaption>
               <div class="film-art__head">
                 <p class="film-art__title">{{ a.title }}</p>
-                {% if a.credit %}<span class="film-credit">Art by {{ a.credit }}</span>{% endif %}
+                {% if a.credit %}<span class="film-credit">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</span>{% endif %}
               </div>
               {% if a.description %}<p class="film-art__desc">{{ a.description }}</p>{% endif %}
               {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
@@ -378,7 +378,7 @@ title: Home
           <h2 class="film-section__heading">Script</h2>
           {% if p.pdf %}<a class="film-script__pdf" href="{{ p.pdf }}" target="_blank" rel="noopener noreferrer">Full PDF <span aria-hidden="true">&nearr;</span></a>{% endif %}
         </div>
-        <p class="film-script__byline">Written by Richard Wang</p>
+        <p class="film-script__byline">Written by Richard Wang{% if p.script_note %} &middot; {{ p.script_note }}{% endif %}</p>
 
         <div class="film-script__wrap">
           <div class="film-script" data-scriptpane data-open="false">
