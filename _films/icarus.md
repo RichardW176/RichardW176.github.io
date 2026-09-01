@@ -6,9 +6,15 @@ description: A son argues his ambitions to his father a day before Icarus's fall
 accent_rgb: 255 176 92
 order: 1
 
-# summary / animation_note / backgrounds_note / characters_note are Richard's
-# copy to write. Left OUT rather than stubbed -- the template renders nothing
-# when a key is absent, so no placeholder can reach the page by accident.
+summary: >
+  Icarus is an animated short I wrote inspired from the classic Greek myth. As
+  director, I recruited a team of 8 artists, providing creative direction for
+  three disciplines: Storyboard / Animation, Background Art, and Character
+  Design.
+
+# animation_note / backgrounds_note / characters_note are still Richard's copy
+# to write. Left OUT rather than stubbed -- the template renders nothing when a
+# key is absent, so no placeholder can reach the page by accident.
 
 image: /assets/images/icarus/daedalus-head-studies.webp
 summary_image: /assets/images/icarus/the-sun.webp
