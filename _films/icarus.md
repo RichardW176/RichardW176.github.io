@@ -14,6 +14,17 @@ summary_image: /assets/images/icarus/the-sun.webp
 summary_image_alt: Icarus - the sun
 poster_frame_borderless: true
 
+# Film card: three crops side by side. object-position is per-image because
+# each painting composes its subject at a different height and the card crops
+# 16:9 art into roughly 1.3:1 -- a naive centre crop cuts the wrong thing.
+card_art:
+  - file: /assets/images/icarus/path-to-the-city.webp
+    position: center
+  - file: /assets/images/icarus/the-sun.webp
+    position: center 44%
+  - file: /assets/images/icarus/the-field.webp
+    position: center 60%
+
 pdf: /assets/docs/icarus-draft-one.pdf
 
 # Storyboard. Remuxed from the uploaded .mov -- already h264/yuv420p, so no
@@ -31,6 +42,10 @@ hero_art:
 
 # Three across.
 backgrounds:
+  - file: /assets/images/icarus/the-shore-at-night.webp
+    title: The shore at night
+    quote: "The SON stands in shallow water... trying to catch a fish."
+    credit: Isabel Sun
   - file: /assets/images/icarus/path-to-the-city.webp
     title: Path to the city
     quote: "...at the path leading up to the city..."
@@ -60,6 +75,11 @@ concept_art:
     title: Daedalus - head studies
     description: Profile and turnaround passes finding the weight in his face.
     credit: Michelle Wang
+    mat: white
+  - file: /assets/images/icarus/robed-figure-design.webp
+    title: Robed figure - character design
+    description: Silhouette studies, collar detail and a standing turnaround.
+    credit: Alice Zhou
     mat: white
   - file: /assets/images/icarus/sheep.webp
     title: Sheep - design

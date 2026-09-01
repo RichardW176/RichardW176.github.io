@@ -92,6 +92,32 @@ title: Home
     <div class="project-list">
       {% for p in items %}
         {% assign accent = p.accent_rgb | default: "255 58 138" %}
+        {% if p.card_art %}
+        <div class="film-card" data-goto="{{ viewprefix }}{{ p.title | slugify }}" role="button" tabindex="0"
+             aria-label="Open {{ p.title }}"
+             style="--project-accent-rgb: {{ p.accent_rgb | default: '255 176 92' }};">
+
+          <div class="film-card__strip" data-count="{{ p.card_art | size }}">
+            {% for a in p.card_art %}
+            <img src="{{ a.file }}" alt=""
+                 {% if a.position %}style="object-position: {{ a.position }};"{% endif %}
+                 {% unless forloop.first %}loading="lazy"{% endunless %} decoding="async">
+            {% endfor %}
+          </div>
+
+          <div class="film-card__band">
+            <div class="film-card__text">
+              <span class="film-card__eyebrow">
+                {{ p.media_type }}{% if p.role_display %} &middot; {{ p.role_display }}{% endif %}
+              </span>
+              <h3 class="film-card__title">{{ p.title }}</h3>
+              {% if p.description %}<p class="film-card__desc">{{ p.description }}</p>{% endif %}
+            </div>
+            <span class="film-card__cta">View film <span aria-hidden="true">&rarr;</span></span>
+          </div>
+
+        </div>
+        {% else %}
         <div class="project-card" data-goto="{{ viewprefix }}{{ p.title | slugify }}" role="button" tabindex="0" aria-label="Open {{ p.title }}" style="--project-accent-rgb: {{ accent }};">
           <div class="project-card__glow"></div>
 
@@ -188,6 +214,7 @@ title: Home
 
           </div>
         </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -308,7 +335,7 @@ title: Home
         {% endif %}
 
         {% if p.backgrounds %}
-        <div class="film-art-row">
+        <div class="film-art-row" data-count="{{ p.backgrounds | size }}">
           {% for a in p.backgrounds %}
           <figure class="film-art">
             <div class="film-frame"><img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async"></div>

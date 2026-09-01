@@ -3832,3 +3832,131 @@ html.hero-owns-scroll { scroll-snap-type: none; }
   .film-script p > strong:first-child { margin-left: 3ch; }
   .film-credit { margin-left: 0; }
 }
+
+/* ===================================================================
+   FILM CARD -- wide letterbox band, three crops + overlay
+   Scoped to .film-card* so games and writing are untouched.
+   =================================================================== */
+
+.film-card {
+  position: relative;
+  overflow: hidden;
+  max-width: 1180px;
+  border-radius: 26px;
+  border: 1px solid rgba(var(--project-accent-rgb, 255 176 92) / 0.34);
+  background: #000;
+  cursor: pointer;
+  transition: border-color 220ms ease, transform 220ms cubic-bezier(0.22,1,0.36,1);
+}
+.film-card:hover,
+.film-card:focus-visible {
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.7);
+  transform: translateY(-3px);
+}
+.film-card:focus-visible { outline: none; }
+
+/* The band. 300px on 1180 is ~3.9:1 -- a letterbox strip, not a block. Raising
+   this much past 340px makes the card read as a square slab; dropping below
+   ~240px starts crowding the title against the description in the band. */
+.film-card__strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;              /* hairline, so the three read as separate frames */
+  height: 300px;
+}
+.film-card__strip[data-count="1"] { grid-template-columns: 1fr; }
+.film-card__strip[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+
+.film-card__strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* per-image object-position comes from front matter */
+  background: #0b0b10;
+}
+
+/* Overlay band. The gradient starts fully transparent so the art is not
+   flattened, and the blur is deliberately small (2px) -- enough to lift the
+   text off busy art without smearing the painting behind it. */
+.film-card__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 36px;
+  background: linear-gradient(180deg,
+    rgba(6,7,12,0) 0%,
+    rgba(6,7,12,0.74) 36%,
+    rgba(6,7,12,0.95) 100%);
+  backdrop-filter: blur(2px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 28px;
+}
+
+.film-card__text { display: grid; gap: 9px; }
+
+.film-card__eyebrow {
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 1);
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.film-card__title {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 0.94;
+  /* the band alone is not always enough over a bright sky */
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+}
+
+.film-card__desc {
+  margin: 0;
+  max-width: 56ch;
+  color: rgba(235, 238, 246, 0.92);
+  font-size: 0.99rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.film-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 1);
+  font-weight: 800;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+.film-card:hover .film-card__cta span { transform: translateX(3px); }
+.film-card__cta span { transition: transform 200ms ease; }
+
+/* Backgrounds row now carries four plates, and repeat(3, 1fr) would strand the
+   fourth alone on a second line. Same data-count idiom as the card strip. */
+.film-art-row[data-count="4"] { grid-template-columns: repeat(4, 1fr); }
+.film-art-row[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+.film-art-row[data-count="1"] { grid-template-columns: 1fr; }
+
+/* ---------- mobile ----------
+   Three crops at phone width would be ~40px slivers, which reads as noise.
+   Drop to one image and let the band sit under it. */
+@media (max-width: 760px) {
+  .film-card__strip {
+    grid-template-columns: 1fr;
+    height: 200px;
+  }
+  .film-card__strip img:not(:first-child) { display: none; }
+
+  .film-card__band {
+    padding: 20px 22px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .film-card__cta { justify-self: start; }
+}
