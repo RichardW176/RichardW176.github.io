@@ -2,12 +2,13 @@
 layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
-summary_image: /assets/images/floodsong-banner.webp
-# Pre-cropped to the rightmost 65% of the painting (1.79:1), so at full width
-# the slot keeps the whole width and trims 11% off top/bottom instead of
-# cutting a third of the image away. Narrow panels still crop horizontally.
-# Note this framing drops the figure on the cliff, which sat at ~33%.
-summary_image_position: center
+summary_image: /assets/images/floodsong-banner-v2.webp
+# Pre-cropped from 22% of the original (2.15:1) rather than repositioning: the
+# slot cannot be told how MUCH to show, only where to look. This keeps the
+# figure on the cliff, which sat at ~33.5% and was lost at a 65% crop, and
+# still holds the wave. Anchored left so the figure survives narrow panels too
+# -- centre would cut it once the slot drops below about 1.5:1.
+summary_image_position: left center
 summary_image_alt: Floodsong side banner art
 accent_rgb: 103 246 255
 poster_frame_borderless: true
