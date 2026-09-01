@@ -14,7 +14,8 @@ title: Home
       loop
       muted
       playsinline
-      preload="none">
+      poster="/assets/images/posters/overdawn-menu.webp"
+      preload="auto">
       <source src="/assets/video/Overdawn%20Menu.mp4" type="video/mp4">
     </video>
   </div>
