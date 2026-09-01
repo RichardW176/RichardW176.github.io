@@ -342,6 +342,13 @@
    =================================================================== */
 
 (function () {
+  // TEMPORARILY OFF -- checking whether the settle is what causes the jitter.
+  // Flip to true to bring it back; nothing below was removed. The CSS
+  // proximity snap this replaced is still commented out in custom.css, so
+  // with this false the project list is plain free scrolling.
+  var ENABLED = false;
+  if (!ENABLED) return;
+
   var DUR = 260;       // nudge animation length, ms
   var IDLE = 140;      // silence after the last scroll event = "stopped", ms
   var DEADZONE = 26;   // already this close to centred? leave it alone, px
