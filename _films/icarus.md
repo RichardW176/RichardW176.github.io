@@ -6,17 +6,17 @@ description: A son argues his ambitions to his father a day before Icarus's fall
 accent_rgb: 255 176 92
 order: 1
 
-# Card art. The showcase card needs both; without them the poster renders
-# with an empty src. daedalus-head-studies is the only portrait asset, so
-# it is the one that survives the 5/7 frame without a hard crop.
+# summary / animation_note / backgrounds_note / characters_note are Richard's
+# copy to write. Left OUT rather than stubbed -- the template renders nothing
+# when a key is absent, so no placeholder can reach the page by accident.
+
 image: /assets/images/icarus/daedalus-head-studies.webp
 summary_image: /assets/images/icarus/the-sun.webp
 summary_image_alt: Icarus - the sun
 poster_frame_borderless: true
 
-# Film card: three crops side by side. object-position is per-image because
-# each painting composes its subject at a different height and the card crops
-# 16:9 art into roughly 1.3:1 -- a naive centre crop cuts the wrong thing.
+pdf: /assets/docs/icarus-draft-one.pdf
+
 card_art:
   - file: /assets/images/icarus/path-to-the-city.webp
     position: center
@@ -25,66 +25,65 @@ card_art:
   - file: /assets/images/icarus/the-field.webp
     position: center 60%
 
-pdf: /assets/docs/icarus-draft-one.pdf
+# --- 1. storyboard & animation -------------------------------------------------
+# animation_reel is omitted until the compilation is cut, so the section shows
+# its empty state rather than a player pointed at a missing file.
+animation_section: true
+animation_reel_label: Animation reel
 
-# Storyboard. Remuxed from the uploaded .mov -- already h264/yuv420p, so no
-# re-encode was needed.
-storyboard: /assets/video/the-breakening.mp4
-storyboard_title: The Breakening
-storyboard_caption: Animatic for the shore confrontation.
+# --- 2. background art ---------------------------------------------------------
+# Order is SCRIPT order, not upload order: the film opens on the shore.
+backgrounds_lead:
+  file: /assets/images/icarus/the-shore-at-night.webp
+  title: The shore at night
+  quote: "The SON stands in shallow water, striking the crook into the sea when the tide comes in repeatedly..."
+  credit: Isabel Sun
 
-# Lead background, full width.
-hero_art:
-  file: /assets/images/icarus/the-sun.webp
-  title: The sun
-  quote: "...up at the sun when a silhouette - ICARUS - flies across it and towards the sea."
-  credit: Alice Zhou
-
-# Three across.
 backgrounds:
-  - file: /assets/images/icarus/the-shore-at-night.webp
-    title: The shore at night
-    quote: "The SON stands in shallow water... trying to catch a fish."
-    credit: Isabel Sun
-  - file: /assets/images/icarus/path-to-the-city.webp
-    title: Path to the city
-    quote: "...at the path leading up to the city..."
-    credit: Alex Duan
   - file: /assets/images/icarus/the-field.webp
     title: The field
     quote: "A strong gust of wind shifts the tall grass at his feet."
     credit: Alex Duan
+  - file: /assets/images/icarus/the-sun.webp
+    title: The sun
+    quote: "...a silhouette - ICARUS - flies across it and towards the sea."
+    credit: Alice Zhou
+  - file: /assets/images/icarus/path-to-the-city.webp
+    title: Ascent to the city
+    quote: "...at the path leading up to the city..."
+    credit: Alex Duan
   - file: /assets/images/icarus/the-basin.webp
-    title: The basin
-    quote: "He washes his face with water from a bucket."
+    title: Empty plate
     credit: Alex Duan
 
-# Character / concept work. 'wide: true' spans the full row.
-concept_art:
-  - file: /assets/images/icarus/icarus-flight-sheet.webp
-    title: Icarus - flight and expression sheet
-    description: Descent poses and expression range for the fall.
-    credit: Alice Zhou
-    wide: true
+# --- 3. character design -------------------------------------------------------
+characters_lead:
+  file: /assets/images/icarus/icarus-flight-sheet.webp
+  title: Icarus - flight and expression sheet
+  credit: Alice Zhou
+  mat: light
+
+characters:
   - file: /assets/images/icarus/father-and-son.webp
-    title: Father and Son - character design
-    description: Silhouette contrast carries the argument before either speaks.
+    title: Father and Son - final design
     credit: Michelle Wang
     mat: light
-  - file: /assets/images/icarus/daedalus-head-studies.webp
-    title: Daedalus - head studies
-    description: Profile and turnaround passes finding the weight in his face.
-    credit: Michelle Wang
-    mat: white
-  - file: /assets/images/icarus/robed-figure-design.webp
-    title: Robed figure - character design
-    description: Silhouette studies, collar detail and a standing turnaround.
-    credit: Alice Zhou
-    mat: white
   - file: /assets/images/icarus/sheep.webp
-    title: Sheep - design
+    title: Sheep - final design
     quote: "Close up of a sheep bleating and grazing."
     credit: Luis Saucedo
+    mat: white
+
+character_iterations_label: Daedalus - iterations
+character_iterations:
+  - file: /assets/images/icarus/robed-figure-design.webp
+    title: Daedalus - iteration 1
+    description: Robed figure - silhouette studies and collar detail.
+    credit: Alice Zhou
+    mat: grey
+  - file: /assets/images/icarus/daedalus-head-studies.webp
+    title: Daedalus - second iteration
+    credit: Michelle Wang
     mat: white
 ---
 

@@ -24,7 +24,7 @@ card_art:
   - file: /assets/images/nim/the-lighter.webp
     position: center 55%
 
-hero_art:
+backgrounds_lead:
   file: /assets/images/nim/the-beach-afternoon.webp
   title: The beach, afternoon
   quote: "Two actors - a man and a woman - stand on the beach."

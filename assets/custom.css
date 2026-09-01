@@ -4006,3 +4006,157 @@ html.hero-owns-scroll { scroll-snap-type: none; }
 @media (max-width: 700px) {
   .detail-backbar { padding-left: 18px; top: 12px; }
 }
+
+/* ===================================================================
+   FILM DETAIL -- background summary + three named groups
+   Supersedes the single "Visuals" block. Rules already defined above
+   (.film-frame, .film-art__title, .film-credit, .film-art__quote,
+   .film-cap, the light/white mats) are unchanged.
+   =================================================================== */
+
+/* ---------- background summary ---------- */
+.film-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  padding: 52px 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.film-section__label {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(231, 235, 245, 0.55);
+  font-weight: 700;
+}
+.film-summary__body {
+  max-width: 74ch;
+  color: rgba(230, 234, 243, 0.86);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.film-summary__body p { margin: 0 0 14px; }
+.film-summary__body p:last-child { margin-bottom: 0; }
+
+/* ---------- the three groups ----------
+   Heavier than the old uppercase section labels on purpose: the page now has
+   three peer sections rather than one Visuals block, so they need to read as
+   chapter breaks, not small-caps captions. */
+.film-group { padding-top: 64px; }
+.film-group:first-of-type { padding-top: 52px; }
+
+.film-group__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.film-group__head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.film-group__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- direction note ---------- */
+.film-note {
+  max-width: 74ch;
+  margin-bottom: 28px;
+  color: rgba(230, 234, 243, 0.82);
+  font-size: 0.99rem;
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+.film-note p { margin: 0 0 12px; }
+.film-note p:last-child { margin-bottom: 0; }
+
+/* ---------- layout ---------- */
+.film-art--lead { margin: 0 0 22px; }
+
+.film-art-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.film-art-row[data-count="1"] { grid-template-columns: 1fr; }
+.film-art-row[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+.film-art-row[data-count="3"] { grid-template-columns: repeat(3, 1fr); }
+
+.film-art-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.film-subhead {
+  margin: 34px 0 16px;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.film-art--sm .film-art__title { font-size: 0.98rem; }
+.film-art--sm .film-art__quote { font-size: 0.86rem; }
+.film-art--sm figcaption { padding: 12px 2px 0; }
+
+/* ---------- reel ---------- */
+.film-frame--accent {
+  border-radius: 18px;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.28);
+}
+.film-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0b0b10;
+}
+.film-frame__empty {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 28px;
+  text-align: center;
+  background: #0b0b10;
+  color: rgba(231, 235, 245, 0.5);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.film-frame__empty p { margin: 0; max-width: 460px; }
+.film-frame__empty-label {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--project-accent-rgb, 255 176 92) / 0.9);
+}
+
+/* ---------- mats ----------
+   The robed-figure sheet is drawn on a mid-grey ground, so a white mat rings it
+   with a bright halo. Match the artwork instead. */
+.film-frame--mat-grey { background: #9a9a9a; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 900px) {
+  .film-summary { grid-template-columns: 1fr; gap: 16px; padding-top: 36px; }
+  .film-art-row,
+  .film-art-row[data-count="2"],
+  .film-art-row[data-count="3"],
+  .film-art-pair { grid-template-columns: 1fr; }
+  .film-group { padding-top: 44px; }
+  .film-group__title { font-size: 1.15rem; }
+}

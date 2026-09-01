@@ -1,0 +1,22 @@
+{%- comment -%}
+  One art figure: frame, mat, title, credit, optional description and script
+  quote. Params: a (the item), size (lead|md|sm), label (credit wording).
+
+  `label` exists because "Art by" is wrong over a photographed frame -- Nim
+  passes "Cinematography by". An item may override it per-piece.
+{%- endcomment -%}
+<figure class="film-art film-art--{{ include.size }}">
+  <div class="film-frame{% if include.a.mat %} film-frame--mat-{{ include.a.mat }}{% endif %}">
+    <img src="{{ include.a.file }}" alt="{{ include.a.title }}" loading="lazy" decoding="async">
+  </div>
+  <figcaption>
+    <div class="film-art__head">
+      <p class="film-art__title">{{ include.a.title }}</p>
+      {% if include.a.credit %}
+        <span class="film-credit{% if include.size == 'sm' %} film-credit--line{% endif %}">{{ include.a.credit_label | default: include.label | default: "Art by" }} {{ include.a.credit }}</span>
+      {% endif %}
+    </div>
+    {% if include.a.description %}<p class="film-art__desc">{{ include.a.description }}</p>{% endif %}
+    {% if include.a.quote %}<p class="film-art__quote">&ldquo;{{ include.a.quote }}&rdquo;</p>{% endif %}
+  </figcaption>
+</figure>

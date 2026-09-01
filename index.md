@@ -297,82 +297,92 @@ title: Home
     {% if card_panel == "films" %}
     <div class="detail-body">
 
-      <section class="film-visuals">
-        <h2 class="film-section__heading">Visuals</h2>
+      {% if p.summary %}
+      <section class="film-summary">
+        <h2 class="film-section__label">Background</h2>
+        <div class="film-summary__body">{{ p.summary | markdownify }}</div>
+      </section>
+      {% endif %}
 
-        {% if p.storyboard %}
-        <figure class="film-storyboard">
-          <div class="film-frame">
-            <video controls loop muted playsinline preload="metadata">
-              <source src="{{ p.storyboard }}" type="video/mp4">
+      {%- comment -%} 1. storyboard & animation. Opt-in via animation_section:
+      Icarus declares it and shows the empty state until the reel is cut, while
+      a film with no animation at all (Nim) must not render a "drop the reel
+      here" box it will never fill. Content alone cannot decide this -- Icarus
+      currently HAS no reel and still wants the section.
+      {%- endcomment -%}
+      {% if p.animation_section or p.animation_reel or p.animation_note %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.animation_label | default: "Storyboard &amp; Animation" }}</h2></div>
+        {% if p.animation_note %}<div class="film-note">{{ p.animation_note | markdownify }}</div>{% endif %}
+
+        <figure class="film-reel">
+          <div class="film-frame film-frame--accent">
+            {% if p.animation_reel %}
+            <video controls playsinline preload="metadata"{% if p.animation_reel_poster %} poster="{{ p.animation_reel_poster }}"{% endif %}>
+              <source src="{{ p.animation_reel }}" type="video/mp4">
             </video>
-            {% if p.storyboard_title %}
-            <div class="project-highlight__tab">
-              <span class="project-highlight__tab-title">{{ p.storyboard_title }}</span>
-              <span class="project-highlight__tab-sub">Storyboard</span>
+            {% else %}
+            <div class="film-frame__empty">
+              <p class="film-frame__empty-label">Compilation reel</p>
+              <p>Drop the reel here as MP4 (H.264 + AAC).</p>
             </div>
             {% endif %}
+            <div class="project-highlight__tab">
+              <span class="project-highlight__tab-title">{{ p.title }}</span>
+              <span class="project-highlight__tab-sub">{{ p.animation_reel_label | default: "Animation reel" }}</span>
+            </div>
           </div>
-          {% if p.storyboard_caption %}
-          <figcaption class="film-cap">{{ p.storyboard_caption }}</figcaption>
+          {% if p.animation_reel_caption and p.animation_reel_caption != "" %}
+          <figcaption class="film-cap">{{ p.animation_reel_caption }}</figcaption>
           {% endif %}
         </figure>
-        {% endif %}
+      </section>
+      {% endif %}
 
-        {% if p.hero_art or p.backgrounds %}
-        <p class="film-subhead">{{ p.backgrounds_label | default: "Backgrounds" }}</p>
+      {%- comment -%} 2. background art (Nim relabels this "Stills") {%- endcomment -%}
+      {% if p.backgrounds_lead or p.backgrounds %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.backgrounds_label | default: "Background Art" }}</h2></div>
+        {% if p.backgrounds_note %}<div class="film-note">{{ p.backgrounds_note | markdownify }}</div>{% endif %}
 
-        {% if p.hero_art %}
-        {% assign a = p.hero_art %}
-        <figure class="film-art film-art--lead">
-          <div class="film-frame"><img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async"></div>
-          <figcaption>
-            <div class="film-art__head">
-              <p class="film-art__title">{{ a.title }}</p>
-              {% if a.credit %}<span class="film-credit">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</span>{% endif %}
-            </div>
-            {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
-          </figcaption>
-        </figure>
+        {% if p.backgrounds_lead %}
+          {% assign a = p.backgrounds_lead %}
+          {% include film-art.html a=a size="lead" label=p.credit_label %}
         {% endif %}
 
         {% if p.backgrounds %}
         <div class="film-art-row" data-count="{{ p.backgrounds | size }}">
-          {% for a in p.backgrounds %}
-          <figure class="film-art">
-            <div class="film-frame"><img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async"></div>
-            <figcaption>
-              <p class="film-art__title film-art__title--sm">{{ a.title }}</p>
-              {% if a.quote %}<p class="film-art__quote film-art__quote--sm">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
-              {% if a.credit %}<p class="film-credit film-credit--line">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</p>{% endif %}
-            </figcaption>
-          </figure>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% endif %}
-
-        {% if p.concept_art %}
-        <p class="film-subhead">{{ p.concept_label | default: "Concept &amp; character design" }}</p>
-        <div class="film-art-grid">
-          {% for a in p.concept_art %}
-          <figure class="film-art{% if a.wide %} film-art--wide{% endif %}">
-            <div class="film-frame{% if a.mat == 'light' %} film-frame--mat-light{% elsif a.mat == 'white' %} film-frame--mat-white{% endif %}">
-              <img src="{{ a.file }}" alt="{{ a.title }}" loading="lazy" decoding="async">
-            </div>
-            <figcaption>
-              <div class="film-art__head">
-                <p class="film-art__title">{{ a.title }}</p>
-                {% if a.credit %}<span class="film-credit">{{ a.credit_label | default: p.credit_label | default: "Art by" }} {{ a.credit }}</span>{% endif %}
-              </div>
-              {% if a.description %}<p class="film-art__desc">{{ a.description }}</p>{% endif %}
-              {% if a.quote %}<p class="film-art__quote">&ldquo;{{ a.quote }}&rdquo;</p>{% endif %}
-            </figcaption>
-          </figure>
-          {% endfor %}
+          {% for a in p.backgrounds %}{% include film-art.html a=a size="sm" label=p.credit_label %}{% endfor %}
         </div>
         {% endif %}
       </section>
+      {% endif %}
+
+      {%- comment -%} 3. character design {%- endcomment -%}
+      {% if p.characters_lead or p.characters or p.character_iterations %}
+      <section class="film-group">
+        <div class="film-group__head"><h2 class="film-group__title">{{ p.characters_label | default: "Character Design" }}</h2></div>
+        {% if p.characters_note %}<div class="film-note">{{ p.characters_note | markdownify }}</div>{% endif %}
+
+        {% if p.characters_lead %}
+          {% assign a = p.characters_lead %}
+          {% include film-art.html a=a size="lead" label=p.credit_label %}
+        {% endif %}
+
+        {% if p.characters %}
+        <div class="film-art-pair">
+          {% for a in p.characters %}{% include film-art.html a=a size="md" label=p.credit_label %}{% endfor %}
+        </div>
+        {% endif %}
+
+        {% if p.character_iterations %}
+        <p class="film-subhead">{{ p.character_iterations_label | default: "Iterations" }}</p>
+        <div class="film-art-pair">
+          {% for a in p.character_iterations %}{% include film-art.html a=a size="md" label=p.credit_label %}{% endfor %}
+        </div>
+        {% endif %}
+      </section>
+      {% endif %}
 
       {% if p.content and p.content != "" %}
       <section class="film-script-section">
