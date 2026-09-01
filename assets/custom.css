@@ -3492,27 +3492,28 @@ h2 {
    `proximity`, not `mandatory`: the page scroll container is the
    document, shared with the hero and everything below, and mandatory
    would drag those toward a card whenever one came near.
-   =================================================================== */
+   ===================================================================
+
+
+   SUPERSEDED by the LOOSE SETTLE-SNAP block in showcase.js, which nudges
+   the nearest card only after scrolling goes quiet. Native proximity snap
+   cannot coexist with it: the browser re-grabs the scroll position after
+   every scrollTo the tween makes, so the two fight and the nudge never
+   lands. Restore this block and delete that IIFE to go back.
 
 html { scroll-snap-type: y proximity; }
 
-/* While the pinned hero still owns the scroll, snapping would pull its
-   handoff toward the first card. Set by showcase.js. */
 html.hero-owns-scroll { scroll-snap-type: none; }
 
 .project-list .project-card {
   scroll-snap-align: center;
-  /* clears the 79px sticky tab bar, so a card centres in the space below
-     it rather than behind it */
   scroll-margin-top: 79px;
 }
 
-/* Under 900px the stage collapses to one column and a card grows taller
-   than the viewport, so centring one would trap its top and bottom
-   off-screen. Phones scroll plainly. */
 @media (max-width: 900px) {
   html { scroll-snap-type: none; }
 }
+*/
 
 /* ===================================================================
    PROJECT DETAIL PAGE -- sticky back bar

@@ -315,3 +315,120 @@
   window.addEventListener('resize', onScroll, { passive: true });
   sync();
 })();
+
+/* ===================================================================
+   LOOSE SETTLE-SNAP ON THE PROJECT LIST
+
+   Scrolling is never hijacked. The user scrolls freely; once they STOP,
+   a short settle timer fires and nudges the nearest card into place.
+
+   Replaces the CSS scroll-snap block in custom.css (now commented out) --
+   the two cannot coexist: proximity snap re-grabs the scroll position
+   after every scrollTo the tween makes.
+   =================================================================== */
+
+(function () {
+  var DUR = 260;       // nudge animation length, ms
+  var IDLE = 140;      // silence after the last scroll event = "stopped", ms
+  var DEADZONE = 26;   // already this close to centred? leave it alone, px
+
+  var idle = null;
+  var settling = false;
+
+  // The games pane is a bare [data-panel] div, and showcase.js hides the
+  // inactive pane with an inline display:none rather than the `hidden`
+  // attribute -- so read the computed style, or this settles cards on the
+  // Writing Samples tab too.
+  function sections() {
+    var pane = document.querySelector('[data-panel="games"]');
+    if (!pane || getComputedStyle(pane).display === 'none') return [];
+    return Array.prototype.slice.call(pane.querySelectorAll('.project-card'));
+  }
+
+  function barOffset() {
+    var bar = document.querySelector('.portfolio-tabs');
+    return bar ? bar.getBoundingClientRect().height : 0;
+  }
+
+  // Where the card would sit if it were centred below the sticky tab bar.
+  function targetFor(el) {
+    var offset = barOffset();
+    var r = el.getBoundingClientRect();
+    return Math.max(window.scrollY + r.top - offset
+         - Math.max((window.innerHeight - offset - r.height) / 2, 0), 0);
+  }
+
+  function nearest(list) {
+    var offset = barOffset();
+    var mid = offset + (window.innerHeight - offset) / 2;
+    var best = null, bestd = Infinity;
+    for (var i = 0; i < list.length; i++) {
+      var r = list[i].getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestd) { bestd = d; best = list[i]; }
+    }
+    return best;
+  }
+
+  // Native behavior:'smooth' animates for a browser-chosen duration, typically
+  // 500ms+, which cannot be shortened and reads as sluggish. Custom tween.
+  //
+  // html carries `scroll-behavior: smooth` (custom.css:20), and a bare
+  // scrollTo inherits it -- every frame of this tween would be handed to the
+  // browser's own smooth animation, which never lands. behavior:'auto' opts
+  // each frame out without disturbing the hero's smooth scrolling.
+  var anim = null;
+  function tween(to) {
+    if (anim) cancelAnimationFrame(anim);
+    var from = window.scrollY;
+    var dist = to - from;
+    if (Math.abs(dist) < 2) return;
+    var t0 = performance.now();
+    settling = true;
+    (function step(now) {
+      var p = Math.min((now - t0) / DUR, 1);
+      var e = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+      window.scrollTo({ top: from + dist * e, behavior: 'auto' });
+      if (p < 1) { anim = requestAnimationFrame(step); }
+      else { anim = null; settling = false; }
+    })(t0);
+  }
+
+  function settle() {
+    var list = sections();
+    if (!list.length) return;
+
+    // Only nudge while the games list actually holds the viewport, so the hero
+    // above and anything below are left alone.
+    var first = list[0].getBoundingClientRect();
+    var last = list[list.length - 1].getBoundingClientRect();
+    if (!(first.top < window.innerHeight * 0.75
+       && last.bottom > window.innerHeight * 0.25)) return;
+
+    var el = nearest(list);
+    if (!el) return;
+    var to = targetFor(el);
+    if (Math.abs(to - window.scrollY) < DEADZONE) return;   // close enough
+    tween(to);
+  }
+
+  window.addEventListener('scroll', function () {
+    // Ignore scroll events our own tween generates, or it re-triggers itself.
+    if (settling) return;
+    clearTimeout(idle);
+    idle = setTimeout(settle, IDLE);
+  }, { passive: true });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    var list = sections();
+    if (!list.length) return;
+    var el = nearest(list);
+    var i = list.indexOf(el);
+    var next = e.key === 'ArrowDown' ? i + 1 : i - 1;
+    if (next < 0 || next >= list.length) return;
+    e.preventDefault();
+    clearTimeout(idle);
+    tween(targetFor(list[next]));
+  });
+})();
