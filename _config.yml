@@ -13,9 +13,16 @@ defaults:
       type: prose
     values:
       layout: project
+  - scope:
+      path: ""
+      type: films
+    values:
+      layout: project
 
 collections:
   projects:
+    output: true
+  films:
     output: true
   prose:
     output: true
