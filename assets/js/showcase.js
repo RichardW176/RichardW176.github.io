@@ -487,3 +487,95 @@
     t.textContent = open ? 'Read full script' : 'Collapse';
   });
 })();
+
+/* ===================================================================
+   BACKGROUND ART -- cycling stage
+
+   Scoped per [data-bg-cycle] block, NOT document-wide. Every film's
+   detail view is in the DOM at once (views toggle with display, they
+   are not removed), so a global [data-slide] query mixes all films'
+   slides into one rotation and a single window.__bgIndex is shared
+   between them. State lives on each block instead.
+   =================================================================== */
+
+(function () {
+  if (window.__bgCycleBound) return;
+  window.__bgCycleBound = true;
+
+  function state(root) {
+    if (!root.__bg) root.__bg = { i: 0, paused: false };
+    return root.__bg;
+  }
+
+  function show(root, i) {
+    var s = root.querySelectorAll('[data-slide]');
+    var d = root.querySelectorAll('[data-dot]');
+    if (!s.length) return;
+    var n = ((i % s.length) + s.length) % s.length;   // wraps both directions
+
+    for (var k = 0; k < s.length; k++) s[k].classList.toggle('is-active', k === n);
+    for (var j = 0; j < d.length; j++) d[j].classList.toggle('is-active', j === n);
+
+    var cap = root.querySelector('[data-caption]');
+    if (cap) {
+      cap.querySelector('[data-cap-title]').textContent  = s[n].getAttribute('data-title')  || '';
+      cap.querySelector('[data-cap-quote]').textContent  = s[n].getAttribute('data-quote')  || '';
+      cap.querySelector('[data-cap-credit]').textContent = s[n].getAttribute('data-credit') || '';
+    }
+    state(root).i = n;
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest) return;
+    var root = e.target.closest('[data-bg-cycle]');
+    if (!root) return;
+
+    var nav = e.target.closest('[data-nav]');
+    if (nav) { show(root, state(root).i + (nav.getAttribute('data-nav') === 'next' ? 1 : -1)); return; }
+
+    var dot = e.target.closest('[data-dot]');
+    if (dot) show(root, parseInt(dot.getAttribute('data-dot'), 10));
+  });
+
+  // WCAG 2.2.2 Pause/Stop/Hide -- anything auto-advancing past 5s needs a way
+  // to stop it. Pausing on hover/focus also stops the motion nagging at the
+  // reader while they are reading something else on the page.
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // capture:true -- pointerenter/leave and focusin/out need capture here
+  ['pointerenter', 'focusin'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      var r = e.target.closest && e.target.closest('[data-bg-cycle]');
+      if (r) state(r).paused = true;
+    }, true);
+  });
+  ['pointerleave', 'focusout'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      var r = e.target.closest && e.target.closest('[data-bg-cycle]');
+      if (r) state(r).paused = false;
+    }, true);
+  });
+
+  if (!reduced) {
+    setInterval(function () {
+      var blocks = document.querySelectorAll('[data-bg-cycle]');
+      for (var i = 0; i < blocks.length; i++) {
+        var r = blocks[i];
+        // offsetParent is null while the view is display:none -- no point
+        // advancing a carousel nobody is looking at.
+        if (r.offsetParent === null || state(r).paused) continue;
+        show(r, state(r).i + 1);
+      }
+    }, 4200);
+  }
+
+  function init() {
+    var blocks = document.querySelectorAll('[data-bg-cycle]');
+    for (var i = 0; i < blocks.length; i++) show(blocks[i], 0);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

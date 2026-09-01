@@ -24,13 +24,11 @@ card_art:
   - file: /assets/images/nim/the-lighter.webp
     position: center 55%
 
-backgrounds_lead:
-  file: /assets/images/nim/the-beach-afternoon.webp
-  title: The beach, afternoon
-  quote: "Two actors - a man and a woman - stand on the beach."
-  credit: Soroosh Mozhgan
-
 backgrounds:
+  - file: /assets/images/nim/the-beach-afternoon.webp
+    title: The beach, afternoon
+    quote: "Two actors - a man and a woman - stand on the beach."
+    credit: Soroosh Mozhgan
   - file: /assets/images/nim/mc-raises-the-camera.webp
     title: MC raises the camera
     quote: "The character laughs. He raises his camera. We hear a click."

@@ -39,13 +39,11 @@ animation_reel_label: Animation reel
 
 # --- 2. background art ---------------------------------------------------------
 # Order is SCRIPT order, not upload order: the film opens on the shore.
-backgrounds_lead:
-  file: /assets/images/icarus/the-shore-at-night.webp
-  title: The shore at night
-  quote: "The SON stands in shallow water, striking the crook into the sea when the tide comes in repeatedly..."
-  credit: Isabel Sun
-
 backgrounds:
+  - file: /assets/images/icarus/the-shore-at-night.webp
+    title: The shore at night
+    quote: "The SON stands in shallow water, striking the crook into the sea..."
+    credit: Isabel Sun
   - file: /assets/images/icarus/the-field.webp
     title: The field
     quote: "A strong gust of wind shifts the tall grass at his feet."

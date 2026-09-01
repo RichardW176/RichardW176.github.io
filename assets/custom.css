@@ -4160,3 +4160,119 @@ html.hero-owns-scroll { scroll-snap-type: none; }
   .film-group { padding-top: 44px; }
   .film-group__title { font-size: 1.15rem; }
 }
+
+/* ===================================================================
+   BACKGROUND ART -- cycling stage + thumbnail strip
+
+   The strip is what keeps this from being a content trap: a bare
+   carousel hides four of five paintings, and a reviewer skimming a
+   portfolio will not wait through a rotation to see them.
+   =================================================================== */
+
+.bg-cycle { max-width: 1180px; }
+
+.bg-cycle__stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0b0b10;
+}
+
+.bg-cycle__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 700ms ease;
+}
+/* Active state is a class, not an inline style, so each film's accent
+   applies -- Nim is blue, Icarus amber. */
+.bg-cycle__slide.is-active { opacity: 1; pointer-events: auto; }
+
+.bg-cycle__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 44px;                     /* 44px min touch target */
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(8, 8, 12, 0.6);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.bg-cycle__nav:hover,
+.bg-cycle__nav:focus-visible { border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.8); }
+.bg-cycle__nav--prev { left: 16px; }
+.bg-cycle__nav--next { right: 16px; }
+
+.bg-cycle__cap {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px 4px 0;
+  min-height: 2.2rem;              /* reserve space so swapping text cannot shift layout */
+}
+.bg-cycle__cap .film-art__title,
+.bg-cycle__cap .film-art__quote { margin: 0; }
+.bg-cycle__cap .film-credit:empty { display: none; }
+
+/* ---------- thumbnail strip ---------- */
+.bg-cycle__strip {
+  display: flex;
+  gap: 10px;
+  padding: 18px 4px 0;
+}
+
+.bg-cycle__thumb {
+  position: relative;
+  flex: 1;
+  min-width: 0;                    /* lets flex children actually shrink */
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0b0b10;
+  cursor: pointer;
+  opacity: 0.42;
+  transition: opacity 260ms ease, border-color 260ms ease;
+}
+.bg-cycle__thumb:hover,
+.bg-cycle__thumb:focus-visible { opacity: 0.8; }
+.bg-cycle__thumb.is-active {
+  opacity: 1;
+  border-color: rgba(var(--project-accent-rgb, 255 176 92) / 0.85);
+}
+
+.bg-cycle__thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.bg-cycle__thumb span {
+  display: block;
+  padding: 7px 8px 8px;
+  color: rgba(231, 235, 245, 0.78);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .bg-cycle__strip { overflow-x: auto; }
+  .bg-cycle__thumb { flex: 0 0 132px; }   /* scroll rather than crush to slivers */
+  .bg-cycle__nav { width: 40px; height: 40px; }
+}

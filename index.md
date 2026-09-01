@@ -339,22 +339,48 @@ title: Home
       </section>
       {% endif %}
 
-      {%- comment -%} 2. background art (Nim relabels this "Stills") {%- endcomment -%}
-      {% if p.backgrounds_lead or p.backgrounds %}
+      {%- comment -%} 2. background art -- cycling stage + thumbnail strip.
+      Nim relabels the heading "Stills" and its credits read "Cinematography by".
+      {%- endcomment -%}
+      {% if p.backgrounds %}
       <section class="film-group">
         <div class="film-group__head"><h2 class="film-group__title">{{ p.backgrounds_label | default: "Background Art" }}</h2></div>
         {% if p.backgrounds_note %}<div class="film-note">{{ p.backgrounds_note | markdownify }}</div>{% endif %}
 
-        {% if p.backgrounds_lead %}
-          {% assign a = p.backgrounds_lead %}
-          {% include film-art.html a=a size="lead" label=p.credit_label %}
-        {% endif %}
+        <div class="bg-cycle" data-bg-cycle>
 
-        {% if p.backgrounds %}
-        <div class="film-art-row" data-count="{{ p.backgrounds | size }}">
-          {% for a in p.backgrounds %}{% include film-art.html a=a size="sm" label=p.credit_label %}{% endfor %}
+          <div class="bg-cycle__stage" data-stage>
+            {% for a in p.backgrounds %}
+            <img class="bg-cycle__slide"
+                 data-slide
+                 data-title="{{ a.title | escape }}"
+                 data-quote="{% if a.quote %}&ldquo;{{ a.quote | escape }}&rdquo;{% endif %}"
+                 data-credit="{% if a.credit %}{{ a.credit_label | default: p.credit_label | default: 'Art by' }} {{ a.credit | escape }}{% endif %}"
+                 src="{{ a.file }}"
+                 alt="{{ a.title | escape }}"
+                 {% unless forloop.first %}loading="lazy"{% endunless %} decoding="async">
+            {% endfor %}
+
+            <button class="bg-cycle__nav bg-cycle__nav--prev" data-nav="prev" type="button" aria-label="Previous background">&larr;</button>
+            <button class="bg-cycle__nav bg-cycle__nav--next" data-nav="next" type="button" aria-label="Next background">&rarr;</button>
+          </div>
+
+          <div class="bg-cycle__cap" data-caption aria-live="polite">
+            <p class="film-art__title" data-cap-title></p>
+            <p class="film-art__quote" data-cap-quote></p>
+            <span class="film-credit" data-cap-credit></span>
+          </div>
+
+          <div class="bg-cycle__strip">
+            {% for a in p.backgrounds %}
+            <button class="bg-cycle__thumb" data-dot="{{ forloop.index0 }}" type="button" aria-label="{{ a.title | escape }}">
+              <img src="{{ a.file }}" alt="" loading="lazy" decoding="async">
+              <span>{{ a.title }}</span>
+            </button>
+            {% endfor %}
+          </div>
+
         </div>
-        {% endif %}
       </section>
       {% endif %}
 
