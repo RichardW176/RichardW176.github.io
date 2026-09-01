@@ -2,7 +2,7 @@
 layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
-summary_image: /assets/images/floodsong-key-art.webp
+summary_image: /assets/images/floodsong-opening.webp
 # 2.75:1 art in a slot that runs 2.01:1 down to 1.16:1, so cover always crops
 # horizontally -- 73% of the width survives at full width, 42% at the narrowest.
 # The logo is gone from this version, which was the only reason to anchor right,
