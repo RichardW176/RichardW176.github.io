@@ -3,9 +3,13 @@ layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
 summary_image: /assets/images/floodsong-key-art.webp
-# 2.75:1 art in a ~2:1 slot: centre-cropping slices the FLOODSONG logo off the
-# right edge. Anchoring right keeps the logo whole and still holds the figure.
-summary_image_position: right center
+# 2.75:1 art in a slot that runs 2.01:1 down to 1.16:1, so cover always crops
+# horizontally -- 73% of the width survives at full width, 42% at the narrowest.
+# The logo is gone from this version, which was the only reason to anchor right,
+# so it anchors left instead: the figure on the cliff and the light burst both
+# sit left of centre. Nudge toward "50% center" to re-balance, or "right center"
+# to favour the wave on the right.
+summary_image_position: left center
 summary_image_alt: Floodsong side banner art
 accent_rgb: 103 246 255
 poster_frame_borderless: true
