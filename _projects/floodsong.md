@@ -2,14 +2,12 @@
 layout: project
 title: Floodsong
 image: /assets/images/floodsong.png
-summary_image: /assets/images/floodsong-opening.webp
-# 2.75:1 art in a slot that runs 2.01:1 down to 1.16:1, so cover always crops
-# horizontally -- 73% of the width survives at full width, 42% at the narrowest.
-# The logo is gone from this version, which was the only reason to anchor right,
-# so it anchors left instead: the figure on the cliff and the light burst both
-# sit left of centre. Nudge toward "50% center" to re-balance, or "right center"
-# to favour the wave on the right.
-summary_image_position: left center
+summary_image: /assets/images/floodsong-banner.webp
+# Pre-cropped to the rightmost 65% of the painting (1.79:1), so at full width
+# the slot keeps the whole width and trims 11% off top/bottom instead of
+# cutting a third of the image away. Narrow panels still crop horizontally.
+# Note this framing drops the figure on the cliff, which sat at ~33%.
+summary_image_position: center
 summary_image_alt: Floodsong side banner art
 accent_rgb: 103 246 255
 poster_frame_borderless: true
