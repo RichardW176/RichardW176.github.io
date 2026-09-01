@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1400" width="1000" height="1400" role="img" aria-label="Punkrocker poster placeholder">
+  <defs>
+    <linearGradient id="pr-bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#150a1d"/>
+      <stop offset="0.55" stop-color="#0c060f"/>
+      <stop offset="1" stop-color="#07040a"/>
+    </linearGradient>
+    <radialGradient id="pr-glow" cx="0.5" cy="0.38" r="0.62">
+      <stop offset="0" stop-color="#ff4ad6" stop-opacity="0.34"/>
+      <stop offset="0.6" stop-color="#ff4ad6" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#ff4ad6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="pr-grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#ff4ad6" stroke-opacity="0.09" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="1400" fill="url(#pr-bg)"/>
+  <rect width="1000" height="1400" fill="url(#pr-grid)"/>
+  <rect width="1000" height="1400" fill="url(#pr-glow)"/>
+
+  <g fill="none" stroke="#ff4ad6" stroke-opacity="0.28">
+    <circle cx="500" cy="540" r="196" stroke-width="2"/>
+    <circle cx="500" cy="540" r="150" stroke-width="1" stroke-opacity="0.18"/>
+    <circle cx="500" cy="540" r="104" stroke-width="1" stroke-opacity="0.12"/>
+  </g>
+  <circle cx="500" cy="540" r="46" fill="#ff4ad6" fill-opacity="0.22"/>
+  <circle cx="500" cy="540" r="12" fill="#ff4ad6" fill-opacity="0.75"/>
+
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="500" y="900" fill="#ffffff" font-size="104" font-weight="700" letter-spacing="10">PUNKROCKER</text>
+    <text x="500" y="962" fill="#ff4ad6" font-size="30" font-weight="600" letter-spacing="16">CYBER-DISCO PARRY</text>
+    <text x="500" y="1250" fill="#ffffff" fill-opacity="0.36" font-size="26" font-weight="500" letter-spacing="9">POSTER COMING SOON</text>
+  </g>
+
+  <rect x="24" y="24" width="952" height="1352" rx="30" fill="none" stroke="#ff4ad6" stroke-opacity="0.34" stroke-width="2"/>
+</svg>

@@ -201,9 +201,14 @@ title: Home
   {% assign accent = p.accent_rgb | default: "255 58 138" %}
   <div data-view="{{ p.title | slugify }}" style="--project-accent-rgb: {{ accent }};">
     <div class="detail-hero">
-      {% if p.video %}
+      {%- comment -%}
+        detail_video swaps the hero clip on the detail view only; projects that
+        ship a single clip leave it unset and fall back to the card video.
+      {%- endcomment -%}
+      {% assign hero_video = p.detail_video | default: p.video %}
+      {% if hero_video %}
       <video class="detail-hero__media" data-autoplay-when-visible="true" loop muted playsinline preload="none">
-        <source src="{{ p.video }}" type="video/mp4">
+        <source src="{{ hero_video }}" type="video/mp4">
       </video>
       {% else %}
       <img class="detail-hero__media" src="{{ p.summary_image | default: p.image }}" alt="">
