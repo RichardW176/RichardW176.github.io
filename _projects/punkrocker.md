@@ -2,7 +2,9 @@
 title: Punkrocker
 image: /assets/images/punkrocker-poster.png
 video: /assets/video/Punkrocker%20Card.mp4
-detail_video: /assets/video/Punkrocker.mp4
+secondary_video: /assets/video/Punkrocker.mp4
+secondary_video_title: Punkrocker
+secondary_video_subtitle: Gameplay Sample
 accent_rgb: 255 74 214
 poster_frame_borderless: true
 role: Designer, Engineer
