@@ -11,8 +11,13 @@ summary_image: /assets/images/floodsong-banner-v3.webp
 summary_image_position: center
 summary_image_alt: Floodsong side banner art
 secondary_video: /assets/video/Floodsong%20Portfolio.mp4
-secondary_video_title: Floodsong
-secondary_video_subtitle: Portfolio Sample
+secondary_video_title: Kayo
+secondary_video_subtitle: Final Boss Prototype
+secondary_feature_items:
+  - label: Combat Design
+    text: Ability documentation / implementation, behavior tree, balancing
+  - label: Level Design
+    text: Arena blockout, set dressing, encounter sequencing
 accent_rgb: 103 246 255
 poster_frame_borderless: true
 role: Narrative

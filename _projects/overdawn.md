@@ -21,7 +21,7 @@ tertiary_video_subtitle: Final Boss
 tertiary_video_position: center 66%
 tertiary_feature_heading:
 tertiary_feature_items:
-  - label: Boss Design
+  - label: Combat Design
     text: Ability documentation / implementation, behavior tree, balancing, enemy design
   - label: Narrative Design
     text: Character documentation, yarnspinner dialogue
