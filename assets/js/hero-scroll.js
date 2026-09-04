@@ -60,7 +60,18 @@
     step = next;
     busy = true;
     apply();
-    window.scrollTo({ top: targetY(), behavior: instant ? 'auto' : 'smooth' });
+    // behavior:'auto' defers to the computed scroll-behavior, which custom.css
+    // sets to smooth -- so it is NOT the instant this asks for. Override the
+    // property inline for the call to get a real snap.
+    if (instant) {
+      var root = document.documentElement;
+      var prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, targetY());
+      root.style.scrollBehavior = prev;
+    } else {
+      window.scrollTo({ top: targetY(), behavior: 'smooth' });
+    }
     setTimeout(function () {
       busy = false;
       settled = Date.now();

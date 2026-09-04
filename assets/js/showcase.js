@@ -6,15 +6,21 @@
    =================================================================== */
 
 (function () {
-  // html carries `scroll-behavior: smooth` (custom.css:20), so a bare
-  // scrollTo or scrollIntoView does not place the page -- it ANIMATES there
-  // from wherever the reader already was. That is what made opening a card
-  // from far down the grid look like the detail view "started at the bottom
-  // and scrolled itself up", and Back look like a slide down past the hero.
-  // A view swap is a cut, not a move, so every jump opts out explicitly.
+  // A view swap is a cut, not a move. Getting that is fiddlier than it looks:
+  // per CSSOM, behavior:'auto' does NOT mean instant -- it means "use the
+  // computed scroll-behavior", and custom.css:20 sets that to smooth on html.
+  // So scrollTo({behavior:'auto'}) still ANIMATES here, which is what made
+  // opening a card ease up from the bottom of the project and Back ease down
+  // from the hero. Overriding the property inline for the duration of the call
+  // beats the stylesheet, and unlike behavior:'instant' it needs no support
+  // check -- an unknown enum value would throw.
   function jump(y) {
-    var max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
-    window.scrollTo({ top: Math.min(Math.max(y, 0), max), behavior: 'auto' });
+    var root = document.documentElement;
+    var max = Math.max(root.scrollHeight - window.innerHeight, 0);
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, Math.min(Math.max(y, 0), max));
+    root.style.scrollBehavior = prev;
   }
 
   // Top of the card grid -- never the top of the DOCUMENT, which is the
