@@ -3995,7 +3995,13 @@ html.hero-owns-scroll { scroll-snap-type: none; }
   top: 16px;
   z-index: 500;
   height: 0;
-  padding-left: 40px;
+  /* Match .detail-hero__inner exactly -- content-box, max-width 1120, 40px
+     side padding -- so the button lines up with the title rather than with
+     the raw viewport edge. Without this the bar is full-bleed and the gap
+     grows with the window: 115px adrift at 1440. */
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
   pointer-events: none;   /* the empty bar must not swallow clicks on the hero */
 }
 .detail-backbar .detail-back {
@@ -4004,7 +4010,7 @@ html.hero-owns-scroll { scroll-snap-type: none; }
 }
 
 @media (max-width: 700px) {
-  .detail-backbar { padding-left: 18px; top: 12px; }
+  .detail-backbar { padding: 0 18px; top: 12px; }
 }
 
 /* ===================================================================
