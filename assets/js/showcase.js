@@ -6,6 +6,30 @@
    =================================================================== */
 
 (function () {
+  // html carries `scroll-behavior: smooth` (custom.css:20), so a bare
+  // scrollTo or scrollIntoView does not place the page -- it ANIMATES there
+  // from wherever the reader already was. That is what made opening a card
+  // from far down the grid look like the detail view "started at the bottom
+  // and scrolled itself up", and Back look like a slide down past the hero.
+  // A view swap is a cut, not a move, so every jump opts out explicitly.
+  function jump(y) {
+    var max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+    window.scrollTo({ top: Math.min(Math.max(y, 0), max), behavior: 'auto' });
+  }
+
+  // Top of the card grid -- never the top of the DOCUMENT, which is the
+  // pinned hero the reader has already scrolled past.
+  function showcaseTop() {
+    var el = document.getElementById('portfolio-showcase');
+    if (!el) return 0;
+    return el.getBoundingClientRect().top +
+           (window.pageYOffset || document.documentElement.scrollTop);
+  }
+
+  // Where the reader was in the grid when they opened a detail view, so Back
+  // returns them to the card they clicked instead of the top of the list.
+  var gridScroll = null;
+
   function show(view) {
     var pages = document.querySelectorAll('[data-view]');
     for (var i = 0; i < pages.length; i++) {
@@ -20,12 +44,13 @@
     if (track) track.style.display = view === 'index' ? '' : 'none';
 
     // Now place the scroll position: opening a detail starts at its top;
-    // returning to the grid lands on the cards, not back up the tall hero.
+    // returning to the grid lands where the reader left off, floored at the
+    // first card so it can never restore them into the hero.
     if (view === 'index') {
-      var showcase = document.getElementById('portfolio-showcase');
-      if (showcase) { showcase.scrollIntoView(); } else { window.scrollTo(0, 0); }
+      var floor = showcaseTop();
+      jump(gridScroll === null ? floor : Math.max(gridScroll, floor));
     } else {
-      window.scrollTo(0, 0);
+      jump(0);
     }
 
     var active = document.querySelector('[data-view="' + view + '"]');
@@ -73,23 +98,14 @@
     // and a remembered position is clamped to it too: if you scrolled up into
     // the hero while on a tab, coming back should not restore you there.
     requestAnimationFrame(function () {
-      var floor = 0;
-      var showcase = document.getElementById('portfolio-showcase');
-      if (showcase) {
-        floor = showcase.getBoundingClientRect().top +
-                (window.pageYOffset || document.documentElement.scrollTop);
-      }
-      var want = tabScroll.hasOwnProperty(name)
-        ? Math.max(tabScroll[name], floor)
-        : floor;
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo(0, Math.min(want, Math.max(max, 0)));
+      var floor = showcaseTop();
+      jump(tabScroll.hasOwnProperty(name) ? Math.max(tabScroll[name], floor) : floor);
     });
   }
 
   document.addEventListener('click', function (e) {
     var card = e.target.closest && e.target.closest('[data-goto]');
-    if (card) { show(card.getAttribute('data-goto')); return; }
+    if (card) { gridScroll = window.scrollY; show(card.getAttribute('data-goto')); return; }
 
     var back = e.target.closest && e.target.closest('[data-back]');
     if (back) {
@@ -107,7 +123,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
     var c = e.target.closest && e.target.closest('[data-goto]');
-    if (c) { e.preventDefault(); show(c.getAttribute('data-goto')); return; }
+    if (c) { e.preventDefault(); gridScroll = window.scrollY; show(c.getAttribute('data-goto')); return; }
     var t = e.target.closest && e.target.closest('[data-tab]');
     if (t) { e.preventDefault(); selectTab(t.getAttribute('data-tab'), true); }
   });
