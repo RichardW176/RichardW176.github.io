@@ -3,8 +3,6 @@ layout: page
 title: Home
 ---
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
 <div class="hero-pin-track" data-hero-track data-step="0">
 <section class="hero">
   <div class="hero-media" aria-hidden="true">

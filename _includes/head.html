@@ -1,0 +1,22 @@
+<!-- Overrides minima's own _includes/head.html (gem, minima 2.5.x). Kept
+     byte-for-byte in step with it apart from the icon block: the theme has no
+     custom-head.html hook at this version, so declaring a favicon site-wide
+     means owning the whole head.
+
+     The icon used to live in index.md, which Jekyll renders into the BODY --
+     browsers do not reliably honour <link rel="icon"> there, and every page
+     other than the home page had no icon declared at all. -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+
+  {%- seo -%}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+</head>
