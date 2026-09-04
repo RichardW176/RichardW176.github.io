@@ -30,6 +30,22 @@
   // returns them to the card they clicked instead of the top of the list.
   var gridScroll = null;
 
+  // Placing the scroll has to happen AFTER the swapped-in view has been laid
+  // out. Toggling display and scrolling in the same synchronous step asks the
+  // browser to scroll a document whose height is still the old one, and it
+  // clamps the request to the height it has -- which is how opening a short
+  // project from far down the grid landed on the bottom of that project. So
+  // place twice: once now, so there is no visible flash at the old offset,
+  // and again on the next frame once the real height is known.
+  function place(view) {
+    if (view === 'index') {
+      var floor = showcaseTop();
+      jump(gridScroll === null ? floor : Math.max(gridScroll, floor));
+    } else {
+      jump(0);
+    }
+  }
+
   function show(view) {
     var pages = document.querySelectorAll('[data-view]');
     for (var i = 0; i < pages.length; i++) {
@@ -43,15 +59,8 @@
     var track = document.querySelector('[data-hero-track]');
     if (track) track.style.display = view === 'index' ? '' : 'none';
 
-    // Now place the scroll position: opening a detail starts at its top;
-    // returning to the grid lands where the reader left off, floored at the
-    // first card so it can never restore them into the hero.
-    if (view === 'index') {
-      var floor = showcaseTop();
-      jump(gridScroll === null ? floor : Math.max(gridScroll, floor));
-    } else {
-      jump(0);
-    }
+    place(view);
+    requestAnimationFrame(function () { place(view); });
 
     var active = document.querySelector('[data-view="' + view + '"]');
     if (active) {
