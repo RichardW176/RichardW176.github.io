@@ -60,18 +60,13 @@
     step = next;
     busy = true;
     apply();
-    // behavior:'auto' defers to the computed scroll-behavior, which custom.css
-    // sets to smooth -- so it is NOT the instant this asks for. Override the
-    // property inline for the call to get a real snap.
-    if (instant) {
-      var root = document.documentElement;
-      var prev = root.style.scrollBehavior;
-      root.style.scrollBehavior = 'auto';
-      window.scrollTo(0, targetY());
-      root.style.scrollBehavior = prev;
-    } else {
-      window.scrollTo({ top: targetY(), behavior: 'smooth' });
-    }
+    // BOTH paths ease, deliberately. This used to pass behavior:'auto' when
+    // `instant` was set, which reads as a jump but per CSSOM defers to the
+    // computed scroll-behavior -- smooth, from custom.css:20. So the seam
+    // hand-off has always lerped, and that is the feel we want; making it a
+    // true snap was jarring. `instant` now only shortens the settle window
+    // below, which is all it ever effectively did.
+    window.scrollTo({ top: targetY(), behavior: 'smooth' });
     setTimeout(function () {
       busy = false;
       settled = Date.now();
