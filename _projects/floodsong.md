@@ -17,7 +17,7 @@ secondary_feature_items:
   - label: Combat Design
     text: Ability documentation / implementation, behavior tree, balancing
   - label: Level Design
-    text: Arena blockout, set dressing, encounter sequencing
+    text: Arena blockout, set dressing, mockups
 accent_rgb: 103 246 255
 poster_frame_borderless: true
 role: Narrative
