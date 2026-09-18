@@ -19,6 +19,9 @@ tertiary_feature_items:
 quaternary_video: /assets/video/Thang%20Gameplay.mp4
 quaternary_video_title: Core Mechanics
 quaternary_video_subtitle: Power-ups, Parry, Freeze-tag
+quinary_video: /assets/video/Thang%20Level.mp4
+quinary_video_title: Polar Bear Hideout
+quinary_video_subtitle: Multiplayer Level
 accent_rgb: 116 236 255
 poster_frame_borderless: true
 role: Lead Narrative Designer, Designer
