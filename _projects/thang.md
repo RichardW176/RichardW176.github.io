@@ -4,12 +4,12 @@ image: /assets/images/thang-poster.jpg
 video: /assets/video/Thang%20Menu.mp4
 summary_image: /assets/images/thang%20new%20side.png
 summary_image_alt: Thang ice arena banner art
-secondary_video: /assets/video/Thang%20Gameplay.mp4
-secondary_video_title: Popsicle power-ups and Parrying
-secondary_video_subtitle: Core Mechanics
-tertiary_video: /assets/video/Thang%20Level.mp4
-tertiary_video_title: Polar Bear Hideout
-tertiary_video_subtitle: Multiplayer Level
+secondary_video: /assets/video/Thang%20Level.mp4
+secondary_video_title: Polar Bear Hideout
+secondary_video_subtitle: Multiplayer Level
+tertiary_video: /assets/video/Thang%20Gameplay.mp4
+tertiary_video_title: Popsicle power-ups and Parrying
+tertiary_video_subtitle: Core Mechanics
 quaternary_video: /assets/video/Thang%20Preview.mp4
 quaternary_video_title: Freeze Tag / Ovens
 quaternary_video_subtitle: Core Mechanics
