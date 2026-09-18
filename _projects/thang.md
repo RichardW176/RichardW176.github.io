@@ -16,6 +16,9 @@ tertiary_video_subtitle: Map Blockout
 tertiary_feature_items:
   - label: Level Design
     text: Mock-up sketches, blockout implementation, usability testing
+quaternary_video: /assets/video/Thang%20Gameplay.mp4
+quaternary_video_title: Core Mechanics
+quaternary_video_subtitle: Power-ups, Parry, Freeze-tag
 accent_rgb: 116 236 255
 poster_frame_borderless: true
 role: Lead Narrative Designer, Designer
