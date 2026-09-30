@@ -12,8 +12,9 @@
 
    Steps 0 and 1 are the two PINNED beats, so the track is 200vh with no empty
    tail. Step 2 is not a pinned beat — it hands you to the work section.
-   Scrolling back UP off the work section jumps instantly to beat 1 rather than
-   easing, so the hero and portfolio are never on screen together.
+   Scrolling back UP off the work section eases back to beat 1, but only after
+   a deliberate pull (see PULL below) -- momentum that carries you up through
+   the portfolio stops at its top instead of flinging you into the hero.
 
    Below 700px the whole thing is inert (see the media query in
    custom.css) and the page scrolls normally.
@@ -54,23 +55,52 @@
     return track.getBoundingClientRect().top + pagetop + step * window.innerHeight;
   }
 
-  function go(dir, instant) {
+  // Our own tween rather than scrollTo({behavior:'smooth'}). Native smooth
+  // scrolling picks its own short, front-loaded curve, and trackpad inertia
+  // arriving mid-flight knocks it off course -- together that read as a snap
+  // on the hand-off to the work section. This eases in AND out, and the wheel
+  // handler swallows input while it runs so nothing fights it.
+  // scroll-behavior is forced to auto for the run, or every frame's scrollTo
+  // would inherit smooth from custom.css:20 (see jump() in showcase.js).
+  var anim = null;
+  var savedBehavior = '';
+  function tween(to, dur, done) {
+    var root = document.documentElement;
+    if (anim) cancelAnimationFrame(anim);
+    else savedBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    var from = window.pageYOffset || root.scrollTop;
+    var dist = to - from;
+    var t0 = performance.now();
+    function frame(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo(0, from + dist * e);
+      if (p < 1) { anim = requestAnimationFrame(frame); return; }
+      anim = null;
+      root.style.scrollBehavior = savedBehavior;
+      done();
+    }
+    anim = requestAnimationFrame(frame);
+  }
+
+  // Crossing between the hero and the work section travels a full viewport
+  // that you actually watch go by, so it gets a longer ease than the pinned
+  // beats, where the hero is sticky and only the crossfade is visible.
+  var SEAM_MS = 950;
+  var BEAT_MS = 600;
+
+  function go(dir) {
     var next = Math.min(Math.max(step + dir, 0), maxstep);
     if (next === step) return;
+    var crossing = step === maxstep || next === maxstep;
     step = next;
     busy = true;
     apply();
-    // BOTH paths ease, deliberately. This used to pass behavior:'auto' when
-    // `instant` was set, which reads as a jump but per CSSOM defers to the
-    // computed scroll-behavior -- smooth, from custom.css:20. So the seam
-    // hand-off has always lerped, and that is the feel we want; making it a
-    // true snap was jarring. `instant` now only shortens the settle window
-    // below, which is all it ever effectively did.
-    window.scrollTo({ top: targetY(), behavior: 'smooth' });
-    setTimeout(function () {
+    tween(targetY(), crossing ? SEAM_MS : BEAT_MS, function () {
       busy = false;
       settled = Date.now();
-    }, instant ? 260 : 700);
+    });
   }
 
   // showcase.js hides the pin track with display:none when a detail view
@@ -117,17 +147,52 @@
     return r.top <= 2 && r.bottom >= window.innerHeight - 2;
   }
 
+  // Pulling back up into the hero from the top of the work section.
+  // It used to fire on the first upward wheel event in the seam zone, so the
+  // momentum from scrolling up through the portfolio flung you straight into
+  // the hero the instant the first card reached the top. Now:
+  //   - momentum that carries you to the seam just stops there;
+  //   - a NEW gesture (one that starts after QUIET ms without wheel input)
+  //     has to add up to PULL px of upward delta before the hero comes back.
+  // Raise PULL to make it take more scrolling.
+  var PULL = 360;
+  var QUIET = 200;
+  var pull = 0;
+  var armed = false;
+  var lastWheel = 0;
+  var LANDING_MS = 450;   // swallow the inertia tail after landing on the work
+
   document.addEventListener('wheel', function (e) {
     var dir = e.deltaY > 0 ? 1 : -1;
-    // scrolling back up off the work section: snap instantly to Background
-    if (dir < 0 && step >= maxstep && atseam()) {
-      if (Math.abs(e.deltaY) < 16) return;   // ignore faint upward drift
+    var now = Date.now();
+    var gap = now - lastWheel;
+    lastWheel = now;
+
+    // mid-tween: nothing may fight the animation
+    if (busy) { e.preventDefault(); return; }
+
+    // just landed on the work section: eat the rest of that flick, so it
+    // doesn't carry on scrolling past the tabs. Time-boxed from the landing,
+    // never refreshed, so it can't turn into a lock.
+    if (dir > 0 && step >= maxstep && now - settled < LANDING_MS && atseam()) {
       e.preventDefault();
-      if (busy || Date.now() - settled < 320) return;
-      step = maxstep;              // so go(-1) lands on maxstep - 1
-      go(-1, true);
       return;
     }
+
+    if (dir < 0 && step >= maxstep && atseam()) {
+      e.preventDefault();
+      if (gap > QUIET) { armed = true; pull = 0; }   // a fresh gesture
+      if (!armed) return;          // still the momentum that brought you here
+      pull += Math.abs(e.deltaY);
+      if (pull < PULL) return;
+      armed = false;
+      pull = 0;
+      step = maxstep;              // so go(-1) lands on maxstep - 1
+      go(-1);
+      return;
+    }
+    armed = false;
+    pull = 0;
     if (!inzone()) return;
     // at the ends, hand scrolling back to the page
     if (dir > 0 && step >= maxstep) return;
@@ -149,11 +214,11 @@
     if (Math.abs(dy) < 40) return;
     var dir = dy > 0 ? 1 : -1;
     if (dir < 0 && step >= maxstep && atseam()) {
-      if (Math.abs(dy) < 70) return;         // needs a deliberate swipe
       e.preventDefault();
+      if (Math.abs(dy) < 160) return;        // needs a long, deliberate swipe
       starty = e.touches[0].clientY;
       step = maxstep;
-      go(-1, true);
+      go(-1);
       return;
     }
     if (!inzone()) return;
@@ -166,10 +231,14 @@
 
   document.addEventListener('keydown', function (e) {
     var up = (e.key === 'ArrowUp' || e.key === 'PageUp');
+    if (busy) {
+      if (up || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') e.preventDefault();
+      return;
+    }
     if (up && step >= maxstep && atseam()) {
       e.preventDefault();
       step = maxstep;
-      go(-1, true);
+      go(-1);
       return;
     }
     if (!inzone()) return;
