@@ -28,6 +28,7 @@ title: Home
 
       <!-- BEAT 2 — background + contact -->
       <div class="hero-panel hero-panel--bio" data-hero-panel="bio">
+        <img class="hero-portrait" src="/assets/images/portrait.webp" alt="Richard Wang" width="480" height="480" decoding="async">
         <p class="hero-eyebrow">Background</p>
         <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
         <p>Feel free to contact me using either of the methods below!</p>
@@ -169,7 +170,7 @@ title: Home
               <div class="project-showcase__summary-awards">
                 {% for award in p.awards %}
                 <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
-                  <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
+                  <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" decoding="async">
                 </figure>
                 {% endfor %}
               </div>
@@ -286,7 +287,7 @@ title: Home
             <div class="detail-hero__awards">
               {% for award in p.awards %}
               <figure class="project-showcase__summary-award{% if award.wide %} project-showcase__summary-award--wide{% endif %}{% if award.mono %} project-showcase__summary-award--mono{% endif %}">
-                <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" loading="lazy" decoding="async">
+                <img src="{{ award.image | default: award.file }}" alt="{{ award.alt | default: award.name | default: award.title | default: p.title }}" decoding="async">
               </figure>
               {% endfor %}
             </div>
@@ -377,7 +378,7 @@ title: Home
           <div class="bg-cycle__strip">
             {% for a in p.backgrounds %}
             <button class="bg-cycle__thumb" data-dot="{{ forloop.index0 }}" type="button" aria-label="{{ a.title | escape }}">
-              <img src="{{ a.file }}" alt="" loading="lazy" decoding="async">
+              <img src="{{ a.file }}" alt="" decoding="async">
               <span>{{ a.title }}</span>
             </button>
             {% endfor %}

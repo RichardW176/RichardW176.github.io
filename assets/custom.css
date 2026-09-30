@@ -2480,6 +2480,22 @@ h2 {
 }
 .hero-panel--bio .hero-socials { margin-top: 26px; }
 
+/* ---- Portrait: tops the Background beat ----
+   Same hairline language as the pill buttons and tabs -- a translucent white
+   ring -- with a black gap so it reads as a ring, not a stroke on the photo. */
+.hero-portrait {
+  display: block;
+  width: 132px;
+  height: 132px;
+  margin: 0 0 26px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50% !important;   /* beats the site-wide square reset, line 4 */
+  background: #000000;
+  object-fit: cover;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.04), 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
 /* ---- Scroll hint: names the beat the next scroll brings ---- */
 .hero-scroll-hint {
   position: absolute;
@@ -2542,6 +2558,7 @@ h2 {
   .hero-title { font-size: clamp(44px, 6vw, 72px); }
   .hero-panel--bio p:not(.hero-eyebrow) { font-size: 1rem; line-height: 1.6; }
   .hero-panel--bio .hero-socials { margin-top: 18px; }
+  .hero-portrait { width: 104px; height: 104px; margin-bottom: 18px; }
 }
 
 /* ---- Mobile: no step-jacking; both panels shown in flow ---- */
