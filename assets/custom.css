@@ -2480,20 +2480,38 @@ h2 {
 }
 .hero-panel--bio .hero-socials { margin-top: 26px; }
 
-/* ---- Portrait: tops the Background beat ----
-   Same hairline language as the pill buttons and tabs -- a translucent white
-   ring -- with a black gap so it reads as a ring, not a stroke on the photo. */
+/* ---- Portrait: sits to the right of the Background copy ----
+   Same hairline language as the tabs and cards -- a translucent white ring --
+   with a black gap so it reads as a ring, not a stroke on the photo. */
+.hero-panel--bio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(40px, 6vw, 96px);
+}
+.hero-bio__copy { flex: 0 1 620px; min-width: 0; }
 .hero-portrait {
+  flex: none;
   display: block;
-  width: 132px;
-  height: 132px;
-  margin: 0 0 26px;
-  padding: 4px;
+  width: clamp(220px, 26vw, 340px);
+  height: auto;
+  aspect-ratio: 1;
+  padding: 6px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50% !important;   /* beats the site-wide square reset, line 4 */
   background: #000000;
   object-fit: cover;
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.04), 0 18px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.04), 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Narrow screens: stack, portrait first */
+@media (max-width: 700px) {
+  .hero-panel--bio {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .hero-portrait { order: -1; width: 180px; }
 }
 
 /* ---- Scroll hint: names the beat the next scroll brings ---- */
@@ -2558,7 +2576,7 @@ h2 {
   .hero-title { font-size: clamp(44px, 6vw, 72px); }
   .hero-panel--bio p:not(.hero-eyebrow) { font-size: 1rem; line-height: 1.6; }
   .hero-panel--bio .hero-socials { margin-top: 18px; }
-  .hero-portrait { width: 104px; height: 104px; margin-bottom: 18px; }
+  .hero-portrait { width: clamp(200px, 22vw, 260px); }
 }
 
 /* ---- Mobile: no step-jacking; both panels shown in flow ---- */

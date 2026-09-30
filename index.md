@@ -28,18 +28,20 @@ title: Home
 
       <!-- BEAT 2 — background + contact -->
       <div class="hero-panel hero-panel--bio" data-hero-panel="bio">
-        <img class="hero-portrait" src="/assets/images/portrait.webp" alt="Richard Wang" width="480" height="480" decoding="async">
-        <p class="hero-eyebrow">Background</p>
-        <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
-        <p>Feel free to contact me using either of the methods below!</p>
-        <div class="hero-socials">
-          <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
-          </a>
-          <a class="hero-social-btn" href="mailto:richardwangsgs@gmail.com">
-            <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
-          </a>
+        <div class="hero-bio__copy">
+          <p class="hero-eyebrow">Background</p>
+          <p>Hi there! I&rsquo;m Richard, a USC student and Indie developer seeking gameplay, combat, and narrative design internships in the games industry. I have a background specializing in character / enemy design, cinematics, and quest / encounter sequencing.</p>
+          <p>Feel free to contact me using either of the methods below!</p>
+          <div class="hero-socials">
+            <a class="hero-social-btn" href="https://www.linkedin.com/in/ruiqian-wang-140500324/" target="_blank" rel="noopener noreferrer">
+              <img src="/assets/images/image-removebg-preview (58).png" alt="LinkedIn">
+            </a>
+            <a class="hero-social-btn" href="mailto:richardwangsgs@gmail.com">
+              <img src="/assets/images/image-removebg-preview (59).png" alt="Email">
+            </a>
+          </div>
         </div>
+        <img class="hero-portrait" src="/assets/images/portrait.webp" alt="Richard Wang" width="480" height="480" decoding="async">
       </div>
 
     </div>
